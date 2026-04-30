@@ -48,8 +48,8 @@ export default function Testimonials() {
       <div className="absolute inset-0 pattern-stripes opacity-10 z-0"></div>
       
       {/* Floating Decorative Elements */}
-      <div className="absolute top-20 right-20 text-8xl animate-wiggle opacity-20 pointer-events-none">⭐</div>
-      <div className="absolute bottom-20 left-10 text-9xl animate-float-reverse opacity-20 pointer-events-none">💖</div>
+      <div className="absolute top-20 right-20 text-8xl md:animate-wiggle opacity-20 pointer-events-none">⭐</div>
+      <div className="absolute bottom-20 left-10 text-9xl md:animate-float-reverse opacity-20 pointer-events-none">💖</div>
 
       <div className="container mx-auto px-6 max-w-7xl relative z-20">
         <div className="text-center mb-16 md:mb-20">

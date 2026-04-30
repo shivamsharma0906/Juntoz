@@ -31,8 +31,8 @@ export default function About() {
               </div>
 
               {/* Decorative corners */}
-              <div className="absolute top-4 right-4 text-5xl animate-spin-slow">🔥</div>
-              <div className="absolute bottom-4 left-4 text-5xl animate-bounce-subtle">💻</div>
+              <div className="absolute top-4 right-4 text-5xl md:animate-spin-slow">🔥</div>
+              <div className="absolute bottom-4 left-4 text-5xl md:animate-bounce-subtle">💻</div>
             </div>
           </div>
 

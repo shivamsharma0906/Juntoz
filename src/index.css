@@ -57,6 +57,14 @@
   body {
     @apply bg-background text-foreground font-body overflow-x-hidden selection:bg-accent-1 selection:text-white;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.15s !important;
+    }
+  }
 }
 
 @utility text-shadow-1 {

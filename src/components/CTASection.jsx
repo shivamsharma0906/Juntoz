@@ -8,21 +8,21 @@ export default function CTASection() {
       
       {/* Giant Typography Background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center z-0 pointer-events-none mix-blend-multiply opacity-20 overflow-hidden flex justify-center">
-        <h2 className="text-[10rem] md:text-[25rem] font-heading font-black leading-none text-accent-1 animate-pulse select-none">
+        <h2 className="text-[10rem] md:text-[25rem] font-heading font-black leading-none text-accent-1 md:animate-pulse select-none">
           LFG
         </h2>
       </div>
 
       {/* Mobile Ambient Glows */}
-      <div className="absolute top-[20%] left-[-10%] w-40 h-40 bg-accent-1 rounded-full mix-blend-screen opacity-50 blur-[50px] md:opacity-0 pointer-events-none z-0"></div>
-      <div className="absolute bottom-[20%] right-[-10%] w-40 h-40 bg-accent-2 rounded-full mix-blend-screen opacity-50 blur-[50px] md:opacity-0 pointer-events-none z-0"></div>
+      <div className="absolute top-[20%] left-[-10%] w-40 h-40 bg-accent-1 rounded-full mix-blend-screen opacity-50 blur-lg md:blur-[50px] md:opacity-0 pointer-events-none z-0"></div>
+      <div className="absolute bottom-[20%] right-[-10%] w-40 h-40 bg-accent-2 rounded-full mix-blend-screen opacity-50 blur-lg md:blur-[50px] md:opacity-0 pointer-events-none z-0"></div>
 
       <div className="container mx-auto px-4 md:px-6 max-w-5xl relative z-20 text-center">
         
         {/* Urgency Badge */}
         <div className="inline-block bg-background border-4 border-accent-3 px-6 md:px-8 py-2 md:py-3 rounded-full mb-8 md:mb-12 shadow-[8px_8px_0_#FFE600] -rotate-3 hover:rotate-0 transition-transform mx-2">
           <span className="font-heading font-black text-white text-base sm:text-xl md:text-2xl uppercase tracking-widest flex items-center gap-2 md:gap-3">
-            <span className="animate-pulse">🔥</span> LIMITED CLIENT SLOTS
+            <span className="md:animate-pulse">🔥</span> LIMITED CLIENT SLOTS
           </span>
         </div>
 
@@ -44,7 +44,7 @@ export default function CTASection() {
           >
             <span className="absolute inset-0 pattern-dots opacity-20 mix-blend-overlay"></span>
             <span className="relative z-10 flex items-center gap-2 md:gap-4 justify-center">
-              <span className="text-2xl sm:text-4xl md:text-5xl animate-wiggle">💬</span>
+              <span className="text-2xl sm:text-4xl md:text-5xl md:animate-wiggle">💬</span>
               DM US ON WHATSAPP
             </span>
           </a>

@@ -171,7 +171,7 @@ export default function Portfolio() {
 
         {/* Bridge Text */}
         <div className="text-center mt-20 mb-12">
-          <p className="font-heading font-black text-white/40 uppercase tracking-[0.3em] text-xs md:text-sm animate-pulse">
+          <p className="font-heading font-black text-white/40 uppercase tracking-[0.3em] text-xs md:text-sm md:animate-pulse">
             This is not just data — see real client conversations below
           </p>
         </div>
@@ -201,7 +201,7 @@ export default function Portfolio() {
                   <div className="overflow-hidden">
                     <div className="flex items-center gap-2">
                       <h4 className="text-white font-bold text-sm truncate">{chat.name}</h4>
-                      <div className="w-1.5 h-1.5 rounded-full bg-accent-2 animate-pulse shrink-0"></div>
+                      <div className="w-1.5 h-1.5 rounded-full bg-accent-2 md:animate-pulse shrink-0"></div>
                     </div>
                     <span className="text-white/50 text-[10px] flex items-center gap-1">
                       Online
@@ -218,9 +218,9 @@ export default function Portfolio() {
                   
                   {/* Subtle Typing indicator mock */}
                   <div className="absolute top-4 left-4 flex gap-1 opacity-20 group-hover:opacity-40 transition-opacity">
-                    <div className="w-1 h-1 bg-white rounded-full animate-bounce"></div>
-                    <div className="w-1 h-1 bg-white rounded-full animate-bounce [animation-delay:0.2s]"></div>
-                    <div className="w-1 h-1 bg-white rounded-full animate-bounce [animation-delay:0.4s]"></div>
+                    <div className="w-1 h-1 bg-white rounded-full md:animate-bounce"></div>
+                    <div className="w-1 h-1 bg-white rounded-full md:animate-bounce [animation-delay:0.2s]"></div>
+                    <div className="w-1 h-1 bg-white rounded-full md:animate-bounce [animation-delay:0.4s]"></div>
                   </div>
 
                   <div className="bg-gradient-to-br from-accent-5 to-accent-1 text-white p-3 rounded-xl rounded-tl-none self-start max-w-[95%] shadow-[4px_4px_0_rgba(0,0,0,0.3)] relative z-10">
@@ -249,7 +249,7 @@ export default function Portfolio() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center min-h-[64px] md:min-h-[80px] py-4 px-8 md:px-12 rounded-full bg-[#25D366] border-4 border-[#128C7E] font-heading font-black text-lg md:text-2xl uppercase tracking-widest text-white shadow-[0_0_30px_rgba(37,211,102,0.4)] hover:scale-105 transition-transform"
             >
-              <span className="mr-3 text-2xl md:text-3xl animate-wiggle">💬</span>
+              <span className="mr-3 text-2xl md:text-3xl md:animate-wiggle">💬</span>
               WhatsApp
             </a>
           </div>

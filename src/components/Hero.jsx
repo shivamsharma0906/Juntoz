@@ -8,24 +8,24 @@ export default function Hero() {
       
       {/* Pattern Layering (z-0) */}
       <div className="absolute inset-0 pattern-mesh opacity-30 z-0"></div>
-      <div className="absolute inset-0 pattern-dots opacity-20 z-0 animate-spin-slow origin-center scale-150"></div>
+      <div className="absolute inset-0 pattern-dots opacity-20 z-0 md:animate-spin-slow origin-center scale-150"></div>
 
       {/* Massive Background Typography */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center z-0 pointer-events-none mix-blend-overlay overflow-hidden flex justify-center">
-        <h1 className="text-[5rem] sm:text-[10rem] md:text-[25rem] font-heading font-black leading-none text-accent-1/20 select-none animate-pulse">
+        <h1 className="text-[5rem] sm:text-[10rem] md:text-[25rem] font-heading font-black leading-none text-accent-1/20 select-none md:animate-pulse">
           GROWTH
         </h1>
       </div>
 
-      {/* Floating Decorative Shapes (z-10) - Now visible but scaled down on mobile for enchantment! */}
-      <div className="absolute top-[18%] left-[5%] md:left-[10%] text-3xl md:text-6xl animate-float z-10 select-none">✨</div>
-      <div className="absolute bottom-[18%] right-[5%] md:right-[15%] text-4xl md:text-7xl animate-float-reverse z-10 select-none">🚀</div>
-      <div className="absolute top-[35%] right-[5%] md:right-[10%] text-2xl md:text-5xl animate-bounce-subtle z-10 select-none">💸</div>
-      <div className="absolute bottom-[25%] left-[2%] md:left-[5%] text-3xl md:text-6xl animate-wiggle z-10 select-none">🎯</div>
+      {/* Floating Decorative Shapes (z-10) - Disabled on mobile for performance */}
+      <div className="absolute top-[18%] left-[5%] md:left-[10%] text-3xl md:text-6xl md:animate-float z-10 select-none">✨</div>
+      <div className="absolute bottom-[18%] right-[5%] md:right-[15%] text-4xl md:text-7xl md:animate-float-reverse z-10 select-none">🚀</div>
+      <div className="absolute top-[35%] right-[5%] md:right-[10%] text-2xl md:text-5xl md:animate-bounce-subtle z-10 select-none">💸</div>
+      <div className="absolute bottom-[25%] left-[2%] md:left-[5%] text-3xl md:text-6xl md:animate-wiggle z-10 select-none">🎯</div>
 
-      {/* Geometric Floaties (Mobile Glow Orbs) */}
-      <div className="absolute top-[12%] right-[0%] md:right-[25%] w-24 h-24 md:w-16 md:h-16 bg-accent-2 rounded-full mix-blend-screen opacity-60 md:opacity-50 animate-float blur-[40px] md:blur-xl z-10 pointer-events-none"></div>
-      <div className="absolute bottom-[15%] left-[-10%] md:left-[25%] w-32 h-32 md:w-24 md:h-24 bg-accent-1 rounded-full mix-blend-screen opacity-60 md:opacity-50 animate-float-reverse blur-[50px] md:blur-xl z-10 pointer-events-none"></div>
+      {/* Geometric Floaties (Mobile Glow Orbs) - Reduced blur & animations on mobile */}
+      <div className="absolute top-[12%] right-[0%] md:right-[25%] w-24 h-24 md:w-16 md:h-16 bg-accent-2 rounded-full mix-blend-screen opacity-60 md:opacity-50 md:animate-float blur-md md:blur-xl z-10 pointer-events-none"></div>
+      <div className="absolute bottom-[15%] left-[-10%] md:left-[25%] w-32 h-32 md:w-24 md:h-24 bg-accent-1 rounded-full mix-blend-screen opacity-60 md:opacity-50 md:animate-float-reverse blur-md md:blur-xl z-10 pointer-events-none"></div>
 
       {/* Content Container (z-20) */}
       <div className="container mx-auto px-4 md:px-6 relative z-20 max-w-7xl">
@@ -33,7 +33,7 @@ export default function Hero() {
           
           {/* Eyebrow */}
           <div className="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 border-4 border-accent-3 bg-muted/50 rounded-full backdrop-blur-md shadow-[4px_4px_0_#00F5D4] -rotate-2 hover:rotate-0 transition-transform cursor-default mx-2 relative z-30">
-            <span className="text-lg md:text-xl animate-wiggle inline-block">💎</span>
+            <span className="text-lg md:text-xl md:animate-wiggle inline-block">💎</span>
             <span className="font-heading font-bold uppercase tracking-widest text-accent-2 text-[10px] sm:text-sm md:text-base whitespace-normal text-center">
               THE BEAUTY INDUSTRY'S SECRET WEAPON
             </span>
@@ -66,7 +66,7 @@ export default function Hero() {
               className="group relative inline-flex items-center justify-center min-h-[56px] md:min-h-[64px] py-4 px-6 sm:px-12 rounded-full bg-gradient-to-r from-accent-1 via-accent-5 to-accent-2 border-4 border-accent-3 font-heading font-black text-sm sm:text-lg md:text-xl uppercase tracking-widest text-white shadow-hard-1 hover:scale-105 hover:shadow-hard-2 transition-all duration-300 ease-out active:scale-95 z-30 w-full sm:w-auto"
             >
               <span className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-20 transition-opacity"></span>
-              <span className="mr-2 md:mr-3 text-xl md:text-2xl animate-wiggle">💬</span>
+              <span className="mr-2 md:mr-3 text-xl md:text-2xl md:animate-wiggle">💬</span>
               Start on WhatsApp
             </a>
             

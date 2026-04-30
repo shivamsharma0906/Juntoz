@@ -13,7 +13,7 @@ export default function BusinessCard() {
             <div className="absolute -top-20 -right-20 w-64 h-64 bg-accent-5 blur-3xl opacity-30 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
 
             {/* Verification Sticker */}
-            <div className="absolute top-4 right-4 md:top-8 md:right-8 bg-accent-2 border-2 md:border-4 border-background text-background font-heading font-black px-2 py-1 md:px-4 md:py-2 rotate-12 shadow-[2px_2px_0_#FFF] md:shadow-[4px_4px_0_#FFF] animate-bounce-subtle z-10 text-xs sm:text-sm md:text-xl uppercase">
+            <div className="absolute top-4 right-4 md:top-8 md:right-8 bg-accent-2 border-2 md:border-4 border-background text-background font-heading font-black px-2 py-1 md:px-4 md:py-2 rotate-12 shadow-[2px_2px_0_#FFF] md:shadow-[4px_4px_0_#FFF] md:animate-bounce-subtle z-10 text-xs sm:text-sm md:text-xl uppercase">
               100% VERIFIED
             </div>
 
@@ -21,7 +21,7 @@ export default function BusinessCard() {
 
               {/* Profile Image Avatar (Abstract) */}
               <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 shrink-0 bg-accent-4 rounded-full border-4 md:border-8 border-accent-3 flex items-center justify-center overflow-hidden shadow-hard-1 -rotate-6">
-                <div className="text-[3rem] md:text-[5rem] animate-wiggle">⚡</div>
+                <div className="text-[3rem] md:text-[5rem] md:animate-wiggle">⚡</div>
               </div>
 
               {/* Text Info */}
@@ -39,7 +39,7 @@ export default function BusinessCard() {
                   <span className="font-heading font-black text-accent-3">5.0</span>
                   <div className="flex gap-1">
                     {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-accent-3 text-2xl animate-pulse" style={{ animationDelay: `${i * 100}ms` }}>★</span>
+                      <span key={i} className="text-accent-3 text-2xl md:animate-pulse" style={{ animationDelay: `${i * 100}ms` }}>★</span>
                     ))}
                   </div>
                   <span className="font-body text-white/50 text-sm font-bold uppercase underline">(100+ Reviews)</span>

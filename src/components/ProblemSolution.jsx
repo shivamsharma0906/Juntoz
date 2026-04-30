@@ -13,7 +13,7 @@ export default function ProblemSolution() {
       <div className="absolute inset-0 pattern-dots opacity-20 z-0"></div>
       
       {/* Giant Background Emoji */}
-      <div className="absolute top-10 left-[-5%] text-[10rem] md:text-[20rem] opacity-10 animate-spin-slow pointer-events-none select-none z-0">🌀</div>
+      <div className="absolute top-10 left-[-5%] text-[10rem] md:text-[20rem] opacity-10 md:animate-spin-slow pointer-events-none select-none z-0">🌀</div>
       <div className="absolute bottom-10 right-[-5%] text-[8rem] md:text-[15rem] opacity-10 animate-float pointer-events-none select-none z-0">💀</div>
 
       <div className="container mx-auto px-6 max-w-7xl relative z-20">
@@ -40,7 +40,7 @@ export default function ProblemSolution() {
                     {p.text}
                   </p>
                   {/* Decorative corner tag */}
-                  <div className="absolute -top-3 -right-3 w-8 h-8 bg-accent-3 rounded-full flex items-center justify-center font-heading font-black text-background text-sm border-2 border-background animate-pulse">
+                  <div className="absolute -top-3 -right-3 w-8 h-8 bg-accent-3 rounded-full flex items-center justify-center font-heading font-black text-background text-sm border-2 border-background md:animate-pulse">
                     !
                   </div>
                 </div>
