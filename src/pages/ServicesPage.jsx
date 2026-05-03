@@ -1,6 +1,5 @@
 import Services from '../components/Services';
 import Qualification from '../components/Qualification';
-import Pricing from '../components/Pricing';
 
 export default function ServicesPage() {
   return (
