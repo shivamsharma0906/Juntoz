@@ -1,44 +1,45 @@
 import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import './index.css';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import TrustStrip from './components/TrustStrip';
-import ProblemSolution from './components/ProblemSolution';
-import Services from './components/Services';
-import Portfolio from './components/Portfolio';
-import Results from './components/Results';
-import Testimonials from './components/Testimonials';
-import BusinessCard from './components/BusinessCard';
-import About from './components/About';
 import Footer from './components/Footer';
 
-function App() {
-  // Smooth scroll
-  useEffect(() => {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-  }, []);
+// Pages
+import Home from './pages/Home';
+import ServicesPage from './pages/ServicesPage';
+import PortfolioPage from './pages/PortfolioPage';
+import ResultsPage from './pages/ResultsPage';
+import AboutPage from './pages/AboutPage';
 
+// Scroll to top on navigation
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
+function App() {
   return (
-    <div className="relative">
-      <Navbar />
-      <Hero />
-      <TrustStrip />
-      <ProblemSolution />
-      <Services />
-      <Portfolio />
-      <Results />
-      <Testimonials />
-      <BusinessCard />
-      <About />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="relative min-h-screen bg-background">
+        <ScrollToTop />
+        <Navbar />
+        
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/work" element={<PortfolioPage />} />
+            <Route path="/results" element={<ResultsPage />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 

@@ -1,62 +1,32 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 const services = [
   {
     num: '01',
     icon: '🎯',
     title: 'Lead Generation Ads',
-    subtitle: '(Meta & Google)',
-    desc: 'Laser-targeted campaigns designed to put your business in front of brides and beauty lovers EXACTLY when they are looking.',
-    backPoints: [
-      '🚀 Facebook campaigns',
-      '📊 Insights',
-      '⚡ Boosting',
-      '📈 Organic followers',
-      '🎯 Fb Campaigns',
-      '📥 Leads generation',
-    ],
-    hex: '#FF3AF2',
-    borderHex: '#FFE600',
+    subtitle: 'Meta & Google',
+    desc: 'Laser-targeted campaigns designed to put your business in front of brides and beauty lovers exactly when they are searching.',
+    points: ['Facebook & Instagram campaigns', 'Google Search & Display', 'Lead capture funnels', 'Audience targeting', 'Performance insights', 'Monthly reporting'],
+    color: '#FF3AF2',
   },
   {
     num: '02',
     icon: '🚀',
     title: 'Instagram Growth',
-    subtitle: '& Boosting',
-    desc: 'Content strategies to turn your profile into a high-converting client magnet. We grow your authority.',
-    backPoints: [
-      '📱 Instagram Page handling',
-      '✍️ Updated bio',
-      '🤳 Stories - 11',
-      '🗓️ Content calendar',
-      '🌟 Highlights',
-      '📈 Insights',
-      '🎬 Edit reels',
-      '📝 Post description',
-      '📤 Upload posts & reels {8+7}',
-      '🎵 Trending songs',
-      '✨ Organic followers',
-      '🎨 Grid layout : Aesthetic',
-      '💡 Content ideas',
-    ],
-    hex: '#00F5D4',
-    borderHex: '#FF3AF2',
+    subtitle: 'Content & Boosting',
+    desc: 'Content strategies to turn your profile into a high-converting client magnet. We build your authority, not just your follower count.',
+    points: ['Instagram page handling', 'Content calendar & ideas', 'Reels editing & upload', 'Stories & highlights', 'Grid layout design', 'Organic growth'],
+    color: '#00F5D4',
   },
   {
     num: '03',
     icon: '📍',
     title: 'SEO & Local Visibility',
-    subtitle: '',
-    desc: 'Rank higher on Google when locals search for "makeup artists near me". Dominate local search.',
-    backPoints: [
-      '🗺️ Google Business Profile setup',
-      '🔑 Local keyword optimisation',
-      '⭐ Review generation strategy',
-      '📄 On-page SEO for your website',
-      '📊 Monthly ranking reports',
-    ],
-    hex: '#FF6B35',
-    borderHex: '#00F5D4',
+    subtitle: 'Rank Where It Counts',
+    desc: 'Rank higher on Google when locals search for "makeup artists near me". Dominate local search and get found first.',
+    points: ['Google Business Profile', 'Local keyword optimisation', 'Review generation', 'On-page SEO', 'Monthly ranking reports', 'Map pack dominance'],
+    color: '#7B2FFF',
   },
 ];
 
@@ -65,135 +35,157 @@ export default function Services() {
   const [activeIdx, setActiveIdx] = useState(0);
   const touchStart = useRef(0);
 
-  const handleFlip = (idx) => {
-    setFlipped(prev => (prev === idx ? null : idx));
-  };
-
-  const handleTouchStart = (clientX) => {
-    touchStart.current = clientX;
-  };
-
-  const handleTouchEnd = (clientX) => {
-    const diff = touchStart.current - clientX;
+  const handleFlip = (idx) => setFlipped(prev => (prev === idx ? null : idx));
+  const handleTouchStart = (x) => { touchStart.current = x; };
+  const handleTouchEnd = (x) => {
+    const diff = touchStart.current - x;
     if (Math.abs(diff) > 50) {
-      if (diff > 0 && activeIdx < services.length - 1) {
-        setActiveIdx(prev => prev + 1);
-        setFlipped(null);
-      } else if (diff < 0 && activeIdx > 0) {
-        setActiveIdx(prev => prev - 1);
-        setFlipped(null);
-      }
+      if (diff > 0 && activeIdx < services.length - 1) { setActiveIdx(p => p + 1); setFlipped(null); }
+      else if (diff < 0 && activeIdx > 0) { setActiveIdx(p => p - 1); setFlipped(null); }
     }
   };
 
   return (
-    <section id="services" className="relative py-32 bg-background overflow-hidden z-10">
-      <div className="absolute inset-0 opacity-20 z-0" style={{backgroundImage:'repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(255,230,0,0.08) 10px,rgba(255,230,0,0.08) 20px)'}}></div>
+    <section id="services" className="relative py-28 bg-background overflow-hidden">
+      <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-accent-5/10 rounded-full blur-[100px] pointer-events-none z-0" />
 
-      <div className="container mx-auto px-6 max-w-6xl relative z-20">
+      <div className="container mx-auto px-6 max-w-6xl relative z-10">
 
-        {/* Section Header */}
-        <div className="text-center mb-20 relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-[5rem] sm:text-[8rem] md:text-[12rem] font-heading font-black text-accent-5/10 pointer-events-none select-none whitespace-nowrap">
-            WHAT WE DO
-          </div>
-          <div className="inline-block px-6 py-2 border-4 border-accent-2 bg-muted/80 rounded-full text-accent-2 font-heading font-bold uppercase tracking-widest mb-6 -rotate-2">
-            The Growth Pillars 🛠️
-          </div>
-          <h2 className="font-heading font-black text-4xl sm:text-6xl md:text-8xl uppercase text-white leading-none" style={{textShadow:'4px 4px 0 #7B2FFF, 8px 8px 0 #FF3AF2'}}>
-            WHAT WE <span className="text-transparent" style={{WebkitTextStroke:'2px #FF3AF2'}}>BUILD</span> FOR YOU
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p className="font-body text-accent-2 text-sm font-semibold uppercase tracking-[0.2em] mb-4">
+            What We Do
+          </p>
+          <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-6xl uppercase leading-none tracking-tighter">
+            Services Built to <span className="text-accent-2 text-glow-cyan">Convert</span>
           </h2>
+          <p className="font-body text-white/50 text-lg max-w-lg mx-auto mt-5 leading-relaxed">
+            Every service is a piece of a proven system. Together, they fill your calendar.
+          </p>
         </div>
 
-        {/* Desktop Grid / Mobile Slider */}
-        <div className="relative overflow-hidden md:overflow-visible">
-          <div 
-            className="flex md:grid md:grid-cols-3 gap-8 md:gap-14 transition-transform duration-500 ease-out md:!transform-none md:cursor-default cursor-grab active:cursor-grabbing select-none"
-            style={{ 
-              transform: `translateX(calc(-${activeIdx * 100}% - ${activeIdx * 32}px))` 
-            }}
+        {/* Desktop grid */}
+        <div className="hidden md:grid grid-cols-3 gap-6">
+          {services.map((s, i) => (
+            <div
+              key={i}
+              className="relative group"
+              style={{ perspective: '1000px', height: '420px' }}
+            >
+              <div
+                className="w-full h-full transition-all duration-700"
+                style={{
+                  transformStyle: 'preserve-3d',
+                  transform: flipped === i ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                }}
+              >
+                {/* Front */}
+                <div
+                  className="absolute inset-0 glass-card p-7 flex flex-col group-hover:border-white/15 transition-all duration-300"
+                  style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+                >
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="text-3xl">{s.icon}</div>
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center font-heading font-black text-xs text-background"
+                      style={{ backgroundColor: s.color }}
+                    >
+                      {s.num}
+                    </div>
+                  </div>
+
+                  <h3 className="font-heading font-black text-white text-xl uppercase leading-tight mb-1">
+                    {s.title}
+                  </h3>
+                  <p className="font-body text-xs font-semibold uppercase tracking-[0.15em] mb-4" style={{ color: s.color }}>
+                    {s.subtitle}
+                  </p>
+                  <p className="font-body text-white/55 text-sm leading-relaxed flex-1">{s.desc}</p>
+
+                  <button
+                    onClick={() => handleFlip(i)}
+                    className="mt-5 inline-flex items-center gap-2 text-xs font-body font-semibold uppercase tracking-widest transition-all duration-200"
+                    style={{ color: s.color }}
+                  >
+                    What's included →
+                  </button>
+                </div>
+
+                {/* Back */}
+                <div
+                  className="absolute inset-0 glass-card p-7 flex flex-col"
+                  style={{
+                    backfaceVisibility: 'hidden',
+                    WebkitBackfaceVisibility: 'hidden',
+                    transform: 'rotateY(180deg)',
+                    borderColor: `${s.color}30`,
+                  }}
+                >
+                  <h3 className="font-heading font-black text-sm uppercase tracking-widest mb-5" style={{ color: s.color }}>
+                    What's Included
+                  </h3>
+                  <ul className="space-y-2.5 flex-1 overflow-y-auto custom-scrollbar pr-1">
+                    {s.points.map((pt, j) => (
+                      <li key={j} className="flex items-center gap-3 font-body text-white/70 text-sm">
+                        <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: s.color }} />
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    onClick={() => handleFlip(i)}
+                    className="mt-5 text-xs font-body font-semibold uppercase tracking-widest text-white/30 hover:text-white/60 transition-colors"
+                  >
+                    ← Back
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile slider */}
+        <div className="md:hidden overflow-hidden">
+          <div
+            className="flex gap-5 transition-transform duration-500 ease-out cursor-grab active:cursor-grabbing select-none"
+            style={{ transform: `translateX(calc(-${activeIdx * 100}% - ${activeIdx * 20}px))` }}
             onTouchStart={(e) => handleTouchStart(e.touches[0].clientX)}
             onTouchEnd={(e) => handleTouchEnd(e.changedTouches[0].clientX)}
             onMouseDown={(e) => handleTouchStart(e.clientX)}
             onMouseUp={(e) => handleTouchEnd(e.clientX)}
           >
-            {services.map((s, i) => {
-              const isFlipped = flipped === i;
-              const rotation = i === 1 ? 'md:rotate-2' : i === 2 ? 'md:-rotate-1' : 'md:rotate-1';
-              const isActive = activeIdx === i;
-
-              return (
-                <div
-                  key={s.num}
-                  className={`relative min-w-full flex-shrink-0 md:min-w-0 ${rotation} hover:rotate-0 transition-all duration-300 ${isActive ? 'opacity-100 scale-100' : 'opacity-40 scale-95 md:opacity-100 md:scale-100'}`}
-                  style={{ perspective: '1000px', height: '460px' }}
-                >
-                  {/* Inner flip container */}
-                  <div
-                    className="w-full h-full relative transition-all duration-700"
-                    style={{
-                      transformStyle: 'preserve-3d',
-                      transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                    }}
-                  >
-                    {/* Front */}
-                    <div
-                      className="absolute inset-0 p-8 rounded-[32px] border-8 flex flex-col"
-                      style={{
-                        backfaceVisibility: 'hidden',
-                        WebkitBackfaceVisibility: 'hidden',
-                        backgroundColor: '#2D1B4E',
-                        borderColor: s.borderHex,
-                        boxShadow: isActive ? `8px 8px 0 ${s.hex}` : `4px 4px 0 ${s.hex}80`,
-                      }}
-                    >
-                      <div className="absolute -top-5 -right-5 w-14 h-14 rounded-full flex items-center justify-center font-heading font-black text-2xl border-4 border-background" style={{ backgroundColor: s.hex, color: '#0D0D1A' }}>
-                        {s.num}
-                      </div>
-                      <div className="text-5xl mb-5">{s.icon}</div>
-                      <h3 className="font-heading font-black text-2xl uppercase text-white leading-tight mb-1" style={{ textShadow: `2px 2px 0 ${s.hex}` }}>{s.title}</h3>
-                      {s.subtitle && <h4 className="font-heading font-bold text-lg uppercase mb-4" style={{ color: s.hex }}>{s.subtitle}</h4>}
-                      <p className="font-body text-white/80 text-base font-medium leading-relaxed flex-1 mt-2">{s.desc}</p>
-                      <button onClick={() => handleFlip(i)} className="mt-6 inline-flex items-center gap-2 font-heading font-bold uppercase tracking-widest text-sm px-5 py-2.5 rounded-full border-4 text-white transition-all hover:scale-105" style={{ borderColor: s.hex, backgroundColor: 'rgba(0,0,0,0.3)' }}>Learn More <span>→</span></button>
-                    </div>
-
-                    {/* Back */}
-                    <div
-                      className="absolute inset-0 p-8 rounded-[32px] border-8 flex flex-col justify-between"
-                      style={{
-                        backfaceVisibility: 'hidden',
-                        WebkitBackfaceVisibility: 'hidden',
-                        transform: 'rotateY(180deg)',
-                        backgroundColor: s.hex === '#FF3AF2' ? '#1A0A2E' : s.hex === '#00F5D4' ? '#081A18' : '#1A0A05',
-                        borderColor: s.hex,
-                        boxShadow: `8px 8px 0 ${s.borderHex}`,
-                      }}
-                    >
-                      <div>
-                        <h3 className="font-heading font-black text-2xl uppercase mb-6 leading-tight" style={{ color: s.hex, textShadow: `2px 2px 0 #0D0D1A` }}>What's Included ✅</h3>
-                        <div className="max-h-[240px] overflow-y-auto pr-2 custom-scrollbar">
-                          <ul className="space-y-3">
-                            {s.backPoints.map((pt, j) => (
-                              <li key={j} className="font-body font-bold text-white text-base flex items-start gap-2"><span>{pt}</span></li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                      <button onClick={() => handleFlip(i)} className="mt-6 inline-flex items-center gap-2 font-heading font-bold uppercase tracking-widest text-sm px-5 py-2.5 rounded-full border-4 transition-all hover:scale-105" style={{ borderColor: s.hex, color: s.hex, backgroundColor: 'rgba(0,0,0,0.4)' }}>← Flip Back</button>
-                    </div>
-                  </div>
+            {services.map((s, i) => (
+              <div key={i} className="min-w-full glass-card p-6 flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl">{s.icon}</span>
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center font-heading font-black text-[10px] text-background" style={{ backgroundColor: s.color }}>{s.num}</div>
                 </div>
-              );
-            })}
+                <div>
+                  <h3 className="font-heading font-black text-white text-lg uppercase">{s.title}</h3>
+                  <p className="font-body text-xs font-semibold uppercase tracking-widest mt-0.5" style={{ color: s.color }}>{s.subtitle}</p>
+                </div>
+                <p className="font-body text-white/55 text-sm leading-relaxed">{s.desc}</p>
+                <ul className="space-y-2">
+                  {s.points.map((pt, j) => (
+                    <li key={j} className="flex items-center gap-3 font-body text-white/60 text-sm">
+                      <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: s.color }} />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Dots */}
+          <div className="flex items-center justify-center gap-2 mt-6">
+            {services.map((_, i) => (
+              <button key={i} onClick={() => setActiveIdx(i)} className={`rounded-full transition-all duration-300 ${activeIdx === i ? 'w-8 h-2 bg-accent-2' : 'w-2 h-2 bg-white/20'}`} />
+            ))}
           </div>
         </div>
 
-        {/* Dots (Mobile only) */}
-        <div className="flex md:hidden items-center justify-center gap-3 mt-12">
-          {services.map((_, i) => (
-            <button key={i} onClick={() => setActiveIdx(i)} className={`transition-all duration-300 rounded-full ${activeIdx === i ? 'w-10 h-3 bg-accent-2 shadow-[0_0_15px_#00F5D4]' : 'w-3 h-3 bg-white/20'}`} />
-          ))}
-        </div>
       </div>
     </section>
   );

@@ -1,75 +1,565 @@
-export default function About() {
-  const values = [
-    'UNAPOLOGETIC GROWTH',
-    'DATA-BACKED CREATIVE',
-    'ZERO EXCUSES',
+import { useState, useRef, useEffect } from 'react';
+
+const proofStats = [
+  { value: 200, suffix: '+', label: 'Beauty Clients Across India', color: '#FF3AF2', icon: '💄' },
+  { value: 100, suffix: '+', label: 'Active Clients / Month', color: '#00F5D4', icon: '🎯' },
+  { value: 5.0, suffix: '★', label: 'Client Rating', color: '#7B2FFF', icon: '⭐' },
+];
+
+const values = [
+  {
+    n: '01',
+    headline: 'More Bridal Bookings',
+    sub: 'Not Just Likes',
+    color: '#FF3AF2',
+    icon: '💍',
+    description: 'Convert Instagram followers into paying bridal clients with our proven funnel system.',
+  },
+  {
+    n: '02',
+    headline: 'Real Leads',
+    sub: 'Not Vanity Followers',
+    color: '#00F5D4',
+    icon: '📈',
+    description: 'Quality leads who actually book, not random followers who never convert.',
+  },
+  {
+    n: '03',
+    headline: 'Predictable Revenue',
+    sub: 'Monthly Booking System',
+    color: '#7B2FFF',
+    icon: '💰',
+    description: 'Stop the feast-or-famine cycle. Get consistent monthly bookings.',
+  },
+];
+
+// ── Animated Counter Hook ──
+function useCounter(end, duration = 2000, start = 0) {
+  const [count, setCount] = useState(start);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  return { count, setCount, hasAnimated, setHasAnimated, end, duration };
+}
+
+// ── Floating Orbs ──
+const FloatingOrbs = () => {
+  const orbs = [
+    { color: '#FF3AF2', size: 300, top: '10%', left: '5%', delay: 0, duration: 8 },
+    { color: '#00F5D4', size: 250, top: '60%', right: '10%', delay: 2, duration: 10 },
+    { color: '#7B2FFF', size: 200, bottom: '15%', left: '50%', delay: 4, duration: 12 },
   ];
 
   return (
-    <section id="about" className="relative py-32 bg-accent-2 overflow-hidden z-10 border-y-8 border-background">
-      {/* Pattern Layer */}
-      <div className="absolute inset-0 pattern-mesh opacity-30 mix-blend-multiply z-0 pointer-events-none"></div>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {orbs.map((orb, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full animate-float-orb"
+          style={{
+            width: orb.size,
+            height: orb.size,
+            top: orb.top,
+            left: orb.left,
+            right: orb.right,
+            bottom: orb.bottom,
+            background: `radial-gradient(circle, ${orb.color}15 0%, transparent 70%)`,
+            filter: 'blur(60px)',
+            animationDelay: `${orb.delay}s`,
+            animationDuration: `${orb.duration}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
-      <div className="container mx-auto px-6 max-w-7xl relative z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          
-          {/* Left — Visual Chaos */}
-          <div className="relative z-10">
-            <div className="absolute -inset-10 bg-accent-3/40 blur-3xl rounded-full z-0 pointer-events-none"></div>
-            
-            <div className="relative z-10 w-full aspect-square bg-background border-8 border-accent-1 rounded-[40px] shadow-hard-2 rotate-3 hover:rotate-0 transition-transform duration-500 overflow-hidden flex items-center justify-center">
-              <div className="absolute inset-0 pattern-stripes opacity-20 pointer-events-none"></div>
-              
-              <div className="text-center p-8 relative z-10">
-                <div className="font-heading font-black text-3xl text-accent-2 uppercase tracking-widest mb-2 bg-muted inline-block px-4 py-1 border-4 border-accent-2 rotate-[-5deg]">EST. 2023</div>
-                <h3 className="font-heading font-black text-[5rem] md:text-[7rem] leading-none text-white text-shadow-mega -rotate-2">
-                  15+
-                </h3>
-                <p className="font-heading font-bold text-2xl uppercase tracking-widest text-accent-3 bg-background inline-block px-4 py-2 border-4 border-accent-3 shadow-[4px_4px_0_#FFF] rotate-2 mt-4">
-                  Growth Obsessed Specialists
-                </p>
-              </div>
+// ── Particle System ──
+const ParticleField = () => {
+  const particles = Array.from({ length: 25 }, (_, i) => ({
+    id: i,
+    size: Math.random() * 3 + 1,
+    left: `${Math.random() * 100}%`,
+    delay: Math.random() * 8,
+    duration: Math.random() * 15 + 10,
+    opacity: Math.random() * 0.4 + 0.1,
+  }));
 
-              {/* Decorative corners */}
-              <div className="absolute top-4 right-4 text-5xl md:animate-spin-slow">🔥</div>
-              <div className="absolute bottom-4 left-4 text-5xl md:animate-bounce-subtle">💻</div>
-            </div>
-          </div>
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((p) => (
+        <div
+          key={p.id}
+          className="absolute rounded-full bg-white animate-particle-rise"
+          style={{
+            width: p.size,
+            height: p.size,
+            left: p.left,
+            bottom: '-5%',
+            opacity: p.opacity,
+            animationDelay: `${p.delay}s`,
+            animationDuration: `${p.duration}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
-          {/* Right — Text Content */}
-          <div className="space-y-6 md:space-y-8 relative z-20">
-            <div className="inline-block px-4 md:px-6 py-1 md:py-2 border-4 border-background bg-accent-1 text-background font-heading font-black tracking-widest text-sm md:text-base uppercase rotate-2 shadow-[4px_4px_0_#0D0D1A] md:shadow-[6px_6px_0_#0D0D1A]">
-              WHO WE ARE
-            </div>
+// ── Stat Card Component ──
+const StatCard = ({ stat, index, isVisible }) => {
+  const counterRef = useRef({ count: 0, hasAnimated: false });
+  const [displayValue, setDisplayValue] = useState(0);
 
-            <div>
-              <h2 className="font-heading font-black text-4xl sm:text-5xl md:text-7xl uppercase text-background leading-[0.9] tracking-tighter text-shadow-1 mb-2">
-                YOUR CREATIVE
-              </h2>
-              <h2 className="font-heading font-black text-4xl sm:text-5xl md:text-7xl uppercase text-white leading-[0.9] tracking-tighter text-shadow-3 bg-background inline-block px-3 md:px-4 py-1 -rotate-1 max-w-full overflow-hidden text-ellipsis">
-                GROWTH PARTNER.
-              </h2>
-            </div>
+  useEffect(() => {
+    if (!isVisible || counterRef.current.hasAnimated) return;
 
-            <p className="font-body text-lg md:text-2xl text-background font-bold leading-relaxed bg-white/50 p-4 md:p-6 rounded-2xl border-4 border-dashed border-background">
-              We are a growth-focused agency built explicitly for makeup artists and beauty brands. We don't just make things look pretty; we build aggressive systems that turn attention into real paying clients.
-            </p>
+    counterRef.current.hasAnimated = true;
+    const duration = 2000;
+    const steps = 60;
+    const increment = stat.value / steps;
+    const stepDuration = duration / steps;
+    let currentStep = 0;
 
-            {/* Core Values */}
-            <div className="flex flex-col gap-4 pt-4">
-              {values.map((v, i) => (
-                <div key={i} className="flex items-center gap-4 bg-background p-4 border-4 border-accent-3 shadow-[4px_4px_0_#FF3AF2] hover:-translate-y-1 hover:shadow-[6px_6px_0_#00F5D4] transition-all">
-                  <div className="w-8 h-8 shrink-0 bg-accent-1 rounded-full flex items-center justify-center font-black text-background text-sm">
-                    {i + 1}
-                  </div>
-                  <span className="font-heading font-black text-xl md:text-2xl text-white uppercase tracking-wider">{v}</span>
-                </div>
-              ))}
-            </div>
+    const timer = setInterval(() => {
+      currentStep++;
+      const newValue = Math.min(increment * currentStep, stat.value);
+      setDisplayValue(newValue);
 
-          </div>
+      if (currentStep >= steps) {
+        clearInterval(timer);
+        setDisplayValue(stat.value);
+      }
+    }, stepDuration);
+
+    return () => clearInterval(timer);
+  }, [isVisible, stat.value]);
+
+  const formattedValue = typeof stat.value === 'number' && stat.value % 1 !== 0
+    ? displayValue.toFixed(1)
+    : Math.floor(displayValue);
+
+  return (
+    <div
+      className="group relative flex items-center gap-4 flex-1 min-w-[140px] px-4 py-3 rounded-xl transition-all duration-500 hover:scale-105"
+      style={{
+        background: `linear-gradient(135deg, ${stat.color}08 0%, transparent 100%)`,
+        border: `1px solid ${stat.color}20`,
+        boxShadow: `0 4px 20px ${stat.color}10`,
+        animationDelay: `${index * 150}ms`,
+      }}
+    >
+      {/* Animated background glow on hover */}
+      <div
+        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at center, ${stat.color}15 0%, transparent 70%)`,
+        }}
+      />
+
+      {/* Icon */}
+      <div
+        className="relative z-10 text-2xl transition-transform duration-300 group-hover:scale-125 group-hover:rotate-12"
+        style={{
+          filter: `drop-shadow(0 0 8px ${stat.color}60)`,
+        }}
+      >
+        {stat.icon}
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex-1">
+        <div
+          className="font-heading font-black leading-none transition-all duration-300 group-hover:scale-110"
+          style={{
+            fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
+            color: stat.color,
+            textShadow: `0 0 25px ${stat.color}70`,
+          }}
+        >
+          {formattedValue}{stat.suffix}
+        </div>
+        <div
+          className="font-body text-xs uppercase tracking-widest mt-1 transition-colors duration-300 group-hover:text-white/60"
+          style={{ color: 'rgba(255,255,255,0.4)' }}
+        >
+          {stat.label}
         </div>
       </div>
+
+      {/* Pulse indicator */}
+      <div
+        className="absolute -top-1 -right-1 w-3 h-3 rounded-full opacity-0 group-hover:opacity-100 animate-ping"
+        style={{ background: stat.color }}
+      />
+    </div>
+  );
+};
+
+// ── Value Card Component ──
+const ValueCard = ({ value, index }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+    setMousePos({ x, y });
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      className="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:scale-105"
+      style={{
+        background: `linear-gradient(135deg, ${value.color}05 0%, rgba(255,255,255,0.02) 100%)`,
+        border: `1px solid ${isHovered ? value.color + '40' : 'rgba(255,255,255,0.07)'}`,
+        boxShadow: isHovered
+          ? `0 20px 60px ${value.color}25, 0 0 0 1px ${value.color}15`
+          : '0 4px 20px rgba(0,0,0,0.2)',
+        transform: isHovered
+          ? `perspective(1000px) rotateX(${-mousePos.y * 0.1}deg) rotateY(${mousePos.x * 0.1}deg) translateZ(10px)`
+          : 'none',
+        animationDelay: `${index * 100}ms`,
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleMouseMove}
+    >
+      {/* Animated gradient overlay */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+        style={{
+          background: `linear-gradient(135deg, ${value.color}12 0%, transparent 100%)`,
+        }}
+      />
+
+      {/* Spotlight effect following cursor */}
+      {isHovered && (
+        <div
+          className="absolute rounded-full pointer-events-none transition-opacity duration-300"
+          style={{
+            width: '200px',
+            height: '200px',
+            left: `${((mousePos.x / 20 + 0.5) * 100)}%`,
+            top: `${((mousePos.y / 20 + 0.5) * 100)}%`,
+            transform: 'translate(-50%, -50%)',
+            background: `radial-gradient(circle, ${value.color}20 0%, transparent 60%)`,
+            filter: 'blur(30px)',
+          }}
+        />
+      )}
+
+      {/* Content */}
+      <div className="relative z-10 flex items-start gap-4 px-5 py-5">
+        {/* Number badge with glow */}
+        <div
+          className="relative w-10 h-10 shrink-0 rounded-full flex items-center justify-center font-heading font-black text-xs transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
+          style={{
+            backgroundColor: value.color,
+            color: '#08080f',
+            boxShadow: `0 0 20px ${value.color}60, inset 0 0 10px rgba(255,255,255,0.2)`,
+          }}
+        >
+          {/* Pulsing ring */}
+          <div
+            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 animate-ping"
+            style={{ background: value.color }}
+          />
+          <span className="relative z-10">{value.n}</span>
+        </div>
+
+        {/* Text content */}
+        <div className="flex-1">
+          {/* Icon */}
+          <div
+            className="text-3xl mb-2 transition-transform duration-300 group-hover:scale-125"
+            style={{
+              filter: `drop-shadow(0 0 10px ${value.color}60)`,
+            }}
+          >
+            {value.icon}
+          </div>
+
+          {/* Headline */}
+          <p
+            className="font-heading font-black text-white text-base uppercase leading-tight mb-1 transition-all duration-300 group-hover:text-opacity-100"
+            style={{
+              textShadow: isHovered ? `0 0 10px ${value.color}40` : 'none',
+            }}
+          >
+            {value.headline}
+          </p>
+
+          {/* Subtitle */}
+          <p
+            className="font-body text-sm font-semibold mb-3 transition-all duration-300"
+            style={{
+              color: value.color,
+              opacity: isHovered ? 1 : 0.8,
+            }}
+          >
+            {value.sub}
+          </p>
+
+          {/* Description (shows on hover) */}
+          <p
+            className="font-body text-xs leading-relaxed transition-all duration-500 overflow-hidden"
+            style={{
+              color: 'rgba(255,255,255,0.5)',
+              maxHeight: isHovered ? '100px' : '0',
+              opacity: isHovered ? 1 : 0,
+            }}
+          >
+            {value.description}
+          </p>
+        </div>
+      </div>
+
+      {/* Corner accent */}
+      <div
+        className="absolute top-0 right-0 w-20 h-20 opacity-20 transition-opacity duration-300 group-hover:opacity-40"
+        style={{
+          background: `radial-gradient(circle at top right, ${value.color} 0%, transparent 70%)`,
+        }}
+      />
+    </div>
+  );
+};
+
+export default function About() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  // IntersectionObserver for scroll animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <section
+      id="about"
+      ref={sectionRef}
+      className="relative py-24 sm:py-32 bg-background overflow-hidden"
+      aria-labelledby="about-heading"
+    >
+      {/* Enhanced Background Layers */}
+      <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" />
+      <FloatingOrbs />
+      <ParticleField />
+
+      {/* Animated gradient line */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px z-0"
+        style={{
+          background: 'linear-gradient(90deg, transparent 0%, #00F5D4 50%, transparent 100%)',
+          opacity: 0.3,
+        }}
+      />
+
+      <div className="container mx-auto px-5 sm:px-6 max-w-6xl relative z-10">
+
+        {/* Header Section */}
+        <div
+          className={`mb-12 sm:mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+        >
+          {/* Label with animated underline */}
+          <div className="inline-flex items-center gap-3 mb-5">
+            <div className="h-px w-10 bg-gradient-to-r from-transparent to-accent-2 animate-pulse" />
+            <p
+              className="font-body text-sm font-bold uppercase tracking-[0.3em]"
+              style={{ color: '#00F5D4' }}
+            >
+              Who We Are
+            </p>
+            <div className="h-px w-10 bg-gradient-to-l from-transparent to-accent-2 animate-pulse" />
+          </div>
+
+          {/* Headline with gradient animation */}
+          <h2
+            id="about-heading"
+            className="font-heading font-black uppercase leading-tight tracking-tighter mb-5"
+            style={{ fontSize: 'clamp(2rem, 6vw, 4rem)' }}
+          >
+            <span className="text-white">Your Growth Partner for </span>
+            <span
+              className="inline-block bg-gradient-to-r from-accent-2 via-white to-accent-2 bg-clip-text text-transparent animate-gradient-shift"
+              style={{
+                backgroundSize: '200% auto',
+                textShadow: '0 0 40px rgba(0,245,212,0.6)',
+              }}
+            >
+              Beauty Brands.
+            </span>
+          </h2>
+
+          {/* Body copy with staggered fade-in */}
+          <p
+            className={`font-body leading-relaxed max-w-3xl transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+            style={{
+              fontSize: 'clamp(1rem, 2.5vw, 1.15rem)',
+              color: 'rgba(255,255,255,0.65)',
+            }}
+          >
+            We help makeup artists, salons, and beauty brands turn Instagram into a
+            consistent booking machine using ads, content, and conversion systems.{' '}
+            <span className="text-accent-2 font-semibold">No fluff. Just results.</span>
+          </p>
+        </div>
+
+        {/* Stats Section with animated counter */}
+        <div
+          className={`mb-12 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+        >
+          <div
+            className="relative flex flex-wrap gap-4 p-6 rounded-3xl backdrop-blur-xl overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
+            }}
+          >
+            {/* Animated background shimmer */}
+            <div
+              className="absolute inset-0 opacity-30 pointer-events-none"
+              style={{
+                background:
+                  'linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%)',
+                animation: 'shimmer 3s infinite',
+              }}
+            />
+
+            {proofStats.map((stat, i) => (
+              <div key={i} className="flex-1 min-w-[140px]">
+                {i > 0 && (
+                  <div
+                    className="hidden sm:block absolute w-px h-12 top-1/2 -translate-y-1/2"
+                    style={{
+                      left: `${(i / proofStats.length) * 100}%`,
+                      background: 'linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%)',
+                    }}
+                  />
+                )}
+                <StatCard stat={stat} index={i} isVisible={isVisible} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Value Cards Grid */}
+        <div
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+        >
+          {values.map((v, idx) => (
+            <ValueCard key={v.n} value={v} index={idx} />
+          ))}
+        </div>
+
+        {/* Bottom CTA hint */}
+        <div
+          className={`mt-12 text-center transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+        >
+          <p className="font-body text-white/40 text-sm tracking-wide">
+            Ready to scale your beauty business?{' '}
+            <a
+              href="#contact"
+              className="text-accent-2 font-semibold hover:underline transition-all duration-300 hover:text-accent-2/80"
+            >
+              Let's talk →
+            </a>
+          </p>
+        </div>
+
+      </div>
+
+      {/* Custom Animations */}
+      <style>{`
+        @keyframes float-orb {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.6;
+          }
+          33% {
+            transform: translate(30px, -30px) scale(1.1);
+            opacity: 0.8;
+          }
+          66% {
+            transform: translate(-20px, 20px) scale(0.9);
+            opacity: 0.7;
+          }
+        }
+        .animate-float-orb {
+          animation: float-orb ease-in-out infinite;
+        }
+
+        @keyframes particle-rise {
+          0% {
+            transform: translateY(0) translateX(0) rotate(0deg);
+            opacity: 0;
+          }
+          10% {
+            opacity: var(--opacity, 0.3);
+          }
+          90% {
+            opacity: var(--opacity, 0.3);
+          }
+          100% {
+            transform: translateY(-100vh) translateX(50px) rotate(360deg);
+            opacity: 0;
+          }
+        }
+        .animate-particle-rise {
+          animation: particle-rise linear infinite;
+        }
+
+        @keyframes gradient-shift {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        .animate-gradient-shift {
+          animation: gradient-shift 4s ease infinite;
+        }
+
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+      `}</style>
     </section>
   );
 }
