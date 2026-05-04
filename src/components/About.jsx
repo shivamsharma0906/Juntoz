@@ -41,69 +41,6 @@ function useCounter(end, duration = 2000, start = 0) {
   return { count, setCount, hasAnimated, setHasAnimated, end, duration };
 }
 
-// ── Floating Orbs ──
-const FloatingOrbs = () => {
-  const orbs = [
-    { color: '#FF3AF2', size: 300, top: '10%', left: '5%', delay: 0, duration: 8 },
-    { color: '#00F5D4', size: 250, top: '60%', right: '10%', delay: 2, duration: 10 },
-    { color: '#7B2FFF', size: 200, bottom: '15%', left: '50%', delay: 4, duration: 12 },
-  ];
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {orbs.map((orb, i) => (
-        <div
-          key={i}
-          className="absolute rounded-full animate-float-orb"
-          style={{
-            width: orb.size,
-            height: orb.size,
-            top: orb.top,
-            left: orb.left,
-            right: orb.right,
-            bottom: orb.bottom,
-            background: `radial-gradient(circle, ${orb.color}15 0%, transparent 70%)`,
-            filter: 'blur(60px)',
-            animationDelay: `${orb.delay}s`,
-            animationDuration: `${orb.duration}s`,
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
-// ── Particle System ──
-const ParticleField = () => {
-  const particles = Array.from({ length: 25 }, (_, i) => ({
-    id: i,
-    size: Math.random() * 3 + 1,
-    left: `${Math.random() * 100}%`,
-    delay: Math.random() * 8,
-    duration: Math.random() * 15 + 10,
-    opacity: Math.random() * 0.4 + 0.1,
-  }));
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((p) => (
-        <div
-          key={p.id}
-          className="absolute rounded-full bg-white animate-particle-rise"
-          style={{
-            width: p.size,
-            height: p.size,
-            left: p.left,
-            bottom: '-5%',
-            opacity: p.opacity,
-            animationDelay: `${p.delay}s`,
-            animationDuration: `${p.duration}s`,
-          }}
-        />
-      ))}
-    </div>
-  );
-};
 
 // ── Stat Card Component ──
 const StatCard = ({ stat, index, isVisible }) => {
@@ -195,79 +132,34 @@ const StatCard = ({ stat, index, isVisible }) => {
   );
 };
 
-// ── Value Card Component ──
+// ── Value Card ── (all hover via CSS — zero React re-renders on mouse move)
 const ValueCard = ({ value, index }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const cardRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
-    setMousePos({ x, y });
-  };
-
   return (
     <div
-      ref={cardRef}
-      className="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:scale-105"
+      className="group relative overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1"
       style={{
         background: `linear-gradient(135deg, ${value.color}05 0%, rgba(255,255,255,0.02) 100%)`,
-        border: `1px solid ${isHovered ? value.color + '40' : 'rgba(255,255,255,0.07)'}`,
-        boxShadow: isHovered
-          ? `0 20px 60px ${value.color}25, 0 0 0 1px ${value.color}15`
-          : '0 4px 20px rgba(0,0,0,0.2)',
-        transform: isHovered
-          ? `perspective(1000px) rotateX(${-mousePos.y * 0.1}deg) rotateY(${mousePos.x * 0.1}deg) translateZ(10px)`
-          : 'none',
+        border: '1px solid rgba(255,255,255,0.07)',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
         animationDelay: `${index * 100}ms`,
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onMouseMove={handleMouseMove}
     >
-      {/* Animated gradient overlay */}
+      {/* Gradient overlay — CSS only via group-hover */}
       <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-        style={{
-          background: `linear-gradient(135deg, ${value.color}12 0%, transparent 100%)`,
-        }}
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: `linear-gradient(135deg, ${value.color}10 0%, transparent 100%)` }}
       />
-
-      {/* Spotlight effect following cursor */}
-      {isHovered && (
-        <div
-          className="absolute rounded-full pointer-events-none transition-opacity duration-300"
-          style={{
-            width: '200px',
-            height: '200px',
-            left: `${((mousePos.x / 20 + 0.5) * 100)}%`,
-            top: `${((mousePos.y / 20 + 0.5) * 100)}%`,
-            transform: 'translate(-50%, -50%)',
-            background: `radial-gradient(circle, ${value.color}20 0%, transparent 60%)`,
-            filter: 'blur(30px)',
-          }}
-        />
-      )}
-
       {/* Content */}
       <div className="relative z-10 flex items-start gap-4 px-5 py-5">
-        {/* Number badge with glow */}
+        {/* Number badge */}
         <div
-          className="relative w-10 h-10 shrink-0 rounded-full flex items-center justify-center font-heading font-black text-xs transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
+          className="relative w-10 h-10 shrink-0 rounded-full flex items-center justify-center font-heading font-black text-xs transition-all duration-300 group-hover:scale-110"
           style={{
             backgroundColor: value.color,
             color: '#08080f',
-            boxShadow: `0 0 20px ${value.color}60, inset 0 0 10px rgba(255,255,255,0.2)`,
+            boxShadow: `0 0 14px ${value.color}50`,
           }}
         >
-          {/* Pulsing ring */}
-          <div
-            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 animate-ping"
-            style={{ background: value.color }}
-          />
           <span className="relative z-10">{value.n}</span>
         </div>
 
@@ -284,35 +176,17 @@ const ValueCard = ({ value, index }) => {
           </div>
 
           {/* Headline */}
-          <p
-            className="font-heading font-black text-white text-base uppercase leading-tight mb-1 transition-all duration-300 group-hover:text-opacity-100"
-            style={{
-              textShadow: isHovered ? `0 0 10px ${value.color}40` : 'none',
-            }}
-          >
+          <p className="font-heading font-black text-white text-base uppercase leading-tight mb-1">
             {value.headline}
           </p>
 
           {/* Subtitle */}
-          <p
-            className="font-body text-sm font-semibold mb-3 transition-all duration-300"
-            style={{
-              color: value.color,
-              opacity: isHovered ? 1 : 0.8,
-            }}
-          >
+          <p className="font-body text-sm font-semibold mb-3" style={{ color: value.color }}>
             {value.sub}
           </p>
 
-          {/* Description (shows on hover) */}
-          <p
-            className="font-body text-xs leading-relaxed transition-all duration-500 overflow-hidden"
-            style={{
-              color: 'rgba(255,255,255,0.5)',
-              maxHeight: isHovered ? '100px' : '0',
-              opacity: isHovered ? 1 : 0,
-            }}
-          >
+          {/* Description */}
+          <p className="font-body text-xs leading-relaxed text-white/40">
             {value.description}
           </p>
         </div>
@@ -359,13 +233,15 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative py-24 sm:py-32 bg-background overflow-hidden"
+      className="relative py-20 bg-background overflow-hidden"
       aria-labelledby="about-heading"
     >
-      {/* Enhanced Background Layers */}
-      <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" />
-      <FloatingOrbs />
-      <ParticleField />
+      {/* Static background glows — CSS only, no JS */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute top-[10%] left-[5%] w-[300px] h-[300px] rounded-full blur-[120px]" style={{ background: 'rgba(255,58,242,0.06)' }} />
+        <div className="absolute bottom-[15%] right-[10%] w-[250px] h-[250px] rounded-full blur-[100px]" style={{ background: 'rgba(0,245,212,0.06)' }} />
+        <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] rounded-full blur-[80px]" style={{ background: 'rgba(123,47,255,0.05)' }} />
+      </div>
 
       {/* Animated gradient line */}
       <div

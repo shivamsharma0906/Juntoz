@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
 import logo from '../image.png';
 
-const WA_HARD = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20want%20to%20book%20a%20strategy%20call.';
 
 const footerLinks = [
   { label: 'Services', to: '/services' },
-  { label: 'Work',     to: '/work'     },
-  { label: 'Results',  to: '/results'  },
-  { label: 'About',    to: '/about'    },
+  { label: 'Work', to: '/work' },
+  { label: 'Results', to: '/results' },
+  { label: 'About', to: '/about' },
 ];
 
 const socials = [
@@ -24,6 +23,26 @@ const socials = [
 ];
 
 export default function Footer() {
+  /* ── 3D tilt for contact cards ── */
+  const tilt = (e) => {
+    const card = e.currentTarget;
+    if (!card._raf) {
+      card._raf = requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 22;
+        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 22;
+        card.style.transform = `perspective(500px) rotateX(${-y}deg) rotateY(${x}deg) scale(1.05) translateZ(8px)`;
+        card._raf = null;
+      });
+    }
+  };
+  const resetTilt = (e) => {
+    const card = e.currentTarget;
+    card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+    card.style.transform = 'perspective(500px) rotateX(0) rotateY(0) scale(1) translateZ(0)';
+    setTimeout(() => { card.style.transition = ''; }, 500);
+  };
+
   return (
     <footer
       id="footer"
@@ -88,91 +107,99 @@ export default function Footer() {
       }} />
 
       {/* ══════════════════════════════════════
-           CTA ZONE (INSANE LEVEL)
+           GET IN TOUCH
       ══════════════════════════════════════ */}
-      <div className="relative px-5 pt-20 pb-16 flex flex-col items-center text-center group" style={{ zIndex: 10 }}>
+      <div className="relative px-5 pt-16 pb-12 flex flex-col items-center text-center" style={{ zIndex: 10 }}>
 
-        {/* Ambient Hover Spotlight */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-accent-1/5 rounded-full blur-[150px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
-
-        {/* Status badge */}
-        <div className="flex items-center gap-2 mb-8 px-5 py-2.5 rounded-full border border-green-500/30 bg-green-500/10 backdrop-blur-sm shadow-[0_0_20px_rgba(74,222,128,0.15)] hover:scale-105 transition-transform duration-500">
-          <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse shadow-[0_0_10px_#4ade80]" />
-          <span className="font-body text-xs font-bold uppercase tracking-[0.25em] text-green-400">
-            Currently Accepting Clients
-          </span>
+        {/* Label */}
+        <div className="inline-flex items-center gap-3 mb-6">
+          <div className="h-px w-8 bg-gradient-to-r from-transparent to-accent-2 opacity-60" />
+          <p className="font-body text-accent-2 text-xs font-bold uppercase tracking-[0.25em]">Get In Touch</p>
+          <div className="h-px w-8 bg-gradient-to-l from-transparent to-accent-2 opacity-60" />
         </div>
 
         {/* Headline */}
         <h2
-          className="font-heading font-black uppercase leading-[0.9] tracking-tighter mb-8"
-          style={{ fontSize: 'clamp(2.2rem, 8vw, 7.5rem)', color: '#ffffff', maxWidth: '900px' }}
+          className="font-heading font-black uppercase leading-[0.9] tracking-tighter mb-4 text-white"
+          style={{ fontSize: 'clamp(2rem, 6vw, 5rem)' }}
         >
-          <span className="inline-block animate-[slideUp_1s_ease-out_forwards] mr-[0.25em] mb-2 sm:mb-0">Ready to</span>
-          
-          <span className="inline-block relative animate-[slideUp_1s_ease-out_0.1s_forwards] opacity-0 mr-[0.25em] mb-2 sm:mb-0">
-            <span style={{
-              WebkitTextStroke: '2px #FF3AF2',
-              color: 'transparent',
-              textShadow: '0 0 60px rgba(255,58,242,0.8)',
-            }}>
-              Dominate
-            </span>
-            {/* Added intense backdrop glow to keep it insane */}
-            <span className="absolute inset-0 bg-[#FF3AF2] blur-[40px] opacity-20 z-[-1] animate-pulse" />
-          </span>
-          
-          <br className="sm:hidden" />
-          
-          <span className="inline-block animate-[slideUp_1s_ease-out_0.2s_forwards] opacity-0">Your Market?</span>
+          Let's Talk About<br />
+          <span style={{
+            background: 'linear-gradient(120deg, #FF3AF2, #7B2FFF)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}>Your Growth.</span>
         </h2>
 
-        {/* Subtitle */}
-        <p className="font-body max-w-xl leading-relaxed animate-[slideUp_1s_ease-out_0.4s_forwards] opacity-0" style={{
-          fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
-          color: 'rgba(255,255,255,0.65)',
-        }}>
-          One strategy call is all it takes. No fluff — just a clear growth plan for your beauty brand.
+        <p className="font-body text-white/45 text-base max-w-md mx-auto mb-10 leading-relaxed">
+          Whether you have a question, a project in mind, or just want to explore — we're easy to reach.
         </p>
 
-        {/* CTA Button */}
-        <div className="mt-12 relative animate-[slideUp_1s_ease-out_0.6s_forwards] opacity-0">
-          <div className="absolute inset-0 rounded-full blur-2xl scale-110 gradient-cta-bg opacity-40 group-hover:opacity-70 group-hover:blur-3xl transition-all duration-500 pointer-events-none" />
+        {/* Contact cards */}
+        <div className="flex flex-col sm:flex-row items-stretch justify-center gap-3 w-full max-w-2xl">
+
+          {/* Email */}
           <a
-            href={WA_HARD}
+            href="mailto:hello@juntoz.com"
+            className="group flex items-center gap-3 flex-1 min-w-0 px-5 py-4 rounded-2xl border border-white/8 bg-white/3 hover:border-accent-2/30 hover:bg-accent-2/5 transition-all duration-300"
+            onMouseEnter={(e) => { e.currentTarget.style.willChange = 'transform'; }}
+            onMouseLeave={(e) => { resetTilt(e); e.currentTarget.style.willChange = 'auto'; }}
+            onMouseMove={tilt}
+          >
+            <div className="w-9 h-9 rounded-xl bg-accent-2/10 border border-accent-2/20 flex items-center justify-center shrink-0 group-hover:bg-accent-2/20 transition-colors duration-300">
+              <svg className="w-4 h-4 text-accent-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div className="text-left min-w-0">
+              <p className="font-body text-white/35 text-[10px] uppercase tracking-widest">Email</p>
+              <p className="font-body text-white/70 text-sm font-semibold group-hover:text-white transition-colors duration-300 truncate">hello@juntoz.com</p>
+            </div>
+          </a>
+
+          {/* Phone */}
+          <a
+            href="tel:+919004001800"
+            className="group flex items-center gap-3 flex-1 min-w-0 px-5 py-4 rounded-2xl border border-white/8 bg-white/3 hover:border-accent-1/30 hover:bg-accent-1/5 transition-all duration-300"
+            onMouseEnter={(e) => { e.currentTarget.style.willChange = 'transform'; }}
+            onMouseLeave={(e) => { resetTilt(e); e.currentTarget.style.willChange = 'auto'; }}
+            onMouseMove={tilt}
+          >
+            <div className="w-9 h-9 rounded-xl bg-accent-1/10 border border-accent-1/20 flex items-center justify-center shrink-0 group-hover:bg-accent-1/20 transition-colors duration-300">
+              <svg className="w-4 h-4 text-accent-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+            <div className="text-left min-w-0">
+              <p className="font-body text-white/35 text-[10px] uppercase tracking-widest">Call Us</p>
+              <p className="font-body text-white/70 text-sm font-semibold group-hover:text-white transition-colors duration-300 whitespace-nowrap">+91 90040 01800</p>
+            </div>
+          </a>
+
+          <a
+            href="https://www.instagram.com/_juntoz"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative inline-flex items-center gap-3 rounded-full font-heading font-black uppercase tracking-widest text-white transition-all duration-500 hover:scale-105 active:scale-95 overflow-hidden group/btn"
-            style={{
-              fontSize: 'clamp(0.875rem, 2vw, 1rem)',
-              padding: 'clamp(16px, 3vw, 24px) clamp(32px, 6vw, 56px)',
-              background: 'linear-gradient(135deg, #FF3AF2 0%, #7B2FFF 100%)',
-              boxShadow: '0 0 40px rgba(255,58,242,0.6), 0 0 80px rgba(123,47,255,0.3), inset 0 1px 0 rgba(255,255,255,0.2)',
-            }}
+            className="group flex items-center gap-3 flex-1 min-w-0 px-5 py-4 rounded-2xl border border-white/8 bg-white/3 hover:border-[#FF3AF2]/30 hover:bg-[#FF3AF2]/5 transition-all duration-300"
+            onMouseEnter={(e) => { e.currentTarget.style.willChange = 'transform'; }}
+            onMouseLeave={(e) => { resetTilt(e); e.currentTarget.style.willChange = 'auto'; }}
+            onMouseMove={tilt}
           >
-            {/* Sweep */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-[150%] group-hover/btn:animate-[sweep_1.5s_ease-in-out_infinite]" />
-            <svg className="w-6 h-6 shrink-0 relative z-10" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.875L.057 23.386a.5.5 0 0 0 .614.599l5.728-1.539A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75A9.75 9.75 0 1 1 12 2.25 9.75 9.75 0 0 1 12 21.75z"/>
-            </svg>
-            <span className="relative z-10">Book a Strategy Call</span>
+            <div className="w-9 h-9 rounded-xl bg-[#FF3AF2]/10 border border-[#FF3AF2]/20 flex items-center justify-center shrink-0 group-hover:bg-[#FF3AF2]/20 transition-colors duration-300">
+              <svg className="w-4 h-4 text-[#FF3AF2] fill-current" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg>
+            </div>
+            <div className="text-left min-w-0">
+              <p className="font-body text-white/35 text-[10px] uppercase tracking-widest">Instagram</p>
+              <p className="font-body text-white/70 text-sm font-semibold group-hover:text-white transition-colors duration-300">@_juntoz</p>
+            </div>
           </a>
-        </div>
 
-        {/* Trust strip */}
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mt-10 animate-[slideUp_1s_ease-out_0.8s_forwards] opacity-0">
-          {[
-            { icon: '🚀', text: '200+ Brands' },
-            { icon: '📈', text: '3× Avg. Growth' },
-            { icon: '⭐', text: '5.0 Rated' },
-          ].map((t, i) => (
-            <span key={i} className="flex items-center gap-2 font-body text-[10px] sm:text-xs font-bold uppercase tracking-widest text-white/50 hover:text-accent-2 transition-colors duration-300">
-              <span className="text-sm sm:text-base">{t.icon}</span>{t.text}
-            </span>
-          ))}
         </div>
       </div>
+
 
       {/* ── Divider ── */}
       <div className="mx-5 sm:mx-auto sm:max-w-5xl h-px" style={{
@@ -262,9 +289,9 @@ export default function Footer() {
             </p>
             <ul className="space-y-3">
               {[
-                { text: 'Mumbai, India',    href: null },
+                { text: 'Mumbai, India', href: null },
                 { text: 'hello@juntoz.com', href: 'mailto:hello@juntoz.com' },
-                { text: '+91 90040 01800',  href: 'tel:+919004001800' },
+                { text: '+91 90040 01800', href: 'tel:+919004001800' },
               ].map((item, i) => (
                 <li key={i}>
                   {item.href ? (

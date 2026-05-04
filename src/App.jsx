@@ -11,11 +11,29 @@ import PortfolioPage from './pages/PortfolioPage';
 import ResultsPage from './pages/ResultsPage';
 import AboutPage from './pages/AboutPage';
 
-// Scroll to top on navigation
+// Re-run reveal scan on every route change (catches freshly mounted [data-reveal] elements)
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // Small delay so React finishes rendering the new page's components
+    const t = setTimeout(() => {
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('revealed');
+              obs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
+      );
+      document.querySelectorAll('[data-reveal]:not(.revealed)').forEach((el) => obs.observe(el));
+    }, 80);
+
+    return () => clearTimeout(t);
   }, [pathname]);
   return null;
 }

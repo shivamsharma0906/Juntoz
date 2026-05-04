@@ -88,7 +88,7 @@ export default function HowItWorks() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="how-it-works" className="relative py-32 bg-background overflow-hidden">
+    <section ref={sectionRef} id="how-it-works" className="relative py-20 bg-background overflow-hidden">
       {/* ── Dynamic Ambient Background ── */}
       <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" />
       <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-64 bg-accent-2/10 rounded-full blur-[120px] pointer-events-none z-0 transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`} />
@@ -96,7 +96,7 @@ export default function HowItWorks() {
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
 
         {/* ── Header ── */}
-        <div className={`text-center mb-24 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div data-reveal="up" className="text-center mb-16">
           <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-accent-2/20 bg-accent-2/5 backdrop-blur-md mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-accent-2 animate-pulse" />
             <p className="font-body text-accent-2 text-xs font-bold uppercase tracking-[0.2em]">
@@ -135,12 +135,9 @@ export default function HowItWorks() {
             {steps.map((step, i) => (
               <div 
                 key={i} 
-                className={`relative flex flex-col items-center text-center group transition-all duration-1000 ease-out`}
-                style={{ 
-                  opacity: isVisible ? 1 : 0, 
-                  transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
-                  transitionDelay: `${300 + (i * 200)}ms` 
-                }}
+                data-reveal="up"
+                data-delay={String((i + 1) * 100)}
+                className="relative flex flex-col items-center text-center group"
               >
                 
                 {/* Number Badge (Floating above) */}
@@ -150,8 +147,8 @@ export default function HowItWorks() {
 
                 {/* Main Node Circle */}
                 <div className="relative w-[80px] h-[80px] flex items-center justify-center rounded-full border-2 border-white/10 bg-[#0a0a0f] z-10 mb-8 transition-all duration-500 group-hover:scale-110 group-hover:bg-white/5">
-                  {/* Rotating dashed ring */}
-                  <div className={`absolute inset-0 rounded-full border border-dashed border-white/20 group-hover:${step.border} group-hover:animate-[spin_10s_linear_infinite] transition-colors duration-500`} />
+                  {/* Dashed ring */}
+                  <div className="absolute inset-0 rounded-full border border-dashed border-white/20 transition-colors duration-500" />
                   
                   {/* Glowing core on hover */}
                   <div className={`absolute inset-0 rounded-full ${step.bg} opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-500`} />
@@ -196,12 +193,9 @@ export default function HowItWorks() {
           {steps.map((step, i) => (
             <div 
               key={i} 
-              className="relative group transition-all duration-1000 ease-out"
-              style={{ 
-                opacity: isVisible ? 1 : 0, 
-                transform: isVisible ? 'translateX(0)' : 'translateX(40px)',
-                transitionDelay: `${i * 200}ms` 
-              }}
+              data-reveal="left"
+              data-delay={String(i * 100)}
+              className="relative group"
             >
               
               {/* Node Point */}
@@ -213,9 +207,9 @@ export default function HowItWorks() {
               </div>
 
               {/* Card */}
-              <div className={`glass-card p-5 sm:p-6 rounded-2xl group-hover:border-${step.color.replace('#', '')}/30 transition-all duration-500 relative overflow-hidden`} style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
+              <div className="glass-card p-5 sm:p-6 rounded-2xl transition-all duration-300 relative overflow-hidden hover:border-white/15" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
                 {/* Sweep highlight */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:animate-[sweep_1.5s_ease-in-out_infinite] pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:animate-[sweep_1.5s_ease-in-out] pointer-events-none" />
                 
                 <div className="relative z-10">
                   <div className="flex items-center gap-3 sm:gap-4 mb-4">

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 const pains = [
   {
     icon: (
-      <svg className="w-6 h-6 text-accent-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
@@ -12,7 +12,7 @@ const pains = [
   },
   {
     icon: (
-      <svg className="w-6 h-6 text-accent-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
       </svg>
     ),
@@ -21,7 +21,7 @@ const pains = [
   },
   {
     icon: (
-      <svg className="w-6 h-6 text-accent-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
@@ -33,7 +33,7 @@ const pains = [
 const fixes = [
   { 
     icon: (
-      <svg className="w-5 h-5 text-accent-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
       </svg>
     ), 
@@ -41,7 +41,7 @@ const fixes = [
   },
   { 
     icon: (
-      <svg className="w-5 h-5 text-accent-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
       </svg>
     ), 
@@ -49,7 +49,7 @@ const fixes = [
   },
   { 
     icon: (
-      <svg className="w-5 h-5 text-accent-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
       </svg>
     ), 
@@ -57,7 +57,7 @@ const fixes = [
   },
   { 
     icon: (
-      <svg className="w-5 h-5 text-accent-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
       </svg>
     ), 
@@ -85,7 +85,7 @@ export default function ProblemSolution() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="problem-solution" className="relative py-32 bg-background overflow-hidden">
+    <section ref={sectionRef} id="problem-solution" className="relative py-20 bg-background overflow-hidden">
       
       {/* ── Dynamic Backgrounds ── */}
       <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" />
@@ -99,7 +99,7 @@ export default function ProblemSolution() {
       </div>
 
       <div className="container mx-auto px-6 max-w-[1400px] relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start">
 
           {/* ── LEFT COLUMN (THE PROBLEM) ── */}
           <div className={`space-y-10 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
@@ -112,7 +112,7 @@ export default function ProblemSolution() {
                   Sound Familiar?
                 </p>
               </div>
-              <h2 className="font-heading font-black text-white text-5xl sm:text-6xl md:text-7xl uppercase leading-[0.95] tracking-tighter">
+              <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase leading-[0.95] tracking-tighter">
                 You're Working Hard.<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-1 to-[#ff7eb3] relative inline-block">
                   But Not Smart.
@@ -127,18 +127,18 @@ export default function ProblemSolution() {
               {pains.map((p, i) => (
                 <div 
                   key={i} 
-                  className="group relative p-6 rounded-2xl bg-[#0a0a0f] border border-white/5 transition-all duration-500 hover:-translate-y-1 hover:border-accent-1/30 hover:shadow-[0_10px_30px_rgba(255,58,242,0.1)] overflow-hidden"
+                  className="group relative p-5 rounded-2xl bg-[#0a0a0f] border border-white/5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-1/30 hover:shadow-[0_8px_24px_rgba(255,58,242,0.1)] overflow-hidden"
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
                   {/* Hover background gradient */}
                   <div className="absolute inset-0 bg-gradient-to-r from-accent-1/0 to-accent-1/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
-                  <div className="relative z-10 flex items-start gap-5">
-                    <div className="w-12 h-12 shrink-0 rounded-xl bg-accent-1/10 flex items-center justify-center border border-accent-1/20 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                  <div className="relative z-10 flex items-start gap-3 sm:gap-5">
+                    <div className="w-12 h-12 shrink-0 rounded-xl bg-accent-1/10 flex items-center justify-center border border-accent-1/20 text-accent-1 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                       {p.icon}
                     </div>
                     <div>
-                      <p className="font-body font-bold text-white/90 text-lg group-hover:text-white transition-colors duration-300">{p.text}</p>
+                      <p className="font-body font-bold text-white/90 text-base sm:text-lg group-hover:text-white transition-colors duration-300">{p.text}</p>
                       <p className="font-body text-sm text-white/40 mt-1.5 leading-relaxed group-hover:text-white/60 transition-colors duration-300">{p.sub}</p>
                     </div>
                   </div>
@@ -147,7 +147,7 @@ export default function ProblemSolution() {
             </div>
 
             {/* Pink Callout Block */}
-            <div className="relative overflow-hidden rounded-2xl p-6 bg-accent-1/5 border border-accent-1/20 group">
+            <div className="relative overflow-hidden rounded-2xl p-5 bg-accent-1/5 border border-accent-1/20 group">
               <div className="absolute inset-0 bg-gradient-to-r from-accent-1/0 via-accent-1/10 to-accent-1/0 -translate-x-[100%] group-hover:animate-sweep pointer-events-none" />
               <div className="flex gap-4 items-center relative z-10">
                 <div className="w-1 h-12 bg-accent-1 rounded-full shrink-0 shadow-[0_0_10px_rgba(255,58,242,0.5)]" />
@@ -162,7 +162,7 @@ export default function ProblemSolution() {
 
 
           {/* ── RIGHT COLUMN (THE SOLUTION) ── */}
-          <div className={`space-y-10 lg:pt-16 transition-all duration-1000 delay-300 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+          <div className={`space-y-8 lg:pt-14 transition-all duration-1000 delay-300 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             
             {/* Header */}
             <div>
@@ -172,7 +172,7 @@ export default function ProblemSolution() {
                   The Juntoz System
                 </p>
               </div>
-              <h2 className="font-heading font-black text-white text-5xl sm:text-6xl md:text-7xl uppercase leading-[0.95] tracking-tighter">
+              <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase leading-[0.95] tracking-tighter">
                 We Build You a<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-2 to-[#00ff9d] relative inline-block">
                   Growth Machine.
@@ -182,7 +182,7 @@ export default function ProblemSolution() {
               </h2>
             </div>
 
-            <p className="font-body text-white/60 text-lg md:text-xl leading-relaxed max-w-lg border-l-2 border-accent-2/30 pl-5 py-1">
+            <p className="font-body text-white/60 text-sm sm:text-lg md:text-xl leading-relaxed max-w-lg border-l-2 border-accent-2/30 pl-4 sm:pl-5 py-1">
               Not random posts. Not boosted reels. A complete, end-to-end system that attracts, captures, and converts the right clients — every single month.
             </p>
 
@@ -191,7 +191,7 @@ export default function ProblemSolution() {
               {fixes.map((f, i) => (
                 <div 
                   key={i} 
-                  className="group relative p-5 rounded-2xl bg-gradient-to-br from-[rgba(255,255,255,0.03)] to-transparent border border-white/5 transition-all duration-500 hover:-translate-y-1 hover:border-accent-2/40 hover:shadow-[0_10px_30px_rgba(0,245,212,0.15)] overflow-hidden flex flex-col justify-center min-h-[120px]"
+                  className="group relative p-4 rounded-2xl bg-gradient-to-br from-[rgba(255,255,255,0.03)] to-transparent border border-white/5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-2/40 hover:shadow-[0_8px_24px_rgba(0,245,212,0.12)] overflow-hidden flex flex-col justify-center min-h-[100px]"
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
                   {/* Sweep highlight */}
@@ -210,11 +210,11 @@ export default function ProblemSolution() {
             </div>
 
             {/* Cyan Callout Block */}
-            <div className="relative overflow-hidden rounded-2xl p-6 bg-accent-2/5 border border-accent-2/20 group">
+            <div className="relative overflow-hidden rounded-2xl p-5 bg-accent-2/5 border border-accent-2/20 group">
               <div className="absolute inset-0 bg-gradient-to-r from-accent-2/0 via-accent-2/10 to-accent-2/0 -translate-x-[100%] group-hover:animate-sweep pointer-events-none" />
               <div className="flex gap-4 items-center relative z-10">
                 <div className="w-1 h-12 bg-accent-2 rounded-full shrink-0 shadow-[0_0_10px_rgba(0,245,212,0.5)]" />
-                <p className="font-heading font-black text-white/90 text-xl uppercase leading-snug tracking-wide">
+                <p className="font-heading font-black text-white/90 text-lg sm:text-xl uppercase leading-snug tracking-wide">
                   We don't sell services.<br />
                   <span className="text-accent-2">We sell a booked-out calendar.</span>
                 </p>
