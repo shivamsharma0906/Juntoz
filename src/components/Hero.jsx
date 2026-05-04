@@ -146,7 +146,6 @@ export default function Hero() {
       {/* ── Scroll indicator ── */}
       <div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        style={{ opacity: mounted ? 1 : 0, transition: 'opacity 1s ease 0.8s' }}
       >
         <span className="font-heading font-black text-white/15 text-[9px] tracking-[0.35em] uppercase">Scroll</span>
         <div className="w-px h-7 bg-white/8 relative overflow-hidden rounded-full">
