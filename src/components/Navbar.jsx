@@ -82,6 +82,10 @@ export default function Navbar() {
                   src={logo}
                   alt="Juntoz"
                   className="h-8 md:h-10 w-auto relative z-10 transition-all duration-400 group-hover/logo:scale-105 group-hover/logo:drop-shadow-[0_0_8px_rgba(0,245,212,0.6)]"
+                  style={{
+                    filter: 'brightness(0) invert(1) sepia(1) hue-rotate(225deg) saturate(4) brightness(1.4)',
+                    mixBlendMode: 'screen',
+                  }}
                 />
               </div>
             </Link>

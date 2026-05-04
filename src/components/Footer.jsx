@@ -219,7 +219,7 @@ export default function Footer() {
                 src={logo}
                 alt="Juntoz"
                 className="h-14 w-auto transition-opacity duration-300"
-                style={{ opacity: 0.85 }}
+                style={{ opacity: 0.85, filter: 'brightness(0) invert(1) sepia(1) hue-rotate(225deg) saturate(4) brightness(1.4)', mixBlendMode: 'screen' }}
                 onMouseEnter={e => e.currentTarget.style.opacity = '1'}
                 onMouseLeave={e => e.currentTarget.style.opacity = '0.85'}
               />
