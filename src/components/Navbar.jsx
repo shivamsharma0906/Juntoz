@@ -33,7 +33,8 @@ export default function Navbar() {
 
   /* ── Close on route change ── */
   useEffect(() => {
-    setMenuOpen(false);
+    const timer = setTimeout(() => setMenuOpen(false), 0);
+    return () => clearTimeout(timer);
   }, [location]);
 
   /* ── Body lock ── */

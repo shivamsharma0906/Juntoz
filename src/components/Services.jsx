@@ -64,18 +64,18 @@ const AUTO_PLAY_INTERVAL = 4500;
 
 export default function Services() {
   const containerRef = useRef(null);
-  const trackRef     = useRef(null);
+  const trackRef = useRef(null);
   const cardWidthRef = useRef(0);
-  const indexRef     = useRef(0);
-  const pausedRef    = useRef(false);
-  const timerRef     = useRef(null);
-  const velocityRef  = useRef(0);
-  const lastXRef     = useRef(0);
-  const lastTimeRef  = useRef(0);
-  const mouseStartX  = useRef(0);
-  const isDragging   = useRef(false);
+  const indexRef = useRef(0);
+  const pausedRef = useRef(false);
+  const timerRef = useRef(null);
+  const velocityRef = useRef(0);
+  const lastXRef = useRef(0);
+  const lastTimeRef = useRef(0);
+  const mouseStartX = useRef(0);
+  const isDragging = useRef(false);
 
-  const [dotIdx, setDotIdx]     = useState(0);
+  const [dotIdx, setDotIdx] = useState(0);
   const [progress, setProgress] = useState(0);
 
   const COUNT = services.length;
@@ -90,14 +90,14 @@ export default function Services() {
     const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
 
     let w;
-    if (isMobile)      w = cw - 40;
+    if (isMobile) w = cw - 40;
     else if (isTablet) w = (cw - GAP) / 1.6;
-    else               w = (cw - GAP * 2) / 3.1;
+    else w = (cw - GAP * 2) / 3.1;
 
     cardWidthRef.current = w;
     if (trackRef.current) {
       Array.from(trackRef.current.children).forEach((card) => {
-        card.style.width    = `${w}px`;
+        card.style.width = `${w}px`;
         card.style.minWidth = `${w}px`;
       });
     }
@@ -109,7 +109,7 @@ export default function Services() {
     if (!track) return;
     const offset = idx * (cardWidthRef.current + GAP);
     track.style.transition = instant ? 'none' : 'transform 0.6s cubic-bezier(0.34, 1.2, 0.64, 1)';
-    track.style.transform  = `translateX(-${offset}px)`;
+    track.style.transform = `translateX(-${offset}px)`;
     indexRef.current = idx;
     setDotIdx(idx % COUNT);
   }, [COUNT]);
@@ -125,13 +125,13 @@ export default function Services() {
     }
   }, [COUNT, slideTo]);
 
-  /* ── Progress bar ── */
+  /* ── Progress bar (throttled to 100ms for better performance) ── */
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress(p => (p >= 100 ? 0 : p + (100 / (AUTO_PLAY_INTERVAL / 50))));
-    }, 50);
+      setProgress(p => (p >= 100 ? 0 : p + (100 / (AUTO_PLAY_INTERVAL / 100))));
+    }, 100);
     return () => clearInterval(interval);
-  }, [dotIdx]);
+  }, []);
   useEffect(() => { setProgress(0); }, [dotIdx]);
 
   const startTimer = useCallback(() => {
@@ -180,12 +180,12 @@ export default function Services() {
       pausedRef.current = false; startTimer(); isHoriz = null;
     };
     el.addEventListener('touchstart', onTouchStart, { passive: true });
-    el.addEventListener('touchmove',  onTouchMove,  { passive: false });
-    el.addEventListener('touchend',   onTouchEnd,   { passive: true });
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    el.addEventListener('touchend', onTouchEnd, { passive: true });
     return () => {
       el.removeEventListener('touchstart', onTouchStart);
-      el.removeEventListener('touchmove',  onTouchMove);
-      el.removeEventListener('touchend',   onTouchEnd);
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('touchend', onTouchEnd);
     };
   }, [advance, slideTo, startTimer, COUNT]);
 
@@ -242,7 +242,7 @@ export default function Services() {
           ref={containerRef}
           className="overflow-hidden cursor-grab active:cursor-grabbing select-none"
           style={{
-            paddingLeft:  'max(20px, calc((100vw - 1200px) / 2 + 24px))',
+            paddingLeft: 'max(20px, calc((100vw - 1200px) / 2 + 24px))',
             paddingRight: '20px',
           }}
           onMouseEnter={() => { pausedRef.current = true; clearInterval(timerRef.current); }}
@@ -336,8 +336,8 @@ export default function Services() {
                 aria-label={`Go to service ${i + 1}`}
                 className="rounded-full transition-all duration-300"
                 style={{
-                  width:      dotIdx === i ? '28px' : '8px',
-                  height:     '8px',
+                  width: dotIdx === i ? '28px' : '8px',
+                  height: '8px',
                   background: dotIdx === i ? '#FF3AF2' : 'rgba(255,255,255,0.18)',
                 }}
               />

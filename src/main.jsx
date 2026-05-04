@@ -39,8 +39,8 @@ function initReveal() {
 // Scan 1 — right after first paint
 requestAnimationFrame(initReveal);
 
-// Scan 2 — after React finishes rendering child components (~100–200 ms)
-setTimeout(initReveal, 200);
-
-// Scan 3 — safety net for any slow or conditional renders
-setTimeout(initReveal, 800);
+// Scan 2 — retry if mutations happen during hydration
+const revealRetry = setTimeout(() => {
+  const unrevealed = document.querySelectorAll('[data-reveal]:not(.revealed)');
+  if (unrevealed.length > 0) initReveal();
+}, 500);
