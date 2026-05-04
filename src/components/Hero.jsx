@@ -7,13 +7,6 @@ export default function Hero() {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const rafRef = useRef(null);
-  const [mounted, setMounted] = useState(false);
-
-  /* ── Fade-in on mount ── */
-  useEffect(() => {
-    const t = requestAnimationFrame(() => setMounted(true));
-    return () => cancelAnimationFrame(t);
-  }, []);
 
   /* ── Scroll-driven parallax — desktop only ── */
   useEffect(() => {
@@ -53,14 +46,7 @@ export default function Hero() {
       </div>
 
       {/* ── Content ── */}
-      <div
-        className="container mx-auto px-5 sm:px-6 relative z-10 flex flex-col items-center text-center"
-        style={{
-          opacity: mounted ? 1 : 0,
-          transform: mounted ? 'translateY(0)' : 'translateY(20px)',
-          transition: 'opacity 0.9s ease, transform 0.9s ease',
-        }}
-      >
+      <div className="container mx-auto px-5 sm:px-6 relative z-10 flex flex-col items-center text-center">
         {/* Eyebrow label */}
         <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-accent-2/25 bg-accent-2/6 backdrop-blur-sm mb-7 sm:mb-9">
           <span className="relative flex h-1.5 w-1.5">
