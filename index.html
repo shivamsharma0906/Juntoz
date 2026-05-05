@@ -14,11 +14,43 @@
   <meta property="og:description"
     content="We turn makeup artists into booked-out brands. Join 200+ clients who scaled their beauty business with Juntoz." />
   <meta property="og:type" content="website" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- DNS prefetch & preconnect for Google Fonts -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!--
+    NON-BLOCKING font load trick:
+    Load as media="print" so it never blocks rendering.
+    onload swaps it to media="all" once the stylesheet is fetched.
+    This eliminates the render-blocking font request entirely.
+  -->
   <link
     href="https://fonts.googleapis.com/css2?family=Bangers&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Outfit:wght@100..900&family=Unbounded:wght@400..900&display=swap"
-    rel="stylesheet">
+    rel="stylesheet"
+    media="print"
+    onload="this.media='all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bangers&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Outfit:wght@100..900&family=Unbounded:wght@400..900&display=swap"
+      rel="stylesheet" />
+  </noscript>
+
+  <!-- Inline critical CSS to style above-the-fold text before JS loads -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #080810;
+      color: #ffffff;
+      font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    #root { min-height: 100vh; }
+  </style>
 </head>
 
 <body>
