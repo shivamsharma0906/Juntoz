@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import './index.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
 
 // Pages
 import Home from './pages/Home';
@@ -61,6 +62,7 @@ function App() {
         </main>
 
         <Footer />
+        <WhatsAppButton />
       </div>
     </BrowserRouter>
   );

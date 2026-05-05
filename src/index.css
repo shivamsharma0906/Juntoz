@@ -63,6 +63,10 @@
     0%, 100% { transform: rotate(-3deg); }
     50%       { transform: rotate(3deg); }
   }
+  @keyframes progress-fill {
+    0%   { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+  }
 }
 
 /* ════════════════════════════════════════════════
@@ -115,10 +119,16 @@
 
 /* Gradient text */
 @utility bg-gradient-text {
-  @apply bg-gradient-to-r from-accent-1 via-accent-2 to-accent-5 bg-[length:200%_100%] animate-gradient-shift;
+  @apply bg-gradient-to-r from-accent-1 via-accent-2 to-accent-5 bg-[length:200%_100%];
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+/* Only animate gradient shift on larger screens to save mobile battery/CPU */
+@media (min-width: 768px) {
+  .bg-gradient-text {
+    animation: gradient-shift 4s ease infinite;
+  }
 }
 
 /* ════════════════════════════════════════════════
@@ -229,18 +239,13 @@
 /* ════════════════════════════════════════════════
    GLOBAL SCROLL REVEAL
    JS in main.jsx scans [data-reveal] and adds .revealed
-   when elements enter viewport. Fallback auto-reveals
-   after 1.5s in case JS is slow on mobile.
+   when elements enter viewport.
 ════════════════════════════════════════════════ */
-@keyframes reveal-fallback {
-  to { opacity: 1; transform: none; }
-}
 
 [data-reveal] {
   opacity: 0;
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  /* Reduced from 1.5s → 0.6s so above-fold content appears faster if JS is slow */
-  animation: reveal-fallback 0.7s ease 0.6s forwards;
+  will-change: opacity, transform;
 }
 [data-reveal="up"]    { transform: translateY(36px); }
 [data-reveal="left"]  { transform: translateX(-36px); }
@@ -250,8 +255,7 @@
 
 [data-reveal].revealed {
   opacity: 1 !important;
-  transform: none !important;
-  animation: none !important;
+  transform: translate(0,0) scale(1) !important;
 }
 
 /* ── LCP fix: hero h1 must be visible immediately for Lighthouse ─
