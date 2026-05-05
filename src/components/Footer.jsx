@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logo from './IMG_0367.PNG';
+import logo from './logo.webp';
 
 
 const footerLinks = [
@@ -218,6 +218,8 @@ export default function Footer() {
               <img
                 src={logo}
                 alt="Juntoz"
+                width="224"
+                height="56"
                 className="h-14 w-auto transition-opacity duration-300"
                 style={{ opacity: 0.85 }}
                 onMouseEnter={e => e.currentTarget.style.opacity = '1'}

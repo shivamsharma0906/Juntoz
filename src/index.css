@@ -39,8 +39,8 @@
     50%       { transform: translateY(14px); }
   }
   @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(255, 58, 242, 0.4); }
-    50%       { box-shadow: 0 0 40px rgba(255, 58, 242, 0.7), 0 0 80px rgba(0, 245, 212, 0.2); }
+    0%, 100% { opacity: 0.7; filter: blur(0px); }
+    50%       { opacity: 1;   filter: blur(1px); }
   }
   @keyframes gradient-shift {
     0%   { background-position: 0% 50%; }

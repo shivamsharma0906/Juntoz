@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from './IMG_0367.PNG';
+import logo from './logo.webp';
 
 const WA_HARD =
   'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20want%20to%20book%20a%20strategy%20call.';
@@ -81,6 +81,9 @@ export default function Navbar() {
                 <img
                   src={logo}
                   alt="Juntoz"
+                  width="160"
+                  height="40"
+                  fetchpriority="high"
                   className="h-8 md:h-10 w-auto relative z-10 transition-all duration-400 group-hover/logo:scale-105 group-hover/logo:drop-shadow-[0_0_8px_rgba(0,245,212,0.6)]"
                 />
               </div>
