@@ -6,10 +6,13 @@ import Footer from './components/Footer';
 
 // Pages
 import Home from './pages/Home';
-import ServicesPage from './pages/ServicesPage';
-import PortfolioPage from './pages/PortfolioPage';
-import ResultsPage from './pages/ResultsPage';
-import AboutPage from './pages/AboutPage';
+import { lazy, Suspense } from 'react';
+
+// Lazy load non-critical pages to reduce initial JavaScript bundle size (Fixes high FCP/LCP)
+const ServicesPage = lazy(() => import('./pages/ServicesPage'));
+const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
+const ResultsPage = lazy(() => import('./pages/ResultsPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
 
 // Re-run reveal scan on every route change (catches freshly mounted [data-reveal] elements)
 function ScrollToTop() {
@@ -46,13 +49,15 @@ function App() {
         <Navbar />
         
         <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/work" element={<PortfolioPage />} />
-            <Route path="/results" element={<ResultsPage />} />
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
+          <Suspense fallback={<div className="h-screen w-full flex items-center justify-center"><div className="w-8 h-8 border-4 border-[#00F5D4] border-t-transparent rounded-full animate-spin"></div></div>}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/work" element={<PortfolioPage />} />
+              <Route path="/results" element={<ResultsPage />} />
+              <Route path="/about" element={<AboutPage />} />
+            </Routes>
+          </Suspense>
         </main>
 
         <Footer />
