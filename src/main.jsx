@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { SpeedInsights } from "@vercel/speed-insights/react"
+import { initAnimations } from './animations.js'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -41,8 +42,20 @@ function initReveal() {
 // Scan 1 — right after first paint
 requestAnimationFrame(initReveal);
 
+// ── Launch all premium animations after React first render ──
+// Use 200ms timeout — React needs at least one paint cycle to mount components
+setTimeout(initAnimations, 200);
+
 // Scan 2 — retry if mutations happen during hydration
 const revealRetry = setTimeout(() => {
   const unrevealed = document.querySelectorAll('[data-reveal]:not(.revealed)');
   if (unrevealed.length > 0) initReveal();
 }, 500);
+
+// Expose cleanup handle so HMR can clear it
+if (import.meta.hot) {
+  import.meta.hot.dispose(() => {
+    clearTimeout(revealRetry);
+    if (revealObs) { revealObs.disconnect(); revealObs = null; }
+  });
+}

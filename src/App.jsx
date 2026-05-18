@@ -1,13 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import './index.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
-
-// Pages
+import FloatingShapes from './components/FloatingShapes';
+import MagneticCursor from './components/MagneticCursor';
 import Home from './pages/Home';
-import { lazy, Suspense } from 'react';
 
 // Lazy load non-critical pages to reduce initial JavaScript bundle size (Fixes high FCP/LCP)
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
@@ -45,7 +44,16 @@ function ScrollToTop() {
 function App() {
   return (
     <BrowserRouter>
-      <div className="relative min-h-screen bg-background">
+      <div className="relative min-h-screen">
+        <div className="fixed inset-0 pattern-hex pointer-events-none" style={{ zIndex: -2 }} />
+        <div className="fixed inset-0 bg-gradient-to-t from-[#050508]/80 via-transparent to-[#050508]/80 pointer-events-none" style={{ zIndex: -2 }} />
+        
+        {/* GLOBAL 3D SCROLLING SHAPES */}
+        <FloatingShapes />
+
+        {/* PREMIUM MAGNETIC CURSOR — desktop only */}
+        <MagneticCursor />
+        
         <ScrollToTop />
         <Navbar />
         

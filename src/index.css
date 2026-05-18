@@ -67,6 +67,22 @@
     0%   { transform: scaleX(0); }
     100% { transform: scaleX(1); }
   }
+  @keyframes nav-cta-sweep {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(200%);  }
+  }
+  @keyframes sweep {
+    0%   { transform: translateX(-150%); }
+    100% { transform: translateX(150%);  }
+  }
+  @keyframes hex-move {
+    0% {
+      background-position: 0 0, 0 0, 60px 105px, 60px 105px, 0 0, 60px 105px;
+    }
+    100% {
+      background-position: 120px 210px, 120px 210px, 180px 315px, 180px 315px, 120px 210px, 180px 315px;
+    }
+  }
 }
 
 /* ════════════════════════════════════════════════
@@ -74,10 +90,13 @@
 ════════════════════════════════════════════════ */
 @layer base {
   body {
-    @apply bg-background text-foreground font-body overflow-x-hidden;
+    @apply text-foreground font-body overflow-x-hidden;
     @apply selection:bg-accent-1 selection:text-white;
-    background-image:
-      radial-gradient(ellipse 80% 40% at 50% -10%, rgba(123,47,255,0.12) 0%, transparent 70%);
+    background-color: #050508;
+  }
+  
+  section, footer, main, .bg-background {
+    background-color: transparent !important;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -217,6 +236,18 @@
     radial-gradient(ellipse at 80% 70%, rgba(0, 245, 212, 0.08) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 50%, rgba(123, 47, 255, 0.06) 0%, transparent 60%);
 }
+@utility pattern-hex {
+  background-color: #050508;
+  background-image: 
+    linear-gradient(30deg, #0d0d14 12%, transparent 12.5%, transparent 87%, #0d0d14 87.5%, #0d0d14),
+    linear-gradient(150deg, #0d0d14 12%, transparent 12.5%, transparent 87%, #0d0d14 87.5%, #0d0d14),
+    linear-gradient(30deg, #0d0d14 12%, transparent 12.5%, transparent 87%, #0d0d14 87.5%, #0d0d14),
+    linear-gradient(150deg, #0d0d14 12%, transparent 12.5%, transparent 87%, #0d0d14 87.5%, #0d0d14),
+    linear-gradient(60deg, #151520 25%, transparent 25.5%, transparent 75%, #151520 75%, #151520),
+    linear-gradient(60deg, #151520 25%, transparent 25.5%, transparent 75%, #151520 75%, #151520);
+  background-size: 120px 210px;
+  animation: hex-move 30s linear infinite;
+}
 
 /* ════════════════════════════════════════════════
    SCROLLBAR
@@ -326,3 +357,177 @@
   z-index: 1;
   transition: background 0.1s ease;
 }
+
+/* ════════════════════════════════════════════════
+   ANIMATIONS.JS SUPPORT STYLES
+   These only affect GPU layers — no layout shifts
+════════════════════════════════════════════════ */
+
+/* ── 8. Logo Marquee strip ── */
+.marquee-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+.marquee-wrapper::before,
+.marquee-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+.marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-background), transparent);
+}
+.marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-background), transparent);
+}
+[data-marquee], .marquee-track {
+  display: flex;
+  gap: 3rem;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+/* ── 7. Button shine sweep ── */
+.jtz-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  background-position: -100% 0;
+  pointer-events: none;
+  z-index: 9;
+  transition: background-position 0.55s ease;
+}
+
+/* ── 1. Hero entrance keyframe ── */
+@keyframes hero-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── 6. Image parallax base ── */
+section img:not([data-no-parallax]) {
+  will-change: transform;
+}
+
+/* ── 3. Generic tilt card base styles ── */
+.glass-card,
+.glass-card-strong,
+.glass-card-cyan {
+  transform-style: preserve-3d;
+}
+
+/* ── Reduced motion: guarantee all our JS animations are skipped ── */
+@media (prefers-reduced-motion: reduce) {
+  [data-sr-inited],
+  section img:not([data-no-parallax]),
+  [data-marquee],
+  .marquee-track,
+  .jtz-shine {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    will-change: auto !important;
+  }
+}
+/* MOBILE OPTIMIZATIONS */
+@media (max-width: 767px) {
+  .pattern-hex { animation: none !important; }
+  .glass-card, .glass-card-strong { backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important; }
+  .juntoz-breathe { font-size: clamp(48px, 20vw, 120px) !important; }
+}
+@media (max-width: 374px) { body { font-size: 14px; } }
+
+/* ═══════════════════════════════════════════════════════════
+   GLOBAL PERFORMANCE OPTIMIZATIONS
+   ─────────────────────────────────────────────────────────
+   Reduce GPU overdraw, prevent unnecessary compositing layers,
+   and skip layout/paint for off-screen sections.
+═══════════════════════════════════════════════════════════ */
+
+/* Lazy render off-screen sections — browser skips paint until near viewport */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}
+
+/* Only promote elements that actually animate to their own GPU layer */
+.will-change-transform { will-change: transform; }
+.will-change-opacity   { will-change: opacity; }
+
+/* ── Mobile-specific performance kills ─────────────────── */
+@media (max-width: 767px) {
+
+  /* Kill ALL filter:blur() on decorative bg elements — single biggest perf win */
+  .absolute[style*="blur"],
+  .pointer-events-none[style*="blur"] {
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Kill box-shadow blur on cards — cheaper border used instead */
+  .rounded-2xl,
+  .rounded-3xl,
+  .rounded-\[2rem\] {
+    box-shadow: none !important;
+  }
+
+  /* Disable all decorative spinning/floating animations on mobile */
+  @keyframes about-badge-spin     { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes about-badge-spin-rev { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+  @keyframes innov-badge-spin     { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes innov-badge-spin-rev { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+  @keyframes about-star-spin      { 0%,100% { transform: rotate(0deg); } }
+  @keyframes float                { 0%,100% { transform: none; } }
+  @keyframes float-reverse        { 0%,100% { transform: none; } }
+  @keyframes pulse-glow           { 0%,100% { opacity: 0.7; filter: none; } }
+  @keyframes bounce-subtle        { 0%,100% { transform: none; } }
+
+  /* Simplify marquee — keep moving but reduce repaints */
+  .marquee-track {
+    will-change: transform;
+    contain: layout style;
+  }
+
+  /* Prevent transform stacking on animated badges */
+  [style*="badge-spin"] {
+    contain: layout style;
+  }
+
+  /* Remove text-shadow on large headings — expensive on mobile */
+  h1, h2 {
+    text-shadow: none !important;
+  }
+}
+
+/* ── Reduced motion — full override ───────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

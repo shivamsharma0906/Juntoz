@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from './logo.webp';
 
@@ -19,10 +19,21 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [hovered, setHovered] = useState(null);
+  const [mounted, setMounted] = useState(false);       // ← entrance
   const [indicatorStyle, setIndicatorStyle] = useState({});
+
   const navRef = useRef(null);
   const linkRefs = useRef({});
+  const ctaRef = useRef(null);
+  const magnetRaf = useRef(null);
+  const spotRef = useRef(null);                         // ← cursor spotlight
   const location = useLocation();
+
+  /* ── Entrance animation on mount ── */
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 60);
+    return () => clearTimeout(t);
+  }, []);
 
   /* ── Scroll-aware ── */
   useEffect(() => {
@@ -33,8 +44,8 @@ export default function Navbar() {
 
   /* ── Close on route change ── */
   useEffect(() => {
-    const timer = setTimeout(() => setMenuOpen(false), 0);
-    return () => clearTimeout(timer);
+    const t = setTimeout(() => setMenuOpen(false), 0);
+    return () => clearTimeout(t);
   }, [location]);
 
   /* ── Body lock ── */
@@ -58,80 +69,143 @@ export default function Navbar() {
     }
   }, [hovered, location.pathname]);
 
+  /* ── Cursor spotlight on nav pill ── */
+  const onNavMouseMove = useCallback((e) => {
+    if (!navRef.current || !spotRef.current) return;
+    const rect = navRef.current.getBoundingClientRect();
+    spotRef.current.style.left = `${e.clientX - rect.left}px`;
+    spotRef.current.style.top = `${e.clientY - rect.top}px`;
+    spotRef.current.style.opacity = '1';
+  }, []);
+
+  const onNavMouseLeave = useCallback(() => {
+    if (spotRef.current) spotRef.current.style.opacity = '0';
+  }, []);
+
+  /* ── Magnetic CTA ── */
+  const onCtaMouseMove = useCallback((e) => {
+    const el = ctaRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.3;
+    const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.3;
+    if (magnetRaf.current) cancelAnimationFrame(magnetRaf.current);
+    magnetRaf.current = requestAnimationFrame(() => {
+      el.style.transform = `translate(${dx}px, ${dy}px) scale(1.05)`;
+    });
+  }, []);
+
+  const onCtaMouseLeave = useCallback(() => {
+    if (!ctaRef.current) return;
+    ctaRef.current.style.transition = 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+    ctaRef.current.style.transform = 'translate(0,0) scale(1)';
+    setTimeout(() => {
+      if (ctaRef.current) ctaRef.current.style.transition = '';
+    }, 500);
+  }, []);
+
+  /* entrance styles */
+  const navEnter = {
+    opacity: mounted ? 1 : 0,
+    transform: mounted ? 'translateY(0)' : 'translateY(-20px)',
+    transition: 'opacity 0.6s ease 0.1s, transform 0.6s cubic-bezier(0.22,1,0.36,1) 0.1s',
+  };
+
+  const itemEnter = (delay = 0) => ({
+    opacity: mounted ? 1 : 0,
+    transform: mounted ? 'translateY(0)' : 'translateY(-10px)',
+    transition: `opacity 0.5s ease ${delay}s, transform 0.5s cubic-bezier(0.22,1,0.36,1) ${delay}s`,
+  });
+
   return (
     <>
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'pt-2 sm:pt-3' : 'pt-4 sm:pt-5'}`}>
+      <nav
+        style={navEnter}
+        className={`fixed top-0 w-full z-50 transition-[padding] duration-500 ${scrolled ? 'pt-1.5 sm:pt-3' : 'pt-2.5 sm:pt-5'}`}
+      >
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           <div className={`
-            flex items-center justify-between px-4 sm:px-5 py-3 transition-all duration-500 rounded-2xl sm:rounded-full
+            flex items-center justify-between px-3 sm:px-5 py-2 sm:py-3 transition-all duration-500 rounded-xl sm:rounded-full
             ${scrolled
               ? 'bg-[#06060f]/85 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.04)]'
               : 'bg-white/4 backdrop-blur-xl border border-white/8'}
           `}>
 
-            {/* ── Logo ── */}
-            <Link
-              to="/"
-              className="flex items-center shrink-0 relative z-[60] group/logo"
-              onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            >
-              <div className="relative">
-                {/* Glow behind logo */}
-                <div className="absolute inset-0 rounded-lg bg-accent-2/0 group-hover/logo:bg-accent-2/15 blur-[12px] transition-all duration-500 scale-150" />
-                <img
-                  src={logo}
-                  alt="Juntoz"
-                  width="160"
-                  height="40"
-                  fetchpriority="high"
-                  className="h-8 md:h-10 w-auto relative z-10 transition-all duration-400 group-hover/logo:scale-105 group-hover/logo:drop-shadow-[0_0_8px_rgba(0,245,212,0.6)]"
-                />
-              </div>
-            </Link>
+            {/* ── Logo — entrance from left ── */}
+            <div style={itemEnter(0.18)}>
+              <Link
+                to="/"
+                className="flex items-center shrink-0 relative z-[60] group/logo"
+                onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              >
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-lg bg-accent-2/0 group-hover/logo:bg-accent-2/15 blur-[12px] transition-all duration-500 scale-150" />
+                  <img
+                    src={logo}
+                    alt="Juntoz"
+                    width="160"
+                    height="40"
+                    fetchpriority="high"
+                    className="h-7 sm:h-9 md:h-10 w-auto relative z-10 transition-all duration-400 group-hover/logo:scale-105 group-hover/logo:drop-shadow-[0_0_8px_rgba(0,245,212,0.6)]"
+                  />
+                </div>
+              </Link>
+            </div>
 
-            {/* ── Desktop nav links with sliding indicator ── */}
-            <div
-              ref={navRef}
-              className="hidden md:flex items-center gap-0 relative bg-white/4 backdrop-blur-sm rounded-full p-1 border border-white/8"
-            >
-              {/* Sliding pill indicator */}
+            {/* ── Desktop nav links — with cursor spotlight ── */}
+            <div style={itemEnter(0.26)}>
               <div
-                className="absolute top-1 bottom-1 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none"
-                style={{
-                  background: 'rgba(255,255,255,0.09)',
-                  ...indicatorStyle,
-                }}
-              />
+                ref={navRef}
+                onMouseMove={onNavMouseMove}
+                onMouseLeave={onNavMouseLeave}
+                className="hidden md:flex items-center gap-0 relative bg-white/4 backdrop-blur-sm rounded-full p-1 border border-white/8 overflow-hidden"
+              >
+                {/* Cursor spotlight — inspired by unvdigital.com hover glow */}
+                <div
+                  ref={spotRef}
+                  className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full transition-opacity duration-300"
+                  style={{
+                    background: 'radial-gradient(circle, rgba(0,245,212,0.12) 0%, transparent 70%)',
+                    opacity: 0,
+                    zIndex: 0,
+                  }}
+                />
 
-              {navLinks.map((link) => {
-                const isActive = location.pathname === link.href;
-                return (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    ref={(el) => { linkRefs.current[link.href] = el; }}
-                    onMouseEnter={() => setHovered(link.href)}
-                    onMouseLeave={() => setHovered(null)}
-                    className={`relative font-body font-semibold uppercase tracking-widest text-xs px-5 py-2 rounded-full transition-colors duration-200 z-10
-                      ${isActive ? 'text-white' : 'text-white/50 hover:text-white/80'}`}
-                  >
-                    {link.name}
-                    {/* Active dot */}
-                    {isActive && (
-                      <span className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent-2 shadow-[0_0_4px_#00F5D4]" />
-                    )}
-                  </Link>
-                );
-              })}
+                {/* Sliding pill indicator */}
+                <div
+                  className="absolute top-1 bottom-1 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none z-[1]"
+                  style={{ background: 'rgba(255,255,255,0.09)', ...indicatorStyle }}
+                />
+
+                {navLinks.map((link) => {
+                  const isActive = location.pathname === link.href;
+                  return (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      ref={(el) => { linkRefs.current[link.href] = el; }}
+                      onMouseEnter={() => setHovered(link.href)}
+                      onMouseLeave={() => setHovered(null)}
+                      className={`relative font-body font-semibold uppercase tracking-widest text-xs px-5 py-2 rounded-full transition-colors duration-200 z-10
+                        ${isActive ? 'text-white' : 'text-white/50 hover:text-white/80'}`}
+                    >
+                      {link.name}
+                      {isActive && (
+                        <span className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent-2 shadow-[0_0_4px_#00F5D4]" />
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
 
             {/* ── Desktop right side ── */}
-            <div className="hidden md:flex items-center gap-4">
+            <div style={itemEnter(0.34)} className="hidden md:flex items-center gap-4">
               {/* Social icons */}
               <div className="flex gap-3">
                 {[
-                  { href: 'https://www.instagram.com/_juntoz', label: 'Instagram', path: IG_PATH, color: '#FF3AF2' },
-                  { href: 'https://www.linkedin.com/in/juntoz-digital-marketing-agency-b0a114290/', label: 'LinkedIn', path: LI_PATH, color: '#00F5D4' },
+                  { href: 'https://www.instagram.com/_juntoz', label: 'Instagram', path: IG_PATH },
+                  { href: 'https://www.linkedin.com/in/juntoz-digital-marketing-agency-b0a114290/', label: 'LinkedIn', path: LI_PATH },
                 ].map((s) => (
                   <a
                     key={s.label}
@@ -140,31 +214,32 @@ export default function Navbar() {
                     rel="noopener noreferrer"
                     aria-label={s.label}
                     className="group/icon w-8 h-8 rounded-full flex items-center justify-center border border-white/8 bg-white/4 hover:border-white/20 transition-all duration-300 hover:scale-110"
-                    style={{ '--icon-color': s.color }}
                   >
-                    <svg
-                      className="w-3.5 h-3.5 fill-current text-white/40 group-hover/icon:text-white transition-colors duration-300"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg className="w-3.5 h-3.5 fill-current text-white/40 group-hover/icon:text-white transition-colors duration-300" viewBox="0 0 24 24">
                       <path d={s.path} />
                     </svg>
                   </a>
                 ))}
               </div>
 
-              {/* Divider */}
               <div className="w-px h-4 bg-white/10" />
 
-              {/* CTA — spinning border like hero */}
+              {/* CTA — magnetic + shimmer sweep */}
               <a
+                ref={ctaRef}
                 href={WA_HARD}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="nav-cta-btn relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-heading font-black uppercase text-xs tracking-widest text-white transition-all duration-300 hover:scale-105 overflow-hidden"
-                style={{ background: 'linear-gradient(135deg, #FF3AF2 0%, #7B2FFF 100%)' }}
+                onMouseMove={onCtaMouseMove}
+                onMouseLeave={onCtaMouseLeave}
+                className="nav-cta-btn relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-heading font-black uppercase text-xs tracking-widest text-white overflow-hidden"
+                style={{
+                  background: 'linear-gradient(135deg, #FF3AF2 0%, #7B2FFF 100%)',
+                  boxShadow: '0 0 20px rgba(123,47,255,0.3)',
+                  willChange: 'transform',
+                }}
               >
-                {/* Sweep shimmer */}
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-700 pointer-events-none" />
+                <span className="nav-cta-sweep absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full pointer-events-none" />
                 <span className="relative z-10">Book a Call</span>
               </a>
             </div>
@@ -186,20 +261,45 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* ── Bottom progress bar (scroll position) ── */}
         <ScrollProgress />
       </nav>
 
-      {/* ── Mobile drawer ── */}
+      {/* ── Mobile drawer — with animated gradient orbs ── */}
       <div
-        className={`fixed inset-0 z-40 flex flex-col md:hidden transition-all duration-400 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-          }`}
+        className={`fixed inset-0 z-40 flex flex-col md:hidden transition-all duration-400 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         style={{ background: 'rgba(4,4,12,0.97)', backdropFilter: 'blur(24px)' }}
       >
+        {/* Animated gradient orbs in mobile menu — inspired by unvdigital.com */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div
+            className="absolute w-[400px] h-[400px] rounded-full"
+            style={{
+              top: '-10%', left: '-20%',
+              background: 'radial-gradient(circle, rgba(123,47,255,0.12) 0%, transparent 70%)',
+              animation: menuOpen ? 'orb-drift-a 6s ease-in-out infinite' : 'none',
+            }}
+          />
+          <div
+            className="absolute w-[300px] h-[300px] rounded-full"
+            style={{
+              bottom: '5%', right: '-10%',
+              background: 'radial-gradient(circle, rgba(255,58,242,0.1) 0%, transparent 70%)',
+              animation: menuOpen ? 'orb-drift-b 8s ease-in-out infinite' : 'none',
+            }}
+          />
+          <div
+            className="absolute w-[200px] h-[200px] rounded-full"
+            style={{
+              top: '40%', right: '20%',
+              background: 'radial-gradient(circle, rgba(0,245,212,0.07) 0%, transparent 70%)',
+              animation: menuOpen ? 'orb-drift-c 5s ease-in-out infinite' : 'none',
+            }}
+          />
+        </div>
+
         <div className="h-20 shrink-0" />
 
-        <div className="flex-1 flex flex-col justify-center px-6 pb-10 gap-8">
-
+        <div className="flex-1 flex flex-col justify-center px-6 pb-10 gap-8 relative z-10">
           {/* Nav links with stagger */}
           <nav className="flex flex-col gap-0">
             {navLinks.map((link, i) => {
@@ -209,11 +309,12 @@ export default function Navbar() {
                   key={link.name}
                   to={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className={`group flex items-center justify-between py-5 px-1 border-b transition-all duration-200 ${isActive ? 'text-white border-white/15' : 'text-white/40 hover:text-white border-white/6'
+                  className={`group flex items-center justify-between py-5 px-1 border-b transition-all duration-300 ${isActive ? 'text-white border-white/15' : 'text-white/40 hover:text-white border-white/6'
                     }`}
                   style={{
-                    transitionDelay: menuOpen ? `${i * 60}ms` : '0ms',
-                    transform: menuOpen ? 'translateX(0)' : 'translateX(-20px)',
+                    transitionDelay: menuOpen ? `${i * 70}ms` : '0ms',
+                    opacity: menuOpen ? 1 : 0,
+                    transform: menuOpen ? 'translateX(0)' : 'translateX(-24px)',
                   }}
                 >
                   <div className="flex items-center gap-4">
@@ -232,7 +333,14 @@ export default function Navbar() {
           </nav>
 
           {/* Mobile CTA */}
-          <div className="space-y-3">
+          <div
+            className="space-y-3"
+            style={{
+              opacity: menuOpen ? 1 : 0,
+              transform: menuOpen ? 'translateY(0)' : 'translateY(16px)',
+              transition: `opacity 0.4s ease ${navLinks.length * 70 + 80}ms, transform 0.4s ease ${navLinks.length * 70 + 80}ms`,
+            }}
+          >
             <a
               href={WA_HARD}
               target="_blank"
@@ -251,11 +359,10 @@ export default function Navbar() {
               Book a Strategy Call
             </a>
 
-            {/* Socials */}
             <div className="flex items-center justify-center gap-4 pt-1">
               {[
-                { href: 'https://www.instagram.com/_juntoz', label: 'Instagram', color: '#FF3AF2', path: IG_PATH },
-                { href: 'https://www.linkedin.com/in/juntoz-digital-marketing-agency-b0a114290/', label: 'LinkedIn', color: '#00F5D4', path: LI_PATH },
+                { href: 'https://www.instagram.com/_juntoz', label: 'Instagram', path: IG_PATH },
+                { href: 'https://www.linkedin.com/in/juntoz-digital-marketing-agency-b0a114290/', label: 'LinkedIn', path: LI_PATH },
               ].map((s) => (
                 <a
                   key={s.label}
@@ -275,20 +382,34 @@ export default function Navbar() {
       </div>
 
       <style>{`
-        /* Scroll progress thin bar */
+        /* CTA sweep on hover */
         @keyframes nav-cta-sweep {
           0%   { transform: translateX(-100%); }
-          100% { transform: translateX(100%);  }
+          100% { transform: translateX(200%);  }
         }
-        .nav-cta-btn:hover > span:first-child {
-          animation: nav-cta-sweep 0.7s ease forwards;
+        .nav-cta-btn:hover .nav-cta-sweep {
+          animation: nav-cta-sweep 0.65s ease forwards;
+        }
+
+        /* Mobile menu orb drifts */
+        @keyframes orb-drift-a {
+          0%, 100% { transform: translate(0, 0)    scale(1);    }
+          50%       { transform: translate(40px, 30px) scale(1.1); }
+        }
+        @keyframes orb-drift-b {
+          0%, 100% { transform: translate(0, 0)     scale(1);    }
+          50%       { transform: translate(-30px, -20px) scale(1.15); }
+        }
+        @keyframes orb-drift-c {
+          0%, 100% { transform: translate(0, 0)    scale(1);   }
+          50%       { transform: translate(15px, -25px) scale(0.9); }
         }
       `}</style>
     </>
   );
 }
 
-/* ── Thin scroll-progress bar — direct DOM, no React re-renders ── */
+/* ── Scroll progress bar ── */
 function ScrollProgress() {
   const barRef = useRef(null);
   useEffect(() => {

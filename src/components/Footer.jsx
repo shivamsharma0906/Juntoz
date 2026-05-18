@@ -47,7 +47,7 @@ export default function Footer() {
     <footer
       id="footer"
       className="relative overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, #0a0a14 0%, #070710 60%, #050508 100%)' }}
+      style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(5,5,8,0.7) 40%, #050508 100%)' }}
     >
       <style>{`
         @keyframes footer-pulse {
@@ -82,6 +82,15 @@ export default function Footer() {
           0% { transform: translateX(-150%); }
           100% { transform: translateX(150%); }
         }
+        /* ── Circular spinning badge ── */
+        @keyframes footer-badge-spin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes footer-badge-spin-rev {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(-360deg); }
+        }
       `}</style>
 
       {/* ── Ambient orbs (brighter) ── */}
@@ -109,7 +118,7 @@ export default function Footer() {
       {/* ══════════════════════════════════════
            GET IN TOUCH
       ══════════════════════════════════════ */}
-      <div className="relative px-5 pt-16 pb-12 flex flex-col items-center text-center" style={{ zIndex: 10 }}>
+      <div className="relative px-4 sm:px-5 pt-12 sm:pt-16 pb-10 sm:pb-12 flex flex-col items-center text-center" style={{ zIndex: 10 }}>
 
         {/* Label */}
         <div className="inline-flex items-center gap-3 mb-6">
@@ -118,31 +127,57 @@ export default function Footer() {
           <div className="h-px w-8 bg-gradient-to-l from-transparent to-accent-2 opacity-60" />
         </div>
 
-        {/* Headline */}
-        <h2
-          className="font-heading font-black uppercase leading-[0.9] tracking-tighter mb-4 text-white"
-          style={{ fontSize: 'clamp(2rem, 6vw, 5rem)' }}
-        >
-          Let's Talk About<br />
-          <span style={{
-            background: 'linear-gradient(120deg, #FF3AF2, #7B2FFF)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}>Your Growth.</span>
-        </h2>
+        {/* Headline with Spinning Badge */}
+        <div className="relative mb-10 w-full max-w-4xl flex items-center justify-center">
+          <h2
+            className="font-heading font-black uppercase leading-[0.9] tracking-tighter text-white relative z-10"
+            style={{ fontSize: 'clamp(1.9rem, 5.5vw, 5.5rem)' }}
+          >
+            Let's Talk About<br />
+            <span style={{
+              background: 'linear-gradient(120deg, #00F5D4, #7B2FFF)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>Your Growth.</span>
+          </h2>
+          
+          {/* Circular Learn More Badge — continuously spinning */}
+          <Link to="/about" className="absolute right-0 -top-8 hidden lg:flex items-center justify-center w-24 h-24 hover:scale-110 transition-transform duration-500 cursor-pointer z-20">
+            <svg
+              style={{ animation: 'footer-badge-spin 8s linear infinite', width: '100%', height: '100%', overflow: 'visible' }}
+              viewBox="0 0 100 100"
+            >
+              <path id="circlePathFooter" d="M 50, 50 m -36, 0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" fill="transparent" />
+              <text className="font-heading font-black uppercase" fill="#00F5D4" style={{ fontSize: '14.5px', letterSpacing: '0.18em' }}>
+                <textPath href="#circlePathFooter" startOffset="0%">
+                  LEARN MORE • EARN MORE •
+                </textPath>
+              </text>
+            </svg>
+            {/* Arrow — counter-rotates so it always points up-right */}
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{ animation: 'footer-badge-spin-rev 8s linear infinite' }}
+            >
+              <svg className="w-10 h-10 text-white -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+          </Link>
+        </div>
 
-        <p className="font-body text-white/45 text-base max-w-md mx-auto mb-10 leading-relaxed">
+        <p className="font-body text-white/55 text-sm sm:text-base max-w-md mx-auto mb-12 leading-relaxed">
           Whether you have a question, a project in mind, or just want to explore — we're easy to reach.
         </p>
 
         {/* Contact cards */}
-        <div className="flex flex-col sm:flex-row items-stretch justify-center gap-3 w-full max-w-2xl">
+        <div className="flex flex-col sm:flex-row items-stretch justify-center gap-3 w-full max-w-2xl px-1">
 
           {/* Email */}
           <a
             href="mailto:hello@juntoz.com"
-            className="group flex items-center gap-3 flex-1 min-w-0 px-5 py-4 rounded-2xl border border-white/8 bg-white/3 hover:border-accent-2/30 hover:bg-accent-2/5 transition-all duration-300"
+            className="group flex items-center gap-4 flex-1 min-w-0 px-6 py-5 rounded-2xl glass-card hover:border-accent-2/40 hover:bg-accent-2/10 transition-all duration-300"
             onMouseEnter={(e) => { e.currentTarget.style.willChange = 'transform'; }}
             onMouseLeave={(e) => { resetTilt(e); e.currentTarget.style.willChange = 'auto'; }}
             onMouseMove={tilt}
@@ -161,7 +196,7 @@ export default function Footer() {
           {/* Phone */}
           <a
             href="tel:+919004001800"
-            className="group flex items-center gap-3 flex-1 min-w-0 px-5 py-4 rounded-2xl border border-white/8 bg-white/3 hover:border-accent-1/30 hover:bg-accent-1/5 transition-all duration-300"
+            className="group flex items-center gap-4 flex-1 min-w-0 px-6 py-5 rounded-2xl glass-card hover:border-accent-1/40 hover:bg-accent-1/10 transition-all duration-300"
             onMouseEnter={(e) => { e.currentTarget.style.willChange = 'transform'; }}
             onMouseLeave={(e) => { resetTilt(e); e.currentTarget.style.willChange = 'auto'; }}
             onMouseMove={tilt}
@@ -181,7 +216,7 @@ export default function Footer() {
             href="https://www.instagram.com/_juntoz"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-3 flex-1 min-w-0 px-5 py-4 rounded-2xl border border-white/8 bg-white/3 hover:border-[#FF3AF2]/30 hover:bg-[#FF3AF2]/5 transition-all duration-300"
+            className="group flex items-center gap-4 flex-1 min-w-0 px-6 py-5 rounded-2xl glass-card hover:border-[#FF3AF2]/40 hover:bg-[#FF3AF2]/10 transition-all duration-300"
             onMouseEnter={(e) => { e.currentTarget.style.willChange = 'transform'; }}
             onMouseLeave={(e) => { resetTilt(e); e.currentTarget.style.willChange = 'auto'; }}
             onMouseMove={tilt}
@@ -356,7 +391,7 @@ export default function Footer() {
         <div
           className="juntoz-breathe absolute bottom-0 left-1/2 -translate-x-1/2 whitespace-nowrap font-heading font-black uppercase"
           style={{
-            fontSize: 'clamp(80px, 22vw, 380px)',
+            fontSize: 'clamp(60px, 16vw, 250px)',
             lineHeight: 0.8,
             letterSpacing: '-0.03em',
             color: '#070710',               /* fills match bg so only stroke shows */
