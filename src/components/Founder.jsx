@@ -1,65 +1,236 @@
+import { useEffect, useRef, useState } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
+import founderImg from './Founder.jpeg';
 
-const WA_SOFT = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20a%20custom%20growth%20plan%20for%20my%20business.';
+const WA_SOFT =
+  'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20a%20custom%20growth%20plan%20for%20my%20business.';
+
+/* ── tiny stat badge ── */
+function StatBadge({ value, label, color, delay, position }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const target = parseInt(value, 10);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        obs.unobserve(el);
+        let start = null;
+        const duration = 1400;
+        const step = (ts) => {
+          if (!start) start = ts;
+          const progress = Math.min((ts - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          setCount(Math.round(eased * target));
+          if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [target]);
+
+  return (
+    <div
+      ref={ref}
+      className={`absolute ${position} z-20 animate-float-badge`}
+      style={{ animationDelay: `${delay}s`, animationDuration: `${3.5 + delay * 0.4}s` }}
+    >
+      <div
+        className="relative px-4 py-3 rounded-2xl backdrop-blur-xl border shadow-2xl overflow-hidden"
+        style={{
+          background: 'rgba(5,5,12,0.85)',
+          borderColor: `${color}40`,
+          boxShadow: `0 8px 32px ${color}20, inset 0 1px 0 ${color}20`,
+        }}
+      >
+        {/* shimmer */}
+        <div
+          className="absolute inset-0 rounded-2xl pointer-events-none badge-shimmer"
+          style={{ background: `linear-gradient(105deg, transparent 40%, ${color}18 50%, transparent 60%)` }}
+        />
+        <div className="font-heading font-black text-xl md:text-2xl" style={{ color }}>
+          {count}+
+        </div>
+        <div className="font-body text-[10px] text-white/50 uppercase tracking-widest mt-0.5">{label}</div>
+      </div>
+    </div>
+  );
+}
 
 export default function Founder() {
+  const sectionRef = useRef(null);
+  const imgWrapRef = useRef(null);
+
+  /* ── spotlight cursor on image side ── */
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const onMove = (e) => {
+      const rect = section.getBoundingClientRect();
+      section.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+      section.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    };
+    section.addEventListener('mousemove', onMove, { passive: true });
+    return () => section.removeEventListener('mousemove', onMove);
+  }, []);
+
+  /* ── image parallax on scroll ── */
+  useEffect(() => {
+    const wrap = imgWrapRef.current;
+    if (!wrap || window.innerWidth < 768) return;
+    let rafId;
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        const rect = wrap.getBoundingClientRect();
+        const relY = (rect.top + rect.height / 2 - window.innerHeight / 2) / window.innerHeight;
+        const img = wrap.querySelector('img');
+        if (img) img.style.transform = `scale(1.08) translateY(${relY * 28}px)`;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <section id="founder" className="relative py-28 md:py-36 bg-background overflow-hidden">
-      {/* Premium Ambient Backgrounds */}
-      <div className="absolute inset-0 pattern-grid opacity-50 pointer-events-none z-0" />
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent-5/10 rounded-full blur-[150px] pointer-events-none z-0 opacity-40" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent-2/10 rounded-full blur-[120px] pointer-events-none z-0 opacity-40" />
+    <section
+      id="founder"
+      ref={sectionRef}
+      className="relative py-28 md:py-40 overflow-hidden spotlight-section"
+    >
+      {/* ── Ambient background ── */}
+      <div className="absolute inset-0 pattern-grid opacity-40 pointer-events-none z-0" />
+      <div className="absolute top-[-10%] right-[-5%] w-[700px] h-[700px] rounded-full blur-[180px] pointer-events-none z-0"
+        style={{ background: 'radial-gradient(circle, rgba(123,47,255,0.12) 0%, transparent 70%)' }} />
+      <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] rounded-full blur-[150px] pointer-events-none z-0"
+        style={{ background: 'radial-gradient(circle, rgba(0,245,212,0.10) 0%, transparent 70%)' }} />
+      {/* diagonal accent stripe */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-0 left-1/2 w-px h-full"
+          style={{ background: 'linear-gradient(to bottom, transparent, rgba(0,245,212,0.08), transparent)' }} />
+      </div>
 
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
-          {/* Left — Founder Visual */}
-          <ScrollReveal data-reveal="fade" className="relative flex justify-center order-2 lg:order-1">
-            {/* Cinematic Glow Behind Image */}
-            <div className="absolute inset-0 bg-accent-2/20 rounded-[3rem] blur-[80px] pointer-events-none opacity-60 animate-pulse" />
+        {/* ── Section label ── */}
+        <ScrollReveal data-reveal="up" className="flex justify-center mb-16">
+          <span className="inline-flex items-center gap-2 font-body text-[10px] font-bold uppercase tracking-[0.3em] px-4 py-2 rounded-full border"
+            style={{ color: '#00F5D4', borderColor: 'rgba(0,245,212,0.2)', background: 'rgba(0,245,212,0.05)' }}>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00F5D4] animate-pulse" />
+            The Visionary Behind Juntoz
+          </span>
+        </ScrollReveal>
 
-            <div className="relative z-10 group transition-transform duration-700 hover:scale-[1.02]">
-              {/* Outer Border Frame */}
-              <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-accent-2/50 to-transparent p-[2px] opacity-70 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute inset-0 rounded-[2.5rem] bg-background" />
-              </div>
-              
-              {/* Inner Glass Card */}
-              <div className="relative bg-[#05050C]/80 backdrop-blur-2xl rounded-[2.5rem] overflow-hidden flex flex-col items-center justify-center p-12 md:p-16 border border-white/5 shadow-2xl">
-                
-                {/* Subtle Inner Highlight */}
-                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent-2/50 to-transparent opacity-50" />
-                
-                <div className="text-[5rem] md:text-[6rem] mb-6 drop-shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">👨‍💼</div>
-                <div className="font-heading font-black text-2xl md:text-3xl text-white uppercase tracking-widest">Juntoz</div>
-                <div className="font-body text-xs md:text-sm text-accent-2 uppercase tracking-[0.3em] font-bold mt-2">Founder & Strategist</div>
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
 
-              {/* Floating Badge */}
-              <div className="absolute -bottom-6 -right-6 md:-right-8 px-6 py-3 rounded-full bg-accent-5/20 border border-accent-5/40 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] animate-float-orb">
-                <div className="flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full bg-accent-5 animate-pulse" />
-                  <span className="font-heading font-black text-white text-xs md:text-sm uppercase tracking-widest">200+ Clients Scaled</span>
+          {/* ═══════════════════════════════════════
+              LEFT — FOUNDER PHOTO CARD
+          ═══════════════════════════════════════ */}
+          <ScrollReveal data-reveal="left" className="relative flex justify-center order-2 lg:order-1">
+
+            {/* Spinning ring decoration */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[105%] h-[105%] rounded-[3rem] pointer-events-none z-0"
+              style={{
+                border: '1px dashed rgba(0,245,212,0.12)',
+                animation: 'founder-ring-spin 18s linear infinite',
+              }} />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[112%] h-[112%] rounded-[3.5rem] pointer-events-none z-0"
+              style={{
+                border: '1px dashed rgba(123,47,255,0.10)',
+                animation: 'founder-ring-spin 28s linear infinite reverse',
+              }} />
+
+            {/* Cinematic glow behind */}
+            <div className="absolute inset-0 rounded-[3rem] blur-[80px] pointer-events-none z-0"
+              style={{ background: 'radial-gradient(ellipse, rgba(0,245,212,0.18) 0%, rgba(123,47,255,0.12) 60%, transparent 100%)' }} />
+
+            {/* Main photo card */}
+            <div
+              className="relative z-10 w-full max-w-[420px] group"
+              ref={imgWrapRef}
+            >
+              {/* Animated gradient border via pseudo-wrapper */}
+              <div className="relative rounded-[2.5rem] p-[2px] founder-border-glow">
+                <div className="relative rounded-[2.4rem] overflow-hidden bg-[#05050C]"
+                  style={{ boxShadow: '0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04)' }}>
+
+                  {/* Top shimmer line */}
+                  <div className="absolute top-0 inset-x-0 h-px z-20"
+                    style={{ background: 'linear-gradient(to right, transparent, rgba(0,245,212,0.6), transparent)' }} />
+
+                  {/* Photo — parallax via JS, scale container for overflow */}
+                  <div className="overflow-hidden h-[460px] md:h-[540px]">
+                    <img
+                      src={founderImg}
+                      alt="Sujal Mehta — Founder & Strategist, Juntoz"
+                      className="w-full h-full object-cover object-top will-change-transform transition-transform duration-300 group-hover:scale-[1.04]"
+                      style={{ transformOrigin: 'center top' }}
+                    />
+                  </div>
+
+                  {/* Curtain reveal overlay — slides up on scroll-in */}
+                  <div className="absolute inset-0 founder-curtain z-10 rounded-[2.4rem]"
+                    style={{ background: 'linear-gradient(to top, #050508 0%, #0e0e1c 100%)' }} />
+
+                  {/* Bottom glass name overlay */}
+                  <div className="absolute bottom-0 inset-x-0 z-20 px-7 py-5"
+                    style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 60%, transparent 100%)' }}>
+                    <div className="font-heading font-black text-white text-xl md:text-2xl uppercase tracking-widest leading-none">
+                      Sujal Mehta
+                    </div>
+                    <div className="font-body text-xs mt-1 uppercase tracking-[0.3em] font-bold"
+                      style={{ color: '#00F5D4' }}>
+                      Founder &amp; Growth Strategist
+                    </div>
+                    {/* Thin accent line */}
+                    <div className="mt-3 h-px w-16 rounded-full"
+                      style={{ background: 'linear-gradient(to right, #00F5D4, #7B2FFF)' }} />
+                  </div>
                 </div>
               </div>
+
+              {/* ── Floating stat badges ── */}
+              <StatBadge value="200" label="Clients Scaled" color="#00F5D4" delay={0} position="-bottom-5 -left-6 md:-left-10" />
+              <StatBadge value="5" label="Years Experience" color="#7B2FFF" delay={0.6} position="-top-5 -right-6 md:-right-10" />
+              <StatBadge value="98" label="% Retention" color="#FF3AF2" delay={1.2} position="top-1/2 -right-6 md:-right-12 -translate-y-1/2" />
             </div>
           </ScrollReveal>
 
-          {/* Right — Copy */}
+          {/* ═══════════════════════════════════════
+              RIGHT — COPY
+          ═══════════════════════════════════════ */}
           <div className="space-y-8 order-1 lg:order-2">
+
             <ScrollReveal data-reveal="up">
-              <p className="inline-flex items-center gap-2 font-body text-accent-2 text-[10px] font-bold uppercase tracking-[0.25em] mb-4 px-3 py-1 rounded-full border border-accent-2/20 bg-accent-2/5">
-                The person behind Juntoz
-              </p>
-              <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-6xl uppercase leading-[0.95] tracking-tighter">
+              <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-[3.5rem] uppercase leading-[0.92] tracking-tighter">
                 Built by a Marketer<br />
-                Who <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF] drop-shadow-[0_0_20px_rgba(0,245,212,0.3)]">Gets</span> the<br />
+                Who{' '}
+                <span
+                  className="text-transparent bg-clip-text"
+                  style={{
+                    backgroundImage: 'linear-gradient(135deg, #00F5D4, #7B2FFF)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    filter: 'drop-shadow(0 0 24px rgba(0,245,212,0.35))',
+                  }}
+                >
+                  Gets
+                </span>{' '}
+                the<br />
                 Beauty Business.
               </h2>
             </ScrollReveal>
 
-            <ScrollReveal data-reveal="up" delay={100}>
-              <div className="space-y-5 text-base md:text-lg text-white/60 font-body leading-relaxed max-w-xl">
+            <ScrollReveal data-reveal="up" delay={80}>
+              <div className="space-y-4 text-base md:text-lg text-white/55 font-body leading-relaxed max-w-xl">
                 <p>
                   I started Juntoz because I saw talented artists posting beautiful work — and getting{' '}
                   <span className="text-white font-bold">zero clients</span> from it. Not because of skill.
@@ -70,51 +241,133 @@ export default function Founder() {
                 </p>
                 <p>
                   We're not a general agency.{' '}
-                  <span className="text-accent-2 font-bold bg-accent-2/10 px-2 py-0.5 rounded">We exclusively scale beauty businesses</span> — because that laser-focus is exactly why our results are unmatched.
+                  <span
+                    className="font-bold px-2 py-0.5 rounded"
+                    style={{ color: '#00F5D4', background: 'rgba(0,245,212,0.08)' }}
+                  >
+                    We exclusively scale beauty businesses
+                  </span>{' '}
+                  — because that laser-focus is exactly why our results are unmatched.
                 </p>
               </div>
             </ScrollReveal>
 
-            {/* Mission Quote */}
-            <ScrollReveal data-reveal="up" delay={200}>
-              <div className="relative p-6 rounded-2xl bg-gradient-to-r from-accent-2/10 to-transparent border-l-4 border-l-accent-2 backdrop-blur-sm">
-                <svg className="absolute top-4 right-4 w-8 h-8 text-accent-2/20" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21v-7.391c0-5.714 4.14-8.814 8.783-11.415l-1.42 2.62c-2.43 1.13-4.66 3.65-4.66 5.629h3.766v10.557h-6.469zm-13.017 0v-7.391c0-5.714 4.14-8.814 8.783-11.415l-1.42 2.62c-2.43 1.13-4.66 3.65-4.66 5.629h3.766v10.557h-6.469z"/>
+            {/* ── Glowing quote card ── */}
+            <ScrollReveal data-reveal="up" delay={160}>
+              <div
+                className="relative p-6 rounded-2xl overflow-hidden border-l-4 glass-card-strong"
+                style={{ borderLeftColor: '#00F5D4' }}
+              >
+                {/* inner glow */}
+                <div className="absolute inset-0 rounded-2xl pointer-events-none"
+                  style={{ background: 'linear-gradient(135deg, rgba(0,245,212,0.06) 0%, transparent 60%)' }} />
+                {/* quote icon */}
+                <svg className="absolute top-4 right-4 w-8 h-8 opacity-20" fill="#00F5D4" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.714 4.14-8.814 8.783-11.415l-1.42 2.62c-2.43 1.13-4.66 3.65-4.66 5.629h3.766v10.557h-6.469zm-13.017 0v-7.391c0-5.714 4.14-8.814 8.783-11.415l-1.42 2.62c-2.43 1.13-4.66 3.65-4.66 5.629h3.766v10.557h-6.469z" />
                 </svg>
-                <p className="font-heading font-black text-white text-lg md:text-xl uppercase leading-relaxed tracking-wide max-w-[90%]">
+                <p className="relative font-heading font-black text-white text-lg md:text-xl uppercase leading-relaxed tracking-wide max-w-[90%]">
                   My mission: Make every talented artist in India as{' '}
-                  <span className="text-accent-2 drop-shadow-[0_0_15px_rgba(0,245,212,0.4)]">booked as they deserve to be.</span>
+                  <span style={{ color: '#00F5D4', filter: 'drop-shadow(0 0 12px rgba(0,245,212,0.5))' }}>
+                    booked as they deserve to be.
+                  </span>
                 </p>
               </div>
             </ScrollReveal>
 
-            {/* CTA */}
-            <ScrollReveal data-reveal="up" delay={300}>
+            {/* ── Achievement pills ── */}
+            <ScrollReveal data-reveal="up" delay={240}>
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { icon: '⚡', text: '3× Avg. Revenue Growth' },
+                  { icon: '🎯', text: 'Beauty Niche Only' },
+                  { icon: '🚀', text: '90-Day Results' },
+                ].map(({ icon, text }) => (
+                  <span
+                    key={text}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-body text-sm font-semibold border"
+                    style={{
+                      color: 'rgba(255,255,255,0.8)',
+                      borderColor: 'rgba(255,255,255,0.08)',
+                      background: 'rgba(255,255,255,0.04)',
+                      backdropFilter: 'blur(8px)',
+                    }}
+                  >
+                    <span>{icon}</span>{text}
+                  </span>
+                ))}
+              </div>
+            </ScrollReveal>
+
+            {/* ── CTA ── */}
+            <ScrollReveal data-reveal="up" delay={320}>
               <a
                 href={WA_SOFT}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-3 px-8 py-5 rounded-full font-heading font-black text-sm uppercase tracking-widest text-background overflow-hidden shadow-[0_0_30px_rgba(0,245,212,0.3)] transition-all duration-300 hover:scale-105"
-                style={{ background: '#00F5D4' }}
+                className="group relative inline-flex items-center gap-3 px-8 py-5 rounded-full font-heading font-black text-sm uppercase tracking-widest overflow-hidden transition-all duration-300 hover:scale-105"
+                style={{
+                  background: '#00F5D4',
+                  color: '#050508',
+                  boxShadow: '0 0 40px rgba(0,245,212,0.35), 0 4px 20px rgba(0,0,0,0.4)',
+                }}
               >
+                {/* shine sweep */}
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none" />
                 <svg className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:rotate-12" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
                 </svg>
-                <span className="relative z-10">Talk to Us Directly</span>
+                <span className="relative z-10">Talk to Sujal Directly</span>
               </a>
             </ScrollReveal>
           </div>
         </div>
       </div>
-      
+
+      {/* ── Local keyframes & styles ── */}
       <style>{`
-        @keyframes float-orb {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+        /* Spinning ring behind photo */
+        @keyframes founder-ring-spin {
+          from { transform: translate(-50%, -50%) rotate(0deg); }
+          to   { transform: translate(-50%, -50%) rotate(360deg); }
         }
-        .animate-float-orb {
-          animation: float-orb 4s ease-in-out infinite;
+
+        /* Floating badge bob */
+        @keyframes float-badge {
+          0%, 100% { transform: translateY(0); }
+          50%       { transform: translateY(-10px); }
+        }
+        .animate-float-badge {
+          animation: float-badge var(--dur, 3.5s) ease-in-out infinite;
+        }
+
+        /* Animated gradient border on photo card */
+        .founder-border-glow {
+          background: linear-gradient(135deg, rgba(0,245,212,0.5), rgba(123,47,255,0.4), rgba(0,245,212,0.2));
+          background-size: 300% 300%;
+          animation: founder-border-spin 6s ease infinite;
+        }
+        @keyframes founder-border-spin {
+          0%   { background-position: 0% 50%; }
+          50%  { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        /* Badge shimmer sweep on hover */
+        .badge-shimmer {
+          background-size: 300% 100%;
+          background-position: -100% 0;
+          transition: background-position 0.6s ease;
+        }
+
+        /* Curtain reveal — slides up once card enters viewport */
+        .founder-curtain {
+          transform: scaleY(1);
+          transform-origin: bottom;
+          transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        [data-reveal].revealed .founder-curtain,
+        .revealed .founder-curtain {
+          transform: scaleY(0);
         }
       `}</style>
     </section>
