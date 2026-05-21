@@ -95,7 +95,7 @@
     background-color: #050508;
   }
   
-  section, footer, main, .bg-background {
+  .bg-background {
     background-color: transparent !important;
   }
 
@@ -464,10 +464,9 @@ section img:not([data-no-parallax]) {
 ═══════════════════════════════════════════════════════════ */
 
 /* Lazy render off-screen sections — browser skips paint until near viewport */
-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 600px;
-}
+/* NOTE: content-visibility:auto was removed — it caused gradient text,
+   backdrop-filter, and WebkitTextFillColor to visually crash when sections
+   scrolled into the viewport. Sections render normally without it. */
 
 /* Only promote elements that actually animate to their own GPU layer */
 .will-change-transform { will-change: transform; }

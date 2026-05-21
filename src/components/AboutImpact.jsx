@@ -165,7 +165,7 @@ export default function AboutImpact() {
               }}
             >
               <ImageReveal
-                src="/team-meeting.png"
+                src="/team-meeting.webp"
                 alt="Juntoz team reviewing beauty brand growth strategy"
                 color="#7B2FFF"
                 direction="left"

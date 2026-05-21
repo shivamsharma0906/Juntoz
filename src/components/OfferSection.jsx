@@ -76,7 +76,7 @@ export default function OfferSection() {
           </div>
           <h2 className="font-heading font-black text-5xl sm:text-6xl md:text-7xl uppercase text-white leading-[0.95] tracking-tighter">
             Everything You{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFE600] to-[#FF3AF2] drop-shadow-[0_0_30px_rgba(255,230,0,0.3)]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFE600] to-[#FF3AF2]">
               Get
             </span>
           </h2>

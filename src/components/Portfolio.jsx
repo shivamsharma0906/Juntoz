@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
 
 const projects = [
@@ -86,7 +86,7 @@ export default function Portfolio() {
           </div>
           <h2 className="font-heading font-black text-white text-5xl sm:text-6xl md:text-7xl uppercase leading-[0.95] tracking-tighter">
             Our Best{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#FF3AF2] drop-shadow-[0_0_30px_rgba(0,245,212,0.3)]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#FF3AF2]">
               Work
             </span>
           </h2>

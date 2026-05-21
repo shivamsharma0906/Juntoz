@@ -34,15 +34,9 @@ const values = [
   },
 ];
 
-// ── Animated Counter Hook ──
-function useCounter(end, duration = 2000, start = 0) {
-  const [count, setCount] = useState(start);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  return { count, setCount, hasAnimated, setHasAnimated, end, duration };
-}
 
 // ── Stat Card Component ──
-const StatCard = ({ stat, index, isVisible }) => {
+const StatCard = ({ stat, isVisible }) => {
   const counterRef = useRef({ count: 0, hasAnimated: false });
   const [displayValue, setDisplayValue] = useState(0);
 
@@ -128,7 +122,7 @@ const StatCard = ({ stat, index, isVisible }) => {
 };
 
 // ── Value Card ── 
-const ValueCard = ({ value, index }) => {
+const ValueCard = ({ value }) => {
   return (
     <div
       className="group relative overflow-hidden rounded-3xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] p-1"
@@ -251,7 +245,7 @@ export default function About() {
         <ScrollReveal data-reveal="up" delay={150} className="mb-20">
           <div className="flex flex-col lg:flex-row gap-5 p-2 rounded-[28px] bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
             {proofStats.map((stat, i) => (
-              <StatCard key={i} stat={stat} index={i} isVisible={isVisible} />
+              <StatCard key={i} stat={stat} isVisible={isVisible} />
             ))}
           </div>
         </ScrollReveal>
@@ -260,7 +254,7 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {values.map((v, idx) => (
             <ScrollReveal key={v.n} data-reveal="up" delay={250 + idx * 100}>
-              <ValueCard value={v} index={idx} />
+              <ValueCard value={v} />
             </ScrollReveal>
           ))}
         </div>

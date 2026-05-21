@@ -87,7 +87,7 @@ export default function HowItWorks() {
           
           <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] uppercase leading-[0.95] tracking-tighter max-w-4xl mx-auto">
             How We{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#FF3AF2] drop-shadow-[0_0_20px_rgba(0,245,212,0.3)]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#FF3AF2]">
               Grow
             </span>{' '}
             Your Business

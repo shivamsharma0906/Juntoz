@@ -18,7 +18,7 @@
  *   style     — forwarded to the outer wrapper div
  *   imgStyle  — forwarded to <img>
  */
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 
 let _idCounter = 0;
 
@@ -37,7 +37,7 @@ export default function ImageReveal({
   const triggeredRef = useRef(false);
 
   // Unique CSS class per instance so keyframes don't collide
-  const uid = useRef(`ir-${++_idCounter}`).current;
+  const uid = useMemo(() => `ir-${++_idCounter}`, []);
 
   useEffect(() => {
     const wrap    = wrapRef.current;

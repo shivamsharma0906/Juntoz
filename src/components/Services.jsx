@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
 
 const services = [
@@ -103,7 +103,7 @@ export default function Services() {
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">What We Do</span>
           </div>
           <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-6xl uppercase leading-none tracking-tighter mb-4">
-            Services Built to <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF] drop-shadow-[0_0_20px_rgba(0,245,212,0.4)]">Convert</span>
+            Services Built to <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Convert</span>
           </h2>
           <p className="font-body text-white/50 text-sm md:text-base max-w-lg mx-auto leading-relaxed">
             Every service is a piece of a proven system. We don't just run ads; we build client acquisition machines.

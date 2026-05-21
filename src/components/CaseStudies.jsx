@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useRef } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
 
 const WA_HARD = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20want%20to%20book%20a%20strategy%20call.';
@@ -47,16 +47,6 @@ const cases = [
 
 export default function CaseStudies() {
   const sectionRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setIsVisible(true); },
-      { threshold: 0.15 }
-    );
-    if (sectionRef.current) obs.observe(sectionRef.current);
-    return () => obs.disconnect();
-  }, []);
 
   return (
     <section ref={sectionRef} id="case-studies" className="relative py-24 md:py-32 bg-background overflow-hidden">
@@ -74,7 +64,7 @@ export default function CaseStudies() {
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Deep Dives</span>
           </div>
           <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-6xl uppercase leading-none tracking-tighter mb-4">
-            Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF3AF2] to-[#7B2FFF] drop-shadow-[0_0_20px_rgba(255,58,242,0.3)]">Wins</span>
+            Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF3AF2] to-[#7B2FFF]">Wins</span>
           </h2>
           <p className="font-body text-white/50 text-sm md:text-base max-w-lg mx-auto leading-relaxed">
             Real campaigns. Real numbers. See exactly how we transformed these beauty businesses.

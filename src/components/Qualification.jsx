@@ -60,7 +60,7 @@ export default function Qualification() {
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Be Honest With Yourself</span>
           </div>
           <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-6xl uppercase leading-[0.95] tracking-tighter">
-            Is Juntoz <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF] drop-shadow-[0_0_20px_rgba(0,245,212,0.3)]">Right for You?</span>
+            Is Juntoz <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Right for You?</span>
           </h2>
         </ScrollReveal>
 

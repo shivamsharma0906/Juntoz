@@ -37,8 +37,8 @@ function ScrollGroup({ children }) {
 
   useFrame(() => {
     if (!group.current) return;
-    const scrollY  = window.scrollY;
-    const yOffset  = (scrollY * viewport.height) / window.innerHeight;
+    const scrollY = window.scrollY;
+    const yOffset = (scrollY * viewport.height) / window.innerHeight;
     // Slightly faster lerp (0.08 → 0.07) to stay tight with scroll without jitter
     group.current.position.y += (yOffset - group.current.position.y) * 0.07;
   });
@@ -176,7 +176,7 @@ function SceneLayout() {
       {/* HERO — shapes pinned to far left/right screen edges, very deep Z */}
       {/* x = ±0.62 × viewport pushes them half-off-screen; z = -8/-9 makes them small */}
       <AnimatedSphere position={[-w * 0.62, h * 0.05, -8]} />
-      <AnimatedTorus  position={[ w * 0.60, -h * 0.10, -9]} />
+      <AnimatedTorus position={[w * 0.60, -h * 0.10, -9]} />
 
       {/* TESTIMONIALS */}
       <RibbedSphere position={[w * 0.55, -h * 1.3, -6]} />
@@ -209,9 +209,9 @@ export default function FloatingShapes() {
         >
           <ambientLight intensity={1.0} />
 
-          <directionalLight position={[5, 5, 5]}   intensity={3.2} color="#00F5D4" />
-          <directionalLight position={[-5, -5, 2]}  intensity={2.2} color="#FF3AF2" />
-          <spotLight        position={[0, 10, -10]} intensity={3.5} color="#7B2FFF" />
+          <directionalLight position={[5, 5, 5]} intensity={3.2} color="#00F5D4" />
+          <directionalLight position={[-5, -5, 2]} intensity={2.2} color="#FF3AF2" />
+          <spotLight position={[0, 10, -10]} intensity={3.5} color="#7B2FFF" />
 
           <Environment preset="night" />
           <SceneLayout />

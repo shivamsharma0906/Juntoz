@@ -208,7 +208,7 @@ export default function InnovationSection() {
               }}
             >
               <ImageReveal
-                src="/innovation-team.png"
+                src="/innovation-team.webp"
                 alt="Juntoz team innovating beauty brand growth strategy"
                 color="#FF3AF2"
                 direction="right"

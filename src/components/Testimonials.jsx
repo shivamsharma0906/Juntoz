@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
 
 const testimonials = [

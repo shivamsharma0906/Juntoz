@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import InteractiveParticleField from './InteractiveParticleField.jsx';
 
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20to%20know%20how%20you%20can%20grow%20my%20business.';
@@ -210,7 +209,10 @@ export default function Hero() {
 
   /* detect desktop once (avoids SSR mismatch) */
   useEffect(() => {
-    setIsDesktop(window.innerWidth >= 768);
+    const timer = setTimeout(() => {
+      setIsDesktop(window.innerWidth >= 768);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   /* entrance + stats trigger */
@@ -266,7 +268,7 @@ export default function Hero() {
         const rect = sectionRef.current.getBoundingClientRect();
         const p = Math.max(0, Math.min(1, -rect.top / (rect.height * 0.8)));
         headingRef.current.style.transform = `translateY(${-(p * 60)}px)`;
-        headingRef.current.style.opacity   = String(1 - p * 0.85);
+        // Note: opacity is handled by CSS to avoid gradient text rendering glitches
       });
     };
     window.addEventListener('scroll', onScroll, { passive: true });

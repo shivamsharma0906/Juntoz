@@ -47,16 +47,16 @@ function App() {
       <div className="relative min-h-screen">
         <div className="fixed inset-0 pattern-hex pointer-events-none" style={{ zIndex: -2 }} />
         <div className="fixed inset-0 bg-gradient-to-t from-[#050508]/80 via-transparent to-[#050508]/80 pointer-events-none" style={{ zIndex: -2 }} />
-        
+
         {/* GLOBAL 3D SCROLLING SHAPES */}
         <FloatingShapes />
 
         {/* PREMIUM MAGNETIC CURSOR — desktop only */}
         <MagneticCursor />
-        
+
         <ScrollToTop />
         <Navbar />
-        
+
         <main>
           <Suspense fallback={<div className="h-screen w-full flex items-center justify-center"><div className="w-8 h-8 border-4 border-[#00F5D4] border-t-transparent rounded-full animate-spin"></div></div>}>
             <Routes>

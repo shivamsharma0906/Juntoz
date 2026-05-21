@@ -94,7 +94,7 @@ export default function ProblemSolution() {
               </div>
               <h2 className="font-heading font-black text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase leading-[0.95] tracking-tighter">
                 You're Working Hard.<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF3AF2] to-[#ff7eb3] drop-shadow-[0_0_20px_rgba(255,58,242,0.3)]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF3AF2] to-[#ff7eb3]">
                   But Not Smart.
                 </span>
               </h2>
@@ -148,7 +148,7 @@ export default function ProblemSolution() {
               </div>
               <h2 className="font-heading font-black text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase leading-[0.95] tracking-tighter">
                 We Build You a<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF] drop-shadow-[0_0_20px_rgba(0,245,212,0.3)]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">
                   Growth Machine.
                 </span>
               </h2>

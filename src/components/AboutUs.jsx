@@ -17,7 +17,6 @@
  * Brand colors: #00F5D4 · #7B2FFF · #FF3AF2
  */
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import ImageReveal from './ImageReveal.jsx';
 
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20to%20know%20more.';
@@ -203,7 +202,7 @@ export default function AboutUs() {
                 }}
               >
                 <ImageReveal
-                  src="/about-desk.png"
+                  src="/about-desk.webp"
                   alt="Juntoz team working on beauty brand strategy"
                   color="#00F5D4"
                   direction="left"
@@ -231,7 +230,7 @@ export default function AboutUs() {
                 }}
               >
                 <ImageReveal
-                  src="/about-laptop.png"
+                  src="/about-laptop.webp"
                   alt="Juntoz consultant presenting growth strategy"
                   color="#7B2FFF"
                   direction="right"

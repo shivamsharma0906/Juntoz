@@ -131,7 +131,6 @@ export default function MagneticCursor() {
         delete el.dataset.magnetCursorInited;
       });
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const isBtn  = state === 'button';

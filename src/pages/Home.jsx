@@ -9,6 +9,7 @@ import ProblemSolution from '../components/ProblemSolution';
 import NumbersSection from '../components/NumbersSection';
 import HowItWorks from '../components/HowItWorks';
 import FAQSection from '../components/FAQSection';
+import GoogleMap from '../components/GoogleMap';
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       <NumbersSection />
       <HowItWorks />
       <FAQSection />
+      <GoogleMap />
     </>
   );
 }

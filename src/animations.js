@@ -56,9 +56,11 @@ function initHeroParallax() {
       isInHero = false;
       content.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
       content.style.transform = 'translate(0, 0)';
+      content.style.willChange = 'auto';
       if (bgLayer) {
         bgLayer.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
         bgLayer.style.transform = 'translate(0, 0)';
+        bgLayer.style.willChange = 'auto';
       }
     }, { passive: true });
 

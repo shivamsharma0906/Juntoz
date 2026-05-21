@@ -36,7 +36,7 @@ function Counter({ value, suffix, decimal, started }) {
 }
 
 /* ── StatCard: Hover effects and animated borders ── */
-function StatCard({ s, idx, started }) {
+function StatCard({ s, started }) {
   return (
     <div className="group relative rounded-3xl overflow-hidden p-[1px] transition-transform duration-500 hover:scale-[1.03]">
       {/* Animated gradient border */}
@@ -117,7 +117,7 @@ export default function Results() {
           
           <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-6xl uppercase leading-none tracking-tighter mb-4">
             Proof That Our{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7B2FFF] to-[#00F5D4] drop-shadow-[0_0_20px_rgba(0,245,212,0.3)]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7B2FFF] to-[#00F5D4]">
               System Works
             </span>
           </h2>
@@ -131,7 +131,7 @@ export default function Results() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {stats.map((s, i) => (
             <ScrollReveal key={i} data-reveal="up" delay={i * 100}>
-              <StatCard s={s} idx={i} started={started} />
+              <StatCard s={s} started={started} />
             </ScrollReveal>
           ))}
         </div>

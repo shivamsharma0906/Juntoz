@@ -34,7 +34,6 @@ export default function CTASection() {
       rafRef.current = requestAnimationFrame(() => {
         if (!ref.current || !headingRef.current) return;
         const rect = ref.current.getBoundingClientRect();
-        const vh = window.innerHeight;
         // progress: 0 when section top hits viewport top → 1 when section is 70% scrolled past
         const raw = -rect.top / (rect.height * 0.7);
         const p = Math.max(0, Math.min(1, raw));
