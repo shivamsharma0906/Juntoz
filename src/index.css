@@ -89,14 +89,21 @@
    BASE
 ════════════════════════════════════════════════ */
 @layer base {
+  html {
+    background-color: #050508;
+  }
   body {
     @apply text-foreground font-body overflow-x-hidden;
     @apply selection:bg-accent-1 selection:text-white;
     background-color: #050508;
   }
   
+  /* bg-background is the dark base color used by sections.
+     We use the explicit hex (not transparent) so subpages
+     always have a consistent dark background regardless of
+     whether the fixed pattern-hex layer is visible beneath. */
   .bg-background {
-    background-color: transparent !important;
+    background-color: #050508 !important;
   }
 
   @media (prefers-reduced-motion: reduce) {

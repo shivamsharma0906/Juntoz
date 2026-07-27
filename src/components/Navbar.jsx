@@ -145,7 +145,7 @@ export default function Navbar() {
                     alt="Juntoz"
                     width="160"
                     height="40"
-                    fetchpriority="high"
+                    fetchPriority="high"
                     className="h-7 sm:h-9 md:h-10 w-auto relative z-10 transition-all duration-400 group-hover/logo:scale-105 group-hover/logo:drop-shadow-[0_0_8px_rgba(0,245,212,0.6)]"
                   />
                 </div>
