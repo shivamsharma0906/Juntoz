@@ -60,6 +60,11 @@ const services = [
   },
 ];
 
+// Must match the Tailwind `scroll-px-6` on the scroll container below (6 * 0.25rem = 24px).
+// Kept as one constant so the two values can never drift apart again.
+const SCROLL_PADDING_PX = 24;
+const GAP_PX = 24; // matches `gap-6`
+
 export default function Services() {
   const sectionRef = useRef(null);
   const scrollRef = useRef(null);
@@ -70,9 +75,13 @@ export default function Services() {
     const scrollLeft = scrollRef.current.scrollLeft;
     const card = scrollRef.current.children[0];
     if (card) {
-      const cardWidth = card.offsetWidth + 24; // gap is 24px
-      const index = Math.round(scrollLeft / cardWidth);
-      setActiveIdx(Math.min(index, services.length - 1));
+      const cardWidth = card.offsetWidth + GAP_PX;
+      const rawIndex = Math.round(scrollLeft / cardWidth);
+      // Clamp both ends — iOS rubber-band overscroll can briefly push
+      // scrollLeft negative, which previously produced a negative index
+      // and momentarily left every dot unlit.
+      const index = Math.max(0, Math.min(rawIndex, services.length - 1));
+      setActiveIdx(index);
     }
   };
 
@@ -80,8 +89,10 @@ export default function Services() {
     if (!scrollRef.current) return;
     const card = scrollRef.current.children[index];
     if (card) {
-      const paddingOffset = 20; 
-      scrollRef.current.scrollTo({ left: card.offsetLeft - paddingOffset, behavior: 'smooth' });
+      // Was hardcoded to 20px — now matches the container's actual
+      // `scroll-px-6` (24px), so the programmatic scroll lands exactly
+      // on the browser's own snap point instead of overshooting by 4px.
+      scrollRef.current.scrollTo({ left: card.offsetLeft - SCROLL_PADDING_PX, behavior: 'smooth' });
       setActiveIdx(index);
     }
   };
@@ -89,23 +100,24 @@ export default function Services() {
   return (
     <section id="services" ref={sectionRef} className="relative py-24 md:py-32 bg-background overflow-hidden">
       {/* Background Ambience */}
-      <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" />
+      <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" aria-hidden="true" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[150px] pointer-events-none z-0 opacity-20"
-        style={{ background: 'radial-gradient(ellipse, rgba(0,245,212,0.8), transparent)' }} />
+        style={{ background: 'radial-gradient(ellipse, rgba(0,245,212,0.8), transparent)' }} aria-hidden="true" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none z-0 opacity-10"
-        style={{ background: 'radial-gradient(circle, #FF3AF2, transparent)' }} />
+        style={{ background: 'radial-gradient(circle, #FF3AF2, transparent)' }} aria-hidden="true" />
 
       <div className="relative z-10 container mx-auto px-6 max-w-7xl">
         {/* Header */}
-        <ScrollReveal data-reveal="up" className="text-center mb-16 md:mb-24">
+        <ScrollReveal data-reveal="up" className="text-center mb-16 md:mb-24 px-4 sm:px-0">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#00F5D4] animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-[#00F5D4] header-pulse" />
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">What We Do</span>
           </div>
-          <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-6xl uppercase leading-none tracking-tighter mb-4">
-            Services Built to <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Convert</span>
+          <h2 className="font-heading font-black text-white text-2xl xs:text-3xl sm:text-5xl md:text-6xl uppercase leading-tight sm:leading-none tracking-tight sm:tracking-tighter mb-4">
+            Services Built to{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Convert</span>
           </h2>
-          <p className="font-body text-white/50 text-sm md:text-base max-w-lg mx-auto leading-relaxed">
+          <p className="font-body text-white/50 text-sm md:text-base max-w-lg mx-auto leading-relaxed px-2 sm:px-0">
             Every service is a piece of a proven system. We don't just run ads; we build client acquisition machines.
           </p>
         </ScrollReveal>
@@ -113,43 +125,69 @@ export default function Services() {
         {/* ── CSS Grid Desktop / Scroll Snap Mobile ── */}
         <style>{`
           .hide-scrollbar::-webkit-scrollbar { display: none; }
-          .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+          .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch; /* smooth momentum scroll on older iOS Safari */
+            overscroll-behavior-x: contain;     /* stop the horizontal swipe from chaining into page scroll */
+          }
+
+          @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50%       { background-position: 100% 50%; }
+          }
+          .service-border-anim {
+            background-size: 200% 200%;
+            animation: gradient-shift 4s ease-in-out infinite;
+          }
+
+          .header-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+          @media (prefers-reduced-motion: reduce) {
+            .service-border-anim,
+            .header-pulse,
+            .dot-ping {
+              animation: none !important;
+            }
+          }
         `}</style>
-        
-        <div 
+
+        <div
           ref={scrollRef}
           onScroll={handleScroll}
           className="flex lg:grid lg:grid-cols-4 gap-6 pb-12 overflow-x-auto snap-x snap-mandatory lg:snap-none hide-scrollbar scroll-px-6"
         >
           {services.map((s, i) => (
-            <ScrollReveal key={i} data-reveal="up" delay={i * 100} className="min-w-[85vw] sm:min-w-[350px] lg:min-w-0 snap-center shrink-0">
-              <div 
+            <ScrollReveal key={i} data-reveal="up" delay={i * 100} className="w-[calc(100vw-3rem)] sm:w-[350px] lg:w-auto lg:min-w-0 snap-center shrink-0 overflow-hidden">
+              <div
                 className="group relative h-full bg-[#05050C] rounded-[2rem] p-[1px] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02]"
                 style={{ boxShadow: `0 10px 40px rgba(0,0,0,0.3)` }}
               >
-                {/* Animated Border Gradient */}
-                <div 
-                  className="absolute inset-0 bg-gradient-to-br opacity-40 group-hover:opacity-100 transition-opacity duration-500 animate-[gradient-shift_4s_ease-in-out_infinite]"
-                  style={{ background: `linear-gradient(135deg, ${s.color}60, transparent, ${s.color}60)` }} 
+                {/* Animated Border Gradient — keyframes now defined locally above,
+                   so this no longer silently no-ops if global CSS doesn't define it */}
+                <div
+                  className="service-border-anim absolute inset-0 bg-gradient-to-br opacity-40 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: `linear-gradient(135deg, ${s.color}60, transparent, ${s.color}60)` }}
                 />
 
                 <div className="relative h-full bg-[#080810]/95 backdrop-blur-2xl rounded-[31px] p-8 flex flex-col z-10 overflow-hidden">
-                  
+
                   {/* Subtle Inner Glow */}
-                  <div 
+                  <div
                     className="absolute -top-16 -right-16 w-40 h-40 rounded-full blur-[50px] opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: s.color }} 
+                    style={{ background: s.color }}
+                    aria-hidden="true"
                   />
 
                   {/* Header: Icon & Number */}
                   <div className="flex items-start justify-between mb-8 relative z-10">
-                    <div 
+                    <div
                       className="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6"
                       style={{ backgroundColor: `${s.color}15`, border: `1px solid ${s.color}35`, color: s.color, boxShadow: `0 0 20px ${s.color}20` }}
                     >
                       {s.icon}
                     </div>
-                    <div 
+                    <div
                       className="w-10 h-10 rounded-full flex items-center justify-center font-heading font-black text-xs shadow-lg transition-transform duration-500 group-hover:scale-110"
                       style={{ backgroundColor: s.color, color: '#08080f', boxShadow: `0 0 15px ${s.color}40` }}
                     >
@@ -168,7 +206,7 @@ export default function Services() {
                   </div>
 
                   {/* Badge */}
-                  <div 
+                  <div
                     className="mb-6 px-4 py-1.5 rounded-full font-body text-[10px] font-bold uppercase tracking-widest w-fit relative z-10"
                     style={{ background: `${s.color}15`, border: `1px solid ${s.color}30`, color: s.color }}
                   >
@@ -176,14 +214,14 @@ export default function Services() {
                   </div>
 
                   {/* Description */}
-                  <p className="font-body text-white/60 text-sm leading-relaxed mb-8 flex-1 relative z-10">
+                  <p className="font-body text-white/60 text-sm leading-relaxed mb-8 flex-1 relative z-10 break-words">
                     {s.desc}
                   </p>
 
                   {/* List Points */}
                   <ul className="space-y-3 relative z-10 pt-6 border-t border-white/10">
                     {s.points.map((pt, j) => (
-                      <li key={j} className="flex items-center gap-3 font-body text-white/70 text-xs md:text-sm">
+                      <li key={j} className="flex items-center gap-3 font-body text-white/70 text-xs md:text-sm break-words">
                         <span className="w-2 h-2 rounded-full shrink-0 shadow-lg transition-transform duration-300 group-hover:scale-150" style={{ backgroundColor: s.color, boxShadow: `0 0 8px ${s.color}` }} />
                         {pt}
                       </li>
@@ -197,13 +235,15 @@ export default function Services() {
 
         {/* Enhanced Dots (Mobile Only) */}
         <div className="mb-12 px-5 lg:hidden">
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3" role="tablist" aria-label="Service slides">
             {services.map((_, i) => (
               <button
                 key={i}
                 onClick={() => scrollToCard(i)}
                 aria-label={`Go to service ${i + 1}`}
-                className="relative rounded-full transition-all duration-300 hover:scale-125 focus:outline-none"
+                aria-current={activeIdx === i ? 'true' : undefined}
+                role="tab"
+                className="relative rounded-full transition-all duration-300 hover:scale-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
                 style={{
                   width: activeIdx === i ? '36px' : '10px',
                   height: '10px',
@@ -212,7 +252,7 @@ export default function Services() {
                 }}
               >
                 {activeIdx === i && (
-                  <span className="absolute inset-0 rounded-full animate-ping opacity-40" style={{ background: services[i].color }} />
+                  <span className="dot-ping absolute inset-0 rounded-full animate-ping opacity-40" style={{ background: services[i].color }} />
                 )}
               </button>
             ))}
