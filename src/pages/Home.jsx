@@ -11,7 +11,7 @@ const ProblemSolution   = lazy(() => import('../components/ProblemSolution'));
 const NumbersSection    = lazy(() => import('../components/NumbersSection'));
 const HowItWorks        = lazy(() => import('../components/HowItWorks'));
 const FAQSection        = lazy(() => import('../components/FAQSection'));
-const GoogleMap         = lazy(() => import('../components/GoogleMap'));
+const MapSection        = lazy(() => import('../components/MapSection'));
 
 export default function Home() {
   return (
@@ -27,7 +27,7 @@ export default function Home() {
         <NumbersSection />
         <HowItWorks />
         <FAQSection />
-        <GoogleMap />
+        <MapSection />
       </Suspense>
     </>
   );

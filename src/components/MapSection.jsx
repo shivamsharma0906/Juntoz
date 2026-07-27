@@ -1,82 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-// Custom ultra-premium dark theme styling for Google Maps matching Juntoz theme
-const darkMapStyle = [
-  { "elementType": "geometry", "stylers": [{ "color": "#07070a" }] },
-  { "elementType": "labels.text.stroke", "stylers": [{ "color": "#07070a" }, { "weight": 2 }] },
-  { "elementType": "labels.text.fill", "stylers": [{ "color": "#8c8c9a" }] },
-  {
-    "featureType": "administrative.locality",
-    "elementType": "labels.text.fill",
-    "stylers": [{ "color": "#00F5D4" }]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "labels.text.fill",
-    "stylers": [{ "color": "#7B2FFF" }, { "visibility": "simplified" }]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "geometry",
-    "stylers": [{ "color": "#0d0d12" }]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "labels.text.fill",
-    "stylers": [{ "color": "#4a4a5a" }]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry",
-    "stylers": [{ "color": "#12121a" }]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry.stroke",
-    "stylers": [{ "color": "#1a1a24" }]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.text.fill",
-    "stylers": [{ "color": "#606070" }]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "geometry",
-    "stylers": [{ "color": "#1c1c28" }]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "geometry.stroke",
-    "stylers": [{ "color": "#252538" }]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "labels.text.fill",
-    "stylers": [{ "color": "#a0a0b0" }]
-  },
-  {
-    "featureType": "water",
-    "elementType": "geometry",
-    "stylers": [{ "color": "#040406" }]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels.text.fill",
-    "stylers": [{ "color": "#303040" }]
-  }
-];
-
-export default function GoogleMap({
-  lat = 19.3099,
-  lng = 72.8528,
-  zoom = 16,
-  title = "Juntoz Digital Marketing",
-  address = "202, Bhakti Plaza, 150 Feet Rd, Bhayandar West, Thane, Maharashtra 401101"
+export default function MapSection({
+  address = "Office No. 5, 1st Floor, Dev Shristi Tower, 60 Feet Rd, Bhayandar West, Mira Bhayandar, Maharashtra 401101"
 }) {
-  const mapRef = useRef(null);
-  const [mapLoaded, setMapLoaded] = useState(false);
-  const [error, setError] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [currentDay, setCurrentDay] = useState(1);
 
@@ -107,115 +33,6 @@ export default function GoogleMap({
     const interval = setInterval(checkStatus, 30000);
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    if (window.google && window.google.maps) {
-      initMap();
-      return;
-    }
-
-    const scriptId = 'google-maps-script';
-    let script = document.getElementById(scriptId);
-
-    if (!script) {
-      script = document.createElement('script');
-      script.id = scriptId;
-      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBFkXdIXjZ5bNMelG-hBVEfs34JzIFY0dM&libraries=geometry,places`;
-      script.async = true;
-      script.defer = true;
-      script.onload = () => {
-        initMap();
-      };
-      script.onerror = () => {
-        setError(true);
-      };
-      document.head.appendChild(script);
-    } else {
-      const interval = setInterval(() => {
-        if (window.google && window.google.maps) {
-          clearInterval(interval);
-          initMap();
-        }
-      }, 100);
-      return () => clearInterval(interval);
-    }
-
-    function initMap() {
-      if (!mapRef.current) return;
-
-      try {
-        const location = { lat, lng };
-        const map = new window.google.maps.Map(mapRef.current, {
-          center: location,
-          zoom: zoom,
-          styles: darkMapStyle,
-          disableDefaultUI: false,
-          zoomControl: true,
-          mapTypeControl: false,
-          scaleControl: true,
-          streetViewControl: false,
-          rotateControl: false,
-          fullscreenControl: true,
-          gestureHandling: 'cooperative'
-        });
-
-        // Glowing Neon Custom Map Marker
-        const marker = new window.google.maps.Marker({
-          position: location,
-          map: map,
-          title: title,
-          animation: window.google.maps.Animation.DROP
-        });
-
-        const contentString = `
-          <div style="background:#0c0c14; padding:12px; border-radius:12px; border:1px solid rgba(0,245,212,0.2); font-family:sans-serif; color:#ffffff; max-width:220px;">
-            <h4 style="margin:0 0 6px 0; color:#00F5D4; font-size:14px; font-weight:bold; letter-spacing:0.5px;">${title}</h4>
-            <p style="margin:0 0 8px 0; color:rgba(255,255,255,0.7); font-size:11px; line-height:1.4;">${address}</p>
-            <div style="display:inline-flex; align-items:center; gap:6px; font-size:10px; font-weight:bold; color:${isOpen ? '#00F5D4' : '#FF3AF2'}">
-              <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:${isOpen ? '#00F5D4' : '#FF3AF2'}; animation: status-blink 1.5s ease infinite;"></span>
-              ${isOpen ? 'OPEN NOW' : 'CLOSED'}
-            </div>
-          </div>
-        `;
-
-        const infowindow = new window.google.maps.InfoWindow({
-          content: contentString,
-          pixelOffset: new window.google.maps.Size(0, -10)
-        });
-
-        marker.addListener("click", () => {
-          infowindow.open({
-            anchor: marker,
-            map
-          });
-        });
-
-        // Apply dark themed design customizations to InfoWindow once rendered
-        window.google.maps.event.addListener(infowindow, 'domready', () => {
-          const iwOuter = document.querySelector('.gm-style-iw-c');
-          const iwClose = document.querySelector('.gm-style-iw-d');
-          const iwCloseBtn = document.querySelector('.gm-ui-hover-effect');
-          if (iwOuter) {
-            iwOuter.style.background = '#0c0c14';
-            iwOuter.style.border = '1px solid rgba(123,47,255,0.3)';
-            iwOuter.style.boxShadow = '0 10px 35px rgba(0, 0, 0, 0.6)';
-            iwOuter.style.borderRadius = '14px';
-          }
-          if (iwClose) {
-            iwClose.style.color = '#ffffff';
-          }
-          if (iwCloseBtn) {
-            iwCloseBtn.style.color = '#ffffff';
-          }
-        });
-
-        setMapLoaded(true);
-      } catch (e) {
-        console.error("Map initialization failed", e);
-        setError(true);
-      }
-    }
-  }, [lat, lng, zoom, title, address, isOpen]);
 
   // Operating schedule
   const schedule = [
@@ -339,32 +156,21 @@ export default function GoogleMap({
             </a>
           </div>
 
-          {/* RIGHT: Advanced Interactive Map */}
+          {/* RIGHT: Google Maps Embed iframe */}
           <div className="lg:col-span-7 rounded-3xl border border-white/10 bg-[#07070a]/60 backdrop-blur-md shadow-2xl p-2 sm:p-3 relative overflow-hidden group hover:border-white/15 transition-all duration-300">
             <div className="absolute -inset-[1px] bg-gradient-to-r from-[#00F5D4]/10 via-[#7B2FFF]/10 to-[#FF3AF2]/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
             <div className="relative rounded-[1.4rem] overflow-hidden h-[350px] sm:h-full min-h-[400px] w-full bg-[#050508] border border-white/5">
-              {/* Shimmer/Loader when map is not loaded */}
-              {!mapLoaded && !error && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#07070a]">
-                  <div className="w-12 h-12 border-4 border-[#00F5D4] border-t-transparent rounded-full animate-spin mb-4" />
-                  <p className="text-white/40 text-sm font-body tracking-wider animate-pulse">BOOTING GEO-SYSTEM...</p>
-                </div>
-              )}
-
-              {/* Error State */}
-              {error && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#07070a] px-4 text-center">
-                  <svg className="w-12 h-12 text-[#FF3AF2] mb-4 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                  </svg>
-                  <p className="text-white/80 font-heading text-lg font-bold mb-2">MAP INTEGRATION OFFLINE</p>
-                  <p className="text-white/40 text-xs max-w-xs leading-relaxed">Could not load the interactive map API. Please verify network access or configuration settings.</p>
-                </div>
-              )}
-
-              {/* The Actual Map Element */}
-              <div ref={mapRef} className="w-full h-full" />
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.5559639310036!2d72.8496079759016!3d19.301666781949923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b10eda3a9a65%3A0x3c3c948829e3150e!2sJuntoz%20Digital%20Marketing%20Agency!5e0!3m2!1sen!2sin!4v1785145098582!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
+                title="Juntoz Digital Marketing Agency"
+              />
             </div>
           </div>
 
@@ -375,7 +181,7 @@ export default function GoogleMap({
   );
 }
 
-// Internal CSS animation helpers to keep token size low but deliver pure visual fire
+// Internal CSS animation helpers
 const styleTag = (
   <style>{`
     @keyframes map-pulse-green {
