@@ -46,7 +46,7 @@ export default function MapSection({
   ];
 
   return (
-    <section className="relative w-full py-20 overflow-hidden bg-[#050508]/20">
+    <section className="relative w-full py-20 overflow-hidden bg-background">
       {styleTag}
 
       {/* Background ambient glows */}

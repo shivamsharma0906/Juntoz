@@ -28,8 +28,7 @@ const teamMembers = [
 
 export default function TeamSection() {
   return (
-    <section className="relative py-24 bg-[#05050C] overflow-hidden border-t border-white/5">
-      <div className="absolute inset-0 pattern-grid opacity-30 pointer-events-none" />
+    <section className="relative py-24 bg-background overflow-hidden border-t border-white/5">
       
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         

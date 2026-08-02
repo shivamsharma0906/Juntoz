@@ -123,7 +123,7 @@ function ContactForm() {
           id="contact-business"
           type="text"
           autoCapitalize="sentences"
-          placeholder="Your Business Type (e.g. Bridal MUA, Hair Salon) *"
+          placeholder="Your Business Type (e.g. Ecommerce, Real Estate, Clinic) *"
           value={fields.business}
           onChange={e => { setFields(p => ({ ...p, business: e.target.value })); setErrors(p => ({ ...p, business: null })); }}
           className={`${inputBase} ${errors.business ? 'border-red-500/70 bg-red-500/5' : ''}`}
@@ -168,7 +168,7 @@ export default function ContactPage() {
 
       <PageMeta
         title="Contact Juntoz — Book a Free Strategy Call"
-        description="Ready to fill your calendar with premium beauty clients? Contact Juntoz today and get a free growth strategy call within 24 hours."
+        description="Ready to scale your business revenue? Contact Juntoz today and get a free growth strategy call within 24 hours."
         path="/contact"
       />
         <ScrollReveal data-reveal="up" className="mb-16 text-center">
@@ -181,7 +181,7 @@ export default function ContactPage() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Growth</span>
           </h1>
           <p className="font-body text-white/50 text-sm md:text-base max-w-lg mx-auto leading-relaxed">
-            Ready to fill your calendar with premium clients? Drop us a message and we'll get back to you within minutes on WhatsApp.
+            Ready to scale your business revenue? Drop us a message and we'll get back to you within minutes on WhatsApp.
           </p>
         </ScrollReveal>
 

@@ -1,6 +1,7 @@
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { caseStudies } from '../data/caseStudies';
 import ScrollReveal from '../components/ScrollReveal';
+import PageMeta from '../components/PageMeta';
 
 export default function CaseStudyPage() {
   const { slug } = useParams();
@@ -12,6 +13,11 @@ export default function CaseStudyPage() {
 
   return (
     <div className="pt-24 pb-20 min-h-screen bg-background">
+      <PageMeta
+        title={`${study.clientName} Case Study — Juntoz`}
+        description={study.problem}
+        path={`/work/${study.slug}`}
+      />
       <div className="container mx-auto px-6 max-w-4xl">
         
         {/* Back Link */}

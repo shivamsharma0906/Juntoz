@@ -1,14 +1,7 @@
 import { useEffect, useRef } from 'react';
 
-/**
- * ScrollReveal
- * Unified component that integrates with the index.css [data-reveal] system.
- * It uses an IntersectionObserver to add the 'revealed' class once it enters the viewport.
- * 
- * Props:
- *   data-reveal : 'up' | 'fade' | 'zoom' | 'left' | 'right' (default 'up')
- *   delay       : Number (ms) to delay the transition (default 0)
- */
+
+
 export default function ScrollReveal({
   children,
   delay = 0,
@@ -23,19 +16,15 @@ export default function ScrollReveal({
     const el = ref.current;
     if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          // Add the CSS class defined in index.css
-          el.classList.add('revealed');
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
+    if (typeof window.observeForReveal === 'function') {
+      window.observeForReveal(el);
+    }
+    
+    return () => {
+      if (el && typeof window.unobserveForReveal === 'function') {
+        window.unobserveForReveal(el);
+      }
+    };
   }, []);
 
   return (
@@ -52,3 +41,4 @@ export default function ScrollReveal({
     </Tag>
   );
 }
+

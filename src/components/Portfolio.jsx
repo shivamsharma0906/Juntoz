@@ -55,7 +55,6 @@ export default function Portfolio() {
 
   return (
     <section ref={sectionRef} id="portfolio" className="relative py-14 sm:py-20 md:py-32 bg-background overflow-hidden">
-      <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-accent-2/10 rounded-full blur-[150px] pointer-events-none z-0" />
 
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-20">

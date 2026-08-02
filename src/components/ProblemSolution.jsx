@@ -70,7 +70,6 @@ export default function ProblemSolution() {
     <section id="problem-solution" className="relative py-10 md:py-14 bg-background overflow-hidden">
       
       {/* Dynamic Backgrounds */}
-      <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" />
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-[#FF3AF2]/10 rounded-full blur-[150px] pointer-events-none z-0" />
       <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-[#00F5D4]/10 rounded-full blur-[150px] pointer-events-none z-0" />
 

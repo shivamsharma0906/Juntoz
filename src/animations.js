@@ -121,20 +121,10 @@ function initScrollReveal() {
   // Trigger the existing reveal scanner from main.jsx
   if (typeof window.__initReveal === 'function') {
     window.__initReveal();
-  } else {
-    // Fallback: run our own IntersectionObserver
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(({ target, isIntersecting }) => {
-          if (isIntersecting) {
-            target.classList.add('revealed');
-            obs.unobserve(target);
-          }
-        });
-      },
-      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
-    );
-    document.querySelectorAll('[data-reveal]:not(.revealed)').forEach((el) => obs.observe(el));
+  } else if (typeof window.observeForReveal === 'function') {
+    document.querySelectorAll('[data-reveal]:not(.revealed)').forEach((el) => {
+      window.observeForReveal(el);
+    });
   }
 }
 
@@ -385,15 +375,11 @@ export function initAnimations() {
 
   // Expose the reveal scanner so initScrollReveal can use it
   window.__initReveal = () => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(({ target, isIntersecting }) => {
-          if (isIntersecting) { target.classList.add('revealed'); obs.unobserve(target); }
-        });
-      },
-      { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
-    );
-    document.querySelectorAll('[data-reveal]:not(.revealed)').forEach((el) => obs.observe(el));
+    if (typeof window.observeForReveal === 'function') {
+      document.querySelectorAll('[data-reveal]:not(.revealed)').forEach((el) => {
+        window.observeForReveal(el);
+      });
+    }
   };
 
   // Wave 1: effects that work on root DOM (no React-rendered content needed)

@@ -72,7 +72,6 @@ export default function HowItWorks() {
   return (
     <section ref={sectionRef} id="how-it-works" className="relative py-10 md:py-14 bg-background overflow-hidden">
       {/* Dynamic Ambient Background */}
-      <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" />
       <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full blur-[150px] pointer-events-none z-0 transition-opacity duration-1000 ${isVisible ? 'opacity-20' : 'opacity-0'}`}
         style={{ background: 'radial-gradient(ellipse, #00F5D4, transparent)' }} />
 

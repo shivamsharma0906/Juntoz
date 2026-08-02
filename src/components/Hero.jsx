@@ -1,583 +1,496 @@
-import { useEffect, useRef, useState, useCallback, memo } from 'react';
-import InteractiveParticleField from './InteractiveParticleField.jsx';
-import { COMPANY_STATS } from '../data/clients.js';
-import useCountUp from '../hooks/useCountUp.js';
-import GlassShapes from './GlassShapes.jsx';
-
+import { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20to%20know%20how%20you%20can%20grow%20my%20business.';
 
-/* ─── rotating headline words ────────────────────────────────── */
-const ROTATING_WORDS = ['Calendar.', 'Bookings.', 'Revenue.', 'Growth.'];
-
-/* ─── stat pills ──────────────────────────────────────────────── */
-const STATS = [
-  { value: COMPANY_STATS.clientsScaled, suffix: '+', label: 'Beauty Clients', color: '#00F5D4' },
-  { value: COMPANY_STATS.googleRating, suffix: '★', label: 'Google Rating',  color: '#FFE600', decimal: true },
-  { value: COMPANY_STATS.yearsActive,   suffix: '+', label: 'Years Active',   color: '#7B2FFF' },
+/* ─── Rotating Industry Words ─── */
+const ROTATING_WORDS = [
+  'Restaurants.',
+  'Clinics.',
+  'Startups.',
+  'Ecommerce.',
+  'Real Estate.',
+  'Brands.',
+  'Businesses.',
 ];
 
-/* ─── floating particles — reduced count for performance ─────── */
-const PARTICLES = Array.from({ length: 8 }, (_, i) => ({
-  id: i,
-  x: 10 + Math.random() * 80,
-  y: 10 + Math.random() * 80,
-  size: `${1 + Math.random() * 1.4}px`,
-  duration: 6 + Math.random() * 6,
-  delay: Math.random() * 5,
-  color: i % 3 === 0 ? 'rgba(0,245,212,0.6)' : i % 3 === 1 ? 'rgba(123,47,255,0.5)' : 'rgba(255,58,242,0.45)',
-  opacity: 0.10 + Math.random() * 0.15,
-}));
-
-/* ════════════════════════════════════════════════════════════════
-   SUB-COMPONENTS
-════════════════════════════════════════════════════════════════ */
-
-/* word-by-word 3D flip reveal */
-const SplitHeading = memo(function SplitHeading({ children, visible, baseDelay = 0.12 }) {
-  const words = children.trim().split(' ');
-  return (
-    <>
-      {words.map((word, i) => (
-        <span
-          key={i}
-          className="inline-block"
-          style={{
-            opacity: visible ? 1 : 0,
-            transform: visible ? 'translateY(0) rotateX(0deg)' : 'translateY(40px) rotateX(20deg)',
-            transition: `opacity 0.65s ease ${(baseDelay + i * 0.08).toFixed(2)}s,
-                         transform 0.65s cubic-bezier(0.22,1,0.36,1) ${(baseDelay + i * 0.08).toFixed(2)}s`,
-            marginRight: '0.26em',
-            transformOrigin: 'bottom center',
-            willChange: 'opacity, transform',
-          }}
-        >
-          {word}
-        </span>
+/* ─── Desktop: High-Tech Active Workspace 3D Cards ─── */
+const AnalyticsCard = ({ mousePos }) => (
+  <motion.div 
+    className="absolute top-[2%] right-[5%] w-72 rounded-3xl p-5 shadow-2xl backdrop-blur-2xl border border-white/15"
+    style={{
+      background: 'linear-gradient(135deg, rgba(123,47,255,0.15) 0%, rgba(5,5,12,0.85) 100%)',
+      boxShadow: '0 20px 50px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2)',
+      transform: `perspective(1000px) rotateX(${mousePos.y * -8}deg) rotateY(${mousePos.x * 12}deg) translateZ(30px)`,
+      transition: 'transform 0.1s ease-out'
+    }}
+    animate={{ y: [0, -12, 0], rotateZ: [-2, 1, -2] }}
+    transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+  >
+    <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center gap-2">
+        <div className="w-2.5 h-2.5 rounded-full bg-[#00F5D4] animate-ping" />
+        <span className="font-heading font-black text-[10px] uppercase tracking-widest text-white/70">Live Analytics</span>
+      </div>
+      <span className="font-heading font-bold text-xs text-[#00F5D4] bg-[#00F5D4]/10 px-2.5 py-1 rounded-full border border-[#00F5D4]/30">+342% ROAS</span>
+    </div>
+    
+    <div className="flex items-end gap-2 h-28 mt-2 pt-2 border-t border-white/10">
+      {[45, 65, 50, 95, 75, 100, 88].map((h, i) => (
+        <div key={i} className="flex-1 flex flex-col justify-end h-full">
+          <div 
+            className="w-full bg-gradient-to-t from-[#7B2FFF] via-[#00F5D4] to-[#FF3AF2] rounded-t-sm opacity-90 transition-all duration-500 hover:opacity-100" 
+            style={{ height: `${h}%`, boxShadow: '0 0 12px rgba(0,245,212,0.4)' }} 
+          />
+        </div>
       ))}
-    </>
-  );
-});
+    </div>
+  </motion.div>
+);
 
-/* animated rotating gradient word */
-const RotatingWord = memo(function RotatingWord({ words, visible }) {
-  const [index, setIndex] = useState(0);
-  const [state, setState] = useState('idle');
-
-  useEffect(() => {
-    if (!visible) return;
-    const iv = setInterval(() => {
-      setState('exit');
-      setTimeout(() => {
-        setIndex(i => (i + 1) % words.length);
-        setState('enter');
-        setTimeout(() => setState('idle'), 50);
-      }, 380);
-    }, 2400);
-    return () => clearInterval(iv);
-  }, [visible, words.length]);
-
-  const isOut = state === 'exit';
-
-  return (
-    <span 
-      className="relative inline-block" 
-      style={{ 
-        perspective: '400px',
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0) rotateX(0deg)' : 'translateY(40px) rotateX(20deg)',
-        transition: 'opacity 0.65s ease 0.58s, transform 0.65s cubic-bezier(0.22,1,0.36,1) 0.58s',
-        willChange: 'opacity, transform',
-        /* Fix A: single drop-shadow for gentle depth — replaces the five-layer shadow stack */
-        filter: 'drop-shadow(0 4px 18px rgba(0,245,212,0.35))',
-      }}
-    >
-      <span
-        className="relative inline-block"
-        style={{
-          opacity: isOut ? 0 : 1,
-          transform: isOut
-            ? 'translateY(-18px) rotateX(-18deg) skewY(-3deg)'
-            : 'translateY(0) rotateX(0deg) skewY(0deg)',
-          filter: isOut ? 'blur(4px)' : 'blur(0)',
-          transition: 'opacity 0.35s ease, transform 0.38s cubic-bezier(0.4,0,0.2,1), filter 0.35s ease',
-          willChange: 'opacity, transform, filter',
-        }}
-      >
-        {/* Fix A: single gradient-fill span only — no competing highlight overlay */}
-        <span 
-          className="relative z-10 text-transparent bg-clip-text inline-block"
-          style={{ backgroundImage: 'linear-gradient(120deg, #00F5D4 0%, #7B2FFF 55%, #FF3AF2 100%)' }}
-        >
-          {words[index]}
-        </span>
-      </span>
-      {/* glow halo — reduced on mobile */}
-      <span
-        className="absolute inset-0 pointer-events-none hidden sm:block"
-        style={{
-          background: 'radial-gradient(ellipse 80% 60%, rgba(0,245,212,0.22) 0%, transparent 70%)',
-          filter: 'blur(16px)',
-          animation: 'hero-glow 4s ease-in-out infinite',
-        }}
-      />
-    </span>
-  );
-});
-
-/* single marquee row */
-function MarqueeRow({ tags, reverse = false, speed = 30 }) {
-  const set = [...tags, ...tags, ...tags, ...tags];
-  return (
-    <div
-      className="overflow-hidden"
-      style={{ maskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)' }}
-    >
-      <div
-        className="flex whitespace-nowrap"
-        style={{
-          width: 'max-content',
-          animation: `marquee-${reverse ? 'rev' : 'fwd'} ${speed}s linear infinite`,
-        }}
-      >
-        {set.map((tag, i) => (
-          <span
-            key={i}
-            className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-5 font-heading font-black text-[10px] sm:text-xs uppercase tracking-widest cursor-default select-none"
-            style={{ color: i % 3 === 0 ? 'rgba(0,245,212,0.35)' : i % 3 === 1 ? 'rgba(123,47,255,0.4)' : 'rgba(255,58,242,0.35)' }}
-          >
-            <span style={{ color: i % 2 === 0 ? '#00F5D4' : '#FF3AF2', fontSize: '8px' }}>◆</span>
-            {tag}
-          </span>
-        ))}
+const MetaAdsCard = ({ mousePos }) => (
+  <motion.div 
+    className="absolute top-[38%] left-[2%] w-80 rounded-3xl p-6 shadow-2xl backdrop-blur-2xl border border-white/15"
+    style={{
+      background: 'linear-gradient(135deg, rgba(255,58,242,0.15) 0%, rgba(5,5,12,0.85) 100%)',
+      boxShadow: '0 20px 50px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2)',
+      transform: `perspective(1000px) rotateX(${mousePos.y * -10}deg) rotateY(${mousePos.x * 14}deg) translateZ(45px)`,
+      transition: 'transform 0.1s ease-out'
+    }}
+    animate={{ y: [0, 15, 0], rotateZ: [2, -1, 2] }}
+    transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+  >
+    <div className="flex items-center gap-3 mb-4">
+      <div className="w-9 h-9 rounded-xl bg-blue-500/20 border border-blue-400/40 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+        <svg className="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+      </div>
+      <div>
+        <h4 className="font-heading font-black text-white text-xs uppercase tracking-wider">Meta Performance Engine</h4>
+        <p className="font-body text-[10px] text-white/50">Active Scale Campaign</p>
       </div>
     </div>
+    <div className="space-y-3">
+      <div className="flex justify-between items-center bg-white/5 px-3 py-2 rounded-xl border border-white/5">
+        <span className="font-body text-xs text-white/70">Conversion Rate</span>
+        <span className="font-heading font-bold text-xs text-[#00F5D4]">4.82%</span>
+      </div>
+      <div className="flex justify-between items-center bg-white/5 px-3 py-2 rounded-xl border border-white/5">
+        <span className="font-body text-xs text-white/70">Pipeline Generated</span>
+        <span className="font-heading font-bold text-xs text-[#FF3AF2]">₹18.4L</span>
+      </div>
+      <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden mt-3">
+        <div className="h-full w-[82%] bg-gradient-to-r from-[#00F5D4] via-[#7B2FFF] to-[#FF3AF2] shadow-[0_0_10px_#00F5D4]" />
+      </div>
+    </div>
+  </motion.div>
+);
+
+const CreativeCard = ({ mousePos }) => (
+  <motion.div 
+    className="absolute bottom-[5%] right-[10%] w-64 rounded-3xl p-4 shadow-2xl backdrop-blur-2xl border border-white/15"
+    style={{
+      background: 'linear-gradient(135deg, rgba(5,5,12,0.9) 0%, rgba(123,47,255,0.2) 100%)',
+      boxShadow: '0 20px 50px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.2)',
+      transform: `perspective(1000px) rotateX(${mousePos.y * -6}deg) rotateY(${mousePos.x * 10}deg) translateZ(60px)`,
+      transition: 'transform 0.1s ease-out'
+    }}
+    animate={{ y: [0, -14, 0], rotateZ: [-3, 1, -3] }}
+    transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+  >
+    <div className="w-full h-36 rounded-2xl bg-gradient-to-br from-[#7B2FFF] to-[#FF3AF2] mb-3 relative overflow-hidden group/img">
+      <img 
+        src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=400&auto=format&fit=crop"
+        alt="Ad Creative"
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80 group-hover/img:scale-110 transition-transform duration-700" 
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+      <div className="absolute bottom-3 left-3 right-3 flex justify-between items-center">
+        <span className="font-heading font-black text-[10px] text-white uppercase tracking-widest bg-black/60 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10">Ad Creative</span>
+        <span className="w-2 h-2 rounded-full bg-[#00F5D4] shadow-[0_0_8px_#00F5D4]" />
+      </div>
+    </div>
+    <div className="flex justify-between items-center px-1">
+      <span className="font-body text-xs font-bold text-white/80">High CTR Visual</span>
+      <span className="font-heading font-black text-xs text-[#00F5D4]">9.4% CTR</span>
+    </div>
+  </motion.div>
+);
+
+/* ─── Mobile Specific Cards ─── */
+const MobileAnalyticsCard = () => (
+  <motion.div 
+    className="absolute top-0 right-0 w-64 rounded-3xl p-5 shadow-2xl backdrop-blur-2xl border border-white/15 z-20"
+    style={{
+      background: 'linear-gradient(135deg, rgba(123,47,255,0.15) 0%, rgba(5,5,12,0.85) 100%)',
+      boxShadow: '0 20px 50px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2)'
+    }}
+    animate={{ y: [0, -6, 0] }}
+    transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+  >
+    <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center gap-2">
+        <div className="w-2.5 h-2.5 rounded-full bg-[#00F5D4] animate-ping" />
+        <span className="font-heading font-black text-[10px] uppercase tracking-widest text-white/70">Live Analytics</span>
+      </div>
+      <span className="font-heading font-bold text-xs text-[#00F5D4] bg-[#00F5D4]/10 px-2.5 py-1 rounded-full border border-[#00F5D4]/30">+342% ROAS</span>
+    </div>
+    
+    <div className="flex items-end gap-2 h-24 mt-2 pt-2 border-t border-white/10">
+      {[45, 65, 50, 95, 75, 100, 88].map((h, i) => (
+        <div key={i} className="flex-1 flex flex-col justify-end h-full">
+          <div 
+            className="w-full bg-gradient-to-t from-[#7B2FFF] via-[#00F5D4] to-[#FF3AF2] rounded-t-sm opacity-90" 
+            style={{ height: `${h}%`, boxShadow: '0 0 12px rgba(0,245,212,0.4)' }} 
+          />
+        </div>
+      ))}
+    </div>
+  </motion.div>
+);
+
+const MobileCreativeCard = () => (
+  <motion.div 
+    className="absolute top-32 left-0 w-56 rounded-3xl p-4 shadow-2xl backdrop-blur-2xl border border-white/15 z-10"
+    style={{
+      background: 'linear-gradient(135deg, rgba(5,5,12,0.9) 0%, rgba(123,47,255,0.2) 100%)',
+      boxShadow: '0 20px 50px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.2)'
+    }}
+    animate={{ y: [0, 8, 0] }}
+    transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+  >
+    <div className="w-full h-32 rounded-2xl bg-gradient-to-br from-[#7B2FFF] to-[#FF3AF2] mb-3 relative overflow-hidden">
+      <img 
+        src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=400&auto=format&fit=crop"
+        alt="Ad Creative"
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80" 
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+      <div className="absolute bottom-3 left-3 right-3 flex justify-between items-center">
+        <span className="font-heading font-black text-[10px] text-white uppercase tracking-widest bg-black/60 px-2.5 py-1 rounded-full backdrop-blur-md border border-white/10">Ad Creative</span>
+        <span className="w-2 h-2 rounded-full bg-[#00F5D4] shadow-[0_0_8px_#00F5D4]" />
+      </div>
+    </div>
+    <div className="flex justify-between items-center px-1">
+      <span className="font-body text-xs font-bold text-white/80">High CTR Visual</span>
+      <span className="font-heading font-black text-xs text-[#00F5D4]">9.4% CTR</span>
+    </div>
+  </motion.div>
+);
+
+/* ─── Rotating Word Component ─── */
+function RotatingWord() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setIndex(i => (i + 1) % ROTATING_WORDS.length);
+    }, 2200);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <span className="relative inline-block" style={{ minWidth: '8ch' }}>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={index}
+          className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] via-[#7B2FFF] to-[#FF3AF2] drop-shadow-[0_0_25px_rgba(0,245,212,0.4)]"
+          initial={{ opacity: 0, y: 20, rotateX: -20 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+          exit={{ opacity: 0, y: -20, rotateX: 20 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {ROTATING_WORDS[index]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
   );
 }
 
-/* floating stat pill — compact on mobile */
-const StatPill = memo(function StatPill({ stat, started, index }) {
-  const { value } = useCountUp(stat.value, { duration: 1600, started });
-  const display = stat.decimal ? value.toFixed(1) : value;
+const lineReveal = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (delay = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1], delay },
+  }),
+};
 
-  return (
-    <div
-      className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full backdrop-blur-md"
-      style={{
-        background: `${stat.color}10`,
-        border: `1px solid ${stat.color}30`,
-        boxShadow: `0 0 14px ${stat.color}15`,
-        animation: `stat-float ${3 + index * 0.8}s ease-in-out ${index * 0.3}s infinite`,
-      }}
-    >
-      <span
-        className="font-heading font-black text-xs sm:text-sm tabular-nums"
-        style={{ color: stat.color, textShadow: `0 0 10px ${stat.color}55` }}
-      >
-        {display}{stat.suffix}
-      </span>
-      <span className="font-body text-white/40 text-[9px] sm:text-[10px] uppercase tracking-wider">
-        {stat.label}
-      </span>
-    </div>
-  );
-});
-
-/* ════════════════════════════════════════════════════════════════
-   MAIN COMPONENT
-════════════════════════════════════════════════════════════════ */
 export default function Hero() {
-  const sectionRef  = useRef(null);
-  const headingRef  = useRef(null);
-  const glowRef     = useRef(null);
-  const ctaRef      = useRef(null);
-  const rafRef      = useRef(null);
-  const mouseRaf    = useRef(null);
-  const magnetRaf   = useRef(null);
+  const sectionRef = useRef(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  const [visible,      setVisible]      = useState(false);
-  const [statsStarted, setStatsStarted] = useState(false);
-  const [isDesktop,    setIsDesktop]    = useState(false);
-
-  /* detect desktop once (avoids SSR mismatch) */
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsDesktop(window.innerWidth >= 768);
-    }, 0);
-    return () => clearTimeout(timer);
+    const handleResize = () => setIsDesktop(window.innerWidth >= 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  /* entrance + stats trigger */
-  useEffect(() => {
-    const t1 = setTimeout(() => setVisible(true), 60);
-    const t2 = setTimeout(() => setStatsStarted(true), 1000);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, []);
+  const handleMouseMove = (e) => {
+    if (!sectionRef.current || !isDesktop) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setMousePos({ x, y });
+  };
 
-  /* mouse-tracking glow blob — desktop only */
-  const onMouseMove = useCallback((e) => {
-    if (window.innerWidth < 768) return;
-    if (mouseRaf.current) return;
-    mouseRaf.current = requestAnimationFrame(() => {
-      mouseRaf.current = null;
-      const rect = sectionRef.current?.getBoundingClientRect();
-      if (!rect || !glowRef.current) return;
-      const mx = (e.clientX - rect.left) / rect.width;
-      const my = (e.clientY - rect.top) / rect.height;
-      glowRef.current.style.transform =
-        `translate(calc(-50% + ${(mx - 0.5) * 120}px), calc(-50% + ${(my - 0.5) * 80}px))`;
-    });
-  }, []);
-
-  /* magnetic primary CTA — desktop only */
-  const onCtaMouseMove = useCallback((e) => {
-    if (window.innerWidth < 768) return;
-    const el = ctaRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.28;
-    const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.28;
-    if (magnetRaf.current) cancelAnimationFrame(magnetRaf.current);
-    magnetRaf.current = requestAnimationFrame(() => {
-      el.style.transform = `translate(${dx}px, ${dy}px) scale(1.03)`;
-    });
-  }, []);
-
-  const onCtaMouseLeave = useCallback(() => {
-    if (!ctaRef.current) return;
-    ctaRef.current.style.transition = 'transform 0.55s cubic-bezier(0.34,1.56,0.64,1)';
-    ctaRef.current.style.transform  = 'translate(0,0) scale(1)';
-    setTimeout(() => { if (ctaRef.current) ctaRef.current.style.transition = ''; }, 550);
-  }, []);
-
-  /* scroll-out parallax on heading — desktop only */
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.innerWidth < 768) return;
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => {
-        if (!sectionRef.current || !headingRef.current) return;
-        const rect = sectionRef.current.getBoundingClientRect();
-        const p = Math.max(0, Math.min(1, -rect.top / (rect.height * 0.8)));
-        headingRef.current.style.transform = `translateY(${-(p * 60)}px)`;
-        // Note: opacity is handled by CSS to avoid gradient text rendering glitches
-      });
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      if (rafRef.current)    cancelAnimationFrame(rafRef.current);
-      if (mouseRaf.current)  cancelAnimationFrame(mouseRaf.current);
-      if (magnetRaf.current) cancelAnimationFrame(magnetRaf.current);
-    };
-  }, []);
-
-  /* staggered item entrance helper */
-  const item = (delay = 0) => ({
-    opacity:    visible ? 1 : 0,
-    transform:  visible ? 'translateY(0)' : 'translateY(24px)',
-    transition: `opacity 0.75s ease ${delay}s, transform 0.75s cubic-bezier(0.22,1,0.36,1) ${delay}s`,
-  });
-
-  /* ── JSX ── */
   return (
     <section
       ref={sectionRef}
       id="hero"
-      onMouseMove={onMouseMove}
-      className="relative flex flex-col overflow-hidden"
-      style={{
-        minHeight: '100svh',
-        paddingTop: 'clamp(3.5rem, 9vh, 5.5rem)',
-      }}
+      onMouseMove={handleMouseMove}
+      className="relative flex flex-col overflow-hidden bg-[#050508]"
     >
-
-      {/* ════ BACKGROUND LAYER ════ */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-background/40 pointer-events-none" />
-
-        {/* Interactive canvas particle field — DESKTOP ONLY, not mounted on mobile */}
-        {isDesktop && (
-          <div className="absolute inset-0">
-            <InteractiveParticleField />
-          </div>
-        )}
-
-        {/* CSS particle fallback — mobile only, no animation on low-end */}
-        {!isDesktop && (
-          <div className="absolute inset-0 pointer-events-none">
-            {PARTICLES.map(p => (
-              <div
-                key={p.id}
-                className="absolute rounded-full"
-                style={{
-                  left: `${p.x}%`, top: `${p.y}%`,
-                  width: p.size, height: p.size,
-                  background: p.color,
-                  opacity: p.opacity,
-                  /* no animation on mobile — saves battery */
-                }}
-              />
-            ))}
-          </div>
-        )}
-
-        {/* mouse-tracking glow blob — desktop only */}
-        <div
-          ref={glowRef}
-          className="hidden md:block absolute top-1/2 left-1/2 w-[600px] h-[600px] rounded-full will-change-transform pointer-events-none"
+      {/* ════ BACKGROUND LAYER (Shared) ════ */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        
+        {/* Dynamic Cursor Ambient Glow */}
+        <div 
+          className="absolute w-[600px] h-[600px] rounded-full transition-transform duration-300 ease-out pointer-events-none"
           style={{
-            transform: 'translate(-50%,-50%)',
-            background: 'radial-gradient(circle, rgba(123,47,255,0.12) 0%, rgba(0,245,212,0.06) 50%, transparent 70%)',
-            transition: 'transform 0.14s linear',
+            background: 'radial-gradient(circle, rgba(0,245,212,0.12) 0%, rgba(123,47,255,0.08) 40%, transparent 70%)',
+            left: isDesktop ? `${(mousePos.x + 0.5) * 100}%` : '50%',
+            top: isDesktop ? `${(mousePos.y + 0.5) * 100}%` : '50%',
+            transform: 'translate(-50%, -50%)',
+            filter: 'blur(50px)',
           }}
         />
 
-        {/* ambient corner glows — smaller on mobile */}
-        <div
-          className="absolute top-0 right-0 w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle at top right, rgba(255,58,242,0.07) 0%, transparent 65%)' }}
-        />
-        <div
-          className="absolute bottom-0 left-0 w-[150px] sm:w-[300px] h-[150px] sm:h-[300px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle at bottom left, rgba(0,245,212,0.05) 0%, transparent 65%)' }}
-        />
-
-        {/* Chrome/glass floating SVG shapes — desktop only */}
-        {isDesktop && <GlassShapes variant="hero" />}
+        {/* Ambient Corner Orbs */}
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full"
+             style={{ background: 'radial-gradient(circle, rgba(123,47,255,0.2) 0%, transparent 60%)', filter: 'blur(60px)' }} />
+        <div className="absolute bottom-[10%] left-[-10%] w-[500px] h-[500px] rounded-full"
+             style={{ background: 'radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 60%)', filter: 'blur(60px)' }} />
       </div>
 
-      {/* ════ CONTENT — pushes marquee to bottom via flex-1 ════ */}
-      <div className="container mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-center text-center w-full flex-1 justify-center py-6 sm:py-0">
+      {/* ════ MAIN CONTENT (Split between Desktop and Mobile) ════ */}
+      <div className="relative z-10 w-full flex-1">
+        
+        {/* ── DESKTOP LAYOUT (Unchanged) ── */}
+        <div className="hidden md:flex container mx-auto px-6 lg:px-12 items-center max-w-7xl"
+             style={{ minHeight: '100svh', paddingTop: 'clamp(6rem, 14vh, 8rem)', paddingBottom: '4rem' }}>
+          
+          {/* Left: Copy */}
+          <div className="w-[55%] flex flex-col items-start text-left">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="mb-8 inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-xl shadow-[0_0_20px_rgba(0,245,212,0.15)]"
+            >
+              <span className="relative flex h-2.5 w-2.5 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F5D4] opacity-75" />
+                <span className="relative inline-flex rounded-full h-full w-full bg-[#00F5D4]" />
+              </span>
+              <span className="font-heading font-bold text-white text-xs tracking-[0.2em] uppercase">
+                Accepting New Partnerships
+              </span>
+            </motion.div>
 
-        {/* ── availability badge ── */}
-        <div style={item(0.0)} className="mb-3 sm:mb-6">
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
-            style={{
-              background: 'rgba(0,245,212,0.06)',
-              border: '1px solid rgba(0,245,212,0.22)',
-              backdropFilter: 'blur(12px)',
-            }}
-          >
-            <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-70" style={{ background: '#00F5D4' }} />
-              <span className="relative inline-flex rounded-full h-full w-full" style={{ background: '#00F5D4' }} />
-            </span>
-            <span className="font-body font-semibold text-white/75 text-[9px] sm:text-xs tracking-[0.1em] sm:tracking-[0.14em] uppercase whitespace-nowrap">
-              India's Premier Beauty Growth Agency
-            </span>
-            <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full font-heading font-black text-[8px] sm:text-[9px] uppercase tracking-widest" style={{ background: 'rgba(0,245,212,0.15)', color: '#00F5D4' }}>
-              Accepting Clients
-            </span>
+            <h1
+              className="font-heading font-black uppercase tracking-tighter text-white mb-8"
+              style={{ fontSize: 'clamp(2.2rem, 8vw, 6.2rem)', lineHeight: 0.92 }}
+            >
+              <motion.span
+                className="block"
+                variants={lineReveal}
+                initial="hidden"
+                animate="visible"
+                custom={0.1}
+              >
+                We grow
+              </motion.span>
+              <motion.span
+                className="block mt-1"
+                variants={lineReveal}
+                initial="hidden"
+                animate="visible"
+                custom={0.25}
+              >
+                <RotatingWord />
+              </motion.span>
+            </h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+              className="font-body text-white/70 max-w-xl leading-relaxed mb-12 text-lg md:text-xl font-normal"
+            >
+              Stop patching together freelancers. We are one integrated team bringing brand strategy, creative, and performance marketing under one roof.
+            </motion.p>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+              className="flex items-center gap-5 w-auto"
+            >
+              <a
+                href={WA}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center justify-center gap-3 min-h-[56px] rounded-full font-heading font-black uppercase tracking-widest text-background px-9 overflow-hidden transition-all duration-300 hover:scale-105 shadow-[0_0_35px_rgba(0,245,212,0.4)]"
+                style={{ background: '#00F5D4' }}
+              >
+                <span className="absolute inset-0 bg-white/30 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                <span className="relative z-10 text-sm">Start the Conversation</span>
+                <svg className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              
+              <a 
+                href="#work" 
+                className="font-heading font-bold uppercase tracking-widest text-white/70 text-xs hover:text-white transition-colors px-6 py-4 rounded-full border border-white/10 hover:border-white/30 bg-white/5 backdrop-blur-md"
+              >
+                Explore Our Work
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right: Interactive 3D Cards */}
+          <div className="w-[45%] h-[620px] relative perspective-[1000px]">
+            {isDesktop && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
+                className="w-full h-full relative"
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                <AnalyticsCard mousePos={mousePos} />
+                <MetaAdsCard mousePos={mousePos} />
+                <CreativeCard mousePos={mousePos} />
+              </motion.div>
+            )}
           </div>
         </div>
 
-        {/* ── headline — clamp for smooth mobile scaling ── */}
-        <h1
-          ref={headingRef}
-          className="font-heading font-black uppercase tracking-tighter text-white max-w-[20rem] sm:max-w-2xl md:max-w-4xl mb-3 sm:mb-5 will-change-transform"
-          style={{
-            fontSize: 'clamp(1.85rem, 8vw, 6rem)',
-            lineHeight: 0.94,
-            perspective: '800px',
-          }}
-        >
-          {/* Fix C: Rewritten headline — removes the contradiction with Services page */}
-          <SplitHeading visible={visible} baseDelay={0.1}>
-            We Don&apos;t Just
-          </SplitHeading>
-          <br />
-          <SplitHeading visible={visible} baseDelay={0.22}>
-            Run Ads. We Fill Your
-          </SplitHeading>{' '}
-          <RotatingWord words={ROTATING_WORDS} visible={visible} />
-        </h1>
 
-        {/* ── subtext ── */}
-        <p
-          className="font-body text-white/50 max-w-[18rem] sm:max-w-md leading-relaxed mb-4 sm:mb-7"
-          style={{ fontSize: 'clamp(0.8rem, 2.5vw, 1rem)', ...item(0.65) }}
-        >
-          We help beauty businesses in India turn their Instagram presence into
-          a consistent, predictable stream of real bookings — every month.
-        </p>
+        {/* ── MOBILE LAYOUT (Dedicated Experience) ── */}
+        <div className="flex md:hidden flex-col container mx-auto px-4"
+             style={{ minHeight: '100svh', paddingTop: '6rem', paddingBottom: '2rem' }}>
+          
+          {/* Zone 1: Copy & CTAs */}
+          <div className="flex flex-col items-start w-full">
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="mb-5 inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-xl shadow-[0_0_15px_rgba(0,245,212,0.15)]"
+            >
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F5D4] opacity-75" />
+                <span className="relative inline-flex rounded-full h-full w-full bg-[#00F5D4]" />
+              </span>
+              <span className="font-heading font-bold text-white text-[10px] tracking-widest uppercase">
+                Accepting Partnerships
+              </span>
+            </motion.div>
 
-        {/* ── animated stat pills — compact on mobile ── */}
-        <div
-          className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-3 mb-4 sm:mb-7"
-          style={item(0.78)}
-        >
-          {STATS.map((s, i) => (
-            <StatPill key={i} stat={s} started={statsStarted} index={i} />
-          ))}
-        </div>
+            <h1 className="font-heading font-black uppercase tracking-tighter text-white mb-4"
+                style={{ fontSize: '3.5rem', lineHeight: 0.85 }}>
+              <motion.span
+                className="block"
+                variants={lineReveal}
+                initial="hidden"
+                animate="visible"
+                custom={0.1}
+              >
+                We Build
+              </motion.span>
+              <motion.span
+                className="block mt-1 text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] via-[#7B2FFF] to-[#FF3AF2]"
+                variants={lineReveal}
+                initial="hidden"
+                animate="visible"
+                custom={0.2}
+              >
+                Growth.
+              </motion.span>
+            </h1>
 
-        {/* ── CTA buttons ── */}
-        <div
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-[280px] sm:max-w-none"
-          style={item(0.9)}
-        >
-          {/* primary */}
-          <a
-            ref={ctaRef}
-            href={WA}
-            target="_blank"
-            rel="noopener noreferrer"
-            onMouseMove={onCtaMouseMove}
-            onMouseLeave={onCtaMouseLeave}
-            className="hero-cta-primary relative inline-flex items-center justify-center gap-2 w-full sm:w-auto min-h-[44px] rounded-full font-heading font-black uppercase tracking-widest text-background overflow-hidden"
-            style={{
-              background: '#00F5D4',
-              willChange: 'transform',
-              fontSize: 'clamp(0.7rem, 2.2vw, 0.8rem)',
-              padding: 'clamp(0.65rem, 2.5vw, 1rem) clamp(1.25rem, 5vw, 2rem)',
-            }}
-          >
-            <span className="hero-cta-sweep absolute inset-0 pointer-events-none" />
-            <span className="relative z-10 whitespace-nowrap">Get Your Growth Plan</span>
-            <svg className="relative z-10 w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+              className="font-body text-white/70 max-w-[280px] leading-relaxed mb-8 text-sm font-normal"
+            >
+              One integrated team bringing brand strategy, creative, and performance marketing under one roof.
+            </motion.p>
 
-          {/* secondary */}
-          <a
-            href={WA}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto min-h-[44px] rounded-full font-heading font-black uppercase tracking-widest transition-all duration-300 whitespace-nowrap"
-            style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              color: 'rgba(255,255,255,0.55)',
-              fontSize: 'clamp(0.7rem, 2.2vw, 0.8rem)',
-              padding: 'clamp(0.65rem, 2.5vw, 1rem) clamp(1.25rem, 5vw, 2rem)',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.color = '#fff';
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.22)';
-              e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.color = 'rgba(255,255,255,0.55)';
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-              e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
-            }}
-          >
-            See Our Work
-            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+              className="flex flex-col items-start gap-4 w-full"
+            >
+              <a
+                href={WA}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2.5 w-full max-w-[290px] h-[52px] px-6 rounded-full font-heading font-black uppercase tracking-wider text-background shadow-[0_0_20px_rgba(0,245,212,0.3)] transition-transform active:scale-95"
+                style={{ background: '#00F5D4' }}
+              >
+                <span className="text-xs whitespace-nowrap">Start the Conversation</span>
+                <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              
+              <a 
+                href="#work" 
+                className="font-heading font-bold uppercase tracking-widest text-white/50 text-[10px] hover:text-white transition-colors pl-4"
+              >
+                Explore Our Work &rarr;
+              </a>
+            </motion.div>
+          </div>
 
-        {/* Scroll hint — desktop only */}
-        <div className="hidden sm:flex flex-col items-center gap-1 mt-5 opacity-40" style={item(1.1)}>
-          <span className="font-heading font-black text-white/30 text-[8px] tracking-[0.35em] uppercase">Scroll</span>
-          <div className="w-px h-5 bg-white/10 relative overflow-hidden rounded-full">
-            <div className="w-full h-1/2 bg-white/35 absolute top-0" style={{ animation: 'hero-scroll-line 1.6s cubic-bezier(0.4,0,0.2,1) infinite' }} />
+          {/* Zone 2: Dedicated Mobile Visual Composition */}
+          <div className="w-full relative flex-1 min-h-[300px] mt-12 flex justify-center perspective-[800px]">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+              className="w-full max-w-[320px] relative h-[300px]"
+            >
+              <MobileAnalyticsCard />
+              <MobileCreativeCard />
+            </motion.div>
           </div>
         </div>
-      </div>{/* end content container */}
 
-      {/* ══════════════════════════════════════════════════════════
-          TRUST BADGE STRIP
-      ══════════════════════════════════════════════════════════ */}
-      <div
-        className="w-full relative z-10 mt-auto py-3 sm:py-4 px-4 flex items-center justify-center text-center"
-        style={{
-          borderTop: '1px solid rgba(255,255,255,0.06)',
-          background: 'rgba(255,255,255,0.012)',
-          ...(isDesktop ? { backdropFilter: 'blur(4px)' } : {}),
-          ...item(1.15),
-        }}
-      >
-        <span className="flex items-center justify-center gap-2 sm:gap-3 text-[9px] sm:text-[11px] text-white/40 font-heading font-bold uppercase tracking-[0.12em] sm:tracking-[0.3em]">
-          <span className="w-1.5 h-1.5 bg-[#FF3AF2] rounded-full animate-pulse shadow-[0_0_8px_#FF3AF2] shrink-0" />
-          <span>Trusted by 200+ beauty businesses across India</span>
-          <span className="w-1.5 h-1.5 bg-[#00F5D4] rounded-full shadow-[0_0_8px_#00F5D4] shrink-0" />
-        </span>
+      </div>
+      
+      {/* ── Zone 3: Industry Marquee (Shared but handles layout via CSS) ── */}
+      <div className="w-full border-t border-white/10 bg-[#050508]/80 backdrop-blur-xl py-3 overflow-hidden z-20 
+                      md:absolute md:bottom-0 md:left-0 relative mt-auto">
+         <div className="flex whitespace-nowrap animate-[marquee-fwd_40s_linear_infinite] w-max">
+           {[...Array(3)].map((_, i) => (
+             <span key={i} className="flex items-center">
+               {['RESTAURANTS', 'CLINICS', 'REAL ESTATE', 'ECOMMERCE', 'EDUCATION', 'FITNESS', 'STARTUPS', 'HOSPITALITY'].map((tag, j) => (
+                 <span key={j} className="flex items-center">
+                   <span className="px-6 font-heading font-black text-[10px] sm:text-xs uppercase tracking-widest text-white/40">{tag}</span>
+                   <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#00F5D4]/40 shadow-[0_0_6px_#00F5D4]" />
+                 </span>
+               ))}
+             </span>
+           ))}
+         </div>
       </div>
 
-      {/* ════ KEYFRAMES + COMPONENT STYLES ════ */}
       <style>{`
-        /* ── Fix A: removed glossy-3d-text::after five-layer shadow stack entirely.
-           The rotating word now uses a clean gradient fill + single drop-shadow
-           filter on its outer span — set directly in RotatingWord inline styles. ── */
-
-        /* ── hero glow pulse ── */
-        @keyframes hero-glow {
-          0%, 100% { opacity: 0.5; transform: scale(0.95); }
-          50%       { opacity: 1;  transform: scale(1.05); }
-        }
-
-        /* ── scroll indicator ── */
-        @keyframes hero-scroll-line {
-          0%   { transform: translateY(-100%); opacity: 0.8; }
-          100% { transform: translateY(250%);  opacity: 0; }
-        }
-
-        /* ── particle float ── */
-        @keyframes float-particle {
-          0%, 100% { transform: translateY(0px) scale(1); }
-          40%       { transform: translateY(-14px) scale(1.2); }
-          70%       { transform: translateY(8px) scale(0.85); }
-        }
-
-        /* ── stat pill float ── */
-        @keyframes stat-float {
-          0%, 100% { transform: translateY(0); }
-          50%       { transform: translateY(-4px); }
-        }
-
-        /* ── stat pill float ── */
-        @keyframes stat-float {
-          0%, 100% { transform: translateY(0); }
-          50%       { transform: translateY(-4px); }
-        }
-
-        /* ── primary CTA ── */
-        .hero-cta-primary {
-          box-shadow: 0 0 24px rgba(0,245,212,0.22), 0 4px 20px rgba(0,0,0,0.28);
-          transition: box-shadow 0.35s ease, filter 0.35s ease;
-        }
-        .hero-cta-primary:hover {
-          box-shadow: 0 0 44px rgba(0,245,212,0.42), 0 4px 28px rgba(0,0,0,0.3);
-          filter: brightness(1.06);
-        }
-
-        /* ── CTA shimmer sweep ── */
-        .hero-cta-sweep {
-          background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.2) 50%, transparent 65%);
-          background-size: 200% 100%;
-          background-position: -100% 0;
-          border-radius: inherit;
-          transition: background-position 0.6s ease;
-        }
-        .hero-cta-primary:hover .hero-cta-sweep {
-          background-position: 200% 0;
-        }
-
-        /* ── mobile: kill expensive effects ── */
-        @media (max-width: 767px) {
-          @keyframes stat-float    { 0%, 100% { transform: none; } }
-          @keyframes float-particle { 0%, 100% { transform: none; } }
-          .hero-cta-primary {
-            box-shadow: 0 0 16px rgba(0,245,212,0.18);
-          }
-          /* Remove glow filters from bg blobs */
-          #hero .absolute[style*="blur"] {
-            filter: none !important;
-          }
-        }
-
-        /* ── reduced-motion ── */
-        @media (prefers-reduced-motion: reduce) {
-          .hero-cta-primary, .hero-cta-sweep,
-          [style*="float-particle"], [style*="stat-float"] {
-            animation: none !important;
-            transition: none !important;
-          }
+        @keyframes marquee-fwd {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-33.33%); }
         }
       `}</style>
     </section>

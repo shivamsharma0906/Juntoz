@@ -2,64 +2,63 @@
  * ─────────────────────────────────────────────────────────────────
  * PLACEHOLDER DATA: CASE STUDIES
  * ─────────────────────────────────────────────────────────────────
- * This file contains placeholder case studies for the /work hub.
- * Please replace these entries with real client data when available.
+ * Multi-industry case studies focusing on business outcomes.
  */
 
 export const caseStudies = [
   {
-    slug: 'bridal-mua-scaling',
-    clientName: 'Placeholder: Bridal MUA Studio',
-    industry: 'Bridal Makeup',
-    problem: 'Relying entirely on word-of-mouth and inconsistent organic Instagram reach. Calendar had too many empty weekends during off-season.',
-    approach: 'Implemented a WhatsApp-first funnel driven by highly targeted Meta ads focusing on newly engaged brides within a 20km radius. Re-designed Instagram feed to act as a high-trust portfolio.',
-    result: 'Fully booked wedding season 6 months in advance with a 40% increase in average ticket size.',
-    metric: '300%',
-    metricLabel: 'Increase in Enquiries',
-    quote: "Juntoz didn't just get us followers, they got us actual brides who were ready to book. Our calendar has never looked this good.",
-    image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=800&auto=format&fit=crop', // placeholder image
+    slug: 'd2c-ecommerce-scaling',
+    clientName: 'Aura Lifestyle',
+    industry: 'D2C Ecommerce',
+    problem: 'Stuck at a plateau with stagnant ROAS and high customer acquisition cost. Needed to scale aggressively without losing profitability.',
+    approach: 'Overhauled the creative strategy with rapid ad testing, implemented advanced retargeting flows, and optimized the Shopify checkout experience.',
+    result: 'Scaled monthly revenue by 3x while maintaining a healthy 3.5x ROAS at scale.',
+    metric: '3X',
+    metricLabel: 'Revenue Scale',
+    quote: "Juntoz didn't just run our ads; they acted as a true growth partner, challenging our assumptions and pushing us to scale faster.",
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop', // placeholder image
     featured: true,
     color: '#00F5D4',
   },
   {
-    slug: 'premium-salon-chain',
-    clientName: 'Placeholder: Premium Salon Chain',
-    industry: 'Hair & Beauty Salon',
-    problem: 'Opening a new flagship branch but struggling to get foot traffic in the first three months. High customer acquisition cost.',
-    approach: 'Launched an exclusive "Founder\'s Circle" membership offer via localized Google Search ads and Instagram Reels showcasing the premium interior and services.',
-    result: 'Generated 150+ walk-ins in the first 30 days and sold out the membership tier.',
-    metric: '150+',
-    metricLabel: 'New Walk-ins in 30 Days',
-    quote: "The strategy was flawless. They understood exactly how to position our brand to attract high-ticket clients instead of bargain hunters.",
-    image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=800&auto=format&fit=crop', // placeholder image
+    slug: 'luxury-real-estate-leads',
+    clientName: 'Apex Real Estate Developers',
+    industry: 'Real Estate',
+    problem: 'Sales team was wasting hours on low-intent, unqualified leads from generic digital campaigns. High cost per qualified site visit.',
+    approach: 'Built a multi-step qualification funnel. High-end video creatives drove traffic to a dedicated landing page, followed by a WhatsApp pre-qualification sequence.',
+    result: 'Generated 220% more qualified site visits while reducing the overall cost per acquisition by 40%.',
+    metric: '220%',
+    metricLabel: 'More Qualified Site Visits',
+    quote: "The quality of leads changed overnight. Our sales team is finally talking to serious buyers instead of casual browsers.",
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop', // placeholder image
     featured: true,
     color: '#FF3AF2',
   },
   {
-    slug: 'skincare-clinic-leads',
-    clientName: 'Placeholder: Advanced Skincare Clinic',
-    industry: 'Aesthetic Clinic',
-    problem: 'Great doctors, but terrible online presence. Struggling to educate clients on high-ticket aesthetic procedures.',
-    approach: 'Created an educational content series addressing common skin concerns, paired with a seamless WhatsApp consultation booking flow.',
-    result: 'Reduced cost-per-acquisition by 60% and established the clinic as the top local authority for aesthetic treatments.',
-    metric: '60%',
-    metricLabel: 'Reduction in CPA',
-    quote: "Our DMs are finally filled with serious enquiries, not just price shoppers. The Juntoz team knows the beauty space inside out.",
-    image: 'https://images.unsplash.com/photo-1512496015851-a1c8ca944d15?q=80&w=800&auto=format&fit=crop', // placeholder image
+    slug: 'restaurant-chain-rebrand',
+    clientName: 'Zest Burgers',
+    industry: 'Food & Beverage',
+    problem: 'Great food, but an outdated brand identity and low social media engagement were stunting expansion plans into new cities.',
+    approach: 'Complete brand refresh. Designed a bold new visual identity, revamped the packaging, and launched a viral short-form video strategy on Instagram.',
+    result: 'Achieved a 500% increase in organic reach and a 40% jump in weekend footfall across all locations.',
+    metric: '500%',
+    metricLabel: 'Increase in Organic Reach',
+    quote: "They gave our brand a voice. The line out the door on weekends is a direct result of their incredible creative strategy.",
+    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=800&auto=format&fit=crop', // placeholder image
     featured: true,
     color: '#7B2FFF',
   },
   {
-    slug: 'nail-art-studio',
-    clientName: 'Placeholder: Luxe Nail Art Studio',
-    industry: 'Nail Salon',
-    problem: 'Needed to build a loyal recurring client base to sustain weekday operations.',
-    approach: 'Leveraged WhatsApp broadcast lists for targeted flash sales on slow days and implemented a digital loyalty program.',
-    result: 'Increased weekday bookings by 85% and significantly boosted client retention.',
-    metric: '85%',
-    metricLabel: 'More Weekday Bookings',
-    quote: "Weekdays used to be dead quiet. Now, we're consistently busy from Tuesday to Thursday thanks to their smart retention strategies.",
-    image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop', // placeholder image
+    slug: 'edtech-platform-launch',
+    clientName: 'SkillUp Academy',
+    industry: 'EdTech',
+    problem: 'Launching a new professional skills platform but lacked a cohesive digital presence and automated student onboarding system.',
+    approach: 'Developed a custom web platform with a seamless LMS integration, paired with a targeted Meta ads launch campaign.',
+    result: 'Acquired 1,200 active students in the first 45 days and fully automated the enrollment process.',
+    metric: '1,200',
+    metricLabel: 'Active Students Enrolled',
+    quote: "Their technical expertise and marketing savvy combined into a flawless launch. We couldn't have done it without them.",
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop', // placeholder image
     featured: false,
     color: '#00F5D4',
   }

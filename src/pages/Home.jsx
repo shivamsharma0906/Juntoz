@@ -1,24 +1,25 @@
 import { lazy, Suspense } from 'react';
 import Hero from '../components/Hero';
 
-// Lazy load below-the-fold components to reduce initial page bundle weight
-const Results         = lazy(() => import('../components/Results'));
-const WhyJuntoz       = lazy(() => import('../components/WhyJuntoz'));
-const Services        = lazy(() => import('../components/Services'));
-const HowItWorks      = lazy(() => import('../components/HowItWorks'));
-const Testimonials    = lazy(() => import('../components/Testimonials'));
-const FAQSection      = lazy(() => import('../components/FAQSection'));
-const CTASection      = lazy(() => import('../components/CTASection'));
+// Lazy load below-the-fold components
+const WhyMarketingBreaks = lazy(() => import('../components/WhyMarketingBreaks'));
+const WorkGallery        = lazy(() => import('../components/WorkGallery'));
+const EcosystemSection   = lazy(() => import('../components/EcosystemSection'));
+const Services           = lazy(() => import('../components/Services')); // What We Build
+const BehindTheWork      = lazy(() => import('../components/BehindTheWork'));
+const Testimonials       = lazy(() => import('../components/Testimonials'));
+const FAQSection         = lazy(() => import('../components/FAQSection'));
+const CTASection         = lazy(() => import('../components/CTASection'));
 
 export default function Home() {
   return (
     <>
       <Hero />
       <Suspense fallback={null}>
-        <Results />
-        <WhyJuntoz />
+        <WhyMarketingBreaks />
+        <WorkGallery />
         <Services />
-        <HowItWorks />
+        <BehindTheWork />
         <Testimonials />
         <FAQSection />
         <CTASection />

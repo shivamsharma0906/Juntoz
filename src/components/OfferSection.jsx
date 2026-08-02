@@ -58,8 +58,7 @@ export default function OfferSection() {
   }, []);
 
   return (
-    <section id="offer" className="relative py-24 md:py-32 bg-[#0A0A0F] overflow-hidden z-10 border-y border-white/5">
-      <div className="absolute inset-0 pattern-grid opacity-50 z-0" />
+    <section id="offer" className="relative py-24 md:py-32 bg-background overflow-hidden z-10 border-y border-white/5">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#7B2FFF]/10 rounded-full blur-[150px] pointer-events-none z-0" />
 
       {/* Massive Background Text */}

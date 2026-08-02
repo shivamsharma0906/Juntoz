@@ -4,15 +4,7 @@ const WA_SOFT = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20a
 
 const forItems = [
   {
-    text: 'Makeup artists wanting consistent bridal bookings',
-    icon: (
-      <svg className="w-5 h-5 text-[#00F5D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    )
-  },
-  {
-    text: 'Salons ready to invest in data-driven growth',
+    text: 'Ambitious businesses looking to scale revenue predictably',
     icon: (
       <svg className="w-5 h-5 text-[#00F5D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -20,80 +12,87 @@ const forItems = [
     )
   },
   {
-    text: 'Beauty brands scaling their online presence',
+    text: 'Founders ready for a full-stack growth team under one roof',
     icon: (
       <svg className="w-5 h-5 text-[#00F5D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
       </svg>
     )
   },
   {
-    text: 'Freelancers ready to attract clients, not chase them',
+    text: 'Brands seeking data-driven customer acquisition funnels',
     icon: (
       <svg className="w-5 h-5 text-[#00F5D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 19v-6a2 2 0 012-2h2a2 2 0 012 2v6a2 2 0 01-2 2h-2a2 2 0 01-2-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    )
+  },
+  {
+    text: 'Companies valuing long-term partner relationships over cheap tactics',
+    icon: (
+      <svg className="w-5 h-5 text-[#00F5D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     )
   },
 ];
 
 const notForItems = [
-  { text: 'People looking for the cheapest option in the market' },
-  { text: 'Businesses not ready to implement strategy consistently' },
-  { text: 'Anyone expecting overnight results without effort' },
-  { text: 'Those not ready to invest seriously in their growth' },
+  { text: 'Businesses looking for quick superficial hacks without a real strategy' },
+  { text: 'Teams expecting overnight ROI without giving campaigns room to optimize' },
+  { text: 'Companies unwilling to collaborate or invest in creative assets' },
+  { text: 'Anyone seeking fragmented transactional freelancing services' },
 ];
 
 export default function Qualification() {
   return (
-    <section id="qualification" className="relative py-24 md:py-32 bg-background overflow-hidden">
+    <section id="qualification" className="relative py-12 sm:py-20 md:py-32 bg-background overflow-hidden">
       {/* Ambient Backgrounds */}
-      <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#00F5D4]/10 rounded-full blur-[150px] pointer-events-none z-0 opacity-20" />
 
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
 
         {/* Header */}
-        <ScrollReveal data-reveal="up" className="text-center mb-16 md:mb-24">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6">
+        <ScrollReveal data-reveal="up" className="text-center mb-8 sm:mb-14 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-4 sm:mb-6">
             <span className="w-2 h-2 rounded-full bg-[#00F5D4] animate-pulse" />
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Be Honest With Yourself</span>
           </div>
-          <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-6xl uppercase leading-[0.95] tracking-tighter">
+          <h2 className="font-heading font-black text-white text-2xl sm:text-4xl md:text-6xl uppercase leading-[0.95] tracking-tighter">
             Is Juntoz <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Right for You?</span>
           </h2>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 lg:gap-12">
 
           {/* ── FOR (Dominant, Glowing, Cyan) ── */}
-          <ScrollReveal data-reveal="left" delay={100} className="group relative h-full bg-[#05050C] rounded-[2rem] p-[1px] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02]">
+          <ScrollReveal data-reveal="left" delay={100} className="group relative h-full bg-[#05050C] rounded-2xl sm:rounded-[2rem] p-[1px] overflow-hidden transition-all duration-500 hover:-translate-y-1 sm:hover:-translate-y-2">
             {/* Animated Border Gradient */}
             <div className="absolute inset-0 bg-gradient-to-br opacity-50 group-hover:opacity-100 transition-opacity duration-500 animate-[gradient-shift_4s_ease-in-out_infinite]"
               style={{ background: `linear-gradient(135deg, #00F5D460, transparent, #00F5D460)` }} />
 
-            <div className="relative h-full bg-[#080810]/95 backdrop-blur-2xl rounded-[31px] p-8 md:p-10 flex flex-col z-10 overflow-hidden">
+            <div className="relative h-full bg-[#080810]/95 backdrop-blur-2xl rounded-[15px] sm:rounded-[31px] p-4 sm:p-8 md:p-10 flex flex-col z-10 overflow-hidden">
               <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full blur-[50px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none bg-[#00F5D4]" />
               
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6"
+              <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-8">
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-105"
                   style={{ backgroundColor: `#00F5D415`, border: `1px solid #00F5D435`, color: '#00F5D4', boxShadow: `0 0 20px #00F5D420` }}>
-                  <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <svg className="w-5 h-5 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="font-heading font-black text-white text-2xl uppercase tracking-wider text-glow-cyan">
+                <h3 className="font-heading font-black text-white text-lg sm:text-2xl uppercase tracking-wider text-glow-cyan">
                   This is for you
                 </h3>
               </div>
 
-              <div className="space-y-4 flex-1">
+              <div className="space-y-2.5 sm:space-y-4 flex-1">
                 {forItems.map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 group-hover:border-[#00F5D4]/30 transition-colors duration-300">
-                    <div className="w-10 h-10 shrink-0 rounded-full bg-black/50 border border-white/10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:border-[#00F5D4]/50 shadow-inner">
+                  <div key={i} className="flex items-start gap-3 p-2.5 sm:p-4 rounded-xl bg-white/5 border border-white/5 group-hover:border-[#00F5D4]/30 transition-colors duration-300">
+                    <div className="w-7 h-7 sm:w-10 sm:h-10 shrink-0 rounded-full bg-black/50 border border-white/10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:border-[#00F5D4]/50 shadow-inner mt-0.5">
                       {item.icon}
                     </div>
-                    <p className="font-body text-white/90 text-sm md:text-base font-bold leading-relaxed pt-2">
+                    <p className="font-body text-white/90 text-xs sm:text-sm md:text-base font-bold leading-relaxed pt-0.5">
                       {item.text}
                     </p>
                   </div>
@@ -103,36 +102,36 @@ export default function Qualification() {
           </ScrollReveal>
 
           {/* ── NOT FOR (Muted, Subordinate) ── */}
-          <ScrollReveal data-reveal="right" delay={200} className="group relative h-full bg-[#05050C] rounded-[2rem] p-[1px] overflow-hidden transition-all duration-500">
+          <ScrollReveal data-reveal="right" delay={200} className="group relative h-full bg-[#05050C] rounded-2xl sm:rounded-[2rem] p-[1px] overflow-hidden transition-all duration-500">
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
 
-            <div className="relative h-full bg-[#080810]/95 backdrop-blur-2xl rounded-[31px] p-8 md:p-10 flex flex-col z-10 overflow-hidden">
+            <div className="relative h-full bg-[#080810]/95 backdrop-blur-2xl rounded-[15px] sm:rounded-[31px] p-4 sm:p-8 md:p-10 flex flex-col z-10 overflow-hidden">
               <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-0 group-hover:opacity-5 transition-opacity duration-700 pointer-events-none mix-blend-overlay" />
 
-              <div className="flex items-center gap-4 mb-8 opacity-40 group-hover:opacity-60 transition-opacity duration-500">
-                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-8 opacity-40 group-hover:opacity-60 transition-opacity duration-500">
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </div>
-                <h3 className="font-heading font-black text-white text-xl uppercase tracking-wider">
+                <h3 className="font-heading font-black text-white text-base sm:text-xl uppercase tracking-wider">
                   This is not for you
                 </h3>
               </div>
 
-              <div className="space-y-4 flex-1">
+              <div className="space-y-2 sm:space-y-4 flex-1">
                 {notForItems.map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 p-4 rounded-xl border border-transparent hover:bg-white/[0.02] transition-colors duration-300">
-                    <div className="w-2 h-2 rounded-full bg-white/20 shrink-0 mt-2" />
-                    <p className="font-body text-white/40 text-sm leading-relaxed line-through decoration-white/20 group-hover:text-white/60 transition-colors duration-300">
+                  <div key={i} className="flex items-start gap-3 p-2 sm:p-4 rounded-xl border border-transparent hover:bg-white/[0.02] transition-colors duration-300">
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white/20 shrink-0 mt-2" />
+                    <p className="font-body text-white/40 text-xs sm:text-sm leading-relaxed line-through decoration-white/20 group-hover:text-white/60 transition-colors duration-300">
                       {item.text}
                     </p>
                   </div>
                 ))}
               </div>
               
-              <div className="mt-8 pt-8 border-t border-white/5 text-center opacity-30 group-hover:opacity-50 transition-opacity duration-500">
-                <p className="font-body text-white text-[10px] sm:text-xs uppercase tracking-widest leading-loose max-w-xs mx-auto font-bold">
+              <div className="mt-5 sm:mt-8 pt-4 sm:pt-8 border-t border-white/5 text-center opacity-30 group-hover:opacity-50 transition-opacity duration-500">
+                <p className="font-body text-white text-[10px] sm:text-xs uppercase tracking-widest leading-relaxed max-w-xs mx-auto font-bold">
                   We'd rather work with fewer clients who are all-in.
                 </p>
               </div>
@@ -142,14 +141,14 @@ export default function Qualification() {
         </div>
 
         {/* ── Bottom CTA Button ── */}
-        <ScrollReveal data-reveal="up" delay={300} className="mt-16 flex flex-col items-center gap-4">
-          <div className="relative group/cta inline-block">
+        <ScrollReveal data-reveal="up" delay={300} className="mt-8 sm:mt-16 flex flex-col items-center gap-4">
+          <div className="relative group/cta inline-block w-full sm:w-auto text-center">
              <div className="absolute -inset-2 bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF] rounded-full blur-xl opacity-30 group-hover/cta:opacity-60 transition duration-500 animate-pulse" />
              <a
               href={WA_SOFT}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative inline-flex items-center gap-3 px-10 py-5 rounded-full font-heading font-black text-sm md:text-base uppercase tracking-widest text-background transition-transform duration-300 hover:scale-[1.02]"
+              className="relative inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:px-10 sm:py-5 w-full sm:w-auto rounded-full font-heading font-black text-xs sm:text-sm md:text-base uppercase tracking-wider sm:tracking-widest text-background transition-transform duration-300 hover:scale-[1.02] active:scale-95"
               style={{ background: '#00F5D4' }}
              >
                Get Your Custom Growth Plan

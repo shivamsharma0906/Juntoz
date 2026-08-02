@@ -8,7 +8,7 @@ export default function WorkPage() {
     <div className="pt-24 pb-20 min-h-screen bg-background">
       <PageMeta
         title="Our Work — Client Success Stories"
-        description="Explore how Juntoz has helped 200+ beauty brands across India scale bookings with proven digital marketing strategies."
+        description="Explore how Juntoz has helped ambitious brands scale revenue with proven digital growth strategies."
         path="/work"
       />
       <div className="container mx-auto px-6 max-w-7xl">
@@ -22,7 +22,7 @@ export default function WorkPage() {
             Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Success</span>
           </h1>
           <p className="font-body text-white/50 text-sm md:text-base max-w-xl leading-relaxed mx-auto sm:mx-0">
-            Explore how we help beauty brands scale predictability using our proven, data-driven growth systems.
+            Explore how we help companies scale predictably using our proven, data-driven growth systems.
           </p>
         </ScrollReveal>
 

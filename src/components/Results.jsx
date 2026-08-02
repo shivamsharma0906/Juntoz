@@ -83,7 +83,6 @@ export default function Results() {
   return (
     <section id="results" className="relative py-24 md:py-32 bg-background overflow-hidden" ref={ref}>
       {/* Backgrounds */}
-      <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[150px] pointer-events-none z-0 opacity-20"
         style={{ background: 'radial-gradient(ellipse, #7B2FFF, #00F5D4, transparent)' }} />
 

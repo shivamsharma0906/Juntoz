@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
-
 import { clientData, featuredQuote } from '../data/clients.js';
 
 const testimonials = clientData.filter(c => c.quote).map(c => ({
@@ -23,175 +22,153 @@ const StarRow = ({ color }) => (
   </div>
 );
 
-/* ─── Infinite Marquee Card ─────────────────────────────────── */
-function MarqueeCard({ t }) {
-  return (
-    <div
-      className="relative flex flex-col gap-4 p-5 sm:p-6 shrink-0 w-[300px] sm:w-[350px] rounded-2xl group transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1"
-      style={{
-        background: `linear-gradient(135deg, ${t.color}08 0%, rgba(255,255,255,0.02) 100%)`,
-        border: `1px solid ${t.color}35`,
-        boxShadow: `0 4px 30px ${t.color}10, inset 0 1px 0 ${t.color}12`,
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-      }}
-    >
-      {/* Metric badge */}
-      <div
-        className="inline-flex self-start items-center gap-2 px-3 py-1.5 rounded-full font-body font-bold text-[10px] uppercase tracking-wide relative z-10 transition-colors duration-300"
-        style={{ background: `${t.color}12`, border: `1px solid ${t.color}35`, color: t.color }}
-      >
-        <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: t.color }} />
-        {t.metric}
-      </div>
-
-      {/* Stars */}
-      <div className="relative z-10 opacity-80 group-hover:opacity-100 transition-opacity"><StarRow color={t.color} /></div>
-
-      {/* Quote */}
-      <p className="font-body text-white/75 text-sm leading-relaxed flex-1 relative z-10 group-hover:text-white transition-colors duration-300">
-        "{t.quote}"
-      </p>
-
-      {/* Divider */}
-      <div className="h-px w-full relative z-10 transition-colors duration-300" style={{ background: `${t.color}20` }} />
-
-      {/* Author */}
-      <div className="flex items-center justify-between gap-3 relative z-10">
-        <div>
-          <p className="font-heading font-black text-white text-sm uppercase tracking-tight">{t.name}</p>
-          <p className="font-body text-xs mt-0.5 opacity-80" style={{ color: t.color }}>{t.role} · {t.city}</p>
-        </div>
-        <div
-          className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12"
-          style={{ background: `${t.color}12`, border: `1px solid ${t.color}30` }}
-        >
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} style={{ color: t.color }}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ─── Infinite Marquee Track ─────────────────────────────────── */
-function InfiniteMarquee() {
-  const [isPaused, setIsPaused] = useState(false);
-  const items = [...testimonials, ...testimonials, ...testimonials]; // Triple for seamless loop
-
-  return (
-    <div 
-      className="relative w-full overflow-hidden py-10"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      style={{
-        maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
-        WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
-      }}
-    >
-      <div
-        className="flex gap-6 w-max"
-        style={{
-          animation: 'marquee-scroll 50s linear infinite',
-          animationPlayState: isPaused ? 'paused' : 'running'
-        }}
-      >
-        {items.map((t, i) => (
-          <MarqueeCard key={i} t={t} />
-        ))}
-      </div>
-
-      <style>{`
-        @keyframes marquee-scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(calc(-33.33% - 8px)); } /* -33.33% of triple width + gap offset */
-        }
-      `}</style>
-    </div>
-  );
-}
-
-/* ─── Featured Quote (Verve Media inspired) ──────────────────── */
-function FeaturedQuote() {
-  return (
-    <div className="relative max-w-4xl mx-auto px-6 py-16 sm:py-24 text-center">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-24 sm:w-32 sm:h-32 rounded-full blur-[60px] opacity-30 pointer-events-none" style={{ background: '#00F5D4' }} />
-      
-      <svg className="w-10 h-10 sm:w-14 sm:h-14 mx-auto mb-6 text-accent-2/40 opacity-50" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M14.017 21v-7.391c0-5.714 4.14-8.814 8.783-11.415l-1.42 2.62c-2.43 1.13-4.66 3.65-4.66 5.629h3.766v10.557h-6.469zm-13.017 0v-7.391c0-5.714 4.14-8.814 8.783-11.415l-1.42 2.62c-2.43 1.13-4.66 3.65-4.66 5.629h3.766v10.557h-6.469z"/>
-      </svg>
-      
-      <h3 className="font-heading font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter text-white leading-[1.1] mb-8"
-        dangerouslySetInnerHTML={{ __html: featuredQuote.quote }}
-      />
-      
-      <div className="inline-flex items-center gap-4 text-left">
-        <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#00F5D4] to-[#7B2FFF] p-[2px]">
-           <div className="w-full h-full rounded-full bg-background flex items-center justify-center font-heading font-black text-white">{featuredQuote.initials}</div>
-        </div>
-        <div>
-          <p className="font-heading font-black text-white text-sm uppercase tracking-wider">{featuredQuote.name}</p>
-          <p className="font-body text-white/50 text-xs">{featuredQuote.role}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ─── Main export ─────────────────────────────────────────── */
 export default function Testimonials() {
-  return (
-    <section id="testimonials" className="relative py-10 bg-background overflow-hidden" aria-label="Client testimonials">
-      <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" />
-      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] rounded-full blur-[150px] pointer-events-none z-0 opacity-40"
-        style={{ background: 'rgba(0,245,212,0.1)' }} />
-      <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none z-0 opacity-40"
-        style={{ background: 'rgba(123,47,255,0.1)' }} />
+  const [activeIndex, setActiveIndex] = useState(0);
 
-      <div className="relative z-10">
+  return (
+    <section id="testimonials" className="relative py-24 bg-background overflow-hidden" aria-label="Client testimonials">
+      {/* Background Ambience */}
+      <div className="absolute top-1/4 left-[-10%] w-[600px] h-[600px] rounded-full blur-[160px] pointer-events-none z-0 opacity-30" style={{ background: '#00F5D4' }} />
+      <div className="absolute bottom-10 right-[-10%] w-[600px] h-[600px] rounded-full blur-[160px] pointer-events-none z-0 opacity-25" style={{ background: '#7B2FFF' }} />
+
+      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+        
         {/* Header */}
-        <ScrollReveal data-reveal="up" className="text-center mb-6 px-5 sm:px-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6">
+        <ScrollReveal data-reveal="up" className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6">
             <span className="w-2 h-2 rounded-full bg-[#FFE600] animate-pulse" />
-            <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Rated 5.0 on Google</span>
+            <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Rated 5.0 by Growth Partners</span>
           </div>
           
-          <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-6xl uppercase leading-none tracking-tighter mb-4">
-            Real Clients.<br className="sm:hidden" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] via-[#7B2FFF] to-[#FF3AF2]"> Real Results.</span>
+          <h2 className="font-heading font-black text-white text-4xl sm:text-6xl md:text-7xl uppercase leading-none tracking-tighter mb-6">
+            Real Clients. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] via-[#7B2FFF] to-[#FF3AF2]">Real Results.</span>
           </h2>
-          <p className="font-body text-white/50 text-sm sm:text-base max-w-lg mx-auto mb-8">
-            See how beauty professionals across India are transforming their businesses with predictable, high-quality bookings.
+          <p className="font-body text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+            See how ambitious companies across India are scaling their revenue with our integrated growth engine.
           </p>
         </ScrollReveal>
 
-        {/* Featured Pull Quote */}
-        <ScrollReveal data-reveal="fade" delay={100}>
-          <FeaturedQuote />
+        {/* ── Desktop Optimized Split Showcase Grid ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-16">
+          
+          {/* Featured Highlight Card (7 cols - Desktop Only) */}
+          <ScrollReveal data-reveal="left" className="hidden lg:flex lg:col-span-7">
+            <div className="relative w-full rounded-[2.5rem] p-[1px] overflow-hidden bg-gradient-to-br from-white/15 via-white/5 to-transparent shadow-2xl flex flex-col justify-between">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#00F5D4]/10 via-transparent to-[#7B2FFF]/10 pointer-events-none" />
+              
+              <div className="relative h-full bg-[#080812]/95 backdrop-blur-2xl rounded-[39px] p-8 sm:p-12 flex flex-col justify-between z-10 overflow-hidden">
+                <div className="absolute top-0 right-0 p-8 opacity-10 font-heading font-black text-9xl text-white pointer-events-none select-none">
+                  “
+                </div>
+
+                <div className="mb-8">
+                  <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-[#00F5D4]/30 bg-[#00F5D4]/10 mb-8">
+                    <span className="w-2 h-2 rounded-full bg-[#00F5D4]" />
+                    <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#00F5D4]">Featured Case Study</span>
+                  </div>
+
+                  <h3 className="font-heading font-black text-2xl sm:text-4xl text-white uppercase tracking-tight leading-snug mb-6"
+                    dangerouslySetInnerHTML={{ __html: featuredQuote.quote }}
+                  />
+                </div>
+
+                <div className="flex items-center justify-between pt-8 border-t border-white/10 mt-auto">
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#00F5D4] to-[#7B2FFF] p-[2px]">
+                      <div className="w-full h-full rounded-[14px] bg-[#05050C] flex items-center justify-center font-heading font-black text-white text-lg">
+                        {featuredQuote.initials}
+                      </div>
+                    </div>
+                    <div>
+                      <p className="font-heading font-black text-white text-lg uppercase tracking-tight">{featuredQuote.name}</p>
+                      <p className="font-body text-xs text-[#00F5D4] font-semibold tracking-wide">{featuredQuote.role}</p>
+                    </div>
+                  </div>
+
+                  <div className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10">
+                    <span className="font-heading font-black text-white text-sm">5.0</span>
+                    <StarRow color="#00F5D4" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Testimonial Cards Grid (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col gap-6">
+            
+            {/* Mobile Featured Card */}
+            <ScrollReveal data-reveal="up" className="flex lg:hidden flex-1">
+              <div
+                className="group relative p-6 rounded-[2rem] transition-all duration-500 hover:-translate-y-1 overflow-hidden h-full flex flex-col justify-between"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                }}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <span className="font-body font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-full"
+                    style={{ background: '#00F5D415', border: '1px solid #00F5D435', color: '#00F5D4' }}>
+                    Featured Case Study
+                  </span>
+                  <StarRow color="#00F5D4" />
+                </div>
+                <p className="font-body text-white/80 text-sm leading-relaxed mb-6 italic" dangerouslySetInnerHTML={{ __html: featuredQuote.quote }} />
+                <div className="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
+                  <div>
+                    <p className="font-heading font-black text-white text-sm uppercase">{featuredQuote.name}</p>
+                    <p className="font-body text-xs text-white/40">{featuredQuote.role}</p>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {testimonials.slice(0, 3).map((t, idx) => (
+              <ScrollReveal key={idx} data-reveal="right" delay={idx * 100} className="flex-1">
+                <div
+                  className="group relative p-6 rounded-[2rem] transition-all duration-500 hover:-translate-y-1 overflow-hidden h-full flex flex-col justify-between"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                  }}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="font-body font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-full"
+                      style={{ background: `${t.color}15`, border: `1px solid ${t.color}35`, color: t.color }}>
+                      {t.metric}
+                    </span>
+                    <StarRow color={t.color} />
+                  </div>
+
+                  <p className="font-body text-white/80 text-sm leading-relaxed mb-6 italic">
+                    "{t.quote}"
+                  </p>
+
+                  <div className="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
+                    <div>
+                      <p className="font-heading font-black text-white text-sm uppercase">{t.name}</p>
+                      <p className="font-body text-xs text-white/40">{t.role} · {t.city}</p>
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+        </div>
+
+        {/* Bottom Callout & CTA */}
+        <ScrollReveal data-reveal="up" className="text-center">
+          <div className="inline-flex flex-col sm:flex-row items-center gap-6 p-3 sm:pr-8 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl">
+            <span className="px-6 py-3 rounded-full bg-[#00F5D4] text-background font-heading font-black text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(0,245,212,0.4)]">
+              Partner With Juntoz
+            </span>
+            <p className="font-body text-white/70 text-xs sm:text-sm font-medium">
+              Join 200+ scaled companies & growth partners driving predictable revenue.
+            </p>
+          </div>
         </ScrollReveal>
 
-        {/* Infinite Scrolling Marquee */}
-        <ScrollReveal data-reveal="up" delay={200}>
-          <InfiniteMarquee />
-        </ScrollReveal>
-
-        {/* CTA */}
-        <ScrollReveal data-reveal="up" delay={300} className="mt-16 text-center px-5 relative z-20">
-          <a
-            href="https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20to%20know%20how%20you%20can%20grow%20my%20business."
-            target="_blank" rel="noopener noreferrer"
-            className="group relative inline-flex items-center gap-3 px-8 py-5 rounded-full font-heading font-black text-sm uppercase tracking-widest text-background overflow-hidden shadow-[0_0_40px_rgba(0,245,212,0.3)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_60px_rgba(0,245,212,0.5)]"
-            style={{ background: '#00F5D4' }}
-          >
-             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none" />
-             <span className="relative z-10">Start Your Success Story</span>
-             <svg className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-             </svg>
-          </a>
-          <p className="font-body text-white/30 text-xs tracking-widest mt-4 uppercase">Join 200+ Thriving Beauty Brands</p>
-        </ScrollReveal>
       </div>
     </section>
   );

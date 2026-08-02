@@ -24,8 +24,8 @@ const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20to%20k
 const SERVICES = [
   {
     color: '#00F5D4',
-    title: 'Creating Successful Beauty Brands',
-    desc: 'We build stunning Instagram presences and optimise them for maximum reach, bookings, and long-term client loyalty — brand success guaranteed.',
+    title: 'Building Scalable Digital Brands',
+    desc: 'We build magnetic brand presences across channels, optimizing for maximum authority, reach, and long-term customer loyalty — brand success guaranteed.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="3" width="7" height="7" rx="1"/>
@@ -36,8 +36,8 @@ const SERVICES = [
   },
   {
     color: '#7B2FFF',
-    title: 'Tailored Beauty Marketing Solutions',
-    desc: 'Marketing strategies that align perfectly with your salon\'s goals — data-driven Instagram ads, WhatsApp funnels, and targeted campaigns that drive real bookings.',
+    title: 'Custom Performance Marketing',
+    desc: 'Data-driven advertising campaigns that align with your business goals — precision targeted Meta & Google ads, funnel architecture, and ROAS scaling.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -46,8 +46,8 @@ const SERVICES = [
   },
   {
     color: '#FF3AF2',
-    title: 'Booking Automation & More',
-    desc: 'Smart WhatsApp automation, follow-up sequences, and lead nurturing systems that turn enquiries into confirmed bookings — while you focus on your craft.',
+    title: 'Automated Revenue Systems',
+    desc: 'Smart WhatsApp automation, CRM follow-up sequences, and lead nurturing pipelines that convert prospects into high-LTV customers while you sleep.',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
@@ -60,7 +60,7 @@ const SERVICES = [
 /* ── 4-pointed decorative star ── */
 const StarDeco = ({ color = '#00F5D4', size = 28 }) => (
   <svg width={size} height={size} viewBox="0 0 40 40" fill={color}>
-    <path d="M20 0 C20 0 22 15 20 20 C20 20 35 18 40 20 C40 20 25 22 20 20 C20 20 22 35 20 40 C20 40 18 25 20 20 C20 20 5 22 0 20 C0 20 15 18 20 20 C20 20 18 5 20 0Z"/>
+    <path d="M20 0 C20 0 22 15 20 20 C20 20 35 18 40 20 C40 20 22 35 20 40 C20 40 18 25 20 20 C20 20 5 22 0 20 C0 20 15 18 20 20 C20 20 18 5 20 0Z"/>
   </svg>
 );
 
@@ -113,7 +113,7 @@ export default function AboutUs() {
             </div>
 
             <h2
-              className="font-heading text-white leading-tight tracking-tight"
+              className="font-heading text-white leading-tight tracking-tight uppercase"
               style={{ fontSize: 'clamp(1.6rem, 3.5vw, 3rem)', ...fade(0.1) }}
             >
               Driving{' '}
@@ -126,7 +126,7 @@ export default function AboutUs() {
                   backgroundClip: 'text',
                 }}
               >
-                Beauty Brand Growth
+                Digital Brand Growth
               </span>
               <br />
               Since 2022
@@ -143,7 +143,7 @@ export default function AboutUs() {
                 maxWidth: '480px',
               }}
             >
-              Crafting beauty brands, driving Instagram growth, generating consistent bookings, and automating client funnels — with a focused team of beauty marketing specialists.
+              Building scalable digital brands, driving targeted customer acquisition, engineering high-converting web experiences, and automating revenue pipelines — with an integrated team of growth specialists.
             </p>
 
             {/* Know More button */}

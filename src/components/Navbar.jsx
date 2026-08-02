@@ -6,9 +6,8 @@ const WA_HARD =
   'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20want%20to%20book%20a%20strategy%20call.';
 
 const navLinks = [
-  { name: 'Services', href: '/services' },
   { name: 'Work', href: '/work' },
-  { name: 'Results', href: '/results' },
+  { name: 'Services', href: '/services' },
   { name: 'About', href: '/about' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
@@ -19,44 +18,55 @@ const LI_PATH = 'M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [hovered, setHovered] = useState(null);
-  const [mounted, setMounted] = useState(false);       // ← entrance
+  const [mounted, setMounted] = useState(false);
   const [indicatorStyle, setIndicatorStyle] = useState({});
 
   const navRef = useRef(null);
   const linkRefs = useRef({});
   const ctaRef = useRef(null);
   const magnetRaf = useRef(null);
-  const spotRef = useRef(null);                         // ← cursor spotlight
+  const spotRef = useRef(null);
+  const lastScrollY = useRef(0);
   const location = useLocation();
 
-  /* ── Entrance animation on mount ── */
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
     return () => clearTimeout(t);
   }, []);
 
-  /* ── Scroll-aware ── */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 30);
+
+      if (currentY > 80) {
+        if (currentY > lastScrollY.current + 6) {
+          setVisible(false); // Hide on scroll down
+        } else if (currentY < lastScrollY.current - 6) {
+          setVisible(true);  // Reveal on scroll up
+        }
+      } else {
+        setVisible(true);
+      }
+      lastScrollY.current = currentY;
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* ── Close on route change ── */
   useEffect(() => {
     const t = setTimeout(() => setMenuOpen(false), 0);
     return () => clearTimeout(t);
   }, [location]);
 
-  /* ── Body lock ── */
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  /* ── Sliding active indicator ── */
   useEffect(() => {
     const activeHref = hovered ?? location.pathname;
     const el = linkRefs.current[activeHref];
@@ -68,10 +78,11 @@ export default function Navbar() {
         width: elRect.width + 'px',
         opacity: 1,
       });
+    } else {
+      setIndicatorStyle({ opacity: 0 });
     }
   }, [hovered, location.pathname]);
 
-  /* ── Cursor spotlight on nav pill ── */
   const onNavMouseMove = useCallback((e) => {
     if (!navRef.current || !spotRef.current) return;
     const rect = navRef.current.getBoundingClientRect();
@@ -84,16 +95,15 @@ export default function Navbar() {
     if (spotRef.current) spotRef.current.style.opacity = '0';
   }, []);
 
-  /* ── Magnetic CTA ── */
   const onCtaMouseMove = useCallback((e) => {
     const el = ctaRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.3;
-    const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.3;
+    const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.25;
+    const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.25;
     if (magnetRaf.current) cancelAnimationFrame(magnetRaf.current);
     magnetRaf.current = requestAnimationFrame(() => {
-      el.style.transform = `translate(${dx}px, ${dy}px) scale(1.05)`;
+      el.style.transform = `translate(${dx}px, ${dy}px) scale(1.04)`;
     });
   }, []);
 
@@ -106,11 +116,10 @@ export default function Navbar() {
     }, 500);
   }, []);
 
-  /* entrance styles */
   const navEnter = {
     opacity: mounted ? 1 : 0,
-    transform: mounted ? 'translateY(0)' : 'translateY(-20px)',
-    transition: 'opacity 0.6s ease 0.1s, transform 0.6s cubic-bezier(0.22,1,0.36,1) 0.1s',
+    transform: mounted ? (visible ? 'translateY(0)' : 'translateY(-100%)') : 'translateY(-20px)',
+    transition: 'opacity 0.6s ease 0.1s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
   };
 
   const itemEnter = (delay = 0) => ({
@@ -123,60 +132,61 @@ export default function Navbar() {
     <>
       <nav
         style={navEnter}
-        className={`fixed top-0 w-full z-50 transition-[padding] duration-500 ${scrolled ? 'pt-1.5 sm:pt-3' : 'pt-2.5 sm:pt-5'}`}
+        className={`fixed top-0 w-full z-50 transition-[padding] duration-500 ${scrolled ? 'pt-2 sm:pt-4' : 'pt-3 sm:pt-6'}`}
       >
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           <div className={`
-            flex items-center justify-between px-3 sm:px-5 py-2 sm:py-3 transition-all duration-500 rounded-xl sm:rounded-full
+            flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3.5 transition-all duration-500 rounded-full
             ${scrolled
-              ? 'bg-[#06060f]/85 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.04)]'
-              : 'bg-white/4 backdrop-blur-xl border border-white/8'}
+              ? 'bg-[#05050C]/90 backdrop-blur-2xl border border-white/10 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8),0_0_20px_rgba(0,245,212,0.1)]'
+              : 'bg-white/[0.03] backdrop-blur-xl border border-white/10'}
           `}>
 
-            {/* ── Logo — entrance from left ── */}
-            <div style={itemEnter(0.18)}>
+            {/* ── Mobile Left Spacer (to keep logo perfectly centered on mobile) ── */}
+            <div className="w-11 h-11 md:hidden pointer-events-none" />
+
+            {/* ── Logo (Centered on mobile, left-aligned on desktop) ── */}
+            <div style={itemEnter(0.15)} className="flex-1 md:flex-initial flex justify-center md:justify-start">
               <Link
                 to="/"
                 className="flex items-center shrink-0 relative z-[60] group/logo"
                 onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               >
                 <div className="relative">
-                  <div className="absolute inset-0 rounded-lg bg-accent-2/0 group-hover/logo:bg-accent-2/15 blur-[12px] transition-all duration-500 scale-150" />
+                  <div className="absolute inset-0 rounded-lg bg-[#00F5D4]/10 group-hover/logo:bg-[#00F5D4]/25 blur-[14px] transition-all duration-500 scale-150" />
                   <img
                     src={logo}
                     alt="Juntoz"
                     width="160"
                     height="40"
                     fetchPriority="high"
-                    className="h-7 sm:h-9 md:h-10 w-auto relative z-10 transition-all duration-400 group-hover/logo:scale-105 group-hover/logo:drop-shadow-[0_0_8px_rgba(0,245,212,0.6)]"
+                    className="h-7 sm:h-9 md:h-10 w-auto relative z-10 transition-all duration-400 group-hover/logo:scale-105 group-hover/logo:drop-shadow-[0_0_12px_rgba(0,245,212,0.7)]"
                   />
                 </div>
               </Link>
             </div>
 
-            {/* ── Desktop nav links — with cursor spotlight ── */}
-            <div style={itemEnter(0.26)}>
+            {/* ── Desktop nav links capsule ── */}
+            <div style={itemEnter(0.25)} className="hidden md:block">
               <div
                 ref={navRef}
                 onMouseMove={onNavMouseMove}
                 onMouseLeave={onNavMouseLeave}
-                className="hidden md:flex items-center gap-0 relative bg-white/4 backdrop-blur-sm rounded-full p-1 border border-white/8 overflow-hidden"
+                className="flex items-center gap-1 relative bg-white/[0.04] backdrop-blur-md rounded-full p-1.5 border border-white/10 overflow-hidden"
               >
-                {/* Cursor spotlight — inspired by unvdigital.com hover glow */}
                 <div
                   ref={spotRef}
-                  className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full transition-opacity duration-300"
+                  className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full transition-opacity duration-300"
                   style={{
-                    background: 'radial-gradient(circle, rgba(0,245,212,0.12) 0%, transparent 70%)',
+                    background: 'radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 70%)',
                     opacity: 0,
                     zIndex: 0,
                   }}
                 />
 
-                {/* Sliding pill indicator */}
                 <div
-                  className="absolute top-1 bottom-1 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none z-[1]"
-                  style={{ background: 'rgba(255,255,255,0.09)', ...indicatorStyle }}
+                  className="absolute top-1.5 bottom-1.5 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none z-[1]"
+                  style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))', border: '1px solid rgba(255,255,255,0.15)', ...indicatorStyle }}
                 />
 
                 {navLinks.map((link) => {
@@ -188,12 +198,12 @@ export default function Navbar() {
                       ref={(el) => { linkRefs.current[link.href] = el; }}
                       onMouseEnter={() => setHovered(link.href)}
                       onMouseLeave={() => setHovered(null)}
-                      className={`relative font-body font-semibold uppercase tracking-widest text-xs px-5 py-2 rounded-full transition-colors duration-200 z-10
-                        ${isActive ? 'text-white' : 'text-white/50 hover:text-white/80'}`}
+                      className={`relative font-heading font-bold uppercase tracking-widest text-xs px-5 py-2.5 rounded-full transition-colors duration-200 z-10
+                        ${isActive ? 'text-white' : 'text-white/60 hover:text-white'}`}
                     >
                       {link.name}
                       {isActive && (
-                        <span className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent-2 shadow-[0_0_4px_#00F5D4]" />
+                        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#00F5D4] shadow-[0_0_8px_#00F5D4]" />
                       )}
                     </Link>
                   );
@@ -201,10 +211,9 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* ── Desktop right side ── */}
-            <div style={itemEnter(0.34)} className="hidden md:flex items-center gap-4">
-              {/* Social icons */}
-              <div className="flex gap-3">
+            {/* ── Desktop CTA & Socials ── */}
+            <div style={itemEnter(0.35)} className="hidden md:flex items-center gap-4">
+              <div className="flex gap-2.5">
                 {[
                   { href: 'https://www.instagram.com/_juntoz', label: 'Instagram', path: IG_PATH },
                   { href: 'https://www.linkedin.com/in/juntoz-digital-marketing-agency-b0a114290/', label: 'LinkedIn', path: LI_PATH },
@@ -215,18 +224,17 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="group/icon w-8 h-8 rounded-full flex items-center justify-center border border-white/8 bg-white/4 hover:border-white/20 transition-all duration-300 hover:scale-110"
+                    className="group/icon w-9 h-9 rounded-full flex items-center justify-center border border-white/10 bg-white/[0.04] hover:border-[#00F5D4]/40 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_12px_rgba(0,245,212,0.3)]"
                   >
-                    <svg className="w-3.5 h-3.5 fill-current text-white/40 group-hover/icon:text-white transition-colors duration-300" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 fill-current text-white/50 group-hover/icon:text-[#00F5D4] transition-colors duration-300" viewBox="0 0 24 24">
                       <path d={s.path} />
                     </svg>
                   </a>
                 ))}
               </div>
 
-              <div className="w-px h-4 bg-white/10" />
+              <div className="w-px h-5 bg-white/10" />
 
-              {/* CTA — magnetic + shimmer sweep */}
               <a
                 ref={ctaRef}
                 href={WA_HARD}
@@ -234,76 +242,65 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 onMouseMove={onCtaMouseMove}
                 onMouseLeave={onCtaMouseLeave}
-                className="nav-cta-btn relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-heading font-black uppercase text-xs tracking-widest text-white overflow-hidden"
+                className="nav-cta-btn relative inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-heading font-black uppercase text-xs tracking-widest text-background overflow-hidden"
                 style={{
-                  background: 'linear-gradient(135deg, #FF3AF2 0%, #7B2FFF 100%)',
-                  boxShadow: '0 0 20px rgba(123,47,255,0.3)',
+                  background: 'linear-gradient(135deg, #00F5D4 0%, #7B2FFF 100%)',
+                  boxShadow: '0 0 24px rgba(0,245,212,0.4)',
                   willChange: 'transform',
                 }}
               >
-                <span className="nav-cta-sweep absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full pointer-events-none" />
-                <span className="relative z-10">Book a Call</span>
+                <span className="nav-cta-sweep absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full pointer-events-none" />
+                <span className="relative z-10 font-bold">Start Call</span>
               </a>
             </div>
 
-            {/* ── Mobile hamburger ── */}
-            <button
-              className="md:hidden flex items-center gap-2.5 relative z-[60] group/menu min-h-[44px] min-w-[44px] px-2 justify-center"
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle menu"
-            >
-              <span className={`font-heading font-black text-[10px] tracking-widest uppercase transition-colors duration-300 ${menuOpen ? 'text-accent-2' : 'text-white/40 group-hover/menu:text-white'}`}>
-                {menuOpen ? 'Close' : 'Menu'}
-              </span>
-              <div className="flex flex-col gap-[5px] items-end justify-center w-6">
-                <span className={`block h-[1.5px] rounded-full transition-all duration-400 origin-right ${menuOpen ? 'w-6 bg-accent-2 -rotate-45 -translate-y-[3px]' : 'w-6 bg-white/70'}`} />
-                <span className={`block h-[1.5px] rounded-full transition-all duration-400 origin-right ${menuOpen ? 'w-6 bg-accent-2 rotate-45 translate-y-[3px]' : 'w-4 bg-accent-2 group-hover/menu:w-6'}`} />
-              </div>
-            </button>
+            {/* ── Mobile Hamburger (Icon only, no "Menu" word) ── */}
+            <div className="md:hidden flex items-center justify-end">
+              <button
+                className="flex items-center justify-center relative z-[60] group/menu w-11 h-11 rounded-full border border-white/10 bg-white/5 backdrop-blur-md active:scale-95 transition-transform"
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label="Toggle menu"
+              >
+                <div className="flex flex-col gap-[5px] items-center justify-center w-5">
+                  <span className={`block h-[1.5px] rounded-full transition-all duration-400 ${menuOpen ? 'w-5 bg-[#00F5D4] rotate-45 translate-y-[3.25px]' : 'w-5 bg-white/80'}`} />
+                  <span className={`block h-[1.5px] rounded-full transition-all duration-400 ${menuOpen ? 'w-5 bg-[#00F5D4] -rotate-45 -translate-y-[3.25px]' : 'w-3.5 bg-[#00F5D4] group-hover/menu:w-5'}`} />
+                </div>
+              </button>
+            </div>
           </div>
         </div>
 
         <ScrollProgress />
       </nav>
 
-      {/* ── Mobile drawer — with animated gradient orbs ── */}
+      {/* ── Mobile Full-Screen Glass Drawer ── */}
       <div
-        className={`fixed inset-0 z-40 flex flex-col md:hidden transition-all duration-400 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-        style={{ background: 'rgba(4,4,12,0.97)', backdropFilter: 'blur(24px)' }}
+        className={`fixed inset-0 z-40 flex flex-col md:hidden transition-all duration-500 ${menuOpen ? 'opacity-100 pointer-events-auto scale-100' : 'opacity-0 pointer-events-none scale-95'}`}
+        style={{ background: 'rgba(5,5,12,0.96)', backdropFilter: 'blur(28px)' }}
       >
-        {/* Animated gradient orbs in mobile menu — inspired by unvdigital.com */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div
-            className="absolute w-[400px] h-[400px] rounded-full"
+            className="absolute w-[350px] h-[350px] rounded-full"
             style={{
-              top: '-10%', left: '-20%',
-              background: 'radial-gradient(circle, rgba(123,47,255,0.12) 0%, transparent 70%)',
+              top: '-5%', left: '-15%',
+              background: 'radial-gradient(circle, rgba(123,47,255,0.2) 0%, transparent 70%)',
               animation: menuOpen ? 'orb-drift-a 6s ease-in-out infinite' : 'none',
             }}
           />
           <div
             className="absolute w-[300px] h-[300px] rounded-full"
             style={{
-              bottom: '5%', right: '-10%',
-              background: 'radial-gradient(circle, rgba(255,58,242,0.1) 0%, transparent 70%)',
+              bottom: '10%', right: '-10%',
+              background: 'radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 70%)',
               animation: menuOpen ? 'orb-drift-b 8s ease-in-out infinite' : 'none',
-            }}
-          />
-          <div
-            className="absolute w-[200px] h-[200px] rounded-full"
-            style={{
-              top: '40%', right: '20%',
-              background: 'radial-gradient(circle, rgba(0,245,212,0.07) 0%, transparent 70%)',
-              animation: menuOpen ? 'orb-drift-c 5s ease-in-out infinite' : 'none',
             }}
           />
         </div>
 
-        <div className="h-20 shrink-0" />
+        <div className="h-24 shrink-0" />
 
-        <div className="flex-1 flex flex-col justify-center px-6 pb-10 gap-8 relative z-10">
-          {/* Nav links with stagger */}
-          <nav className="flex flex-col gap-0">
+        <div className="flex-1 flex flex-col justify-between px-8 pb-12 relative z-10 overflow-y-auto">
+          <nav className="flex flex-col gap-2 my-auto">
             {navLinks.map((link, i) => {
               const isActive = location.pathname === link.href;
               return (
@@ -311,20 +308,19 @@ export default function Navbar() {
                   key={link.name}
                   to={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className={`group flex items-center justify-between py-5 px-1 border-b transition-all duration-300 ${isActive ? 'text-white border-white/15' : 'text-white/40 hover:text-white border-white/6'
-                    }`}
+                  className={`group flex items-center justify-between py-4 px-2 border-b transition-all duration-400 ${isActive ? 'text-white border-[#00F5D4]/40 font-bold' : 'text-white/50 hover:text-white border-white/10'}`}
                   style={{
-                    transitionDelay: menuOpen ? `${i * 70}ms` : '0ms',
+                    transitionDelay: menuOpen ? `${i * 60}ms` : '0ms',
                     opacity: menuOpen ? 1 : 0,
-                    transform: menuOpen ? 'translateX(0)' : 'translateX(-24px)',
+                    transform: menuOpen ? 'translateX(0)' : 'translateX(-20px)',
                   }}
                 >
                   <div className="flex items-center gap-4">
-                    <span className="font-body text-[10px] tracking-widest text-white/20 font-semibold">0{i + 1}</span>
-                    <span className="font-heading font-black text-3xl sm:text-4xl uppercase">{link.name}</span>
+                    <span className="font-heading font-black text-xs tracking-widest text-[#00F5D4]">0{i + 1}</span>
+                    <span className="font-heading font-black text-3xl sm:text-4xl uppercase tracking-tight">{link.name}</span>
                   </div>
                   <svg
-                    className={`w-5 h-5 transition-all duration-300 ${isActive ? 'opacity-100 text-accent-2' : 'opacity-0 group-hover:opacity-60 -translate-x-2 group-hover:translate-x-0'}`}
+                    className={`w-6 h-6 transition-all duration-300 ${isActive ? 'opacity-100 text-[#00F5D4]' : 'opacity-0 group-hover:opacity-60 -translate-x-2 group-hover:translate-x-0'}`}
                     fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -334,13 +330,12 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Mobile CTA */}
           <div
-            className="space-y-3"
+            className="space-y-4 pt-6"
             style={{
               opacity: menuOpen ? 1 : 0,
               transform: menuOpen ? 'translateY(0)' : 'translateY(16px)',
-              transition: `opacity 0.4s ease ${navLinks.length * 70 + 80}ms, transform 0.4s ease ${navLinks.length * 70 + 80}ms`,
+              transition: `opacity 0.4s ease ${navLinks.length * 60 + 80}ms, transform 0.4s ease ${navLinks.length * 60 + 80}ms`,
             }}
           >
             <a
@@ -348,20 +343,19 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}
-              className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl font-heading font-black text-base uppercase tracking-widest text-white transition-all duration-300 active:scale-95 relative overflow-hidden"
+              className="flex items-center justify-center gap-3 w-full py-4 rounded-full font-heading font-black text-base uppercase tracking-widest text-background transition-all duration-300 active:scale-95 shadow-[0_0_30px_rgba(0,245,212,0.4)]"
               style={{
-                background: 'linear-gradient(135deg, #FF3AF2 0%, #7B2FFF 100%)',
-                boxShadow: '0 0 30px rgba(255,58,242,0.4)',
+                background: 'linear-gradient(135deg, #00F5D4 0%, #7B2FFF 100%)',
               }}
             >
               <svg className="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
                 <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.875L.057 23.386a.5.5 0 0 0 .614.599l5.728-1.539A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75A9.75 9.75 0 1 1 12 2.25 9.75 9.75 0 0 1 12 21.75z" />
               </svg>
-              Book a Strategy Call
+              Start The Conversation
             </a>
 
-            <div className="flex items-center justify-center gap-4 pt-1">
+            <div className="flex items-center justify-center gap-4 pt-2">
               {[
                 { href: 'https://www.instagram.com/_juntoz', label: 'Instagram', path: IG_PATH },
                 { href: 'https://www.linkedin.com/in/juntoz-digital-marketing-agency-b0a114290/', label: 'LinkedIn', path: LI_PATH },
@@ -372,8 +366,8 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110"
-                  style={{ border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.45)' }}
+                  className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  style={{ border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.03)' }}
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d={s.path} /></svg>
                 </a>
@@ -384,7 +378,6 @@ export default function Navbar() {
       </div>
 
       <style>{`
-        /* CTA sweep on hover */
         @keyframes nav-cta-sweep {
           0%   { transform: translateX(-100%); }
           100% { transform: translateX(200%);  }
@@ -393,25 +386,19 @@ export default function Navbar() {
           animation: nav-cta-sweep 0.65s ease forwards;
         }
 
-        /* Mobile menu orb drifts */
         @keyframes orb-drift-a {
-          0%, 100% { transform: translate(0, 0)    scale(1);    }
+          0%, 100% { transform: translate(0, 0) scale(1); }
           50%       { transform: translate(40px, 30px) scale(1.1); }
         }
         @keyframes orb-drift-b {
-          0%, 100% { transform: translate(0, 0)     scale(1);    }
+          0%, 100% { transform: translate(0, 0) scale(1); }
           50%       { transform: translate(-30px, -20px) scale(1.15); }
-        }
-        @keyframes orb-drift-c {
-          0%, 100% { transform: translate(0, 0)    scale(1);   }
-          50%       { transform: translate(15px, -25px) scale(0.9); }
         }
       `}</style>
     </>
   );
 }
 
-/* ── Scroll progress bar ── */
 function ScrollProgress() {
   const barRef = useRef(null);
   useEffect(() => {
@@ -426,14 +413,14 @@ function ScrollProgress() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   return (
-    <div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-white/5 overflow-hidden">
+    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/5 overflow-hidden">
       <div
         ref={barRef}
         style={{
           width: '0%',
           height: '100%',
           background: 'linear-gradient(90deg, #00F5D4, #7B2FFF, #FF3AF2)',
-          boxShadow: '0 0 8px rgba(0,245,212,0.6)',
+          boxShadow: '0 0 10px rgba(0,245,212,0.8)',
         }}
       />
     </div>

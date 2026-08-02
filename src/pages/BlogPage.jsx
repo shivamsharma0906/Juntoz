@@ -40,8 +40,8 @@ export default function BlogPage() {
   return (
     <div className="pt-24 pb-20 min-h-screen bg-background">
       <PageMeta
-        title="Blog — Beauty Marketing Insights & Strategy"
-        description="Tactical breakdowns, Instagram algorithm updates, and proven growth systems for beauty brands in India. Updated regularly by the Juntoz team."
+        title="Blog — Marketing Insights & Strategy"
+        description="Tactical breakdowns, paid ads strategies, and proven growth systems for ambitious brands. Updated regularly by the Juntoz team."
         path="/blog"
       />
       <div className="container mx-auto px-6 max-w-7xl">

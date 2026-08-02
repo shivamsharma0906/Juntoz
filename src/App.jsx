@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState, useRef, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import './index.css';
 import Navbar from './components/Navbar';
@@ -30,23 +30,68 @@ function ScrollToTop() {
 
     // Small delay so React finishes rendering the new page's components
     const t = setTimeout(() => {
-      const obs = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add('revealed');
-              obs.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
-      );
-      document.querySelectorAll('[data-reveal]:not(.revealed)').forEach((el) => obs.observe(el));
+      if (typeof window.observeForReveal === 'function') {
+        document.querySelectorAll('[data-reveal]:not(.revealed)').forEach((el) => {
+          window.observeForReveal(el);
+        });
+      }
     }, 80);
 
     return () => clearTimeout(t);
   }, [pathname]);
   return null;
+}
+
+// Global mouse-tracking ambient glow — desktop only, zero re-renders via rAF
+function GlobalMouseGlow() {
+  const glowRef = useRef(null);
+  const rafRef  = useRef(null);
+
+  useEffect(() => {
+    const el = glowRef.current;
+    if (!el) return;
+
+    // Start centred so there's no "jump" on first mouse move
+    let currentX = window.innerWidth  / 2;
+    let currentY = window.innerHeight / 2;
+    let targetX  = currentX;
+    let targetY  = currentY;
+
+    const onMove = (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    };
+
+    const tick = () => {
+      // Smooth lerp — follows cursor with a 10% lag per frame
+      currentX += (targetX - currentX) * 0.10;
+      currentY += (targetY - currentY) * 0.10;
+
+      el.style.transform = `translate(${currentX - 350}px, ${currentY - 350}px)`;
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    window.addEventListener('mousemove', onMove, { passive: true });
+    rafRef.current = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={glowRef}
+      className="fixed top-0 left-0 w-[700px] h-[700px] rounded-full pointer-events-none"
+      style={{
+        zIndex: -1,
+        background: 'radial-gradient(circle, rgba(0,245,212,0.07) 0%, rgba(123,47,255,0.05) 40%, transparent 70%)',
+        filter: 'blur(60px)',
+        willChange: 'transform',
+      }}
+    />
+  );
 }
 
 function App() {
@@ -71,8 +116,13 @@ function App() {
   return (
     <BrowserRouter>
       <div className="relative min-h-screen">
-        <div className="fixed inset-0 pattern-hex pointer-events-none" style={{ zIndex: -2 }} />
-        <div className="fixed inset-0 bg-gradient-to-t from-[#050508]/80 via-transparent to-[#050508]/80 pointer-events-none" style={{ zIndex: -2 }} />
+        {/* Single fixed full-page grid texture — consistent across ALL sections */}
+        <div className="fixed inset-0 pattern-grid pointer-events-none" style={{ zIndex: -2, opacity: 0.35 }} />
+        {/* Subtle vignette: darkens very top and bottom edges only */}
+        <div className="fixed inset-0 pointer-events-none" style={{ zIndex: -2, background: 'linear-gradient(to bottom, rgba(5,5,8,0.6) 0%, transparent 12%, transparent 88%, rgba(5,5,8,0.6) 100%)' }} />
+
+        {/* GLOBAL MOUSE AMBIENT GLOW — desktop only, follows cursor across entire site */}
+        {isDesktop && <GlobalMouseGlow />}
 
         {/* GLOBAL 3D SCROLLING SHAPES — desktop only and loaded lazily */}
         {isDesktop && (
