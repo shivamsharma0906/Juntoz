@@ -86,12 +86,13 @@ const RotatingWord = memo(function RotatingWord({ words, visible }) {
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateY(0) rotateX(0deg)' : 'translateY(40px) rotateX(20deg)',
         transition: 'opacity 0.65s ease 0.58s, transform 0.65s cubic-bezier(0.22,1,0.36,1) 0.58s',
-        willChange: 'opacity, transform'
+        willChange: 'opacity, transform',
+        /* Fix A: single drop-shadow for gentle depth — replaces the five-layer shadow stack */
+        filter: 'drop-shadow(0 4px 18px rgba(0,245,212,0.35))',
       }}
     >
       <span
-        className="relative inline-block glossy-3d-text"
-        data-text={words[index]}
+        className="relative inline-block"
         style={{
           opacity: isOut ? 0 : 1,
           transform: isOut
@@ -102,17 +103,10 @@ const RotatingWord = memo(function RotatingWord({ words, visible }) {
           willChange: 'opacity, transform, filter',
         }}
       >
+        {/* Fix A: single gradient-fill span only — no competing highlight overlay */}
         <span 
           className="relative z-10 text-transparent bg-clip-text inline-block"
           style={{ backgroundImage: 'linear-gradient(120deg, #00F5D4 0%, #7B2FFF 55%, #FF3AF2 100%)' }}
-        >
-          {words[index]}
-        </span>
-        {/* Glossy top highlight overlay */}
-        <span 
-          className="absolute inset-0 z-20 pointer-events-none text-transparent bg-clip-text"
-          style={{ backgroundImage: 'linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 35%, rgba(0,0,0,0.3) 80%, rgba(255,255,255,0.3) 100%)' }}
-          aria-hidden="true"
         >
           {words[index]}
         </span>
@@ -388,12 +382,13 @@ export default function Hero() {
             perspective: '800px',
           }}
         >
+          {/* Fix C: Rewritten headline — removes the contradiction with Services page */}
           <SplitHeading visible={visible} baseDelay={0.1}>
-            We Don't Run Ads.
+            We Don&apos;t Just
           </SplitHeading>
           <br />
-          <SplitHeading visible={visible} baseDelay={0.3}>
-            We Fill Your
+          <SplitHeading visible={visible} baseDelay={0.22}>
+            Run Ads. We Fill Your
           </SplitHeading>{' '}
           <RotatingWord words={ROTATING_WORDS} visible={visible} />
         </h1>
@@ -506,22 +501,9 @@ export default function Hero() {
 
       {/* ════ KEYFRAMES + COMPONENT STYLES ════ */}
       <style>{`
-        /* ── glossy 3d text effect ── */
-        .glossy-3d-text::after {
-          content: attr(data-text);
-          position: absolute;
-          left: 0;
-          top: 0;
-          z-index: 0;
-          color: transparent;
-          text-shadow: 
-            0 1px 0 rgba(255,255,255,0.4),
-            0 2px 0 #00F5D4,
-            0 3px 0 #7B2FFF,
-            0 4px 0 #FF3AF2,
-            0 5px 0 rgba(255,58,242,0.5),
-            0 8px 15px rgba(0,0,0,0.6);
-        }
+        /* ── Fix A: removed glossy-3d-text::after five-layer shadow stack entirely.
+           The rotating word now uses a clean gradient fill + single drop-shadow
+           filter on its outer span — set directly in RotatingWord inline styles. ── */
 
         /* ── hero glow pulse ── */
         @keyframes hero-glow {
