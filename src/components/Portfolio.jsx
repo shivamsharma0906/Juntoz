@@ -1,66 +1,50 @@
-import { useRef } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
 
-const projects = [
-  {
-    tag: 'META ADS',
-    label: 'Mumbai Bridal MUA',
-    result: '+180% LEADS\nIN 60 DAYS',
-    desc: 'Targeted bride campaigns in Mumbai. Tripled high-ticket inquiries.',
-    hex: '#FF3AF2',
-    location: 'Mumbai',
-  },
-  {
-    tag: 'INSTAGRAM GROWTH',
-    label: 'Luxury Salon',
-    result: '10K ORGANIC\nFOLLOWERS',
-    desc: 'Viral reel strategy resulting in 2x profile visits and walk-ins.',
-    hex: '#00F5D4',
-    location: 'Bangalore',
-  },
-  {
-    tag: 'SEO',
-    label: 'Makeup Studio',
-    result: '#1 ON GOOGLE\nIN 45 DAYS',
-    desc: 'Page 1 organic ranking for "bridal makeup" locally.',
-    hex: '#FFE600',
-    location: 'Delhi',
-  },
-  {
-    tag: 'WHATSAPP MARKETING',
-    label: 'Salon Chain',
-    result: '200+ BOOKINGS\nIN 30 DAYS',
-    desc: '24/7 Automated Chatbot booking flow for a nationwide salon chain.',
-    hex: '#FF6B35',
-    location: 'Nationwide',
-  },
-  {
-    tag: 'WEBSITE FUNNEL',
-    label: 'MUA Academy',
-    result: '40% BOOKING\nRATE',
-    desc: 'High-converting portfolio funnel for an elite makeup academy.',
-    hex: '#7B2FFF',
-    location: 'Pune',
-  },
-  {
-    tag: 'FULL GROWTH SYSTEM',
-    label: 'Premium Bridal Studio',
-    result: '₹6+ LAKHS\nIN 2 MONTHS',
-    desc: 'Completely booked out 3 months in advance via omnichannel ads.',
-    hex: '#FF3AF2',
-    location: 'Mumbai',
-  },
-];
+import { clientData } from '../data/clients.js';
 
-const chats = [
-  { name: 'Unnati', time: '10:42 AM', msg: 'This ad is giving genuine leads. Appointments have been made.' },
-  { name: 'Nikita', time: '02:15 PM', msg: 'Today 4 party makeup booked. More enquiries coming without negotiation.' },
-  { name: 'Shaheen', time: '11:30 AM', msg: 'First booking worth around ₹70,000. You are doing a wonderful job.' },
-  { name: 'Kajol', time: '04:20 PM', msg: '₹6,11,248 generated in just 2 months. Thanks for your support...' }
-];
+
+const projects = clientData.filter(c => c.projectTag).map(c => ({
+  tag: c.projectTag,
+  label: c.projectLabel,
+  result: c.projectResult,
+  desc: c.projectDesc,
+  hex: c.projectColor || c.color,
+  location: c.city,
+}));
 
 export default function Portfolio() {
   const sectionRef = useRef(null);
+  const dragRef = useRef(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  /* Mouse drag-to-scroll (desktop) */
+  const onMouseDown = useCallback((e) => {
+    isDragging.current = true;
+    startX.current = e.pageX - dragRef.current.offsetLeft;
+    scrollLeft.current = dragRef.current.scrollLeft;
+    dragRef.current.style.cursor = 'grabbing';
+  }, []);
+
+  const onMouseLeave = useCallback(() => {
+    isDragging.current = false;
+    if (dragRef.current) dragRef.current.style.cursor = 'grab';
+  }, []);
+
+  const onMouseUp = useCallback(() => {
+    isDragging.current = false;
+    if (dragRef.current) dragRef.current.style.cursor = 'grab';
+  }, []);
+
+  const onMouseMove = useCallback((e) => {
+    if (!isDragging.current) return;
+    e.preventDefault();
+    const x = e.pageX - dragRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.2;
+    dragRef.current.scrollLeft = scrollLeft.current - walk;
+  }, []);
 
   const highlightAmount = (text) => {
     const amountRegex = /(₹[\d,]+|[\d]+%|[\d]+K)/g;
@@ -95,10 +79,48 @@ export default function Portfolio() {
           </p>
         </ScrollReveal>
 
-        {/* ── CSS Grid for Cards ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-24">
+        {/* ── Mobile: horizontal drag-scroll / Desktop: 3-col grid ── */}
+        {/* Drag hint — mobile only */}
+        <div className="flex sm:hidden items-center gap-2 mb-4 text-white/30">
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+          </svg>
+          <span className="font-body text-[10px] uppercase tracking-widest font-bold">Swipe to explore</span>
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </div>
+
+        <div
+          ref={dragRef}
+          className="
+            flex sm:grid sm:grid-cols-2 lg:grid-cols-3
+            gap-6 lg:gap-8 mb-24
+            overflow-x-auto sm:overflow-visible
+            scroll-smooth snap-x snap-mandatory sm:snap-none
+            hide-scrollbar
+            cursor-grab select-none
+          "
+          style={{
+            WebkitOverflowScrolling: 'touch',
+            overscrollBehaviorX: 'contain',
+            maskImage: 'linear-gradient(to right, transparent, black 3%, black 97%, transparent)',
+          }}
+          onMouseDown={onMouseDown}
+          onMouseLeave={onMouseLeave}
+          onMouseUp={onMouseUp}
+          onMouseMove={onMouseMove}
+        >
           {projects.map((p, i) => (
-            <ScrollReveal key={i} data-reveal="up" delay={i * 100}>
+            <div
+              key={i}
+              className="snap-start shrink-0 w-[85vw] sm:w-auto"
+              style={{
+                opacity: 1,
+                transform: 'translateY(0)',
+                animation: `portfolio-card-in 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 120}ms both`,
+              }}
+            >
               <div
                 className="group relative bg-[#05050C] rounded-[2rem] overflow-hidden p-[1px] transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02]"
                 style={{ boxShadow: `0 10px 40px rgba(0,0,0,0.5)` }}
@@ -135,73 +157,17 @@ export default function Portfolio() {
                     </div>
                   </div>
 
-                  {/* Description & Verified Tag */}
+                  {/* Description */}
                   <div className="pt-6 relative z-10" style={{ borderTop: `1px solid ${p.hex}20` }}>
                     <p className="font-body text-white/60 text-sm leading-relaxed">{p.desc}</p>
-                    <div className="inline-flex items-center gap-2 mt-5 px-3 py-1.5 rounded-lg bg-[#00F5D4]/10 border border-[#00F5D4]/20 shadow-inner">
-                      <svg className="w-3.5 h-3.5 text-[#00F5D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="font-body text-[10px] font-bold uppercase tracking-widest text-[#00F5D4]">
-                        Verified Scale
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>
-            </ScrollReveal>
+            </div>
           ))}
         </div>
 
-        {/* ── WhatsApp Proof Section ── */}
-        <ScrollReveal data-reveal="up" className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-heading font-black text-3xl sm:text-4xl md:text-5xl uppercase text-white leading-tight mb-4">
-              Don't Just Trust The Numbers.<br/>
-              <span className="text-accent-2 drop-shadow-[0_0_30px_rgba(0,245,212,0.4)]">Read The Chats.</span>
-            </h2>
-            <p className="font-body text-base md:text-lg text-white/50">
-              Actual WhatsApp conversations with our clients. Zero fluff.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {chats.map((chat, idx) => (
-              <ScrollReveal key={idx} data-reveal="up" delay={idx * 100}>
-                <div className="bg-[#0A0A0F]/80 backdrop-blur-xl rounded-[1.5rem] border border-white/10 shadow-2xl overflow-hidden group transition-all duration-500 hover:-translate-y-2 hover:border-accent-2/40 flex flex-col h-full">
-                  
-                  {/* Header */}
-                  <div className="bg-white/5 px-5 py-4 flex items-center gap-4 border-b border-white/5">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00F5D4] to-[#7B2FFF] flex items-center justify-center font-heading font-black text-white text-lg shrink-0 shadow-lg">
-                      {chat.name.charAt(0)}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <h4 className="text-white font-bold text-sm tracking-wide">{chat.name}</h4>
-                        <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e] animate-pulse" />
-                      </div>
-                      <span className="text-white/40 text-[10px] uppercase tracking-widest font-bold">Online</span>
-                    </div>
-                  </div>
-
-                  {/* Message Body */}
-                  <div className="p-6 bg-black/40 flex-1 flex flex-col justify-end relative overflow-hidden">
-                    <div className="absolute inset-0 pattern-dots opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity" />
-                    
-                    <div className="bg-gradient-to-br from-[#1E1E28] to-[#12121A] border border-white/5 text-white/90 p-5 rounded-2xl rounded-tl-sm self-start shadow-xl relative z-10 group-hover:border-accent-2/30 transition-colors duration-500">
-                      <p className="font-body text-sm leading-relaxed">
-                        {highlightAmount(chat.msg)}
-                      </p>
-                      <span className="text-[10px] font-bold tracking-widest text-white/30 uppercase block mt-3 text-right">
-                        {chat.time}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </ScrollReveal>
 
         {/* Action Call */}
         <ScrollReveal data-reveal="fade" delay={400} className="mt-20 text-center">
@@ -224,6 +190,15 @@ export default function Portfolio() {
         @keyframes gradient-shift {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
+        }
+        @keyframes portfolio-card-in {
+          from { opacity: 0; transform: translateY(24px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @media (prefers-reduced-motion: reduce) {
+          [style*="portfolio-card-in"] { animation: none !important; opacity: 1 !important; transform: none !important; }
         }
       `}</style>
     </section>

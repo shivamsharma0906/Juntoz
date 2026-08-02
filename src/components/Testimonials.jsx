@@ -1,38 +1,17 @@
 import { useState } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
 
-const testimonials = [
-  {
-    quote: 'My bridal bookings tripled within 2 months. I went from 3–4 enquiries a month to 30+. The system genuinely works.',
-    name: 'Priya S.', role: 'Bridal Makeup Artist', city: 'Mumbai',
-    metric: '3× bookings in 60 days', color: '#FF3AF2',
-    rating: 5,
-  },
-  {
-    quote: 'They built my Instagram strategy and lead funnel from scratch. Now clients reach out to me — I stopped chasing them.',
-    name: 'Ananya K.', role: 'Freelance MUA', city: 'Delhi',
-    metric: '0 → consistent leads/month', color: '#00F5D4',
-    rating: 5,
-  },
-  {
-    quote: 'Content strategy improved and my salon appeared in local Google results within weeks. Real visibility, real bookings.',
-    name: 'Mehak R.', role: 'Salon Owner', city: 'Pune',
-    metric: 'Top local search results', color: '#7B2FFF',
-    rating: 5,
-  },
-  {
-    quote: 'The quality of enquiries improved dramatically — brides with real budgets, not price-shoppers. Worth every rupee.',
-    name: 'Kajol P.', role: 'Bridal Studio Owner', city: 'Mumbai',
-    metric: 'Higher-quality leads', color: '#FF3AF2',
-    rating: 5,
-  },
-  {
-    quote: 'First booking from their ads came within 3 weeks of launch. The targeting was spot-on for my ideal client.',
-    name: 'Shaheen M.', role: 'Premium MUA', city: 'Bangalore',
-    metric: 'First booking in 3 weeks', color: '#00F5D4',
-    rating: 5,
-  },
-];
+import { clientData, featuredQuote } from '../data/clients.js';
+
+const testimonials = clientData.filter(c => c.quote).map(c => ({
+  quote: c.quote,
+  name: c.name,
+  role: c.role,
+  city: c.city,
+  metric: c.metric,
+  color: c.color,
+  rating: c.rating
+}));
 
 const StarRow = ({ color }) => (
   <div className="flex gap-1">
@@ -143,17 +122,17 @@ function FeaturedQuote() {
         <path d="M14.017 21v-7.391c0-5.714 4.14-8.814 8.783-11.415l-1.42 2.62c-2.43 1.13-4.66 3.65-4.66 5.629h3.766v10.557h-6.469zm-13.017 0v-7.391c0-5.714 4.14-8.814 8.783-11.415l-1.42 2.62c-2.43 1.13-4.66 3.65-4.66 5.629h3.766v10.557h-6.469z"/>
       </svg>
       
-      <h3 className="font-heading font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter text-white leading-[1.1] mb-8">
-        "Our salon was struggling to find high-paying clients. Juntoz didn't just run ads; they built a <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">client acquisition machine</span>."
-      </h3>
+      <h3 className="font-heading font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter text-white leading-[1.1] mb-8"
+        dangerouslySetInnerHTML={{ __html: featuredQuote.quote }}
+      />
       
       <div className="inline-flex items-center gap-4 text-left">
         <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#00F5D4] to-[#7B2FFF] p-[2px]">
-           <div className="w-full h-full rounded-full bg-background flex items-center justify-center font-heading font-black text-white">SK</div>
+           <div className="w-full h-full rounded-full bg-background flex items-center justify-center font-heading font-black text-white">{featuredQuote.initials}</div>
         </div>
         <div>
-          <p className="font-heading font-black text-white text-sm uppercase tracking-wider">Sneha Kapoor</p>
-          <p className="font-body text-white/50 text-xs">Founder, Radiance Studio</p>
+          <p className="font-heading font-black text-white text-sm uppercase tracking-wider">{featuredQuote.name}</p>
+          <p className="font-body text-white/50 text-xs">{featuredQuote.role}</p>
         </div>
       </div>
     </div>

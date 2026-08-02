@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://juntoz-phi.vercel.app/sitemap.xml
+Sitemap: https://juntoz.in/sitemap.xml

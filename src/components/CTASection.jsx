@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import GlassShapes from './GlassShapes.jsx';
 
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20want%20to%20book%20a%20strategy%20call.';
 
@@ -63,6 +64,9 @@ export default function CTASection() {
         <div className="aurora-3 absolute w-[500px] h-[400px] rounded-full opacity-15"
           style={{ background: 'radial-gradient(ellipse, rgba(255,58,242,0.3) 0%, transparent 70%)', top: '50%', left: '40%' }} />
       </div>
+
+      {/* ── Chrome/glass floating shapes — desktop only ── */}
+      <GlassShapes variant="cta" />
 
       {/* ── GRID ── */}
       <div className="absolute inset-0 pattern-grid opacity-20 pointer-events-none z-0" />
@@ -147,22 +151,7 @@ export default function CTASection() {
             <span className="text-white/65 font-semibold">You leave with a plan — or it's on us.</span>
           </p>
 
-          {/* ── URGENCY BAR ── */}
-          <div className={`inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 rounded-xl mb-8 sm:mb-12 transition-all duration-700 delay-300 ${visible ? 'opacity-100' : 'opacity-0'}`}
-            style={{ background: 'rgba(255,107,53,0.09)', border: '1px solid rgba(255,107,53,0.28)' }}>
-            <span className="font-heading font-black text-[11px] uppercase tracking-widest" style={{ color: '#FF6B35' }}>
-              🔥 Only 3 of 5 June slots remaining
-            </span>
-            <div className="flex gap-1 ml-1">
-              {[...Array(5)].map((_, i) => (
-                <div key={i} className={`w-5 h-1.5 rounded-full transition-all duration-500`}
-                  style={i < 3
-                    ? { background: '#FF6B35', boxShadow: '0 0 6px rgba(255,107,53,0.9)', transitionDelay: `${300 + i * 80}ms` }
-                    : { background: 'rgba(255,255,255,0.1)' }}
-                />
-              ))}
-            </div>
-          </div>
+          
 
           {/* ── CTA BUTTON with spinning gradient ring ── */}
           <div className={`mb-16 transition-all duration-1000 delay-500 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>

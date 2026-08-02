@@ -7,6 +7,8 @@ const footerLinks = [
   { label: 'Work', to: '/work' },
   { label: 'Results', to: '/results' },
   { label: 'About', to: '/about' },
+  { label: 'Blog', to: '/blog' },
+  { label: 'Contact', to: '/contact' },
 ];
 
 const socials = [
@@ -141,7 +143,7 @@ export default function Footer() {
               backgroundClip: 'text',
             }}>Your Growth.</span>
           </h2>
-          
+
           {/* Circular Learn More Badge — continuously spinning */}
           <Link to="/about" className="absolute right-0 -top-8 hidden lg:flex items-center justify-center w-24 h-24 hover:scale-110 transition-transform duration-500 cursor-pointer z-20">
             <svg
@@ -176,7 +178,7 @@ export default function Footer() {
 
           {/* Email */}
           <a
-            href="mailto:hello@juntoz.com"
+            href="mailto:Sujal.Mehta@juntoz.in"
             className="group flex items-center gap-4 flex-1 min-w-0 px-6 py-5 rounded-2xl glass-card hover:border-accent-2/40 hover:bg-accent-2/10 transition-all duration-300"
             onMouseEnter={(e) => { e.currentTarget.style.willChange = 'transform'; }}
             onMouseLeave={(e) => { resetTilt(e); e.currentTarget.style.willChange = 'auto'; }}
@@ -189,7 +191,7 @@ export default function Footer() {
             </div>
             <div className="text-left min-w-0">
               <p className="font-body text-white/35 text-[10px] uppercase tracking-widest">Email</p>
-              <p className="font-body text-white/70 text-sm font-semibold group-hover:text-white transition-colors duration-300 truncate">hello@juntoz.com</p>
+              <p className="font-body text-white/70 text-sm font-semibold group-hover:text-white transition-colors duration-300 truncate">Sujal.Mehta@juntoz.in</p>
             </div>
           </a>
 
@@ -327,7 +329,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {[
                 { text: 'Mumbai, India', href: null },
-                { text: 'hello@juntoz.com', href: 'mailto:hello@juntoz.com' },
+                { text: 'Sujal.Mehta@juntoz.in', href: 'mailto:Sujal.Mehta@juntoz.in' },
                 { text: '+91 90040 01800', href: 'tel:+919004001800' },
               ].map((item, i) => (
                 <li key={i}>

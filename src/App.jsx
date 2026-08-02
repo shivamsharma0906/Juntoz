@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import Home from './pages/Home';
+import ErrorBoundary from './components/ErrorBoundary';
 
 // Lazy load heavy desktop-only modules (Three.js/3D Scene and spring cursors)
 const FloatingShapes = lazy(() => import('./components/FloatingShapes'));
@@ -12,9 +13,14 @@ const MagneticCursor = lazy(() => import('./components/MagneticCursor'));
 
 // Lazy load non-critical pages to reduce initial JavaScript bundle size (Fixes high FCP/LCP)
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
-const PortfolioPage = lazy(() => import('./pages/PortfolioPage'));
+const WorkPage = lazy(() => import('./pages/WorkPage'));
+const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage'));
 const ResultsPage = lazy(() => import('./pages/ResultsPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 // Re-run reveal scan on every route change (catches freshly mounted [data-reveal] elements)
 function ScrollToTop() {
@@ -50,7 +56,16 @@ function App() {
     const handleResize = () => setIsDesktop(window.innerWidth >= 768);
     handleResize();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    
+    const handlePreloadError = () => {
+      window.location.reload();
+    };
+    window.addEventListener('vite:preloadError', handlePreloadError);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('vite:preloadError', handlePreloadError);
+    };
   }, []);
 
   return (
@@ -77,15 +92,22 @@ function App() {
         <Navbar />
 
         <main>
-          <Suspense fallback={<div className="h-screen w-full flex items-center justify-center"><div className="w-8 h-8 border-4 border-[#00F5D4] border-t-transparent rounded-full animate-spin"></div></div>}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/work" element={<PortfolioPage />} />
-              <Route path="/results" element={<ResultsPage />} />
-              <Route path="/about" element={<AboutPage />} />
-            </Routes>
-          </Suspense>
+          <ErrorBoundary message="A section of the page failed to load due to a recent update. Please reload the page to get the latest version.">
+            <Suspense fallback={<div className="h-screen w-full flex items-center justify-center"><div className="w-8 h-8 border-4 border-[#00F5D4] border-t-transparent rounded-full animate-spin"></div></div>}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/work" element={<WorkPage />} />
+                <Route path="/work/:slug" element={<CaseStudyPage />} />
+                <Route path="/results" element={<ResultsPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/blog" element={<BlogPage />} />
+                <Route path="/blog/:slug" element={<BlogPostPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
         </main>
 
         <Footer />

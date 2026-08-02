@@ -1,39 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
+import useCountUp from '../hooks/useCountUp.js';
 
 const stats = [
   { value: 200, suffix: '+',  label: 'MUAs & Salons',         color: '#FF3AF2', icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6' },
-  { value: 100, suffix: '+',  label: 'Active Clients / Month', color: '#00F5D4', icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z' },
-  { value: 3,   suffix: '+',  label: 'Years Experience',       color: '#7B2FFF', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
-  { value: 5.0, suffix: ' ★', label: 'Client Rating',          color: '#FFE600', decimal: true, icon: 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z' },
+  { value: 50, suffix: '+',  label: 'Active Clients / Month', color: '#00F5D4', icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z' },
+  { value: 5,   suffix: '+',  label: 'Years Experience',       color: '#7B2FFF', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
+  { value: 4.5, suffix: ' ★', label: 'Client Rating',          color: '#FFE600', decimal: true, icon: 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z' },
 ];
 
 const GOOGLE_URL = 'https://www.google.com/maps/place/Juntoz+Digital+Marketing+Agency/@19.3016668,72.849608,17z/data=!4m8!3m7!1s0x3be7b10eda3a9a65:0x3c3c948829e3150e!8m2!3d19.3016668!4d72.8521829!9m1!1b1!16s%2Fg%2F11l228zbp7?entry=ttu&g_ep=EgoyMDI2MDQyNy4wIKXMDSoASAFQAw%3D%3D';
 
-/* ── Counter: rAF-driven ── */
-function Counter({ value, suffix, decimal, started }) {
-  const elRef  = useRef(null);
-  const donRef = useRef(false);
-
-  useEffect(() => {
-    if (!started || donRef.current || !elRef.current) return;
-    donRef.current = true;
-    const duration  = 2000;
-    const startTime = performance.now();
-    const end       = decimal ? value : Math.round(value);
-
-    const tick = (now) => {
-      const p    = Math.min((now - startTime) / duration, 1);
-      const ease = 1 - Math.pow(1 - p, 3);
-      const cur  = decimal ? (ease * end).toFixed(1) : Math.round(ease * end);
-      if (elRef.current) elRef.current.textContent = cur + suffix;
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, [started, value, decimal, suffix]);
-
-  return <span ref={elRef}>{decimal ? (0).toFixed(1) : 0}{suffix}</span>;
-}
+/* ── Counter component removed in favor of useCountUp hook ── */
 
 /* ── StatCard: Hover effects and animated borders ── */
 function StatCard({ s, started }) {
@@ -62,7 +40,6 @@ function StatCard({ s, started }) {
           </svg>
         </div>
 
-        {/* Number */}
         <div
           className="relative z-10 font-heading font-black leading-none mt-2 transition-transform duration-300 group-hover:scale-110 origin-bottom"
           style={{
@@ -71,7 +48,11 @@ function StatCard({ s, started }) {
             textShadow: `0 0 30px ${s.color}40`,
           }}
         >
-          <Counter value={s.value} suffix={s.suffix} decimal={s.decimal} started={started} />
+          {(() => {
+            const { value } = useCountUp(s.value, { duration: 2000, started });
+            const display = s.decimal ? value.toFixed(1) : value;
+            return <span>{display}{s.suffix}</span>;
+          })()}
         </div>
         
         {/* Divider line */}

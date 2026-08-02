@@ -9,57 +9,19 @@
  *   Separator: thin 1px horizontal line between rows
  */
 import { useEffect, useRef, useState } from 'react';
+import useCountUp from '../hooks/useCountUp.js';
+import { clientData } from '../data/clients.js';
 
 /* ── Result rows ── */
-const RESULTS = [
-  {
-    label: '+200 Bookings',
-    metric: '+340%',
-    client: 'Glam Studio',
-    service: 'Instagram & WhatsApp Funnels',
-    color: '#00F5D4',
-  },
-  {
-    label: '+1,800 Profile Visits',
-    metric: '+220%',
-    client: 'Luxe Nail Bar',
-    service: 'Reels & Content Strategy',
-    color: '#7B2FFF',
-  },
-  {
-    label: '+450 New Clients',
-    metric: '+180%',
-    client: 'Aura Skin Clinic',
-    service: 'Performance Ads + Local SEO',
-    color: '#FF3AF2',
-  },
-  {
-    label: '+3,200 Story Views',
-    metric: '+95%',
-    client: 'Bridal by Priya',
-    service: 'Branding & Lead Generation',
-    color: '#00F5D4',
-  },
-];
+const RESULTS = clientData.filter(c => c.statsLabel).map(c => ({
+  label: c.statsLabel,
+  metric: c.statsMetric,
+  client: c.businessName || c.name,
+  service: c.statsService,
+  color: c.color,
+}));
 
-/* ── Count-up hook ── */
-function useCountUp(target, duration = 1800, started = false) {
-  const [val, setVal] = useState(0);
-  useEffect(() => {
-    if (!started) return;
-    let st = null;
-    const tick = (ts) => {
-      if (!st) st = ts;
-      const p = Math.min((ts - st) / duration, 1);
-      const e = 1 - Math.pow(1 - p, 3);
-      setVal(Math.round(e * target));
-      if (p < 1) requestAnimationFrame(tick);
-      else setVal(target);
-    };
-    requestAnimationFrame(tick);
-  }, [started, target, duration]);
-  return val;
-}
+/* ── Local useCountUp removed in favor of shared hook ── */
 
 /* ── Trend arrow SVG ── */
 const TrendArrow = ({ color }) => (
@@ -73,17 +35,16 @@ const TrendArrow = ({ color }) => (
   </svg>
 );
 
-/* ── Animated metric — strips the +/% for counting, re-adds ── */
 function AnimatedMetric({ metric, started, color, delay = 0 }) {
   // Extract numeric portion e.g. "+340%" → 340
   const num = parseInt(metric.replace(/[^0-9]/g, ''), 10);
   const prefix = metric.startsWith('+') ? '+' : '';
   const suffix = metric.endsWith('%') ? '%' : '';
-  const count = useCountUp(num, 1800 + delay, started);
+  const { value } = useCountUp(num, { duration: 1800, started, delay });
 
   return (
     <span style={{ color, textShadow: `0 0 40px ${color}45` }}>
-      {prefix}{count}{suffix}
+      {prefix}{value}{suffix}
     </span>
   );
 }

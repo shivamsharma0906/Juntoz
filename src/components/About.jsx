@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
 
 const proofStats = [
@@ -10,7 +10,7 @@ const proofStats = [
 const values = [
   {
     n: '01',
-    headline: 'More Bridal Bookings',
+    headline: 'More Bookings',
     sub: 'Not Just Likes',
     color: '#FF3AF2',
     icon: '💍',
@@ -181,6 +181,9 @@ const ValueCard = ({ value }) => {
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+  const glow1Ref = useRef(null);
+  const glow2Ref = useRef(null);
+  const rafRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -193,6 +196,29 @@ export default function About() {
     return () => observer.disconnect();
   }, []);
 
+  /* ── Scroll parallax on background glows ── */
+  useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced || window.innerWidth < 768) return;
+
+    const onScroll = () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        const el = sectionRef.current;
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const p = Math.max(0, Math.min(1, -rect.top / rect.height));
+        if (glow1Ref.current) glow1Ref.current.style.transform = `translateY(${p * -40}px)`;
+        if (glow2Ref.current) glow2Ref.current.style.transform = `translateY(${p * 30}px)`;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
   return (
     <section
       id="about"
@@ -203,8 +229,8 @@ export default function About() {
       {/* Cinematic Background Ambience */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute inset-0 pattern-grid opacity-100" />
-        <div className="absolute top-[10%] -left-[10%] w-[500px] h-[500px] rounded-full blur-[150px] opacity-30" style={{ background: '#FF3AF2' }} />
-        <div className="absolute top-[40%] -right-[10%] w-[600px] h-[600px] rounded-full blur-[150px] opacity-20" style={{ background: '#00F5D4' }} />
+        <div ref={glow1Ref} className="absolute top-[10%] -left-[10%] w-[500px] h-[500px] rounded-full blur-[150px] opacity-30" style={{ background: '#FF3AF2', willChange: 'transform' }} />
+        <div ref={glow2Ref} className="absolute top-[40%] -right-[10%] w-[600px] h-[600px] rounded-full blur-[150px] opacity-20" style={{ background: '#00F5D4', willChange: 'transform' }} />
         <div className="absolute bottom-0 left-[30%] w-[400px] h-[400px] rounded-full blur-[120px] opacity-20" style={{ background: '#7B2FFF' }} />
       </div>
 

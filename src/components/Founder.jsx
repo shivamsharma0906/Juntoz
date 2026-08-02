@@ -1,39 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
 import founderImg from './Founder.jpeg';
+import { COMPANY_STATS } from '../data/clients.js';
+import useCountUp from '../hooks/useCountUp.js';
 
 const WA_SOFT =
   'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20a%20custom%20growth%20plan%20for%20my%20business.';
 
 /* ── tiny stat badge ── */
 function StatBadge({ value, label, color, delay, position }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
   const target = parseInt(value, 10);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        obs.unobserve(el);
-        let start = null;
-        const duration = 1400;
-        const step = (ts) => {
-          if (!start) start = ts;
-          const progress = Math.min((ts - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          setCount(Math.round(eased * target));
-          if (progress < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-      },
-      { threshold: 0.3 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [target]);
+  const { value: count, ref } = useCountUp(target, { duration: 1400, threshold: 0.3 });
 
   return (
     <div
@@ -198,8 +175,8 @@ export default function Founder() {
               </div>
 
               {/* ── Floating stat badges ── */}
-              <StatBadge value="200" label="Clients Scaled" color="#00F5D4" delay={0} position="-bottom-5 -left-6 md:-left-10" />
-              <StatBadge value="5" label="Years Experience" color="#7B2FFF" delay={0.6} position="-top-5 -right-6 md:-right-10" />
+              <StatBadge value={COMPANY_STATS.clientsScaled.toString()} label="Clients Scaled" color="#00F5D4" delay={0} position="-bottom-5 -left-6 md:-left-10" />
+              <StatBadge value={COMPANY_STATS.yearsActive.toString()} label="Years Experience" color="#7B2FFF" delay={0.6} position="-top-5 -right-6 md:-right-10" />
               <StatBadge value="98" label="% Retention" color="#FF3AF2" delay={1.2} position="top-1/2 -right-6 md:-right-12 -translate-y-1/2" />
             </div>
           </ScrollReveal>

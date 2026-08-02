@@ -1,26 +1,19 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import InteractiveParticleField from './InteractiveParticleField.jsx';
+import { COMPANY_STATS } from '../data/clients.js';
+import useCountUp from '../hooks/useCountUp.js';
+import GlassShapes from './GlassShapes.jsx';
 
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20to%20know%20how%20you%20can%20grow%20my%20business.';
 
 /* ─── rotating headline words ────────────────────────────────── */
 const ROTATING_WORDS = ['Calendar.', 'Bookings.', 'Revenue.', 'Growth.'];
 
-/* ─── dual marquee rows ───────────────────────────────────────── */
-const MARQUEE_ROW_1 = [
-  'Social Media Growth', 'Performance Ads', 'Branding', 'Content Creation',
-  'Website Design', 'Reels & Shoots', 'Lead Generation', 'Instagram Strategy',
-];
-const MARQUEE_ROW_2 = [
-  'Beauty Marketing', 'Salon Growth', 'MUA Clients', 'WhatsApp Funnels',
-  'Local SEO', 'Google Ads', 'Portfolio Design', 'Client Bookings',
-];
-
 /* ─── stat pills ──────────────────────────────────────────────── */
 const STATS = [
-  { value: 200, suffix: '+', label: 'Beauty Clients', color: '#00F5D4' },
-  { value: 5.0, suffix: '★', label: 'Google Rating',  color: '#FFE600', decimal: true },
-  { value: 3,   suffix: '+', label: 'Years Active',   color: '#7B2FFF' },
+  { value: COMPANY_STATS.clientsScaled, suffix: '+', label: 'Beauty Clients', color: '#00F5D4' },
+  { value: COMPANY_STATS.googleRating, suffix: '★', label: 'Google Rating',  color: '#FFE600', decimal: true },
+  { value: COMPANY_STATS.yearsActive,   suffix: '+', label: 'Years Active',   color: '#7B2FFF' },
 ];
 
 /* ─── floating particles — reduced count for performance ─────── */
@@ -38,24 +31,6 @@ const PARTICLES = Array.from({ length: 8 }, (_, i) => ({
 /* ════════════════════════════════════════════════════════════════
    SUB-COMPONENTS
 ════════════════════════════════════════════════════════════════ */
-
-/* count-up hook */
-function useCountUp(target, duration = 1800, start = false) {
-  const [value, setValue] = useState(0);
-  useEffect(() => {
-    if (!start) return;
-    let st = null;
-    const step = (ts) => {
-      if (!st) st = ts;
-      const p = Math.min((ts - st) / duration, 1);
-      const ease = 1 - Math.pow(1 - p, 3);
-      setValue(target % 1 !== 0 ? +(ease * target).toFixed(1) : Math.floor(ease * target));
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [start, target, duration]);
-  return value;
-}
 
 /* word-by-word 3D flip reveal */
 function SplitHeading({ children, visible, baseDelay = 0.12 }) {
@@ -106,9 +81,9 @@ function RotatingWord({ words, visible }) {
   return (
     <span className="relative inline-block" style={{ perspective: '400px' }}>
       <span
-        className="text-transparent bg-clip-text inline-block"
+        className="relative inline-block glossy-3d-text"
+        data-text={words[index]}
         style={{
-          backgroundImage: 'linear-gradient(120deg, #00F5D4 0%, #7B2FFF 55%, #FF3AF2 100%)',
           opacity: isOut ? 0 : 1,
           transform: isOut
             ? 'translateY(-18px) rotateX(-18deg) skewY(-3deg)'
@@ -118,7 +93,20 @@ function RotatingWord({ words, visible }) {
           willChange: 'opacity, transform, filter',
         }}
       >
-        {words[index]}
+        <span 
+          className="relative z-10 text-transparent bg-clip-text inline-block"
+          style={{ backgroundImage: 'linear-gradient(120deg, #00F5D4 0%, #7B2FFF 55%, #FF3AF2 100%)' }}
+        >
+          {words[index]}
+        </span>
+        {/* Glossy top highlight overlay */}
+        <span 
+          className="absolute inset-0 z-20 pointer-events-none text-transparent bg-clip-text"
+          style={{ backgroundImage: 'linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 35%, rgba(0,0,0,0.3) 80%, rgba(255,255,255,0.3) 100%)' }}
+          aria-hidden="true"
+        >
+          {words[index]}
+        </span>
       </span>
       {/* glow halo — reduced on mobile */}
       <span
@@ -165,8 +153,8 @@ function MarqueeRow({ tags, reverse = false, speed = 30 }) {
 
 /* floating stat pill — compact on mobile */
 function StatPill({ stat, started, index }) {
-  const val = useCountUp(stat.value, 1600, started);
-  const display = stat.decimal ? val.toFixed(1) : val;
+  const { value } = useCountUp(stat.value, { duration: 1600, started });
+  const display = stat.decimal ? value.toFixed(1) : value;
 
   return (
     <div
@@ -206,6 +194,7 @@ export default function Hero() {
   const [visible,      setVisible]      = useState(false);
   const [statsStarted, setStatsStarted] = useState(false);
   const [isDesktop,    setIsDesktop]    = useState(false);
+  const [mousePos,     setMousePos]     = useState({ x: 0.5, y: 0.5 });
 
   /* detect desktop once (avoids SSR mismatch) */
   useEffect(() => {
@@ -232,6 +221,7 @@ export default function Hero() {
       if (!rect || !glowRef.current) return;
       const mx = (e.clientX - rect.left) / rect.width;
       const my = (e.clientY - rect.top) / rect.height;
+      setMousePos({ x: mx, y: my });
       glowRef.current.style.transform =
         `translate(calc(-50% + ${(mx - 0.5) * 120}px), calc(-50% + ${(my - 0.5) * 80}px))`;
     });
@@ -350,6 +340,9 @@ export default function Hero() {
           className="absolute bottom-0 left-0 w-[150px] sm:w-[300px] h-[150px] sm:h-[300px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(circle at bottom left, rgba(0,245,212,0.05) 0%, transparent 65%)' }}
         />
+
+        {/* Chrome/glass floating SVG shapes — desktop only */}
+        {isDesktop && <GlassShapes variant="hero" mouseX={mousePos.x} mouseY={mousePos.y} />}
       </div>
 
       {/* ════ CONTENT — pushes marquee to bottom via flex-1 ════ */}
@@ -486,35 +479,43 @@ export default function Hero() {
       </div>{/* end content container */}
 
       {/* ══════════════════════════════════════════════════════════
-          DUAL MARQUEE STRIP
+          TRUST BADGE STRIP
       ══════════════════════════════════════════════════════════ */}
-      {/* ══ DUAL MARQUEE STRIP — pinned to bottom ══ */}
       <div
-        className="w-full relative z-10 overflow-hidden mt-auto"
+        className="w-full relative z-10 mt-auto py-3 sm:py-4 flex items-center justify-center"
         style={{
           borderTop: '1px solid rgba(255,255,255,0.06)',
           background: 'rgba(255,255,255,0.012)',
-          /* No backdropFilter on mobile — very expensive */
           ...(isDesktop ? { backdropFilter: 'blur(4px)' } : {}),
           ...item(1.15),
         }}
       >
-        {/* Row 1 — forward */}
-        <div className="py-2">
-          <MarqueeRow tags={MARQUEE_ROW_1} reverse={false} speed={34} />
-        </div>
-
-        {/* divider */}
-        <div style={{ height: '1px', background: 'rgba(255,255,255,0.04)' }} />
-
-        {/* Row 2 — reverse */}
-        <div className="py-2">
-          <MarqueeRow tags={MARQUEE_ROW_2} reverse={true} speed={28} />
-        </div>
+        <span className="flex items-center gap-3 text-[9px] sm:text-[11px] text-white/30 font-heading font-bold uppercase tracking-[0.3em]">
+          <span className="w-1.5 h-1.5 bg-[#FF3AF2] rounded-full animate-pulse shadow-[0_0_8px_#FF3AF2]" />
+          Trusted by 200+ beauty businesses across India
+          <span className="w-1.5 h-1.5 bg-[#00F5D4] rounded-full shadow-[0_0_8px_#00F5D4]" />
+        </span>
       </div>
 
       {/* ════ KEYFRAMES + COMPONENT STYLES ════ */}
       <style>{`
+        /* ── glossy 3d text effect ── */
+        .glossy-3d-text::after {
+          content: attr(data-text);
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: 0;
+          color: transparent;
+          text-shadow: 
+            0 1px 0 rgba(255,255,255,0.4),
+            0 2px 0 #00F5D4,
+            0 3px 0 #7B2FFF,
+            0 4px 0 #FF3AF2,
+            0 5px 0 rgba(255,58,242,0.5),
+            0 8px 15px rgba(0,0,0,0.6);
+        }
+
         /* ── hero glow pulse ── */
         @keyframes hero-glow {
           0%, 100% { opacity: 0.5; transform: scale(0.95); }
@@ -540,14 +541,10 @@ export default function Hero() {
           50%       { transform: translateY(-4px); }
         }
 
-        /* ── dual marquee ── */
-        @keyframes marquee-fwd {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        @keyframes marquee-rev {
-          0%   { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
+        /* ── stat pill float ── */
+        @keyframes stat-float {
+          0%, 100% { transform: translateY(0); }
+          50%       { transform: translateY(-4px); }
         }
 
         /* ── primary CTA ── */
@@ -588,8 +585,7 @@ export default function Hero() {
         /* ── reduced-motion ── */
         @media (prefers-reduced-motion: reduce) {
           .hero-cta-primary, .hero-cta-sweep,
-          [style*="float-particle"], [style*="stat-float"],
-          [style*="marquee-fwd"], [style*="marquee-rev"] {
+          [style*="float-particle"], [style*="stat-float"] {
             animation: none !important;
             transition: none !important;
           }
