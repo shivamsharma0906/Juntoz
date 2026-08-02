@@ -1,7 +1,7 @@
 import About from '../components/About';
 import AboutUs from '../components/AboutUs';
 import Founder from '../components/Founder';
-import TeamSection from '../components/TeamSection';
+// import TeamSection from '../components/TeamSection';
 import BusinessCard from '../components/BusinessCard';
 
 export default function AboutPage() {
@@ -10,7 +10,7 @@ export default function AboutPage() {
       <AboutUs />
       <About />
       <Founder />
-      <TeamSection />
+      {/* <TeamSection /> */}
       <BusinessCard />
     </div>
   );

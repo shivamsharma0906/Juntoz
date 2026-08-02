@@ -255,6 +255,8 @@ export default function Footer() {
               <img
                 src={logo}
                 alt="Juntoz"
+                loading="lazy"
+                decoding="async"
                 width="224"
                 height="56"
                 className="h-14 w-auto transition-opacity duration-300"
@@ -308,7 +310,7 @@ export default function Footer() {
                 <li key={link.to}>
                   <Link
                     to={link.to}
-                    className="font-body text-sm inline-flex items-center gap-2 transition-all duration-200"
+                    className="font-body text-sm inline-flex items-center gap-2 py-1.5 px-1 transition-all duration-200"
                     style={{ color: 'rgba(255,255,255,0.55)' }}
                     onMouseEnter={e => { e.currentTarget.style.color = '#fff'; }}
                     onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.55)'; }}

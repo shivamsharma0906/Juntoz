@@ -9,7 +9,7 @@ const PROOF = [
   { num: '200+', label: 'Brands Scaled' },
   { num: '5.0 ★', label: 'Google Rating' },
   { num: '3×',   label: 'Avg. Growth'   },
-  { num: '3yrs', label: 'Experience'    },
+  { num: '5yrs', label: 'Experience'    },
 ];
 
 export default function CTASection() {

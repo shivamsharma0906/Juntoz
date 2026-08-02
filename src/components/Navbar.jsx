@@ -248,7 +248,7 @@ export default function Navbar() {
 
             {/* ── Mobile hamburger ── */}
             <button
-              className="md:hidden flex items-center gap-3 relative z-[60] group/menu"
+              className="md:hidden flex items-center gap-2.5 relative z-[60] group/menu min-h-[44px] min-w-[44px] px-2 justify-center"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Toggle menu"
             >

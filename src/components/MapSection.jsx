@@ -61,7 +61,7 @@ export default function MapSection({
         <div className="flex flex-col items-center text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-4">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-[#00F5D4] opacity-60" />
-            <p className="font-body text-[#00F5D4] text-xs font-bold uppercase tracking-[0.25em]">Find Our HQ</p>
+            <p className="font-body text-[#00F5D4] text-xs font-bold uppercase tracking-[0.25em]">Find Our Office</p>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-[#00F5D4] opacity-60" />
           </div>
           <h2 className="font-heading font-black uppercase text-white leading-none tracking-tighter text-4xl sm:text-6xl mb-4">

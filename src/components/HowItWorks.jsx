@@ -160,7 +160,7 @@ export default function HowItWorks() {
         </div>
 
         {/* Mobile Vertical Timeline */}
-        <div className="lg:hidden relative ml-4 sm:ml-8 pl-6 sm:pl-8 space-y-8 py-4">
+        <div className="lg:hidden relative ml-3 sm:ml-8 pl-7 sm:pl-8 space-y-8 py-4">
           
           {/* Animated Vertical Line */}
           <div className="absolute top-0 bottom-0 left-0 w-px bg-white/10 z-0">
@@ -183,7 +183,7 @@ export default function HowItWorks() {
             >
               
               {/* Node Point */}
-              <div className="absolute -left-[37px] top-8 w-4 h-4 rounded-full border-2 border-[#05050C] z-10 transition-all duration-500 group-hover:scale-150" 
+              <div className="absolute -left-[35px] sm:-left-[39px] top-8 w-4 h-4 rounded-full border-2 border-[#05050C] z-10 transition-all duration-500 group-hover:scale-150" 
                 style={{ background: step.color, boxShadow: `0 0 15px ${step.color}60` }} />
 
               {/* Huge Background Number */}

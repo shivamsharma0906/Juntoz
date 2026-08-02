@@ -60,7 +60,7 @@ export default function TeamSection() {
                   {/* Photo */}
                   <div className="w-full aspect-[4/5] rounded-xl overflow-hidden mb-6 relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none" />
-                    <img src={member.image} alt={member.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale group-hover:grayscale-0" />
+                    <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale group-hover:grayscale-0" />
                     
                     {/* Role Tag overlay on image */}
                     <div className="absolute bottom-4 left-4 z-20">

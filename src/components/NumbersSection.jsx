@@ -136,8 +136,8 @@ function ResultRow({ row, index, started, revealed }) {
           <span
             className="font-body leading-snug"
             style={{
-              fontSize: 'clamp(0.6rem, 1.2vw, 0.78rem)',
-              color: hovered ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.28)',
+              fontSize: 'clamp(0.65rem, 1.2vw, 0.78rem)',
+              color: hovered ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.48)',
               transition: 'color 0.35s ease',
             }}
           >

@@ -10,9 +10,9 @@
  * - Skips <nav> elements to avoid double-transform conflict with Navbar magnetics
  * - Cleans up dataset flags on unmount so HMR re-mounts work correctly
  */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 
-export default function MagneticCursor() {
+const MagneticCursor = memo(function MagneticCursor() {
   const dotRef   = useRef(null);
   const ringRef  = useRef(null);
   const pos      = useRef({ x: -200, y: -200 });
@@ -195,4 +195,6 @@ export default function MagneticCursor() {
       />
     </>
   );
-}
+});
+
+export default MagneticCursor;

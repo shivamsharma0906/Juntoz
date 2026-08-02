@@ -98,7 +98,7 @@ export default function Services() {
   };
 
   return (
-    <section id="services" ref={sectionRef} className="relative py-24 md:py-32 bg-background overflow-hidden">
+    <section id="services" ref={sectionRef} className="relative py-14 sm:py-20 md:py-32 bg-background overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" aria-hidden="true" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[150px] pointer-events-none z-0 opacity-20"
@@ -106,9 +106,9 @@ export default function Services() {
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none z-0 opacity-10"
         style={{ background: 'radial-gradient(circle, #FF3AF2, transparent)' }} aria-hidden="true" />
 
-      <div className="relative z-10 container mx-auto px-6 max-w-7xl">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 max-w-7xl">
         {/* Header */}
-        <ScrollReveal data-reveal="up" className="text-center mb-16 md:mb-24 px-4 sm:px-0">
+        <ScrollReveal data-reveal="up" className="text-center mb-10 md:mb-24 px-4 sm:px-0">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6">
             <span className="w-2 h-2 rounded-full bg-[#00F5D4] header-pulse" />
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">What We Do</span>
@@ -163,14 +163,13 @@ export default function Services() {
                 className="group relative h-full bg-[#05050C] rounded-[2rem] p-[1px] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02]"
                 style={{ boxShadow: `0 10px 40px rgba(0,0,0,0.3)` }}
               >
-                {/* Animated Border Gradient — keyframes now defined locally above,
-                   so this no longer silently no-ops if global CSS doesn't define it */}
+                {/* Animated Border Gradient */}
                 <div
                   className="service-border-anim absolute inset-0 bg-gradient-to-br opacity-40 group-hover:opacity-100 transition-opacity duration-500"
                   style={{ background: `linear-gradient(135deg, ${s.color}60, transparent, ${s.color}60)` }}
                 />
 
-                <div className="relative h-full bg-[#080810]/95 backdrop-blur-2xl rounded-[31px] p-8 flex flex-col z-10 overflow-hidden">
+                <div className="relative h-full bg-[#080810]/95 backdrop-blur-2xl rounded-[31px] p-5 xs:p-6 sm:p-8 flex flex-col z-10 overflow-hidden">
 
                   {/* Subtle Inner Glow */}
                   <div
@@ -180,15 +179,15 @@ export default function Services() {
                   />
 
                   {/* Header: Icon & Number */}
-                  <div className="flex items-start justify-between mb-8 relative z-10">
+                  <div className="flex items-start justify-between mb-6 sm:mb-8 relative z-10">
                     <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6"
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6"
                       style={{ backgroundColor: `${s.color}15`, border: `1px solid ${s.color}35`, color: s.color, boxShadow: `0 0 20px ${s.color}20` }}
                     >
                       {s.icon}
                     </div>
                     <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center font-heading font-black text-xs shadow-lg transition-transform duration-500 group-hover:scale-110"
+                      className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-heading font-black text-xs shadow-lg transition-transform duration-500 group-hover:scale-110"
                       style={{ backgroundColor: s.color, color: '#08080f', boxShadow: `0 0 15px ${s.color}40` }}
                     >
                       {s.num}
@@ -196,8 +195,8 @@ export default function Services() {
                   </div>
 
                   {/* Titles */}
-                  <div className="mb-6 relative z-10">
-                    <h3 className="font-heading font-black text-white text-xl md:text-2xl uppercase leading-tight tracking-tight mb-2">
+                  <div className="mb-5 sm:mb-6 relative z-10">
+                    <h3 className="font-heading font-black text-white text-lg sm:text-xl md:text-2xl uppercase leading-tight tracking-tight mb-1.5 sm:mb-2">
                       {s.title}
                     </h3>
                     <p className="font-body text-xs font-bold uppercase tracking-[0.2em]" style={{ color: s.color }}>
@@ -207,21 +206,21 @@ export default function Services() {
 
                   {/* Badge */}
                   <div
-                    className="mb-6 px-4 py-1.5 rounded-full font-body text-[10px] font-bold uppercase tracking-widest w-fit relative z-10"
+                    className="mb-5 sm:mb-6 px-3.5 py-1.5 rounded-full font-body text-[10px] font-bold uppercase tracking-widest w-fit relative z-10"
                     style={{ background: `${s.color}15`, border: `1px solid ${s.color}30`, color: s.color }}
                   >
                     {s.what}
                   </div>
 
                   {/* Description */}
-                  <p className="font-body text-white/60 text-sm leading-relaxed mb-8 flex-1 relative z-10 break-words">
+                  <p className="font-body text-white/60 text-xs sm:text-sm leading-relaxed mb-6 sm:mb-8 flex-1 relative z-10 break-words">
                     {s.desc}
                   </p>
 
                   {/* List Points */}
-                  <ul className="space-y-3 relative z-10 pt-6 border-t border-white/10">
+                  <ul className="space-y-2.5 sm:space-y-3 relative z-10 pt-5 sm:pt-6 border-t border-white/10">
                     {s.points.map((pt, j) => (
-                      <li key={j} className="flex items-center gap-3 font-body text-white/70 text-xs md:text-sm break-words">
+                      <li key={j} className="flex items-center gap-2.5 sm:gap-3 font-body text-white/70 text-xs md:text-sm break-words">
                         <span className="w-2 h-2 rounded-full shrink-0 shadow-lg transition-transform duration-300 group-hover:scale-150" style={{ backgroundColor: s.color, boxShadow: `0 0 8px ${s.color}` }} />
                         {pt}
                       </li>
@@ -234,8 +233,8 @@ export default function Services() {
         </div>
 
         {/* Enhanced Dots (Mobile Only) */}
-        <div className="mb-12 px-5 lg:hidden">
-          <div className="flex flex-wrap items-center justify-center gap-3" role="tablist" aria-label="Service slides">
+        <div className="mb-8 px-5 lg:hidden">
+          <div className="flex flex-wrap items-center justify-center gap-1" role="tablist" aria-label="Service slides">
             {services.map((_, i) => (
               <button
                 key={i}
@@ -243,17 +242,21 @@ export default function Services() {
                 aria-label={`Go to service ${i + 1}`}
                 aria-current={activeIdx === i ? 'true' : undefined}
                 role="tab"
-                className="relative rounded-full transition-all duration-300 hover:scale-125 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
-                style={{
-                  width: activeIdx === i ? '36px' : '10px',
-                  height: '10px',
-                  background: activeIdx === i ? services[i].color : 'rgba(255,255,255,0.2)',
-                  boxShadow: activeIdx === i ? `0 0 12px ${services[i].color}` : 'none',
-                }}
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none"
               >
-                {activeIdx === i && (
-                  <span className="dot-ping absolute inset-0 rounded-full animate-ping opacity-40" style={{ background: services[i].color }} />
-                )}
+                <span
+                  className="relative rounded-full transition-all duration-300 inline-block"
+                  style={{
+                    width: activeIdx === i ? '32px' : '10px',
+                    height: '10px',
+                    background: activeIdx === i ? services[i].color : 'rgba(255,255,255,0.2)',
+                    boxShadow: activeIdx === i ? `0 0 12px ${services[i].color}` : 'none',
+                  }}
+                >
+                  {activeIdx === i && (
+                    <span className="dot-ping absolute inset-0 rounded-full animate-ping opacity-40" style={{ background: services[i].color }} />
+                  )}
+                </span>
               </button>
             ))}
           </div>

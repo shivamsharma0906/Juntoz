@@ -20,16 +20,8 @@ const FAQS = [
     a: 'Established businesses often have the talent but lack a scalable client acquisition system. We audit what\'s working, plug the revenue leaks, and layer paid + organic strategies to increase your monthly bookings and average ticket value without increasing your workload.',
   },
   {
-    q: 'How is it useful to get social media services from an agency?',
-    a: 'Consistency and strategy. Posting randomly yields random results. Our team plans content calendars, shoots Reels, writes captions, and tracks what content converts into bookings — so your Instagram works as a 24/7 salesperson.',
-  },
-  {
     q: 'Do we get customised growth strategies for our beauty brand?',
     a: 'Absolutely. Every salon, MUA, and skin clinic is different. We start with a deep audit of your current presence, competitors, and target clients before building a bespoke roadmap — no copy-paste templates.',
-  },
-  {
-    q: 'Will Juntoz work exactly as discussed and per my requirements?',
-    a: 'That\'s our commitment. Before we start, you receive a detailed strategy document, clear KPIs, and weekly performance reports. Everything we do is trackable and tied to real business outcomes — bookings, leads, and revenue.',
   },
   {
     q: 'Can Juntoz provide performance marketing (paid ads) services?',
@@ -38,14 +30,6 @@ const FAQS = [
   {
     q: 'Why is local SEO important for my salon or beauty clinic?',
     a: 'When someone searches "best salon near me" or "MUA in Mumbai," your business must appear at the top. We optimise your Google Business Profile, build local citations, and manage reviews so you capture that high-intent traffic daily.',
-  },
-  {
-    q: 'How can I find out if Juntoz is the right agency for my business?',
-    a: 'Simple — book a free 30-minute strategy call. We\'ll audit your current digital presence, show you exactly where you\'re losing clients, and propose a custom plan. No pressure, no obligation — just clarity on your growth potential.',
-  },
-  {
-    q: 'Can Juntoz be trusted for long-term digital marketing services?',
-    a: 'We have a 98% client retention rate — our clients stay because they see results. We operate with full transparency: real-time dashboards, monthly reviews, and a dedicated account manager who treats your growth as our own.',
   },
   {
     q: 'How long before I start seeing real results from your services?',
@@ -201,7 +185,7 @@ export default function FAQSection() {
         >
           <h2
             className="font-heading text-white leading-tight tracking-tight"
-            style={{ fontSize: 'clamp(2rem, 5.5vw, 4rem)' }}
+            style={{ fontSize: 'clamp(1.65rem, 5.5vw, 4rem)' }}
           >
             Frequently{' '}
             <span

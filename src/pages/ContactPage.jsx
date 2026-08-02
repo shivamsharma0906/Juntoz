@@ -94,6 +94,8 @@ function ContactForm() {
           <input
             id="contact-name"
             type="text"
+            autoComplete="name"
+            autoCapitalize="words"
             placeholder="Your Name *"
             value={fields.name}
             onChange={e => { setFields(p => ({ ...p, name: e.target.value })); setErrors(p => ({ ...p, name: null })); }}
@@ -105,6 +107,8 @@ function ContactForm() {
           <input
             id="contact-phone"
             type="tel"
+            inputMode="tel"
+            autoComplete="tel"
             placeholder="WhatsApp Number *"
             value={fields.phone}
             onChange={e => { setFields(p => ({ ...p, phone: e.target.value })); setErrors(p => ({ ...p, phone: null })); }}
@@ -118,6 +122,7 @@ function ContactForm() {
         <input
           id="contact-business"
           type="text"
+          autoCapitalize="sentences"
           placeholder="Your Business Type (e.g. Bridal MUA, Hair Salon) *"
           value={fields.business}
           onChange={e => { setFields(p => ({ ...p, business: e.target.value })); setErrors(p => ({ ...p, business: null })); }}
@@ -130,6 +135,7 @@ function ContactForm() {
         <textarea
           id="contact-message"
           rows={4}
+          autoCapitalize="sentences"
           placeholder="Anything you'd like to add? (optional)"
           value={fields.message}
           onChange={e => setFields(p => ({ ...p, message: e.target.value }))}

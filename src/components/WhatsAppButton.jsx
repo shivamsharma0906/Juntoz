@@ -15,20 +15,28 @@ export default function WhatsAppButton() {
         }
         .wa-btn {
           position: fixed;
-          bottom: 24px;
-          right: 24px;
+          bottom: 16px;
+          right: 16px;
           z-index: 9999;
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 56px;
-          height: 56px;
+          width: 48px;
+          height: 48px;
           border-radius: 50%;
           background: #25D366;
           box-shadow: 0 4px 20px rgba(37,211,102,0.45);
           text-decoration: none;
           transition: transform 0.2s ease, box-shadow 0.2s ease;
           will-change: transform;
+        }
+        @media (min-width: 640px) {
+          .wa-btn {
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+          }
         }
         .wa-btn:hover {
           transform: scale(1.1);

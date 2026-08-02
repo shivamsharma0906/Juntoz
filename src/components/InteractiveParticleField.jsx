@@ -5,7 +5,7 @@
  * - Particles are connected by fading lines when near each other
  * - Desktop only (returns null on touch devices)
  */
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 
 const COLORS = ['#00F5D4', '#7B2FFF', '#FF3AF2'];
 const N = 100;
@@ -13,7 +13,7 @@ const REPEL_R = 130;    // px radius of mouse repulsion
 const REPEL_F = 7;      // repulsion force multiplier
 const CONN_D = 95;     // max distance for line connections
 
-export default function InteractiveParticleField({ className = '' }) {
+const InteractiveParticleField = memo(function InteractiveParticleField({ className = '' }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -142,4 +142,6 @@ export default function InteractiveParticleField({ className = '' }) {
       aria-hidden="true"
     />
   );
-}
+});
+
+export default InteractiveParticleField;

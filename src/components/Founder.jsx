@@ -81,7 +81,7 @@ export default function Founder() {
     <section
       id="founder"
       ref={sectionRef}
-      className="relative py-28 md:py-40 overflow-hidden spotlight-section"
+      className="relative py-14 sm:py-24 md:py-40 overflow-hidden spotlight-section"
     >
       {/* ── Ambient background ── */}
       <div className="absolute inset-0 pattern-grid opacity-40 pointer-events-none z-0" />
@@ -95,10 +95,10 @@ export default function Founder() {
           style={{ background: 'linear-gradient(to bottom, transparent, rgba(0,245,212,0.08), transparent)' }} />
       </div>
 
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
 
         {/* ── Section label ── */}
-        <ScrollReveal data-reveal="up" className="flex justify-center mb-16">
+        <ScrollReveal data-reveal="up" className="flex justify-center mb-10 sm:mb-16">
           <span className="inline-flex items-center gap-2 font-body text-[10px] font-bold uppercase tracking-[0.3em] px-4 py-2 rounded-full border"
             style={{ color: '#00F5D4', borderColor: 'rgba(0,245,212,0.2)', background: 'rgba(0,245,212,0.05)' }}>
             <span className="w-1.5 h-1.5 rounded-full bg-[#00F5D4] animate-pulse" />
@@ -106,20 +106,20 @@ export default function Founder() {
           </span>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
           {/* ═══════════════════════════════════════
               LEFT — FOUNDER PHOTO CARD
           ═══════════════════════════════════════ */}
-          <ScrollReveal data-reveal="left" className="relative flex justify-center order-2 lg:order-1">
+          <ScrollReveal data-reveal="left" className="relative flex justify-center order-2 lg:order-1 px-4 xs:px-0">
 
             {/* Spinning ring decoration */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[105%] h-[105%] rounded-[3rem] pointer-events-none z-0"
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[105%] h-[105%] rounded-[3rem] pointer-events-none z-0 hidden sm:block"
               style={{
                 border: '1px dashed rgba(0,245,212,0.12)',
                 animation: 'founder-ring-spin 18s linear infinite',
               }} />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[112%] h-[112%] rounded-[3.5rem] pointer-events-none z-0"
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[112%] h-[112%] rounded-[3.5rem] pointer-events-none z-0 hidden sm:block"
               style={{
                 border: '1px dashed rgba(123,47,255,0.10)',
                 animation: 'founder-ring-spin 28s linear infinite reverse',
@@ -144,10 +144,12 @@ export default function Founder() {
                     style={{ background: 'linear-gradient(to right, transparent, rgba(0,245,212,0.6), transparent)' }} />
 
                   {/* Photo — parallax via JS, scale container for overflow */}
-                  <div className="overflow-hidden h-[460px] md:h-[540px]">
+                  <div className="overflow-hidden h-[400px] xs:h-[460px] md:h-[540px]">
                     <img
                       src={founderImg}
                       alt="Sujal Mehta — Founder & Strategist, Juntoz"
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover object-top will-change-transform transition-transform duration-300 group-hover:scale-[1.04]"
                       style={{ transformOrigin: 'center top' }}
                     />
@@ -158,12 +160,12 @@ export default function Founder() {
                     style={{ background: 'linear-gradient(to top, #050508 0%, #0e0e1c 100%)' }} />
 
                   {/* Bottom glass name overlay */}
-                  <div className="absolute bottom-0 inset-x-0 z-20 px-7 py-5"
+                  <div className="absolute bottom-0 inset-x-0 z-20 px-5 xs:px-7 py-4 sm:py-5"
                     style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 60%, transparent 100%)' }}>
-                    <div className="font-heading font-black text-white text-xl md:text-2xl uppercase tracking-widest leading-none">
+                    <div className="font-heading font-black text-white text-lg xs:text-xl md:text-2xl uppercase tracking-widest leading-none">
                       Sujal Mehta
                     </div>
-                    <div className="font-body text-xs mt-1 uppercase tracking-[0.3em] font-bold"
+                    <div className="font-body text-[10px] xs:text-xs mt-1 uppercase tracking-[0.25em] sm:tracking-[0.3em] font-bold"
                       style={{ color: '#00F5D4' }}>
                       Founder &amp; Growth Strategist
                     </div>
@@ -175,9 +177,9 @@ export default function Founder() {
               </div>
 
               {/* ── Floating stat badges ── */}
-              <StatBadge value={COMPANY_STATS.clientsScaled.toString()} label="Clients Scaled" color="#00F5D4" delay={0} position="-bottom-5 -left-6 md:-left-10" />
-              <StatBadge value={COMPANY_STATS.yearsActive.toString()} label="Years Experience" color="#7B2FFF" delay={0.6} position="-top-5 -right-6 md:-right-10" />
-              <StatBadge value="98" label="% Retention" color="#FF3AF2" delay={1.2} position="top-1/2 -right-6 md:-right-12 -translate-y-1/2" />
+              <StatBadge value={COMPANY_STATS.clientsScaled.toString()} label="Clients Scaled" color="#00F5D4" delay={0} position="-bottom-4 -left-2 xs:-left-4 md:-left-10" />
+              <StatBadge value={COMPANY_STATS.yearsActive.toString()} label="Years Experience" color="#7B2FFF" delay={0.6} position="-top-4 -right-2 xs:-right-4 md:-right-10" />
+              <StatBadge value="98" label="% Retention" color="#FF3AF2" delay={1.2} position="top-1/2 -right-2 xs:-right-4 md:-right-12 -translate-y-1/2" />
             </div>
           </ScrollReveal>
 

@@ -37,7 +37,7 @@ export default function CaseStudyPage() {
           {/* Hero Image */}
           <div className="w-full aspect-video rounded-3xl overflow-hidden relative" style={{ border: '1px solid rgba(255,255,255,0.1)' }}>
             <div className="absolute inset-0 bg-black/20 z-10" />
-            <img src={study.image} alt={study.clientName} className="w-full h-full object-cover" />
+            <img src={study.image} alt={study.clientName} fetchPriority="high" className="w-full h-full object-cover" />
           </div>
         </ScrollReveal>
 

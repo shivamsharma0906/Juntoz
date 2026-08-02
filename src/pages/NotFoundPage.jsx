@@ -31,7 +31,7 @@ export default function NotFoundPage() {
         </p>
         <Link
           to="/"
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-heading font-black uppercase text-xs tracking-widest text-[#050508] bg-[#00F5D4] hover:bg-[#00e1c2] shadow-[0_0_20px_rgba(0,245,212,0.3)] transition-all duration-300"
+          className="inline-flex items-center justify-center gap-2 px-8 py-4 min-h-[44px] rounded-xl font-heading font-black uppercase text-xs tracking-widest text-[#050508] bg-[#00F5D4] hover:bg-[#00e1c2] shadow-[0_0_20px_rgba(0,245,212,0.3)] transition-all duration-300"
         >
           Back to Home
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

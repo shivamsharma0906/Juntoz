@@ -114,6 +114,8 @@ export default function ImageReveal({
           ref={imgRef}
           src={src}
           alt={alt}
+          loading="lazy"
+          decoding="async"
           style={{
             display: 'block',
             width: '100%',

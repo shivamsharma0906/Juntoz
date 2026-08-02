@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, memo } from 'react';
 import InteractiveParticleField from './InteractiveParticleField.jsx';
 import { COMPANY_STATS } from '../data/clients.js';
 import useCountUp from '../hooks/useCountUp.js';
@@ -33,7 +33,7 @@ const PARTICLES = Array.from({ length: 8 }, (_, i) => ({
 ════════════════════════════════════════════════════════════════ */
 
 /* word-by-word 3D flip reveal */
-function SplitHeading({ children, visible, baseDelay = 0.12 }) {
+const SplitHeading = memo(function SplitHeading({ children, visible, baseDelay = 0.12 }) {
   const words = children.trim().split(' ');
   return (
     <>
@@ -56,10 +56,10 @@ function SplitHeading({ children, visible, baseDelay = 0.12 }) {
       ))}
     </>
   );
-}
+});
 
 /* animated rotating gradient word */
-function RotatingWord({ words, visible }) {
+const RotatingWord = memo(function RotatingWord({ words, visible }) {
   const [index, setIndex] = useState(0);
   const [state, setState] = useState('idle');
 
@@ -79,7 +79,16 @@ function RotatingWord({ words, visible }) {
   const isOut = state === 'exit';
 
   return (
-    <span className="relative inline-block" style={{ perspective: '400px' }}>
+    <span 
+      className="relative inline-block" 
+      style={{ 
+        perspective: '400px',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0) rotateX(0deg)' : 'translateY(40px) rotateX(20deg)',
+        transition: 'opacity 0.65s ease 0.58s, transform 0.65s cubic-bezier(0.22,1,0.36,1) 0.58s',
+        willChange: 'opacity, transform'
+      }}
+    >
       <span
         className="relative inline-block glossy-3d-text"
         data-text={words[index]}
@@ -119,7 +128,7 @@ function RotatingWord({ words, visible }) {
       />
     </span>
   );
-}
+});
 
 /* single marquee row */
 function MarqueeRow({ tags, reverse = false, speed = 30 }) {
@@ -152,7 +161,7 @@ function MarqueeRow({ tags, reverse = false, speed = 30 }) {
 }
 
 /* floating stat pill — compact on mobile */
-function StatPill({ stat, started, index }) {
+const StatPill = memo(function StatPill({ stat, started, index }) {
   const { value } = useCountUp(stat.value, { duration: 1600, started });
   const display = stat.decimal ? value.toFixed(1) : value;
 
@@ -177,7 +186,7 @@ function StatPill({ stat, started, index }) {
       </span>
     </div>
   );
-}
+});
 
 /* ════════════════════════════════════════════════════════════════
    MAIN COMPONENT
@@ -194,7 +203,6 @@ export default function Hero() {
   const [visible,      setVisible]      = useState(false);
   const [statsStarted, setStatsStarted] = useState(false);
   const [isDesktop,    setIsDesktop]    = useState(false);
-  const [mousePos,     setMousePos]     = useState({ x: 0.5, y: 0.5 });
 
   /* detect desktop once (avoids SSR mismatch) */
   useEffect(() => {
@@ -221,7 +229,6 @@ export default function Hero() {
       if (!rect || !glowRef.current) return;
       const mx = (e.clientX - rect.left) / rect.width;
       const my = (e.clientY - rect.top) / rect.height;
-      setMousePos({ x: mx, y: my });
       glowRef.current.style.transform =
         `translate(calc(-50% + ${(mx - 0.5) * 120}px), calc(-50% + ${(my - 0.5) * 80}px))`;
     });
@@ -342,7 +349,7 @@ export default function Hero() {
         />
 
         {/* Chrome/glass floating SVG shapes — desktop only */}
-        {isDesktop && <GlassShapes variant="hero" mouseX={mousePos.x} mouseY={mousePos.y} />}
+        {isDesktop && <GlassShapes variant="hero" />}
       </div>
 
       {/* ════ CONTENT — pushes marquee to bottom via flex-1 ════ */}
@@ -374,10 +381,10 @@ export default function Hero() {
         {/* ── headline — clamp for smooth mobile scaling ── */}
         <h1
           ref={headingRef}
-          className="font-heading font-black uppercase tracking-tighter text-white max-w-[18rem] sm:max-w-2xl md:max-w-4xl mb-3 sm:mb-5 will-change-transform"
+          className="font-heading font-black uppercase tracking-tighter text-white max-w-[20rem] sm:max-w-2xl md:max-w-4xl mb-3 sm:mb-5 will-change-transform"
           style={{
-            fontSize: 'clamp(2rem, 8vw, 6rem)',
-            lineHeight: 0.92,
+            fontSize: 'clamp(1.85rem, 8vw, 6rem)',
+            lineHeight: 0.94,
             perspective: '800px',
           }}
         >
@@ -393,8 +400,8 @@ export default function Hero() {
 
         {/* ── subtext ── */}
         <p
-          className="font-body text-white/50 max-w-[16rem] sm:max-w-md leading-relaxed mb-4 sm:mb-7"
-          style={{ fontSize: 'clamp(0.78rem, 2.5vw, 1rem)', ...item(0.65) }}
+          className="font-body text-white/50 max-w-[18rem] sm:max-w-md leading-relaxed mb-4 sm:mb-7"
+          style={{ fontSize: 'clamp(0.8rem, 2.5vw, 1rem)', ...item(0.65) }}
         >
           We help beauty businesses in India turn their Instagram presence into
           a consistent, predictable stream of real bookings — every month.
@@ -412,7 +419,7 @@ export default function Hero() {
 
         {/* ── CTA buttons ── */}
         <div
-          className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full max-w-[280px] sm:max-w-none"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-[280px] sm:max-w-none"
           style={item(0.9)}
         >
           {/* primary */}
@@ -423,12 +430,12 @@ export default function Hero() {
             rel="noopener noreferrer"
             onMouseMove={onCtaMouseMove}
             onMouseLeave={onCtaMouseLeave}
-            className="hero-cta-primary relative inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-full font-heading font-black uppercase tracking-widest text-background overflow-hidden"
+            className="hero-cta-primary relative inline-flex items-center justify-center gap-2 w-full sm:w-auto min-h-[44px] rounded-full font-heading font-black uppercase tracking-widest text-background overflow-hidden"
             style={{
               background: '#00F5D4',
               willChange: 'transform',
-              fontSize: 'clamp(0.65rem, 2.2vw, 0.8rem)',
-              padding: 'clamp(0.6rem, 2.5vw, 1rem) clamp(1.25rem, 5vw, 2rem)',
+              fontSize: 'clamp(0.7rem, 2.2vw, 0.8rem)',
+              padding: 'clamp(0.65rem, 2.5vw, 1rem) clamp(1.25rem, 5vw, 2rem)',
             }}
           >
             <span className="hero-cta-sweep absolute inset-0 pointer-events-none" />
@@ -443,13 +450,13 @@ export default function Hero() {
             href={WA}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-full font-heading font-black uppercase tracking-widest transition-all duration-300 whitespace-nowrap"
+            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto min-h-[44px] rounded-full font-heading font-black uppercase tracking-widest transition-all duration-300 whitespace-nowrap"
             style={{
               background: 'rgba(255,255,255,0.04)',
               border: '1px solid rgba(255,255,255,0.1)',
               color: 'rgba(255,255,255,0.55)',
-              fontSize: 'clamp(0.65rem, 2.2vw, 0.8rem)',
-              padding: 'clamp(0.6rem, 2.5vw, 1rem) clamp(1.25rem, 5vw, 2rem)',
+              fontSize: 'clamp(0.7rem, 2.2vw, 0.8rem)',
+              padding: 'clamp(0.65rem, 2.5vw, 1rem) clamp(1.25rem, 5vw, 2rem)',
             }}
             onMouseEnter={e => {
               e.currentTarget.style.color = '#fff';
@@ -482,7 +489,7 @@ export default function Hero() {
           TRUST BADGE STRIP
       ══════════════════════════════════════════════════════════ */}
       <div
-        className="w-full relative z-10 mt-auto py-3 sm:py-4 flex items-center justify-center"
+        className="w-full relative z-10 mt-auto py-3 sm:py-4 px-4 flex items-center justify-center text-center"
         style={{
           borderTop: '1px solid rgba(255,255,255,0.06)',
           background: 'rgba(255,255,255,0.012)',
@@ -490,10 +497,10 @@ export default function Hero() {
           ...item(1.15),
         }}
       >
-        <span className="flex items-center gap-3 text-[9px] sm:text-[11px] text-white/30 font-heading font-bold uppercase tracking-[0.3em]">
-          <span className="w-1.5 h-1.5 bg-[#FF3AF2] rounded-full animate-pulse shadow-[0_0_8px_#FF3AF2]" />
-          Trusted by 200+ beauty businesses across India
-          <span className="w-1.5 h-1.5 bg-[#00F5D4] rounded-full shadow-[0_0_8px_#00F5D4]" />
+        <span className="flex items-center justify-center gap-2 sm:gap-3 text-[9px] sm:text-[11px] text-white/40 font-heading font-bold uppercase tracking-[0.12em] sm:tracking-[0.3em]">
+          <span className="w-1.5 h-1.5 bg-[#FF3AF2] rounded-full animate-pulse shadow-[0_0_8px_#FF3AF2] shrink-0" />
+          <span>Trusted by 200+ beauty businesses across India</span>
+          <span className="w-1.5 h-1.5 bg-[#00F5D4] rounded-full shadow-[0_0_8px_#00F5D4] shrink-0" />
         </span>
       </div>
 

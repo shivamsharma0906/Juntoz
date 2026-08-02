@@ -54,34 +54,34 @@ export default function Portfolio() {
   };
 
   return (
-    <section ref={sectionRef} id="portfolio" className="relative py-24 md:py-32 bg-background overflow-hidden">
+    <section ref={sectionRef} id="portfolio" className="relative py-14 sm:py-20 md:py-32 bg-background overflow-hidden">
       <div className="absolute inset-0 pattern-grid opacity-100 pointer-events-none z-0" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-accent-2/10 rounded-full blur-[150px] pointer-events-none z-0" />
 
-      <div className="container mx-auto max-w-7xl px-6 relative z-20">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-20">
 
         {/* ── Header ── */}
-        <ScrollReveal data-reveal="up" className="text-center mb-16 md:mb-24">
+        <ScrollReveal data-reveal="up" className="text-center mb-10 md:mb-24">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-accent-2 animate-ping" />
             <p className="font-body text-white/80 text-[10px] font-bold uppercase tracking-[0.2em]">
               The Portfolio
             </p>
           </div>
-          <h2 className="font-heading font-black text-white text-5xl sm:text-6xl md:text-7xl uppercase leading-[0.95] tracking-tighter">
+          <h2 className="font-heading font-black text-white text-3xl xs:text-4xl sm:text-6xl md:text-7xl uppercase leading-[0.95] tracking-tighter">
             Our Best{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#FF3AF2]">
               Work
             </span>
           </h2>
-          <p className="font-body text-white/50 text-base sm:text-lg max-w-xl mx-auto mt-6 leading-relaxed">
+          <p className="font-body text-white/50 text-sm sm:text-lg max-w-xl mx-auto mt-4 sm:mt-6 leading-relaxed">
             We build systems that actually generate revenue. Here's a snapshot of the impact we've made for beauty businesses.
           </p>
         </ScrollReveal>
 
         {/* ── Mobile: horizontal drag-scroll / Desktop: 3-col grid ── */}
         {/* Drag hint — mobile only */}
-        <div className="flex sm:hidden items-center gap-2 mb-4 text-white/30">
+        <div className="flex sm:hidden items-center gap-2 mb-4 text-white/30 px-1">
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
           </svg>
@@ -95,7 +95,7 @@ export default function Portfolio() {
           ref={dragRef}
           className="
             flex sm:grid sm:grid-cols-2 lg:grid-cols-3
-            gap-6 lg:gap-8 mb-24
+            gap-6 lg:gap-8 mb-16 sm:mb-24
             overflow-x-auto sm:overflow-visible
             scroll-smooth snap-x snap-mandatory sm:snap-none
             hide-scrollbar
@@ -129,16 +129,16 @@ export default function Portfolio() {
                 <div className="absolute inset-0 bg-gradient-to-br opacity-40 group-hover:opacity-100 transition-opacity duration-500 animate-[gradient-shift_4s_ease-in-out_infinite]"
                   style={{ background: `linear-gradient(135deg, ${p.hex}60, transparent, ${p.hex}60)` }} />
 
-                <div className="relative h-full bg-[#080810]/95 backdrop-blur-2xl rounded-[31px] p-8 flex flex-col z-10 overflow-hidden">
+                <div className="relative h-full bg-[#080810]/95 backdrop-blur-2xl rounded-[31px] p-5 xs:p-6 sm:p-8 flex flex-col z-10 overflow-hidden">
                   
                   {/* Internal ambient glow */}
                   <div className="absolute -bottom-20 -right-20 w-48 h-48 rounded-full blur-[60px] opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"
                     style={{ background: p.hex }} />
 
                   {/* Top Labels */}
-                  <div className="flex items-start justify-between mb-8 relative z-10">
+                  <div className="flex items-start justify-between mb-6 sm:mb-8 relative z-10">
                     <span
-                      className="font-body font-bold text-[10px] tracking-[0.2em] uppercase px-4 py-1.5 rounded-full shadow-[0_0_15px_rgba(0,0,0,0.3)]"
+                      className="font-body font-bold text-[10px] tracking-[0.2em] uppercase px-3.5 py-1.5 rounded-full shadow-[0_0_15px_rgba(0,0,0,0.3)]"
                       style={{ background: `${p.hex}15`, border: `1px solid ${p.hex}40`, color: p.hex }}
                     >
                       {p.tag}
@@ -147,19 +147,19 @@ export default function Portfolio() {
                   </div>
 
                   {/* Main Metric */}
-                  <div className="flex-1 flex flex-col justify-center mb-8 relative z-10">
+                  <div className="flex-1 flex flex-col justify-center mb-6 sm:mb-8 relative z-10">
                     <p className="font-body text-white/40 text-xs uppercase tracking-widest mb-2 font-bold">{p.label}</p>
                     <div
                       className="font-heading font-black uppercase leading-[1.05] tracking-tight whitespace-pre-line group-hover:scale-[1.03] transition-transform duration-500 origin-left"
-                      style={{ fontSize: 'clamp(1.75rem, 4vw, 2.25rem)', color: p.hex, textShadow: `0 0 30px ${p.hex}40` }}
+                      style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)', color: p.hex, textShadow: `0 0 30px ${p.hex}40` }}
                     >
                       {p.result}
                     </div>
                   </div>
 
                   {/* Description */}
-                  <div className="pt-6 relative z-10" style={{ borderTop: `1px solid ${p.hex}20` }}>
-                    <p className="font-body text-white/60 text-sm leading-relaxed">{p.desc}</p>
+                  <div className="pt-5 sm:pt-6 relative z-10" style={{ borderTop: `1px solid ${p.hex}20` }}>
+                    <p className="font-body text-white/60 text-xs sm:text-sm leading-relaxed">{p.desc}</p>
                   </div>
                 </div>
               </div>

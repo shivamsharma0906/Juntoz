@@ -106,32 +106,44 @@ const PLACEMENTS = {
   ],
 };
 
-export default function GlassShapes({ variant = 'hero', mouseX, mouseY }) {
+export default function GlassShapes({ variant = 'hero' }) {
   const shapesRef = useRef([]);
   const rafRef = useRef(null);
 
   /* Mouse parallax — desktop only, uses rAF */
   useEffect(() => {
-    if (mouseX === undefined || mouseY === undefined) return;
-
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) return;
 
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    rafRef.current = requestAnimationFrame(() => {
-      shapesRef.current.forEach((el, i) => {
-        if (!el) return;
-        const factor = PLACEMENTS[variant]?.[i]?.parallaxFactor || 10;
-        const dx = (mouseX - 0.5) * factor;
-        const dy = (mouseY - 0.5) * factor;
-        el.style.transform = `translate(${dx}px, ${dy}px)`;
+    // Find the closest section to track mouse movement within the section
+    const firstShape = shapesRef.current[0];
+    const container = firstShape ? (firstShape.closest('section') || document.body) : document.body;
+
+    const onMouseMove = (e) => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        const rect = container.getBoundingClientRect();
+        // Calculate normalized mouse coordinates (0 to 1)
+        const mx = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        const my = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
+
+        shapesRef.current.forEach((el, i) => {
+          if (!el) return;
+          const factor = PLACEMENTS[variant]?.[i]?.parallaxFactor || 10;
+          const dx = (mx - 0.5) * factor;
+          const dy = (my - 0.5) * factor;
+          el.style.transform = `translate(${dx}px, ${dy}px)`;
+        });
       });
-    });
+    };
+
+    container.addEventListener('mousemove', onMouseMove, { passive: true });
 
     return () => {
+      container.removeEventListener('mousemove', onMouseMove);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [mouseX, mouseY, variant]);
+  }, [variant]);
 
   const items = PLACEMENTS[variant] || PLACEMENTS.hero;
 
