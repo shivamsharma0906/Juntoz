@@ -89,7 +89,7 @@ export default function CTASection() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00F5D4]" />
             </span>
             <span className="font-body text-[#00F5D4] text-[11px] font-bold uppercase tracking-[0.25em]">
-              Performance Meets CreativityPerformance Meets Creativity
+              Performance Meets Creativity
             </span>
           </div>
 
