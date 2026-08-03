@@ -85,12 +85,13 @@ function GlobalMouseGlow() {
   return (
     <div
       ref={glowRef}
-      className="fixed top-0 left-0 w-[700px] h-[700px] rounded-full pointer-events-none"
+      className="fixed top-0 left-0 w-[600px] h-[600px] rounded-full pointer-events-none"
       style={{
-        zIndex: -1,
-        background: 'radial-gradient(circle, rgba(0,245,212,0.07) 0%, rgba(123,47,255,0.05) 40%, transparent 70%)',
-        filter: 'blur(60px)',
+        zIndex: 9999,
+        background: 'radial-gradient(circle, rgba(0,245,212,0.10) 0%, rgba(123,47,255,0.05) 45%, transparent 70%)',
+        filter: 'blur(50px)',
         willChange: 'transform',
+        mixBlendMode: 'screen',
       }}
     />
   );

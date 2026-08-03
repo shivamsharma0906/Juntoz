@@ -18,7 +18,7 @@ export default function BehindTheWork() {
   const scrollRef = useRef(null);
   
   return (
-    <section id="process" className="py-16 sm:py-24 lg:py-32 relative z-10 bg-background overflow-hidden">
+    <section id="process" className="py-12 sm:py-16 md:py-24 relative z-10 bg-background overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
         <ScrollReveal>
           <div className="mb-12 sm:mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 border-b border-white/10 pb-6 sm:pb-8">

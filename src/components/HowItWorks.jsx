@@ -75,7 +75,7 @@ export default function HowItWorks() {
       <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full blur-[150px] pointer-events-none z-0 transition-opacity duration-1000 ${isVisible ? 'opacity-20' : 'opacity-0'}`}
         style={{ background: 'radial-gradient(ellipse, #00F5D4, transparent)' }} />
 
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
 
         {/* Header */}
         <ScrollReveal data-reveal="up" className="text-center mb-12 md:mb-20">

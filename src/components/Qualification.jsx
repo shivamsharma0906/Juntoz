@@ -46,7 +46,7 @@ const notForItems = [
 
 export default function Qualification() {
   return (
-    <section id="qualification" className="relative py-12 sm:py-20 md:py-32 bg-background overflow-hidden">
+    <section id="qualification" className="relative py-12 sm:py-16 md:py-24 bg-background overflow-hidden">
       {/* Ambient Backgrounds */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#00F5D4]/10 rounded-full blur-[150px] pointer-events-none z-0 opacity-20" />
 

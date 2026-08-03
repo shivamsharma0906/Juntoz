@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
+import BalloonHeading from './BalloonHeading.jsx';
 
 const DEPARTMENTS = [
   {
@@ -105,11 +106,7 @@ export default function Services({ compactTop = false }) {
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Departments</span>
           </div>
           <div className="flex justify-center my-3">
-            <img
-              src="/services_balloon_gradient.png"
-              alt="Services"
-              className="h-20 sm:h-32 md:h-44 lg:h-52 object-contain select-none pointer-events-none"
-            />
+            <BalloonHeading src="/services_balloon_gradient.png" alt="Services" className="h-20 sm:h-32 md:h-44 lg:h-52 mx-auto" />
           </div>
           <p className="font-body text-white/50 text-sm md:text-base max-w-lg mx-auto leading-relaxed px-2 sm:px-0">
             Your outsourced marketing team. From strategy and branding to content, websites, and performance marketing—we handle everything that drives growth.

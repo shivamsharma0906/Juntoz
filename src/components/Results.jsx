@@ -81,12 +81,12 @@ export default function Results() {
   }, []);
 
   return (
-    <section id="results" className="relative py-24 md:py-32 bg-background overflow-hidden" ref={ref}>
+    <section id="results" className="relative py-12 sm:py-16 md:py-24 bg-background overflow-hidden" ref={ref}>
       {/* Backgrounds */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[150px] pointer-events-none z-0 opacity-20"
         style={{ background: 'radial-gradient(ellipse, #7B2FFF, #00F5D4, transparent)' }} />
 
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
 
         {/* Header */}
         <ScrollReveal data-reveal="up" className="text-center mb-16">

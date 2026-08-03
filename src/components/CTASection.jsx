@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
+import BalloonHeading from './BalloonHeading.jsx';
 
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20want%20to%20book%20a%20strategy%20call.';
 
@@ -99,7 +100,7 @@ export default function CTASection() {
             style={{ transitionDuration: visible ? '0ms' : '1000ms' }}
           >
             <div className="flex justify-center my-3">
-              <img src="/growth_balloon.png" alt="Growth" className="h-16 sm:h-24 md:h-36 lg:h-44 object-contain select-none pointer-events-none" />
+              <BalloonHeading src="/growth_balloon.png" alt="Growth" className="h-16 sm:h-24 md:h-36 lg:h-44 mx-auto" />
             </div>
             <h2 className="font-heading font-black uppercase leading-[0.82] tracking-tighter select-none">
               <span className="block text-white" style={{ fontSize: 'clamp(1.8rem,6vw,7.5rem)' }}>

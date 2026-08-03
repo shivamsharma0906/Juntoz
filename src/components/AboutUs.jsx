@@ -84,7 +84,7 @@ export default function AboutUs() {
         <div style={{ position:'absolute', bottom:'10%', left:'5%', width:'500px', height:'500px', background:'radial-gradient(ellipse, rgba(0,245,212,0.05) 0%, transparent 70%)', filter:'blur(80px)' }}/>
       </div>
 
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
         
         {/* ══ TOP ROW: Heading Left | Description + CTA Right ══ */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-16 md:mb-20">

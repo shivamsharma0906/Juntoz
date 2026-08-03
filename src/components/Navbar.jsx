@@ -447,7 +447,7 @@ export default function Navbar() {
                 >
                   <div className="flex items-center gap-4">
                     <span className="font-heading font-black text-xs tracking-widest text-[#00F5D4]">0{i + 1}</span>
-                    <span className="font-heading font-black text-3xl sm:text-4xl uppercase tracking-tight">{link.name}</span>
+                    <span className="font-heading font-black text-2xl sm:text-3xl uppercase tracking-tight">{link.name}</span>
                   </div>
                   <svg
                     className={`w-6 h-6 transition-all duration-300 ${isActive ? 'opacity-100 text-[#00F5D4]' : 'opacity-0 group-hover:opacity-60 -translate-x-2 group-hover:translate-x-0'}`}

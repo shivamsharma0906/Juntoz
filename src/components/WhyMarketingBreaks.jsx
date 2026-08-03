@@ -3,7 +3,7 @@ import ScrollReveal from './ScrollReveal.jsx';
 
 export default function WhyMarketingBreaks() {
   return (
-    <section id="why-marketing-breaks" className="py-24 sm:py-32 relative z-10 bg-background">
+    <section id="why-marketing-breaks" className="py-12 sm:py-16 md:py-24 relative z-10 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
         <ScrollReveal>
           <div className="text-center mb-16 md:mb-24">

@@ -12,13 +12,13 @@ export default function CaseStudyPage() {
   }
 
   return (
-    <div className="pt-28 md:pt-36 pb-20 min-h-screen bg-background">
+    <div className="pt-20 md:pt-36 pb-20 min-h-screen bg-background">
       <PageMeta
         title={`${study.clientName} Case Study — Juntoz`}
         description={study.problem}
         path={`/work/${study.slug}`}
       />
-      <div className="container mx-auto px-6 max-w-4xl">
+      <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
         
         {/* Back Link */}
         <Link to="/work" className="inline-flex items-center gap-2 text-white/50 hover:text-white mb-12 transition-colors font-body text-xs uppercase tracking-widest font-bold">
@@ -36,7 +36,7 @@ export default function CaseStudyPage() {
               {study.industry}
             </span>
           </div>
-          <h1 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-6xl uppercase leading-none tracking-tighter mb-8">
+          <h1 className="font-heading font-black text-white text-3xl sm:text-5xl md:text-6xl uppercase leading-none tracking-tighter mb-8">
             {study.clientName}
           </h1>
 

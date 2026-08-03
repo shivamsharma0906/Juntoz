@@ -4,7 +4,7 @@ import ScrollReveal from './ScrollReveal.jsx';
 
 export default function WorkGallery() {
   return (
-    <section id="work" className="py-24 sm:py-32 relative z-10 bg-background overflow-hidden">
+    <section id="work" className="py-12 sm:py-16 md:py-24 relative z-10 bg-background overflow-hidden">
       {/* Decorative background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-[#7B2FFF]/10 to-[#00F5D4]/10 rounded-full blur-[120px] pointer-events-none" />
 

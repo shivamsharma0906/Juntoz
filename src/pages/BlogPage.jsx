@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { blogPosts } from '../data/blogPosts';
 import ScrollReveal from '../components/ScrollReveal';
 import PageMeta from '../components/PageMeta';
+import BalloonHeading from '../components/BalloonHeading';
 
 const CATEGORIES = ['All', ...new Set(blogPosts.map(p => p.category))];
 
@@ -38,13 +39,13 @@ export default function BlogPage() {
   const remainingPosts = filteredPosts.slice(1);
 
   return (
-    <div className="pt-28 md:pt-36 pb-20 min-h-screen bg-background">
+    <div className="pt-20 md:pt-36 pb-20 min-h-screen bg-background">
       <PageMeta
         title="Blog — Marketing Insights & Strategy"
         description="Tactical breakdowns, paid ads strategies, and proven growth systems for ambitious brands. Updated regularly by the Juntoz team."
         path="/blog"
       />
-      <div className="container mx-auto px-6 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
 
         {/* Header Section */}
         <ScrollReveal data-reveal="up" className="mb-6 md:mb-14 text-center">
@@ -53,7 +54,7 @@ export default function BlogPage() {
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">The Growth Hub</span>
           </div>
           <div className="flex justify-center my-3">
-            <img src="/insights_balloon.png" alt="Insights" className="h-20 sm:h-32 md:h-44 lg:h-52 object-contain select-none pointer-events-none" />
+            <BalloonHeading src="/insights_balloon.png" alt="Insights" className="h-20 sm:h-32 md:h-44 lg:h-52 mx-auto" />
           </div>
           <p className="font-body text-white/50 text-sm md:text-base max-w-xl leading-relaxed mx-auto">
             Tactical breakdowns, algorithm updates, and growth systems for forward-thinking beauty brands.

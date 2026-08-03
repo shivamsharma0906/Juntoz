@@ -41,7 +41,7 @@ export default function BlogPostPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#05050C] via-[#05050C]/60 to-[#05050C]/20" />
         </div>
         
-        <div className="container mx-auto px-6 max-w-6xl relative z-10 pt-32">
+        <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10 pt-32">
           <Link to="/blog" className="inline-flex items-center gap-2 text-white/50 hover:text-white mb-8 transition-colors font-body text-[10px] sm:text-xs uppercase tracking-widest font-bold">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
@@ -66,7 +66,7 @@ export default function BlogPostPage() {
       </div>
 
       {/* Main Content Layout */}
-      <div className="container mx-auto px-6 max-w-6xl py-16 lg:py-24 flex flex-col lg:flex-row gap-12 lg:gap-24 relative">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl py-16 lg:py-24 flex flex-col lg:flex-row gap-12 lg:gap-24 relative">
         
         {/* Sticky Sidebar */}
         <div className="lg:w-[280px] shrink-0">

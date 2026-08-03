@@ -163,20 +163,20 @@ function ContactForm() {
 
 export default function ContactPage() {
   return (
-    <div className="pt-28 md:pt-36 pb-0 min-h-screen bg-background">
-      <div className="container mx-auto px-6 max-w-7xl">
+    <div className="pt-20 md:pt-36 pb-0 min-h-screen bg-background">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
 
       <PageMeta
         title="Contact Juntoz — Book a Free Strategy Call"
         description="Ready to scale your business revenue? Contact Juntoz today and get a free growth strategy call within 24 hours."
         path="/contact"
       />
-        <ScrollReveal data-reveal="up" className="mb-16 text-center">
+        <ScrollReveal data-reveal="up" className="mb-10 sm:mb-16 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6">
             <span className="w-2 h-2 rounded-full bg-[#00F5D4] animate-pulse" />
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Get In Touch</span>
           </div>
-          <h1 className="font-heading font-black text-white text-4xl sm:text-6xl md:text-7xl uppercase leading-none tracking-tighter mb-6">
+          <h1 className="font-heading font-black text-white text-3xl sm:text-6xl md:text-7xl uppercase leading-none tracking-tighter mb-6">
             Let's Talk{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Growth</span>
           </h1>

@@ -4,6 +4,45 @@ import founderImg from './Founder.webp';
 import { COMPANY_STATS } from '../data/clients.js';
 import useCountUp from '../hooks/useCountUp.js';
 
+const Zap = ({ size = 14, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+  </svg>
+);
+
+const Rocket = ({ size = 14, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+    <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2s-6 1.91-8.05 4A22 22 0 0 1 10 8z" />
+    <path d="M9 15c-1.5 1.5-2.5 3.5-2.5 3.5s2-1 3.5-2.5z" />
+    <path d="M15 9c1.5-1.5 2.5-3.5 2.5-3.5s-2 1-3.5 2.5z" />
+    <path d="m9 9-3 3" />
+    <path d="m15 15-3 3" />
+  </svg>
+);
+
 const WA_SOFT =
   'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20a%20custom%20growth%20plan%20for%20my%20business.';
 
@@ -31,10 +70,10 @@ function StatBadge({ value, label, color, delay, position }) {
           className="absolute inset-0 rounded-2xl pointer-events-none badge-shimmer"
           style={{ background: `linear-gradient(105deg, transparent 40%, ${color}18 50%, transparent 60%)` }}
         />
-        <div className="font-heading font-black text-xl md:text-2xl" style={{ color }}>
+        <div className="font-heading font-black text-xl md:text-2xl whitespace-nowrap" style={{ color }}>
           {count}+
         </div>
-        <div className="font-body text-[10px] text-white/50 uppercase tracking-widest mt-0.5">{label}</div>
+        <div className="font-body text-[10px] text-white/50 uppercase tracking-widest mt-0.5 whitespace-nowrap">{label}</div>
       </div>
     </div>
   );
@@ -77,11 +116,36 @@ export default function Founder() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  /* ── 3D tilt on hover ── */
+  useEffect(() => {
+    const wrap = imgWrapRef.current;
+    if (!wrap || window.innerWidth < 768) return;
+    const card = wrap.querySelector('.founder-tilt-target');
+    if (!card) return;
+
+    const onMove = (e) => {
+      const rect = wrap.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(1000px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`;
+    };
+    const onLeave = () => {
+      card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+    };
+
+    wrap.addEventListener('mousemove', onMove);
+    wrap.addEventListener('mouseleave', onLeave);
+    return () => {
+      wrap.removeEventListener('mousemove', onMove);
+      wrap.removeEventListener('mouseleave', onLeave);
+    };
+  }, []);
+
   return (
     <section
       id="founder"
       ref={sectionRef}
-      className="relative py-14 sm:py-24 md:py-40 overflow-hidden spotlight-section"
+      className="relative py-10 sm:py-14 md:py-16 overflow-hidden spotlight-section"
     >
       {/* ── Ambient background ── */}
       <div className="absolute top-[-10%] right-[-5%] w-[700px] h-[700px] rounded-full blur-[180px] pointer-events-none z-0"
@@ -106,7 +170,7 @@ export default function Founder() {
         </ScrollReveal>
 
         {/* ── Desktop split layout ── */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start mt-6 md:mt-8">
           
           {/* Left Column: Photo */}
           <div className="md:col-span-5 flex justify-center">
@@ -124,7 +188,7 @@ export default function Founder() {
 
                 {/* Animated gradient border */}
                 <div className="relative z-10 rounded-[2.5rem] p-[2px] founder-border-glow" ref={imgWrapRef}>
-                  <div className="relative rounded-[2.4rem] overflow-hidden bg-[#05050C]"
+                  <div className="relative rounded-[2.4rem] overflow-hidden bg-[#05050C] founder-tilt-target transition-transform duration-200 ease-out"
                     style={{ boxShadow: '0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04)' }}>
 
                     {/* Top shimmer line */}
@@ -161,6 +225,21 @@ export default function Founder() {
                         style={{ background: 'linear-gradient(to right, #00F5D4, #7B2FFF)' }} />
                     </div>
                   </div>
+
+                  {/* Floating stat badges */}
+                  {[
+                    { value: COMPANY_STATS.clientsScaled, label: 'Clients Scaled' },
+                    { value: COMPANY_STATS.yearsActive, label: 'Years Experience' }
+                  ].map((stat, i) => (
+                    <StatBadge
+                      key={stat.label}
+                      value={stat.value}
+                      label={stat.label}
+                      color={i === 0 ? '#00F5D4' : '#7B2FFF'}
+                      delay={i * 0.6}
+                      position={i === 0 ? '-top-4 right-1 xs:-right-4 sm:-right-8' : '-bottom-4 left-1 xs:-left-4 sm:-left-8'}
+                    />
+                  ))}
                 </div>
               </div>
             </ScrollReveal>
@@ -190,28 +269,44 @@ export default function Founder() {
 
             <ScrollReveal data-reveal="up" delay={80}>
               <div className="space-y-4 text-sm sm:text-base md:text-lg text-white/55 font-body leading-relaxed text-center md:text-left">
-                <p>
-                  I started Juntoz because I saw incredible founders building amazing products — and getting{' '}
-                  <span className="text-white font-bold">zero profitable traction</span> from it. Not because of their product.
-                  Because they had no predictable system.
+                <h3 className="font-heading font-black text-white text-xl sm:text-2xl md:text-3xl uppercase tracking-wide">
+                  About Sujal Mehta
+                </h3>
+                <p className="text-white/70 font-semibold">
+                  Founder &amp; CEO, Juntoz
                 </p>
                 <p>
-                  We've spent years building infrastructure, running ads, and studying what actually converts across multiple industries.
+                  Sujal Mehta is the Founder &amp; CEO of Juntoz, a digital marketing agency
+                  helping businesses grow through strategy, creativity, and performance-driven
+                  marketing.
                 </p>
                 <p>
-                  We're not a generic agency.{' '}
+                  An EXTC Engineering graduate from Sardar Patel Institute of Technology (SPIT),
+                  Andheri, Sujal's passion for marketing began during his college days. He went
+                  on to build a strong corporate career, spending{' '}
+                  <span className="text-white font-bold">5 years at Tata Consultancy Services (TCS)</span>{' '}
+                  and <span className="text-white font-bold">4 years at Nokia</span>, where he
+                  gained valuable experience in leadership, operations, and business processes.
+                </p>
+                <p>
+                  In 2021, he founded Juntoz with a vision to help businesses grow through{' '}
                   <span
                     className="font-bold px-2 py-0.5 rounded"
                     style={{ color: '#00F5D4', background: 'rgba(0,245,212,0.08)' }}
                   >
-                    We operate as your growth department
-                  </span>{' '}
-                  — because that deep integration is exactly why our results are unmatched.
+                    digital marketing, branding, content creation, websites, SEO, Meta Ads,
+                    Google Ads, and AI-powered solutions
+                  </span>
+                  .
+                </p>
+                <p>
+                  Today, Juntoz partners with startups, entrepreneurs, and established brands
+                  to create meaningful digital experiences and deliver measurable business growth.
                 </p>
               </div>
             </ScrollReveal>
 
-            {/* ── Glowing quote card ── */}
+            {/* ── Glowing vision card ── */}
             <ScrollReveal data-reveal="up" delay={160}>
               <div
                 className="relative p-5 sm:p-6 rounded-2xl overflow-hidden border-l-4 glass-card-strong text-left"
@@ -222,12 +317,16 @@ export default function Founder() {
                 <svg className="absolute top-4 right-4 w-8 h-8 opacity-20" fill="#00F5D4" viewBox="0 0 24 24">
                   <path d="M14.017 21v-7.391c0-5.714 4.14-8.814 8.783-11.415l-1.42 2.62c-2.43 1.13-4.66 3.65-4.66 5.629h3.766v10.557h-6.469zm-13.017 0v-7.391c0-5.714 4.14-8.814 8.783-11.415l-1.42 2.62c-2.43 1.13-4.66 3.65-4.66 5.629h3.766v10.557h-6.469z" />
                 </svg>
-                <p className="relative font-heading font-black text-white text-base sm:text-lg md:text-xl uppercase leading-relaxed tracking-wide max-w-[90%]">
-                  My mission: Build predictable growth machines so{' '}
-                  <span style={{ color: '#00F5D4', filter: 'drop-shadow(0 0 12px rgba(0,245,212,0.5))' }}>
-                    founders can focus on what they do best.
-                  </span>
+                <p className="relative text-white/50 text-xs sm:text-sm uppercase tracking-widest font-bold mb-2">
+                  Vision
                 </p>
+                <blockquote className="relative font-heading font-black text-white text-base sm:text-lg md:text-xl uppercase leading-relaxed tracking-wide max-w-[90%]">
+                  To build Juntoz into a globally recognized MNC that empowers businesses
+                  worldwide with innovative digital marketing and technology solutions.{' '}
+                  <span style={{ color: '#00F5D4', filter: 'drop-shadow(0 0 12px rgba(0,245,212,0.5))' }}>
+                    We don't just market brands — we build growth stories.
+                  </span>
+                </blockquote>
               </div>
             </ScrollReveal>
 
@@ -235,9 +334,9 @@ export default function Founder() {
             <ScrollReveal data-reveal="up" delay={240}>
               <div className="flex flex-wrap justify-center md:justify-start gap-3">
                 {[
-                  { icon: '⚡', text: '3× Avg. Revenue Growth' },
-                  { icon: '🚀', text: '90-Day Results' },
-                ].map(({ icon, text }) => (
+                  { Icon: Zap, text: '3× Avg. Revenue Growth' },
+                  { Icon: Rocket, text: '90-Day Results' },
+                ].map(({ Icon, text }) => (
                   <span
                     key={text}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-body text-sm font-semibold border"
@@ -248,7 +347,8 @@ export default function Founder() {
                       backdropFilter: 'blur(8px)',
                     }}
                   >
-                    <span>{icon}</span>{text}
+                    <Icon size={14} style={{ color: '#00F5D4' }} />
+                    {text}
                   </span>
                 ))}
               </div>

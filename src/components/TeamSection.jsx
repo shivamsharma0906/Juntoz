@@ -30,7 +30,7 @@ export default function TeamSection() {
   return (
     <section className="relative py-24 bg-background overflow-hidden border-t border-white/5">
       
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
         
         <ScrollReveal data-reveal="up" className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6">

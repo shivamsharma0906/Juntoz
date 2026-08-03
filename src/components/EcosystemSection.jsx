@@ -25,7 +25,7 @@ export default function EcosystemSection() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section ref={containerRef} id="ecosystem" className="py-16 sm:py-24 lg:py-32 relative z-10 bg-background">
+    <section ref={containerRef} id="ecosystem" className="py-12 sm:py-16 md:py-24 relative z-10 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl relative">
         <div className="text-center mb-16 sm:mb-24">
           <span className="font-heading font-bold tracking-widest text-[#7B2FFF] uppercase text-xs sm:text-sm mb-3 sm:mb-4 block">

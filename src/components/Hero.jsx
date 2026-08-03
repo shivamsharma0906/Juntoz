@@ -465,7 +465,7 @@ export default function Hero() {
             </motion.div>
 
             <h1 className="font-heading font-black uppercase tracking-tighter text-white mb-4 text-center"
-              style={{ fontSize: '3.5rem', lineHeight: 0.85 }}>
+              style={{ fontSize: 'clamp(2.6rem, 10vw, 3.5rem)', lineHeight: 0.85 }}>
               <motion.span
                 className="block"
                 variants={lineReveal}

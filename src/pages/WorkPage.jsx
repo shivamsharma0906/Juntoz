@@ -2,16 +2,17 @@ import { Link } from 'react-router-dom';
 import { caseStudies } from '../data/caseStudies';
 import ScrollReveal from '../components/ScrollReveal';
 import PageMeta from '../components/PageMeta';
+import BalloonHeading from '../components/BalloonHeading';
 
 export default function WorkPage() {
   return (
-    <div className="pt-28 md:pt-36 pb-20 min-h-screen bg-background">
+    <div className="pt-20 md:pt-36 pb-20 min-h-screen bg-background">
       <PageMeta
         title="Our Work — Client Success Stories"
         description="Explore how Juntoz has helped ambitious brands scale revenue with proven digital growth strategies."
         path="/work"
       />
-      <div className="container mx-auto px-6 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         
         <ScrollReveal data-reveal="up" className="mb-6 md:mb-14 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-2">
@@ -19,7 +20,7 @@ export default function WorkPage() {
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Our Work</span>
           </div>
           <div className="flex justify-center my-3">
-            <img src="/results_balloon.png" alt="Results" className="h-20 sm:h-32 md:h-44 lg:h-52 object-contain select-none pointer-events-none" />
+            <BalloonHeading src="/results_balloon.png" alt="Results" className="h-20 sm:h-32 md:h-44 lg:h-52 mx-auto" />
           </div>
           <p className="font-body text-white/50 text-sm md:text-base max-w-xl leading-relaxed mx-auto">
             Explore how we help companies scale predictably using our proven, data-driven growth systems.

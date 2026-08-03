@@ -26,21 +26,21 @@ export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="testimonials" className="relative py-24 bg-background overflow-hidden" aria-label="Client testimonials">
+    <section id="testimonials" className="relative py-14 sm:py-20 md:py-24 bg-background overflow-hidden" aria-label="Client testimonials">
       {/* Background Ambience */}
       <div className="absolute top-1/4 left-[-10%] w-[600px] h-[600px] rounded-full blur-[160px] pointer-events-none z-0 opacity-30" style={{ background: '#00F5D4' }} />
       <div className="absolute bottom-10 right-[-10%] w-[600px] h-[600px] rounded-full blur-[160px] pointer-events-none z-0 opacity-25" style={{ background: '#7B2FFF' }} />
 
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
         
         {/* Header */}
-        <ScrollReveal data-reveal="up" className="text-center mb-16">
+        <ScrollReveal data-reveal="up" className="text-center mb-10 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6">
             <span className="w-2 h-2 rounded-full bg-[#FFE600] animate-pulse" />
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Rated 5.0 by Growth Partners</span>
           </div>
           
-          <h2 className="font-heading font-black text-white text-4xl sm:text-6xl md:text-7xl uppercase leading-none tracking-tighter mb-6">
+          <h2 className="font-heading font-black text-white text-3xl sm:text-6xl md:text-7xl uppercase leading-none tracking-tighter mb-6">
             Real Clients. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] via-[#7B2FFF] to-[#FF3AF2]">Real Results.</span>
           </h2>
           <p className="font-body text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">

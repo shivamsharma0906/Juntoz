@@ -49,12 +49,12 @@ export default function CaseStudies() {
   const sectionRef = useRef(null);
 
   return (
-    <section ref={sectionRef} id="case-studies" className="relative py-24 md:py-32 bg-background overflow-hidden">
+    <section ref={sectionRef} id="case-studies" className="relative py-12 sm:py-16 md:py-24 bg-background overflow-hidden">
       {/* Cinematic Ambience */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[150px] pointer-events-none z-0 transition-opacity duration-1000 opacity-20"
         style={{ background: 'radial-gradient(ellipse, #FF3AF2, transparent)' }} />
 
-      <div className="relative z-10 container mx-auto px-6 max-w-7xl">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 max-w-7xl">
         
         {/* Header */}
         <ScrollReveal data-reveal="up" className="text-center mb-16 md:mb-24">

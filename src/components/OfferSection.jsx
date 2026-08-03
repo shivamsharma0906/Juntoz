@@ -58,7 +58,7 @@ export default function OfferSection() {
   }, []);
 
   return (
-    <section id="offer" className="relative py-24 md:py-32 bg-background overflow-hidden z-10 border-y border-white/5">
+    <section id="offer" className="relative py-12 sm:py-16 md:py-24 bg-background overflow-hidden z-10 border-y border-white/5">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#7B2FFF]/10 rounded-full blur-[150px] pointer-events-none z-0" />
 
       {/* Massive Background Text */}
@@ -66,7 +66,7 @@ export default function OfferSection() {
         <div className="font-heading font-black text-[10rem] md:text-[20rem] text-white/5 leading-none tracking-tighter">OFFER</div>
       </div>
 
-      <div className="container mx-auto px-6 max-w-6xl relative z-20">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-20">
 
         {/* Header */}
         <ScrollReveal data-reveal="up" className="text-center mb-16 md:mb-20">

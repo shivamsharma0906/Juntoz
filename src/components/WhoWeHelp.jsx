@@ -7,7 +7,7 @@ export default function WhoWeHelp() {
       {/* Glow Effects */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#7B2FFF]/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="container mx-auto px-6 max-w-7xl relative">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative">
         <ScrollReveal className="mb-12 text-center">
           <span className="font-heading font-bold tracking-widest text-[#00F5D4] uppercase text-xs mb-3 block">
             Who We Partner With
