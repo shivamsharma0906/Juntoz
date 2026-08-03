@@ -17,8 +17,8 @@
   --color-accent-4: #FF6B35;   /* orange — avoid if possible */
 
   /* ── Typography ─────────────────────────────────── */
-  --font-heading: "Unbounded", "Outfit", sans-serif;
-  --font-body:    "DM Sans", sans-serif;
+  --font-heading: "Bricolage Grotesque", "Outfit", sans-serif;
+  --font-body:    "Sansita", sans-serif;
   --font-display: "Bangers", cursive;
 
   /* ── Animations ──────────────────────────────────── */
@@ -91,11 +91,18 @@
 @layer base {
   html {
     background-color: #050508;
+    font-size: 17.5px; /* Boost root size on mobile to make Bricolage and Sansita readable */
+  }
+  @media (min-width: 768px) {
+    html {
+      font-size: 19px; /* Boost root size on desktop to match previous visual sizing */
+    }
   }
   body {
     @apply text-foreground font-body overflow-x-hidden;
     @apply selection:bg-accent-1 selection:text-white;
     background-color: #050508;
+    letter-spacing: 0.015em; /* Add subtle letter spacing to improve Sansita body text readability */
   }
   
   /* bg-background is the dark base color used by sections.

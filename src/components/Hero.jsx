@@ -1,21 +1,46 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+
+import artistImage from '../assets/Artist.webp';
+import brandsImage from '../assets/Brands.webp';
+import clinicsImage from '../assets/Clinics.webp';
+import startupsImage from '../assets/Startups.webp';
+import restaurantsImage from '../assets/Restaurants.webp';
+
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20to%20know%20how%20you%20can%20grow%20my%20business.';
 
-/* ─── Rotating Industry Words ─── */
-const ROTATING_WORDS = [
-  'Restaurants.',
-  'Clinics.',
-  'Startups.',
-  'Ecommerce.',
-  'Real Estate.',
-  'Brands.',
-  'Businesses.',
+/* ─── Rotating Industry Configuration ─── */
+const ROTATING_INDUSTRIES = [
+  {
+    name: 'Restaurants',
+    image: restaurantsImage,
+    alt: 'Restaurants',
+  },
+  {
+    name: 'Clinics',
+    image: clinicsImage,
+    alt: 'Clinics',
+  },
+  {
+    name: 'Startups',
+    image: startupsImage,
+    alt: 'Startups',
+  },
+  {
+    name: 'Brands',
+    image: brandsImage,
+    alt: 'Brands',
+  },
+  {
+    name: 'Artist',
+    image: artistImage,
+    alt: 'Artist',
+  },
 ];
 
 /* ─── Desktop: High-Tech Active Workspace 3D Cards ─── */
 const AnalyticsCard = ({ mousePos }) => (
-  <motion.div 
+  <motion.div
     className="absolute top-[2%] right-[5%] w-72 rounded-3xl p-5 shadow-2xl backdrop-blur-2xl border border-white/15"
     style={{
       background: 'linear-gradient(135deg, rgba(123,47,255,0.15) 0%, rgba(5,5,12,0.85) 100%)',
@@ -33,13 +58,13 @@ const AnalyticsCard = ({ mousePos }) => (
       </div>
       <span className="font-heading font-bold text-xs text-[#00F5D4] bg-[#00F5D4]/10 px-2.5 py-1 rounded-full border border-[#00F5D4]/30">+342% ROAS</span>
     </div>
-    
+
     <div className="flex items-end gap-2 h-28 mt-2 pt-2 border-t border-white/10">
       {[45, 65, 50, 95, 75, 100, 88].map((h, i) => (
         <div key={i} className="flex-1 flex flex-col justify-end h-full">
-          <div 
-            className="w-full bg-gradient-to-t from-[#7B2FFF] via-[#00F5D4] to-[#FF3AF2] rounded-t-sm opacity-90 transition-all duration-500 hover:opacity-100" 
-            style={{ height: `${h}%`, boxShadow: '0 0 12px rgba(0,245,212,0.4)' }} 
+          <div
+            className="w-full bg-gradient-to-t from-[#7B2FFF] via-[#00F5D4] to-[#FF3AF2] rounded-t-sm opacity-90 transition-all duration-500 hover:opacity-100"
+            style={{ height: `${h}%`, boxShadow: '0 0 12px rgba(0,245,212,0.4)' }}
           />
         </div>
       ))}
@@ -48,7 +73,7 @@ const AnalyticsCard = ({ mousePos }) => (
 );
 
 const MetaAdsCard = ({ mousePos }) => (
-  <motion.div 
+  <motion.div
     className="absolute top-[38%] left-[2%] w-80 rounded-3xl p-6 shadow-2xl backdrop-blur-2xl border border-white/15"
     style={{
       background: 'linear-gradient(135deg, rgba(255,58,242,0.15) 0%, rgba(5,5,12,0.85) 100%)',
@@ -62,7 +87,7 @@ const MetaAdsCard = ({ mousePos }) => (
     <div className="flex items-center gap-3 mb-4">
       <div className="w-9 h-9 rounded-xl bg-blue-500/20 border border-blue-400/40 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.3)]">
         <svg className="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
         </svg>
       </div>
       <div>
@@ -87,7 +112,7 @@ const MetaAdsCard = ({ mousePos }) => (
 );
 
 const CreativeCard = ({ mousePos }) => (
-  <motion.div 
+  <motion.div
     className="absolute bottom-[5%] right-[10%] w-64 rounded-3xl p-4 shadow-2xl backdrop-blur-2xl border border-white/15"
     style={{
       background: 'linear-gradient(135deg, rgba(5,5,12,0.9) 0%, rgba(123,47,255,0.2) 100%)',
@@ -99,12 +124,12 @@ const CreativeCard = ({ mousePos }) => (
     transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
   >
     <div className="w-full h-36 rounded-2xl bg-gradient-to-br from-[#7B2FFF] to-[#FF3AF2] mb-3 relative overflow-hidden group/img">
-      <img 
+      <img
         src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=400&auto=format&fit=crop"
         alt="Ad Creative"
         fetchPriority="high"
         decoding="async"
-        className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80 group-hover/img:scale-110 transition-transform duration-700" 
+        className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80 group-hover/img:scale-110 transition-transform duration-700"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
       <div className="absolute bottom-3 left-3 right-3 flex justify-between items-center">
@@ -121,7 +146,7 @@ const CreativeCard = ({ mousePos }) => (
 
 /* ─── Mobile Specific Cards ─── */
 const MobileAnalyticsCard = () => (
-  <motion.div 
+  <motion.div
     className="absolute top-0 right-0 w-64 rounded-3xl p-5 shadow-2xl backdrop-blur-2xl border border-white/15 z-20"
     style={{
       background: 'linear-gradient(135deg, rgba(123,47,255,0.15) 0%, rgba(5,5,12,0.85) 100%)',
@@ -137,13 +162,13 @@ const MobileAnalyticsCard = () => (
       </div>
       <span className="font-heading font-bold text-xs text-[#00F5D4] bg-[#00F5D4]/10 px-2.5 py-1 rounded-full border border-[#00F5D4]/30">+342% ROAS</span>
     </div>
-    
+
     <div className="flex items-end gap-2 h-24 mt-2 pt-2 border-t border-white/10">
       {[45, 65, 50, 95, 75, 100, 88].map((h, i) => (
         <div key={i} className="flex-1 flex flex-col justify-end h-full">
-          <div 
-            className="w-full bg-gradient-to-t from-[#7B2FFF] via-[#00F5D4] to-[#FF3AF2] rounded-t-sm opacity-90" 
-            style={{ height: `${h}%`, boxShadow: '0 0 12px rgba(0,245,212,0.4)' }} 
+          <div
+            className="w-full bg-gradient-to-t from-[#7B2FFF] via-[#00F5D4] to-[#FF3AF2] rounded-t-sm opacity-90"
+            style={{ height: `${h}%`, boxShadow: '0 0 12px rgba(0,245,212,0.4)' }}
           />
         </div>
       ))}
@@ -152,7 +177,7 @@ const MobileAnalyticsCard = () => (
 );
 
 const MobileCreativeCard = () => (
-  <motion.div 
+  <motion.div
     className="absolute top-32 left-0 w-56 rounded-3xl p-4 shadow-2xl backdrop-blur-2xl border border-white/15 z-10"
     style={{
       background: 'linear-gradient(135deg, rgba(5,5,12,0.9) 0%, rgba(123,47,255,0.2) 100%)',
@@ -162,12 +187,12 @@ const MobileCreativeCard = () => (
     transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
   >
     <div className="w-full h-32 rounded-2xl bg-gradient-to-br from-[#7B2FFF] to-[#FF3AF2] mb-3 relative overflow-hidden">
-      <img 
+      <img
         src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=400&auto=format&fit=crop"
         alt="Ad Creative"
         fetchPriority="high"
         decoding="async"
-        className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80" 
+        className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
       <div className="absolute bottom-3 left-3 right-3 flex justify-between items-center">
@@ -182,30 +207,74 @@ const MobileCreativeCard = () => (
   </motion.div>
 );
 
-/* ─── Rotating Word Component ─── */
-function RotatingWord() {
+/* ─── Rotating Industries Component ─── */
+function RotatingIndustries() {
   const [index, setIndex] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const id = setInterval(() => {
-      setIndex(i => (i + 1) % ROTATING_WORDS.length);
+      setIndex(i => (i + 1) % ROTATING_INDUSTRIES.length);
     }, 2200);
     return () => clearInterval(id);
   }, []);
 
+  // Preload and cache remaining images in background on mount
+  useEffect(() => {
+    ROTATING_INDUSTRIES.forEach((industry) => {
+      const img = new Image();
+      img.src = industry.image;
+    });
+  }, []);
+
+  const activeIndustry = ROTATING_INDUSTRIES[index];
+
+  // Transition variants: Fade, slight upward movement (8-12px), scale (0.96 -> 1)
+  const variants = shouldReduceMotion
+    ? {
+      initial: { opacity: 1, y: 0, scale: 1 },
+      animate: { opacity: 1, y: 0, scale: 1 },
+      exit: { opacity: 1, y: 0, scale: 1 },
+    }
+    : {
+      initial: { opacity: 0, y: 10, scale: 0.96 },
+      animate: { opacity: 1, y: 0, scale: 1 },
+      exit: { opacity: 0, y: -10, scale: 0.96 },
+    };
+
+  const transition = shouldReduceMotion
+    ? { duration: 0 }
+    : { duration: 0.5, ease: [0.22, 1, 0.36, 1] };
+
   return (
-    <span className="relative inline-block" style={{ minWidth: '8ch' }}>
+    <span
+      className="relative inline-flex items-center justify-center md:justify-start overflow-visible vertical-middle select-none w-full md:w-auto"
+      style={{
+        height: '1.35em', // Responsive height scaling to match visual font weight
+      }}
+    >
+      {/* Hidden container to ensure browser caches/preloads images immediately on initial paint */}
+      <div style={{ display: 'none' }} aria-hidden="true">
+        {ROTATING_INDUSTRIES.map((ind) => (
+          <img key={ind.name} src={ind.image} alt="" loading="eager" />
+        ))}
+      </div>
+
       <AnimatePresence mode="wait">
-        <motion.span
+        <motion.img
           key={index}
-          className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] via-[#7B2FFF] to-[#FF3AF2] drop-shadow-[0_0_25px_rgba(0,245,212,0.4)]"
-          initial={{ opacity: 0, y: 20, rotateX: -20 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          exit={{ opacity: 0, y: -20, rotateX: 20 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {ROTATING_WORDS[index]}
-        </motion.span>
+          src={activeIndustry.image}
+          alt={activeIndustry.alt}
+          title={activeIndustry.name}
+          variants={variants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={transition}
+          loading="eager"
+          fetchPriority="high"
+          className="h-full w-auto object-contain block origin-center md:origin-left filter drop-shadow-[0_0_20px_rgba(123,47,255,0.25)]"
+        />
       </AnimatePresence>
     </span>
   );
@@ -249,9 +318,9 @@ export default function Hero() {
     >
       {/* ════ BACKGROUND LAYER (Shared) ════ */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        
+
         {/* Dynamic Cursor Ambient Glow */}
-        <div 
+        <div
           className="absolute w-[600px] h-[600px] rounded-full transition-transform duration-300 ease-out pointer-events-none"
           style={{
             background: 'radial-gradient(circle, rgba(0,245,212,0.12) 0%, rgba(123,47,255,0.08) 40%, transparent 70%)',
@@ -264,21 +333,21 @@ export default function Hero() {
 
         {/* Ambient Corner Orbs */}
         <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full"
-             style={{ background: 'radial-gradient(circle, rgba(123,47,255,0.2) 0%, transparent 60%)', filter: 'blur(60px)' }} />
+          style={{ background: 'radial-gradient(circle, rgba(123,47,255,0.2) 0%, transparent 60%)', filter: 'blur(60px)' }} />
         <div className="absolute bottom-[10%] left-[-10%] w-[500px] h-[500px] rounded-full"
-             style={{ background: 'radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 60%)', filter: 'blur(60px)' }} />
+          style={{ background: 'radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 60%)', filter: 'blur(60px)' }} />
       </div>
 
       {/* ════ MAIN CONTENT (Split between Desktop and Mobile) ════ */}
       <div className="relative z-10 w-full flex-1">
-        
+
         {/* ── DESKTOP LAYOUT (Unchanged) ── */}
         <div className="hidden md:flex container mx-auto px-6 lg:px-12 items-center max-w-7xl"
-             style={{ minHeight: '100svh', paddingTop: 'clamp(6rem, 14vh, 8rem)', paddingBottom: '4rem' }}>
-          
+          style={{ minHeight: '100svh', paddingTop: 'clamp(6rem, 14vh, 8rem)', paddingBottom: '4rem' }}>
+
           {/* Left: Copy */}
           <div className="w-[55%] flex flex-col items-start text-left">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -289,7 +358,7 @@ export default function Hero() {
                 <span className="relative inline-flex rounded-full h-full w-full bg-[#00F5D4]" />
               </span>
               <span className="font-heading font-bold text-white text-xs tracking-[0.2em] uppercase">
-                Accepting New Partnerships
+                Performance Meets Creativity
               </span>
             </motion.div>
 
@@ -313,7 +382,7 @@ export default function Hero() {
                 animate="visible"
                 custom={0.25}
               >
-                <RotatingWord />
+                <RotatingIndustries />
               </motion.span>
             </h1>
 
@@ -326,7 +395,7 @@ export default function Hero() {
               Stop patching together freelancers. We are one integrated team bringing brand strategy, creative, and performance marketing under one roof.
             </motion.p>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
@@ -345,9 +414,9 @@ export default function Hero() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
-              
-              <a 
-                href="#work" 
+
+              <a
+                href="#work"
                 className="font-heading font-bold uppercase tracking-widest text-white/70 text-xs hover:text-white transition-colors px-6 py-4 rounded-full border border-white/10 hover:border-white/30 bg-white/5 backdrop-blur-md"
               >
                 Explore Our Work
@@ -358,7 +427,7 @@ export default function Hero() {
           {/* Right: Interactive 3D Cards */}
           <div className="w-[45%] h-[620px] relative perspective-[1000px]">
             {isDesktop && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
@@ -376,11 +445,11 @@ export default function Hero() {
 
         {/* ── MOBILE LAYOUT (Dedicated Experience) ── */}
         <div className="flex md:hidden flex-col container mx-auto px-4"
-             style={{ minHeight: '100svh', paddingTop: '6rem', paddingBottom: '2rem' }}>
-          
+          style={{ minHeight: '100svh', paddingTop: '6rem', paddingBottom: '2rem' }}>
+
           {/* Zone 1: Copy & CTAs */}
-          <div className="flex flex-col items-start w-full">
-            <motion.div 
+          <div className="flex flex-col items-center text-center w-full">
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
@@ -391,12 +460,12 @@ export default function Hero() {
                 <span className="relative inline-flex rounded-full h-full w-full bg-[#00F5D4]" />
               </span>
               <span className="font-heading font-bold text-white text-[10px] tracking-widest uppercase">
-                Accepting Partnerships
+                Strategy. Creative. Performance.
               </span>
             </motion.div>
 
-            <h1 className="font-heading font-black uppercase tracking-tighter text-white mb-4"
-                style={{ fontSize: '3.5rem', lineHeight: 0.85 }}>
+            <h1 className="font-heading font-black uppercase tracking-tighter text-white mb-4 text-center"
+              style={{ fontSize: '3.5rem', lineHeight: 0.85 }}>
               <motion.span
                 className="block"
                 variants={lineReveal}
@@ -404,16 +473,16 @@ export default function Hero() {
                 animate="visible"
                 custom={0.1}
               >
-                We Build
+                We grow
               </motion.span>
               <motion.span
-                className="block mt-1 text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] via-[#7B2FFF] to-[#FF3AF2]"
+                className="block mt-1"
                 variants={lineReveal}
                 initial="hidden"
                 animate="visible"
                 custom={0.2}
               >
-                Growth.
+                <RotatingIndustries />
               </motion.span>
             </h1>
 
@@ -421,16 +490,16 @@ export default function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-              className="font-body text-white/70 max-w-[280px] leading-relaxed mb-8 text-sm font-normal"
+              className="font-body text-white/70 max-w-[280px] leading-relaxed mb-8 text-sm font-normal mx-auto"
             >
               One integrated team bringing brand strategy, creative, and performance marketing under one roof.
             </motion.p>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-              className="flex flex-col items-start gap-4 w-full"
+              className="flex flex-col items-center gap-4 w-full"
             >
               <a
                 href={WA}
@@ -444,10 +513,10 @@ export default function Hero() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
-              
-              <a 
-                href="#work" 
-                className="font-heading font-bold uppercase tracking-widest text-white/50 text-[10px] hover:text-white transition-colors pl-4"
+
+              <a
+                href="#work"
+                className="font-heading font-bold uppercase tracking-widest text-white/70 text-xs hover:text-white transition-colors"
               >
                 Explore Our Work &rarr;
               </a>
@@ -456,7 +525,7 @@ export default function Hero() {
 
           {/* Zone 2: Dedicated Mobile Visual Composition */}
           <div className="w-full relative flex-1 min-h-[300px] mt-12 flex justify-center perspective-[800px]">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
@@ -469,22 +538,22 @@ export default function Hero() {
         </div>
 
       </div>
-      
+
       {/* ── Zone 3: Industry Marquee (Shared but handles layout via CSS) ── */}
       <div className="w-full border-t border-white/10 bg-[#050508]/80 backdrop-blur-xl py-3 overflow-hidden z-20 
                       md:absolute md:bottom-0 md:left-0 relative mt-auto">
-         <div className="flex whitespace-nowrap animate-[marquee-fwd_40s_linear_infinite] w-max">
-           {[...Array(3)].map((_, i) => (
-             <span key={i} className="flex items-center">
-               {['RESTAURANTS', 'CLINICS', 'REAL ESTATE', 'ECOMMERCE', 'EDUCATION', 'FITNESS', 'STARTUPS', 'HOSPITALITY'].map((tag, j) => (
-                 <span key={j} className="flex items-center">
-                   <span className="px-6 font-heading font-black text-[10px] sm:text-xs uppercase tracking-widest text-white/40">{tag}</span>
-                   <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#00F5D4]/40 shadow-[0_0_6px_#00F5D4]" />
-                 </span>
-               ))}
-             </span>
-           ))}
-         </div>
+        <div className="flex whitespace-nowrap animate-[marquee-fwd_40s_linear_infinite] w-max">
+          {[...Array(3)].map((_, i) => (
+            <span key={i} className="flex items-center">
+              {['BRIDAL MUAs', 'HAIR SALONS', 'NAIL SALONS', 'BEAUTY CLINICS', 'SALON CHAINS', 'MAKEUP ARTISTS', 'AESTHETIC CLINICS', 'MUA ACADEMIES'].map((tag, j) => (
+                <span key={j} className="flex items-center">
+                  <span className="px-6 font-heading font-black text-[10px] sm:text-xs uppercase tracking-widest text-white/40">{tag}</span>
+                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#00F5D4]/40 shadow-[0_0_6px_#00F5D4]" />
+                </span>
+              ))}
+            </span>
+          ))}
+        </div>
       </div>
 
       <style>{`

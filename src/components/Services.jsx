@@ -61,9 +61,9 @@ const DEPARTMENTS = [
 ];
 
 const SCROLL_PADDING_PX = 24;
-const GAP_PX = 24; 
+const GAP_PX = 24;
 
-export default function Services() {
+export default function Services({ compactTop = false }) {
   const sectionRef = useRef(null);
   const scrollRef = useRef(null);
   const [activeIdx, setActiveIdx] = useState(0);
@@ -90,7 +90,7 @@ export default function Services() {
   };
 
   return (
-    <section id="services" ref={sectionRef} className="relative py-14 sm:py-20 md:py-32 bg-background overflow-hidden">
+    <section id="services" ref={sectionRef} className={`relative pb-14 sm:pb-20 md:pb-32 bg-background overflow-hidden ${compactTop ? 'pt-8 md:pt-12' : 'pt-14 sm:pt-20 md:pt-32'}`}>
       {/* Background Ambience */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[150px] pointer-events-none z-0 opacity-20"
         style={{ background: 'radial-gradient(ellipse, rgba(0,245,212,0.8), transparent)' }} aria-hidden="true" />
@@ -99,16 +99,20 @@ export default function Services() {
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 max-w-7xl">
         {/* Header */}
-        <ScrollReveal data-reveal="up" className="text-center mb-10 md:mb-24 px-4 sm:px-0">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6">
+        <ScrollReveal data-reveal="up" className="text-center mb-6 md:mb-14 px-4 sm:px-0">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-2">
             <span className="w-2 h-2 rounded-full bg-[#00F5D4] header-pulse" />
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Departments</span>
           </div>
-          <h2 className="font-heading font-black text-white text-2xl xs:text-3xl sm:text-5xl md:text-6xl uppercase leading-tight sm:leading-none tracking-tight sm:tracking-tighter mb-4">
-            What We <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Build</span>
-          </h2>
+          <div className="flex justify-center my-3">
+            <img
+              src="/services_balloon_gradient.png"
+              alt="Services"
+              className="h-20 sm:h-32 md:h-44 lg:h-52 object-contain select-none pointer-events-none"
+            />
+          </div>
           <p className="font-body text-white/50 text-sm md:text-base max-w-lg mx-auto leading-relaxed px-2 sm:px-0">
-            A full-stack growth team. From the first creative spark to the final conversion, we handle every moving part.
+            Your outsourced marketing team. From strategy and branding to content, websites, and performance marketing—we handle everything that drives growth.
           </p>
         </ScrollReveal>
 

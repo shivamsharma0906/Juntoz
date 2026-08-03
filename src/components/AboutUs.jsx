@@ -1,20 +1,10 @@
 /**
  * AboutUs — "Driving Brand Growth Since a Decade"
  * ─────────────────────────────────────────────────
- * Exact layout from unvdigital.com:
- *
- * TOP ROW (2-col):
- *   LEFT  → eyebrow + big heading
- *   RIGHT → description + "Know More" CTA button
- *
- * BOTTOM ROW (2-col):
- *   LEFT  → large rounded-rect image
- *             + small pill image (offset right)
- *             + 4-point star decoration
- *             + spinning "LEARN MORE" badge (bottom-left)
- *   RIGHT → 3 stacked feature cards (icon + title + desc)
- *
- * Brand colors: #00F5D4 · #7B2FFF · #FF3AF2
+ * Redesigned for desktop:
+ * - Geometric overlapping rounded-rectangle images replacing inconsistent oval/capsules.
+ * - Clean layout with hover scales, premium shadows, and glow highlights.
+ * - Neatly positioned spinning badge to avoid overlap.
  */
 import { useEffect, useRef, useState } from 'react';
 import ImageReveal from './ImageReveal.jsx';
@@ -57,7 +47,6 @@ const SERVICES = [
   },
 ];
 
-/* ── 4-pointed decorative star ── */
 const StarDeco = ({ color = '#00F5D4', size = 28 }) => (
   <svg width={size} height={size} viewBox="0 0 40 40" fill={color}>
     <path d="M20 0 C20 0 22 15 20 20 C20 20 35 18 40 20 C40 20 22 35 20 40 C20 40 18 25 20 20 C20 20 5 22 0 20 C0 20 15 18 20 20 C20 20 18 5 20 0Z"/>
@@ -86,23 +75,21 @@ export default function AboutUs() {
   });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-12 sm:py-16">
-
-      {/* ── Ambient glows ── */}
+    <section ref={sectionRef} className="relative overflow-hidden pb-16 pt-8 md:pb-24 md:pt-12 bg-background">
+      {/* ── Ambient Glows ── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div style={{ position:'absolute', top:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(0,245,212,0.2) 35%, rgba(123,47,255,0.2) 65%, transparent 95%)' }}/>
-        <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(255,58,242,0.15) 40%, rgba(0,245,212,0.15) 60%, transparent 95%)' }}/>
-        <div style={{ position:'absolute', top:'0%', right:'0%', width:'500px', height:'500px', background:'radial-gradient(ellipse, rgba(123,47,255,0.08) 0%, transparent 65%)', filter:'blur(60px)' }}/>
-        <div style={{ position:'absolute', bottom:'0%', left:'0%', width:'400px', height:'400px', background:'radial-gradient(ellipse, rgba(0,245,212,0.06) 0%, transparent 65%)', filter:'blur(60px)' }}/>
+        <div style={{ position:'absolute', top:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(0,245,212,0.15) 35%, rgba(123,47,255,0.15) 65%, transparent 95%)' }}/>
+        <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(255,58,242,0.1) 40%, rgba(0,245,212,0.1) 60%, transparent 95%)' }}/>
+        <div style={{ position:'absolute', top:'10%', right:'5%', width:'600px', height:'600px', background:'radial-gradient(ellipse, rgba(123,47,255,0.06) 0%, transparent 70%)', filter:'blur(80px)' }}/>
+        <div style={{ position:'absolute', bottom:'10%', left:'5%', width:'500px', height:'500px', background:'radial-gradient(ellipse, rgba(0,245,212,0.05) 0%, transparent 70%)', filter:'blur(80px)' }}/>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
-
-        {/* ══ TOP ROW: heading left | description + CTA right ══ */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-start mb-8 sm:mb-10">
-
-          {/* LEFT — eyebrow + heading */}
-          <div>
+      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+        
+        {/* ══ TOP ROW: Heading Left | Description + CTA Right ══ */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-16 md:mb-20">
+          {/* LEFT — Eyebrow + Heading */}
+          <div className="lg:col-span-7">
             <div className="flex items-center gap-2 mb-5" style={fade(0.05)}>
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                 <path d="M8 0l1.5 5.5H15l-4.5 3.3 1.7 5.5L8 11l-4.2 3.3 1.7-5.5L1 5.5h5.5z" fill="#00F5D4"/>
@@ -113,8 +100,8 @@ export default function AboutUs() {
             </div>
 
             <h2
-              className="font-heading text-white leading-tight tracking-tight uppercase"
-              style={{ fontSize: 'clamp(1.6rem, 3.5vw, 3rem)', ...fade(0.1) }}
+              className="font-heading text-white leading-[1.05] tracking-tighter uppercase"
+              style={{ fontSize: 'clamp(2rem, 4vw, 3.8rem)', ...fade(0.1) }}
             >
               Driving{' '}
               <span
@@ -133,49 +120,39 @@ export default function AboutUs() {
             </h2>
           </div>
 
-          {/* RIGHT — description + CTA */}
-          <div style={fade(0.15)}>
-            <p
-              className="font-body leading-relaxed mb-6"
-              style={{
-                fontSize: 'clamp(0.82rem, 1.8vw, 1rem)',
-                color: 'rgba(255,255,255,0.42)',
-                maxWidth: '480px',
-              }}
-            >
+          {/* RIGHT — Description + CTA */}
+          <div className="lg:col-span-5 lg:pt-8" style={fade(0.15)}>
+            <p className="font-body text-white/50 text-sm sm:text-base leading-relaxed mb-8 max-w-lg">
               Building scalable digital brands, driving targeted customer acquisition, engineering high-converting web experiences, and automating revenue pipelines — with an integrated team of growth specialists.
             </p>
 
-            {/* Know More button */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <a
                 href={WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-heading font-black uppercase tracking-widest text-white"
+                className="font-heading font-black uppercase tracking-widest text-white transition-colors duration-300"
                 style={{
-                  fontSize: 'clamp(0.7rem, 1.5vw, 0.8rem)',
-                  background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                  padding: '0.6rem 1.4rem',
+                  fontSize: '0.75rem',
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  padding: '0.75rem 1.6rem',
                   borderRadius: '999px',
-                  transition: 'background 0.3s ease, border-color 0.3s ease',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.22)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; }}
               >
                 Know More
               </a>
 
-              {/* Arrow button */}
               <a
                 href={WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 hover:scale-110 hover:brightness-110"
-                style={{ background: '#00F5D4', boxShadow: '0 0 18px rgba(0,245,212,0.35)' }}
+                className="flex items-center justify-center w-11 h-11 rounded-full transition-all duration-300 hover:scale-110 hover:brightness-110 shrink-0"
+                style={{ background: '#00F5D4', boxShadow: '0 0 20px rgba(0,245,212,0.4)' }}
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#050510" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#050510" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M7 17L17 7M17 7H7M17 7v10"/>
                 </svg>
               </a>
@@ -183,108 +160,89 @@ export default function AboutUs() {
           </div>
         </div>
 
-        {/* ══ BOTTOM ROW: images left | feature cards right ══ */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        {/* ══ BOTTOM ROW: Overlapping Premium Images Left | Feature Cards Right ══ */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          {/* LEFT: Overlapping geometric frames */}
+          <div className="lg:col-span-6 relative w-full flex items-center justify-center min-h-[350px] sm:min-h-[480px]" style={fade(0.2)}>
+            {/* Background glowing frame */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#00F5D4]/10 to-[#7B2FFF]/10 rounded-[2.5rem] blur-2xl opacity-50 z-0 pointer-events-none" />
 
-          {/* ── LEFT: two images side-by-side + star + spinning badge ── */}
-          <div className="relative pb-10" style={fade(0.2)}>
-
-            {/* Side-by-side image row */}
-            <div className="flex items-end gap-3">
-
-              {/* Large rounded-rectangle image — left, taller */}
-              <div
-                className="relative rounded-[2rem] overflow-hidden flex-1"
-                style={{
-                  aspectRatio: '3/4',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  boxShadow: '0 30px 70px rgba(0,0,0,0.5)',
-                }}
-              >
-                <ImageReveal
-                  src="/about-desk.webp"
-                  alt="Juntoz team working on beauty brand strategy"
-                  color="#00F5D4"
-                  direction="left"
-                  imgStyle={{ filter: 'brightness(0.88) contrast(1.06) saturate(0.9)', borderRadius: '2rem' }}
-                />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(0,245,212,0.05) 0%, transparent 60%)', pointerEvents:'none', zIndex:3 }}/>
-                {/* Small dot */}
-                <div
-                  className="absolute top-4 left-4 w-2 h-2 rounded-full"
-                  style={{ background: '#00F5D4', boxShadow: '0 0 12px rgba(0,245,212,0.8)', zIndex:4 }}
-                />
-              </div>
-
-              {/* Small pill/oval image — right, shorter, aligned to bottom */}
-              <div
-                className="relative flex-none"
-                style={{
-                  width: '44%',
-                  aspectRatio: '2/3',
-                  borderRadius: '999px',
-                  overflow: 'hidden',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
-                  marginBottom: '10%',
-                }}
-              >
-                <ImageReveal
-                  src="/about-laptop.webp"
-                  alt="Juntoz consultant presenting growth strategy"
-                  color="#7B2FFF"
-                  direction="right"
-                  delay={0.15}
-                  imgStyle={{ filter: 'brightness(0.88) contrast(1.06) saturate(0.9)', objectPosition: 'top' }}
-                />
-              </div>
+            {/* Main background image */}
+            <div
+              className="relative w-[72%] aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] group/img1"
+              style={{ marginRight: '18%', transform: 'translateY(-15px)' }}
+            >
+              <ImageReveal
+                src="/about-desk.webp"
+                alt="Juntoz team working on beauty brand strategy"
+                color="#00F5D4"
+                direction="left"
+                imgStyle={{ filter: 'brightness(0.9) contrast(1.05)', borderRadius: '2rem' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent pointer-events-none" />
+              <div className="absolute top-5 left-5 w-2.5 h-2.5 rounded-full bg-[#00F5D4] shadow-[0_0_12px_#00F5D4]" />
             </div>
 
-            {/* 4-point star — floating between images */}
+            {/* Overlapping foreground image */}
             <div
-              className="absolute"
+              className="absolute bottom-[-5px] right-[2%] w-[48%] aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/12 shadow-[0_30px_70px_-10px_rgba(0,0,0,0.85)] z-20 transition-transform duration-500 hover:scale-[1.04]"
+            >
+              <ImageReveal
+                src="/about-laptop.webp"
+                alt="Juntoz consultant presenting growth strategy"
+                color="#7B2FFF"
+                direction="right"
+                delay={0.2}
+                imgStyle={{ filter: 'brightness(0.92) contrast(1.05)' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent pointer-events-none" />
+              <div className="absolute top-5 right-5 w-2.5 h-2.5 rounded-full bg-[#7B2FFF] shadow-[0_0_12px_#7B2FFF]" />
+            </div>
+
+            {/* Floating 4-pointed star */}
+            <div
+              className="absolute z-30"
               style={{
-                top: '38%',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                animation: 'about-star-spin 8s linear infinite',
-                filter: 'drop-shadow(0 0 8px rgba(0,245,212,0.6))',
-                zIndex: 10,
+                top: '25%',
+                right: '42%',
+                animation: 'about-star-spin 10s linear infinite',
+                filter: 'drop-shadow(0 0 10px rgba(0,245,212,0.7))',
               }}
             >
-              <StarDeco color="#00F5D4" size={28} />
+              <StarDeco color="#00F5D4" size={32} />
             </div>
 
-            {/* Spinning circular badge — bottom-left, outside the image area */}
+            {/* Spinning badge at bottom-left */}
             <a
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute bottom-0 left-0 flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 hover:scale-110 transition-transform duration-500 z-20"
+              className="absolute bottom-[-15px] left-[-15px] flex items-center justify-center w-24 h-24 hover:scale-110 transition-transform duration-500 z-30"
               aria-label="Learn more about Juntoz"
             >
               <svg
-                style={{ animation: 'about-badge-spin 9s linear infinite', width: '100%', height: '100%', overflow: 'visible' }}
+                className="w-full h-full overflow-visible"
+                style={{ animation: 'about-badge-spin 9s linear infinite' }}
                 viewBox="0 0 100 100"
               >
-                <path id="aboutCirclePath" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" fill="transparent"/>
-                <text style={{ fontSize: '13px', letterSpacing: '0.14em', fontWeight: 800 }}>
-                  <textPath href="#aboutCirclePath" startOffset="0%">
-                    <tspan fill="#00F5D4">LEARN MORE •</tspan>
-                    <tspan fill="#7B2FFF"> EARN MORE •</tspan>
+                <path id="aboutCirclePath2" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" fill="transparent"/>
+                <text style={{ fontSize: '12px', letterSpacing: '0.15em', fontWeight: 900 }}>
+                  <textPath href="#aboutCirclePath2" startOffset="0%">
+                    <tspan fill="#00F5D4">LEARN MORE • </tspan>
+                    <tspan fill="#FF3AF2">EARN MORE • </tspan>
                   </textPath>
                 </text>
               </svg>
-              {/* Counter-rotating arrow */}
+              
               <div
                 className="absolute inset-0 flex items-center justify-center"
                 style={{ animation: 'about-badge-spin-rev 9s linear infinite' }}
               >
                 <div
-                  className="flex items-center justify-center w-9 h-9 rounded-full"
-                  style={{ background: 'rgba(0,245,212,0.12)', border: '1px solid rgba(0,245,212,0.35)' }}
+                  className="flex items-center justify-center w-9 h-9 rounded-full bg-[#05050C]/90 border border-[#00F5D4]/30"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00F5D4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00F5D4" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M7 17L17 7M17 7H7M17 7v10"/>
                   </svg>
                 </div>
@@ -292,35 +250,30 @@ export default function AboutUs() {
             </a>
           </div>
 
-          {/* ── RIGHT: 3 stacked feature cards ── */}
-          <div className="flex flex-col gap-4 pt-2 lg:pt-0 mt-10 lg:mt-0">
+          {/* RIGHT: Stacked feature cards */}
+          <div className="lg:col-span-6 flex flex-col gap-6 w-full">
             {SERVICES.map((s, i) => (
               <div
                 key={i}
-                className="flex gap-4 p-5 sm:p-6 rounded-2xl group"
+                className="flex gap-5 p-6 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/[0.08] hover:-translate-y-1 transition-all duration-300"
                 style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  border: `1px solid rgba(255,255,255,0.07)`,
-                  transition: 'background 0.35s ease, border-color 0.35s ease, transform 0.35s ease',
-                  ...fade(0.25 + i * 0.12),
+                  ...fade(0.25 + i * 0.1),
                 }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.background = `${s.color}07`;
-                  e.currentTarget.style.borderColor = `${s.color}30`;
-                  e.currentTarget.style.transform = 'translateX(4px)';
+                  e.currentTarget.style.borderColor = `${s.color}35`;
+                  e.currentTarget.style.boxShadow = `0 10px 30px -10px ${s.color}15`;
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)';
-                  e.currentTarget.style.transform = 'translateX(0)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                  e.currentTarget.style.boxShadow = 'none';
                 }}
               >
                 {/* Icon */}
                 <div
-                  className="shrink-0 flex items-center justify-center w-12 h-12 rounded-xl mt-0.5"
+                  className="shrink-0 flex items-center justify-center w-12 h-12 rounded-2xl"
                   style={{
-                    background: `${s.color}12`,
-                    border: `1px solid ${s.color}25`,
+                    background: `${s.color}15`,
+                    border: `1px solid ${s.color}30`,
                     color: s.color,
                   }}
                 >
@@ -328,17 +281,11 @@ export default function AboutUs() {
                 </div>
 
                 {/* Text */}
-                <div>
-                  <h3
-                    className="font-heading font-black text-white mb-2 leading-snug"
-                    style={{ fontSize: 'clamp(0.9rem, 2vw, 1.05rem)' }}
-                  >
+                <div className="space-y-1">
+                  <h3 className="font-heading font-black text-white text-lg uppercase tracking-tight">
                     {s.title}
                   </h3>
-                  <p
-                    className="font-body leading-relaxed"
-                    style={{ fontSize: 'clamp(0.76rem, 1.6vw, 0.875rem)', color: 'rgba(255,255,255,0.38)' }}
-                  >
+                  <p className="font-body text-white/50 text-sm leading-relaxed">
                     {s.desc}
                   </p>
                 </div>
@@ -349,7 +296,7 @@ export default function AboutUs() {
         </div>
       </div>
 
-      {/* ── Keyframes ── */}
+      {/* ── Custom Animations ── */}
       <style>{`
         @keyframes about-badge-spin {
           from { transform: rotate(0deg); }

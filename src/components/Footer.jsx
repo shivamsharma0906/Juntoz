@@ -4,6 +4,8 @@ import logo from './logo.webp';
 
 const footerLinks = [
   { label: 'Services', to: '/services' },
+  { label: 'For Makeup Artists', to: '/for-makeup-artists' },
+  { label: 'For Salons', to: '/for-salons' },
   { label: 'Work', to: '/work' },
   { label: 'Results', to: '/results' },
   { label: 'About', to: '/about' },

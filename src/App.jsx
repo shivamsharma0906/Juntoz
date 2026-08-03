@@ -20,6 +20,8 @@ const AboutPage = lazy(() => import('./pages/AboutPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
+const ForMakeupArtistsPage = lazy(() => import('./pages/ForMakeupArtistsPage'));
+const ForSalonsPage = lazy(() => import('./pages/ForSalonsPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 // Re-run reveal scan on every route change (catches freshly mounted [data-reveal] elements)
@@ -153,6 +155,8 @@ function App() {
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/blog" element={<BlogPage />} />
                 <Route path="/blog/:slug" element={<BlogPostPage />} />
+                <Route path="/for-makeup-artists" element={<ForMakeupArtistsPage />} />
+                <Route path="/for-salons" element={<ForSalonsPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>

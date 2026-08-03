@@ -163,7 +163,7 @@ function ContactForm() {
 
 export default function ContactPage() {
   return (
-    <div className="pt-24 pb-0 min-h-screen bg-background">
+    <div className="pt-28 md:pt-36 pb-0 min-h-screen bg-background">
       <div className="container mx-auto px-6 max-w-7xl">
 
       <PageMeta

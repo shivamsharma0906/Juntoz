@@ -12,7 +12,7 @@ export default function CaseStudyPage() {
   }
 
   return (
-    <div className="pt-24 pb-20 min-h-screen bg-background">
+    <div className="pt-28 md:pt-36 pb-20 min-h-screen bg-background">
       <PageMeta
         title={`${study.clientName} Case Study — Juntoz`}
         description={study.problem}

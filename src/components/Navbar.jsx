@@ -8,6 +8,15 @@ const WA_HARD =
 const navLinks = [
   { name: 'Work', href: '/work' },
   { name: 'Services', href: '/services' },
+  { 
+    name: 'Who We Help', 
+    href: '#',
+    isDropdown: true,
+    dropdownItems: [
+      { name: 'For Makeup Artists', href: '/for-makeup-artists' },
+      { name: 'For Salons', href: '/for-salons' },
+    ]
+  },
   { name: 'About', href: '/about' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
@@ -23,6 +32,7 @@ export default function Navbar() {
   const [hovered, setHovered] = useState(null);
   const [mounted, setMounted] = useState(false);
   const [indicatorStyle, setIndicatorStyle] = useState({});
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const navRef = useRef(null);
   const linkRefs = useRef({});
@@ -31,11 +41,26 @@ export default function Navbar() {
   const spotRef = useRef(null);
   const lastScrollY = useRef(0);
   const location = useLocation();
+  const closeTimeoutRef = useRef(null);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
-    return () => clearTimeout(t);
+    return () => {
+      clearTimeout(t);
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
   }, []);
+
+  // Immediately close dropdown if hovering other menu links
+  useEffect(() => {
+    if (hovered && hovered !== 'Who We Help') {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+      setDropdownOpen(false);
+    }
+  }, [hovered]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -68,7 +93,12 @@ export default function Navbar() {
   }, [menuOpen]);
 
   useEffect(() => {
-    const activeHref = hovered ?? location.pathname;
+    let activeHref = hovered ?? location.pathname;
+    // Highlight "Who We Help" if we are on one of its subpages
+    if (!hovered && (location.pathname === '/for-makeup-artists' || location.pathname === '/for-salons')) {
+      activeHref = 'Who We Help';
+    }
+
     const el = linkRefs.current[activeHref];
     if (el && navRef.current) {
       const navRect = navRef.current.getBoundingClientRect();
@@ -136,17 +166,19 @@ export default function Navbar() {
       >
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           <div className={`
-            flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3.5 transition-all duration-500 rounded-full
+            flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3.5 transition-all duration-500 rounded-full relative
             ${scrolled
-              ? 'bg-[#05050C]/90 backdrop-blur-2xl border border-white/10 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8),0_0_20px_rgba(0,245,212,0.1)]'
-              : 'bg-white/[0.03] backdrop-blur-xl border border-white/10'}
+              ? 'bg-[#05050C]/90 border border-white/10 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8),0_0_20px_rgba(0,245,212,0.1)]'
+              : 'bg-white/[0.03] border border-white/10'}
           `}>
+            {/* Separate backdrop-blur layer to prevent browser clipping of absolutely positioned children */}
+            <div className={`absolute inset-0 rounded-full pointer-events-none z-0 ${scrolled ? 'backdrop-blur-2xl' : 'backdrop-blur-xl'}`} />
 
             {/* ── Mobile Left Spacer (to keep logo perfectly centered on mobile) ── */}
-            <div className="w-11 h-11 md:hidden pointer-events-none" />
+            <div className="w-11 h-11 md:hidden pointer-events-none relative z-10" />
 
             {/* ── Logo (Centered on mobile, left-aligned on desktop) ── */}
-            <div style={itemEnter(0.15)} className="flex-1 md:flex-initial flex justify-center md:justify-start">
+            <div style={itemEnter(0.15)} className="flex-1 md:flex-initial flex justify-center md:justify-start relative z-10">
               <Link
                 to="/"
                 className="flex items-center shrink-0 relative z-[60] group/logo"
@@ -167,29 +199,87 @@ export default function Navbar() {
             </div>
 
             {/* ── Desktop nav links capsule ── */}
-            <div style={itemEnter(0.25)} className="hidden md:block">
+            <div style={itemEnter(0.25)} className="hidden md:block relative z-10">
               <div
                 ref={navRef}
                 onMouseMove={onNavMouseMove}
                 onMouseLeave={onNavMouseLeave}
-                className="flex items-center gap-1 relative bg-white/[0.04] backdrop-blur-md rounded-full p-1.5 border border-white/10 overflow-hidden"
+                className="flex items-center gap-1 relative bg-white/[0.04] rounded-full p-1.5 border border-white/10"
               >
-                <div
-                  ref={spotRef}
-                  className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full transition-opacity duration-300"
-                  style={{
-                    background: 'radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 70%)',
-                    opacity: 0,
-                    zIndex: 0,
-                  }}
-                />
-
-                <div
-                  className="absolute top-1.5 bottom-1.5 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none z-[1]"
-                  style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))', border: '1px solid rgba(255,255,255,0.15)', ...indicatorStyle }}
-                />
+                {/* Nested clipping container for background hover spotlight and indicator */}
+                <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none z-0">
+                  <div
+                    ref={spotRef}
+                    className="absolute -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full transition-opacity duration-300"
+                    style={{
+                      background: 'radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 70%)',
+                      opacity: 0,
+                    }}
+                  />
+                  <div
+                    className="absolute top-1.5 bottom-1.5 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    style={{ 
+                      background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))', 
+                      border: '1px solid rgba(255,255,255,0.15)', 
+                      ...indicatorStyle 
+                    }}
+                  />
+                </div>
 
                 {navLinks.map((link) => {
+                  if (link.isDropdown) {
+                    const isSubpageActive = location.pathname === '/for-makeup-artists' || location.pathname === '/for-salons';
+                    return (
+                      <div
+                        key={link.name}
+                        ref={(el) => { linkRefs.current[link.name] = el; }}
+                        onMouseEnter={() => {
+                          if (closeTimeoutRef.current) {
+                            clearTimeout(closeTimeoutRef.current);
+                            closeTimeoutRef.current = null;
+                          }
+                          setHovered(link.name);
+                          setDropdownOpen(true);
+                        }}
+                        onMouseLeave={() => {
+                          closeTimeoutRef.current = setTimeout(() => {
+                            setHovered(null);
+                            setDropdownOpen(false);
+                          }, 180);
+                        }}
+                        className={`relative font-heading font-bold uppercase tracking-widest text-xs px-5 py-2.5 rounded-full transition-colors duration-200 z-10 cursor-pointer select-none group
+                          ${isSubpageActive ? 'text-white' : 'text-white/60 hover:text-white'}`}
+                      >
+                        <span className="flex items-center gap-1.5">
+                          {link.name}
+                          <svg className={`w-3 h-3 transition-transform duration-300 ${dropdownOpen ? 'rotate-180 text-[#00F5D4]' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </span>
+                        
+                        <div
+                          className={`absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-52 z-50 transition-all duration-300 origin-top
+                            ${dropdownOpen ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}`}
+                        >
+                          <div className="w-full p-2 rounded-2xl bg-[#05050C]/95 border border-white/10 backdrop-blur-xl shadow-2xl flex flex-col gap-1">
+                            {link.dropdownItems.map((item) => (
+                              <Link
+                                key={item.name}
+                                to={item.href}
+                                className="font-heading font-bold uppercase tracking-wider text-[10px] text-white/70 hover:text-[#00F5D4] hover:bg-white/5 px-4 py-2.5 rounded-xl transition-all duration-200 text-left block"
+                              >
+                                {item.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                        {isSubpageActive && (
+                          <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#00F5D4] shadow-[0_0_8px_#00F5D4]" />
+                        )}
+                      </div>
+                    );
+                  }
+
                   const isActive = location.pathname === link.href;
                   return (
                     <Link
@@ -212,7 +302,7 @@ export default function Navbar() {
             </div>
 
             {/* ── Desktop CTA & Socials ── */}
-            <div style={itemEnter(0.35)} className="hidden md:flex items-center gap-4">
+            <div style={itemEnter(0.35)} className="hidden md:flex items-center gap-4 relative z-10">
               <div className="flex gap-2.5">
                 {[
                   { href: 'https://www.instagram.com/_juntoz', label: 'Instagram', path: IG_PATH },
@@ -250,12 +340,12 @@ export default function Navbar() {
                 }}
               >
                 <span className="nav-cta-sweep absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full pointer-events-none" />
-                <span className="relative z-10 font-bold">Start Call</span>
+                <span className="relative z-10 font-bold">Let's Connect</span>
               </a>
             </div>
 
             {/* ── Mobile Hamburger (Icon only, no "Menu" word) ── */}
-            <div className="md:hidden flex items-center justify-end">
+            <div className="md:hidden flex items-center justify-end relative z-10">
               <button
                 className="flex items-center justify-center relative z-[60] group/menu w-11 h-11 rounded-full border border-white/10 bg-white/5 backdrop-blur-md active:scale-95 transition-transform"
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -302,6 +392,46 @@ export default function Navbar() {
         <div className="flex-1 flex flex-col justify-between px-8 pb-12 relative z-10 overflow-y-auto">
           <nav className="flex flex-col gap-2 my-auto">
             {navLinks.map((link, i) => {
+              if (link.isDropdown) {
+                return (
+                  <div 
+                    key={link.name} 
+                    className="flex flex-col border-b border-white/10 py-4"
+                    style={{
+                      transitionDelay: menuOpen ? `${i * 60}ms` : '0ms',
+                      opacity: menuOpen ? 1 : 0,
+                      transform: menuOpen ? 'translateX(0)' : 'translateX(-20px)',
+                      transitionProperty: 'opacity, transform',
+                      transitionDuration: '0.4s',
+                    }}
+                  >
+                    <div className="flex items-center gap-4 mb-2 pl-2">
+                      <span className="font-heading font-black text-xs tracking-widest text-[#00F5D4]">0{i + 1}</span>
+                      <span className="font-heading font-black text-lg uppercase tracking-tight text-white/50">{link.name}</span>
+                    </div>
+                    <div className="flex flex-col gap-1 pl-6">
+                      {link.dropdownItems.map((item) => {
+                        const isSubActive = location.pathname === item.href;
+                        return (
+                          <Link
+                            key={item.name}
+                            to={item.href}
+                            onClick={() => setMenuOpen(false)}
+                            className={`flex items-center justify-between py-3.5 px-3 rounded-2xl transition-all duration-300
+                              ${isSubActive ? 'text-white bg-white/5' : 'text-white/60 hover:text-white'}`}
+                          >
+                            <span className="font-heading font-black text-xl uppercase tracking-tight">{item.name}</span>
+                            <svg className="w-5 h-5 text-[#00F5D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              }
+
               const isActive = location.pathname === link.href;
               return (
                 <Link

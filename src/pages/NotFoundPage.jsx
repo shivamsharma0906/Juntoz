@@ -9,7 +9,7 @@ export default function NotFoundPage() {
         description="The page you're looking for doesn't exist. Return to Juntoz to explore our digital marketing services for beauty brands."
         path="/404"
       />
-      <div className="min-h-[70vh] flex flex-col items-center justify-center px-6 pt-24 pb-16 text-center">
+      <div className="min-h-[70vh] flex flex-col items-center justify-center px-6 pt-28 md:pt-36 pb-16 text-center">
         <p className="font-body text-[#00F5D4] text-xs font-bold uppercase tracking-[0.25em] mb-4">
           404 — Not Found
         </p>

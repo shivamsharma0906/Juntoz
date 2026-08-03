@@ -5,7 +5,7 @@ import PageMeta from '../components/PageMeta';
 
 export default function WorkPage() {
   return (
-    <div className="pt-24 pb-20 min-h-screen bg-background">
+    <div className="pt-28 md:pt-36 pb-20 min-h-screen bg-background">
       <PageMeta
         title="Our Work — Client Success Stories"
         description="Explore how Juntoz has helped ambitious brands scale revenue with proven digital growth strategies."
@@ -13,15 +13,15 @@ export default function WorkPage() {
       />
       <div className="container mx-auto px-6 max-w-7xl">
         
-        <ScrollReveal data-reveal="up" className="mb-16 text-center sm:text-left">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6">
+        <ScrollReveal data-reveal="up" className="mb-6 md:mb-14 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-2">
             <span className="w-2 h-2 rounded-full bg-[#00F5D4] animate-pulse" />
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Our Work</span>
           </div>
-          <h1 className="font-heading font-black text-white text-4xl sm:text-6xl md:text-7xl uppercase leading-none tracking-tighter mb-6">
-            Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Success</span>
-          </h1>
-          <p className="font-body text-white/50 text-sm md:text-base max-w-xl leading-relaxed mx-auto sm:mx-0">
+          <div className="flex justify-center my-3">
+            <img src="/results_balloon.png" alt="Results" className="h-20 sm:h-32 md:h-44 lg:h-52 object-contain select-none pointer-events-none" />
+          </div>
+          <p className="font-body text-white/50 text-sm md:text-base max-w-xl leading-relaxed mx-auto">
             Explore how we help companies scale predictably using our proven, data-driven growth systems.
           </p>
         </ScrollReveal>

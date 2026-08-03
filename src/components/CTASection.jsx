@@ -3,13 +3,13 @@ import ScrollReveal from './ScrollReveal.jsx';
 
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20want%20to%20book%20a%20strategy%20call.';
 
-const TICKER = ['START YOUR PROJECT','STRATEGY & CREATIVE','PERFORMANCE MARKETING','WEB & ENGINEERING','JUNTOZ DIGITAL','BOOK A CALL'];
+const TICKER = ['START YOUR PROJECT', 'STRATEGY & CREATIVE', 'PERFORMANCE MARKETING', 'WEB & ENGINEERING', 'JUNTOZ DIGITAL', 'BOOK A CALL'];
 
 const PROOF = [
   { num: '200+', label: 'Brands Scaled' },
   { num: '5.0 ★', label: 'Google Rating' },
-  { num: '3×',   label: 'Avg. ROI'   },
-  { num: '5yrs', label: 'Experience'    },
+  { num: '3×', label: 'Avg. ROI' },
+  { num: '5yrs', label: 'Experience' },
 ];
 
 export default function CTASection() {
@@ -35,11 +35,11 @@ export default function CTASection() {
         const rect = ref.current.getBoundingClientRect();
         const raw = -rect.top / (rect.height * 0.7);
         const p = Math.max(0, Math.min(1, raw));
-        const ty  = -(p * 110);
-        const sc  = 1 - p * 0.12;
-        const op  = 1 - p * 0.75;
-        headingRef.current.style.transform  = `translateY(${ty}px) scale(${sc})`;
-        headingRef.current.style.opacity    = op;
+        const ty = -(p * 110);
+        const sc = 1 - p * 0.12;
+        const op = 1 - p * 0.75;
+        headingRef.current.style.transform = `translateY(${ty}px) scale(${sc})`;
+        headingRef.current.style.opacity = op;
       });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -82,14 +82,14 @@ export default function CTASection() {
       <div className="flex-1 flex items-center justify-center relative z-10">
         <div className="w-full max-w-5xl mx-auto px-5 sm:px-6 py-10 sm:py-16 text-center">
 
-          <div className={`inline-flex items-center gap-2.5 px-5 py-2 rounded-full border mb-12 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}
+          <div className={`inline-flex items-center gap-2.5 px-5 py-2 rounded-full border mb-2 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}
             style={{ borderColor: 'rgba(0,245,212,0.3)', background: 'rgba(0,245,212,0.07)' }}>
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F5D4] opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00F5D4]" />
             </span>
             <span className="font-body text-[#00F5D4] text-[11px] font-bold uppercase tracking-[0.25em]">
-              Accepting New Partnerships
+              Performance Meets CreativityPerformance Meets Creativity
             </span>
           </div>
 
@@ -98,6 +98,9 @@ export default function CTASection() {
             className={`mb-8 transition-[opacity,transform] delay-100 will-change-transform ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
             style={{ transitionDuration: visible ? '0ms' : '1000ms' }}
           >
+            <div className="flex justify-center my-3">
+              <img src="/growth_balloon.png" alt="Growth" className="h-16 sm:h-24 md:h-36 lg:h-44 object-contain select-none pointer-events-none" />
+            </div>
             <h2 className="font-heading font-black uppercase leading-[0.82] tracking-tighter select-none">
               <span className="block text-white" style={{ fontSize: 'clamp(1.8rem,6vw,7.5rem)' }}>
                 READY TO BUILD
@@ -141,8 +144,8 @@ export default function CTASection() {
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"
                   style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)' }} />
                 <svg className="relative z-10 w-7 h-7 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                  <path d="M12 0C5.373 0 0 5.373 0 12c0 2.139.564 4.147 1.549 5.878L0 24l6.272-1.524A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.5-5.24-1.375l-.374-.222-3.724.904.938-3.617-.243-.387A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                  <path d="M12 0C5.373 0 0 5.373 0 12c0 2.139.564 4.147 1.549 5.878L0 24l6.272-1.524A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.5-5.24-1.375l-.374-.222-3.724.904.938-3.617-.243-.387A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
                 </svg>
                 <span className="relative z-10">Start The Conversation</span>
               </a>

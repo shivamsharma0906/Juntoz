@@ -38,7 +38,7 @@ export default function BlogPage() {
   const remainingPosts = filteredPosts.slice(1);
 
   return (
-    <div className="pt-24 pb-20 min-h-screen bg-background">
+    <div className="pt-28 md:pt-36 pb-20 min-h-screen bg-background">
       <PageMeta
         title="Blog — Marketing Insights & Strategy"
         description="Tactical breakdowns, paid ads strategies, and proven growth systems for ambitious brands. Updated regularly by the Juntoz team."
@@ -47,15 +47,15 @@ export default function BlogPage() {
       <div className="container mx-auto px-6 max-w-7xl">
 
         {/* Header Section */}
-        <ScrollReveal data-reveal="up" className="mb-12 text-center sm:text-left">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6">
+        <ScrollReveal data-reveal="up" className="mb-6 md:mb-14 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-2">
             <span className="w-2 h-2 rounded-full bg-[#FF3AF2] animate-pulse" />
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">The Growth Hub</span>
           </div>
-          <h1 className="font-heading font-black text-white text-4xl sm:text-6xl md:text-7xl uppercase leading-none tracking-tighter mb-6">
-            Insights & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF3AF2] to-[#7B2FFF]">Strategy</span>
-          </h1>
-          <p className="font-body text-white/50 text-sm md:text-base max-w-xl leading-relaxed mx-auto sm:mx-0">
+          <div className="flex justify-center my-3">
+            <img src="/insights_balloon.png" alt="Insights" className="h-20 sm:h-32 md:h-44 lg:h-52 object-contain select-none pointer-events-none" />
+          </div>
+          <p className="font-body text-white/50 text-sm md:text-base max-w-xl leading-relaxed mx-auto">
             Tactical breakdowns, algorithm updates, and growth systems for forward-thinking beauty brands.
           </p>
         </ScrollReveal>

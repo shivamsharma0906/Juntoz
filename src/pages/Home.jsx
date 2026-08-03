@@ -3,6 +3,7 @@ import Hero from '../components/Hero';
 
 // Lazy load below-the-fold components
 const WhyMarketingBreaks = lazy(() => import('../components/WhyMarketingBreaks'));
+const WhoWeHelp         = lazy(() => import('../components/WhoWeHelp'));
 const WorkGallery        = lazy(() => import('../components/WorkGallery'));
 const EcosystemSection   = lazy(() => import('../components/EcosystemSection'));
 const Services           = lazy(() => import('../components/Services')); // What We Build
@@ -17,6 +18,7 @@ export default function Home() {
       <Hero />
       <Suspense fallback={null}>
         <WhyMarketingBreaks />
+        <WhoWeHelp />
         <WorkGallery />
         <Services />
         <BehindTheWork />
