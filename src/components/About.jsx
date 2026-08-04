@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import ScrollReveal from './ScrollReveal.jsx';
 
 const proofStats = [
@@ -162,43 +161,48 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {values.map((value, idx) => (
               <ScrollReveal key={value.headline} delay={idx * 150}>
-                <div
-                  className="group relative p-8 rounded-[2rem] border border-white/5 bg-[#0E0E1C]/30 hover:border-white/15 hover:bg-[#0E0E1C]/50 transition-all duration-500 flex flex-col justify-between h-full relative overflow-hidden"
-                  style={{ boxShadow: '0 15px 40px rgba(0,0,0,0.35)' }}
-                >
-                  {/* Subtle corner light */}
-                  <div
-                    className="absolute -top-16 -right-16 w-36 h-36 rounded-full blur-[50px] opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: value.color }}
+                <div className="group relative rounded-[2rem] overflow-hidden p-[1px] transition-all duration-500 hover:-translate-y-1 h-full flex flex-col">
+                  {/* Outer Border Glow */}
+                  <div 
+                    className="absolute inset-0 transition-opacity duration-500 opacity-20 group-hover:opacity-100 bg-gradient-to-br"
+                    style={{ background: `linear-gradient(135deg, ${value.color}80, transparent 60%, ${value.color}80)` }}
                   />
-
-                  <div className="space-y-6">
-                    <div className="flex justify-between items-start">
-                      <div 
-                        className="w-12 h-12 rounded-2xl flex items-center justify-center font-heading font-black text-base border"
-                        style={{
-                          backgroundColor: `${value.color}15`,
-                          borderColor: `${value.color}30`,
-                          color: value.color,
-                        }}
-                      >
-                        {value.icon}
+                  
+                  <div className="relative h-full bg-[#0E0E1C]/45 backdrop-blur-xl rounded-[31px] p-8 flex flex-col justify-between z-10 overflow-hidden">
+                    {/* Dynamic light pools on hover */}
+                    <div 
+                      className="absolute -top-24 -right-24 w-60 h-60 rounded-full blur-[80px] opacity-0 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none"
+                      style={{ background: value.color }}
+                    />
+                    
+                    <div className="space-y-6">
+                      <div className="flex justify-between items-start">
+                        <div 
+                          className="w-12 h-12 rounded-2xl flex items-center justify-center font-heading font-black text-base border"
+                          style={{
+                            backgroundColor: `${value.color}15`,
+                            borderColor: `${value.color}30`,
+                            color: value.color,
+                          }}
+                        >
+                          {value.icon}
+                        </div>
+                        <span className="font-heading font-black text-white/10 text-4xl">{value.n}</span>
                       </div>
-                      <span className="font-heading font-black text-white/10 text-4xl">{value.n}</span>
-                    </div>
 
-                    <div className="space-y-2">
-                      <h3 className="font-heading font-black text-white text-xl uppercase tracking-tight">
-                        {value.headline}
-                      </h3>
-                      <p className="font-heading font-bold text-[10px] tracking-wider uppercase text-white/45">
-                        {value.sub}
+                      <div className="space-y-2">
+                        <h3 className="font-heading font-black text-white text-xl uppercase tracking-tight">
+                          {value.headline}
+                        </h3>
+                        <p className="font-heading font-bold text-[10px] tracking-wider uppercase text-white/45">
+                          {value.sub}
+                        </p>
+                      </div>
+
+                      <p className="font-body text-white/55 text-sm leading-relaxed">
+                        {value.description}
                       </p>
                     </div>
-
-                    <p className="font-body text-white/55 text-sm leading-relaxed">
-                      {value.description}
-                    </p>
                   </div>
                 </div>
               </ScrollReveal>

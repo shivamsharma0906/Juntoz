@@ -74,8 +74,8 @@ export default function ForSalonsPage() {
   return (
     <div className="pt-20 md:pt-28 bg-[#050508] text-white overflow-hidden">
       <PageMeta
-        title="Marketing for Hair & Beauty Salons — Juntoz"
-        description="Drive consistent walk-ins and book dead weekday chairs. Local SEO, retention programs, reviews, and high-intent location ads designed exclusively for salons."
+        title="Marketing & SEO for Hair & Beauty Salons | Juntoz"
+        description="Fill dead weekday chairs and drive consistent local walk-ins. Dominate local Google maps, run high-converting search ads, and automate customer reviews."
         path="/for-salons"
       />
 
@@ -209,7 +209,7 @@ export default function ForSalonsPage() {
               The Reality Check
             </span>
             <h2 className="font-heading font-black text-white text-3xl sm:text-5xl uppercase tracking-tighter">
-              Why Generic Agencies Fail Salons
+              Why Generic Agencies <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Fail Salons</span>
             </h2>
             <p className="font-body text-white/50 text-sm">
               Click on each challenge below to reveal the Juntoz Solution.
@@ -285,7 +285,7 @@ export default function ForSalonsPage() {
               Execution Plan
             </span>
             <h2 className="font-heading font-black text-white text-3xl sm:text-5xl uppercase tracking-tighter">
-              Our Stepped Growth System
+              Our Stepped <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Growth System</span>
             </h2>
             <p className="font-body text-white/50 text-sm">
               We translate your salon services into a robust local traffic flow. Hover or tap each step.
@@ -381,7 +381,7 @@ export default function ForSalonsPage() {
                 Proof
               </span>
               <h2 className="font-heading font-black text-white text-3xl sm:text-5xl uppercase tracking-tighter">
-                Salon Success Stories
+                Salon <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Success Stories</span>
               </h2>
             </div>
             <p className="font-body text-white/50 max-w-xs text-sm">

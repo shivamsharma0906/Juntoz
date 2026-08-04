@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Static Pages -->
   <url>
     <loc>https://juntoz.in/</loc>
     <changefreq>weekly</changefreq>
@@ -18,12 +19,12 @@
   <url>
     <loc>https://juntoz.in/results</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://juntoz.in/about</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://juntoz.in/blog</loc>
@@ -33,6 +34,60 @@
   <url>
     <loc>https://juntoz.in/contact</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://juntoz.in/for-makeup-artists</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://juntoz.in/for-salons</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Case Studies -->
+  <url>
+    <loc>https://juntoz.in/work/d2c-ecommerce-scaling</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://juntoz.in/work/luxury-real-estate-leads</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://juntoz.in/work/restaurant-chain-rebrand</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://juntoz.in/work/edtech-platform-launch</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Articles -->
+  <url>
+    <loc>https://juntoz.in/blog/stop-wasting-money-on-boost-post</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://juntoz.in/blog/meta-ads-cac-escalation-2026</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://juntoz.in/blog/whatsapp-automation-pipeline</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://juntoz.in/blog/scale-brand-authority-2026</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

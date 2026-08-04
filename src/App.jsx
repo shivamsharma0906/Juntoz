@@ -47,17 +47,17 @@ function ScrollToTop() {
 // Global mouse-tracking ambient glow — desktop only, zero re-renders via rAF
 function GlobalMouseGlow() {
   const glowRef = useRef(null);
-  const rafRef  = useRef(null);
+  const rafRef = useRef(null);
 
   useEffect(() => {
     const el = glowRef.current;
     if (!el) return;
 
     // Start centred so there's no "jump" on first mouse move
-    let currentX = window.innerWidth  / 2;
+    let currentX = window.innerWidth / 2;
     let currentY = window.innerHeight / 2;
-    let targetX  = currentX;
-    let targetY  = currentY;
+    let targetX = currentX;
+    let targetY = currentY;
 
     const onMove = (e) => {
       targetX = e.clientX;
@@ -104,12 +104,12 @@ function App() {
     const handleResize = () => setIsDesktop(window.innerWidth >= 768);
     handleResize();
     window.addEventListener('resize', handleResize);
-    
+
     const handlePreloadError = () => {
       window.location.reload();
     };
     window.addEventListener('vite:preloadError', handlePreloadError);
-    
+
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('vite:preloadError', handlePreloadError);
@@ -119,8 +119,37 @@ function App() {
   return (
     <BrowserRouter>
       <div className="relative min-h-screen">
+        {/* ── Base Dark Background with Soft Static Brand Glows ── */}
+        <div
+          className="fixed inset-0 pointer-events-none bg-[#050508]"
+          style={{ zIndex: -5 }}
+        >
+          {/* Subtle static gradient using purple, pink, and teal at ~10% total opacity */}
+          <div
+            className="absolute inset-0 opacity-[0.07]"
+            style={{
+              backgroundImage: `
+  radial-gradient(ellipse at 15% 20%, rgba(123, 46, 255, 0.35) 0%, transparent 85%),
+  radial-gradient(ellipse at 85% 15%, rgba(255, 58, 242, 0.30) 0%, transparent 80%),
+  radial-gradient(ellipse at 50% 85%, rgba(0, 245, 212, 0.28) 0%, transparent 90%)
+`
+            }}
+          />
+        </div>
+
+        {/* ── Subtle Grain/Noise Texture Layer (SVG feTurbulence) at 3.5% opacity overlay ── */}
+        <div
+          className="fixed inset-0 pointer-events-none"
+          style={{
+            zIndex: -4,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            opacity: 0.018,
+            mixBlendMode: 'overlay',
+          }}
+        />
+
         {/* Single fixed full-page grid texture — consistent across ALL sections */}
-        <div className="fixed inset-0 pattern-grid pointer-events-none" style={{ zIndex: -2, opacity: 0.35 }} />
+        <div className="fixed inset-0 pattern-grid pointer-events-none" style={{ zIndex: -3, opacity: 0.35 }} />
         {/* Subtle vignette: darkens very top and bottom edges only */}
         <div className="fixed inset-0 pointer-events-none" style={{ zIndex: -2, background: 'linear-gradient(to bottom, rgba(5,5,8,0.6) 0%, transparent 12%, transparent 88%, rgba(5,5,8,0.6) 100%)' }} />
 

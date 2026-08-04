@@ -9,17 +9,17 @@ export default function WorkGallery() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-[#7B2FFF]/10 to-[#00F5D4]/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
-        <ScrollReveal>
+        <ScrollReveal data-reveal="zoom-cinematic">
           <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-white/10 pb-8">
             <div className="max-w-2xl">
               <span className="font-heading font-bold tracking-widest text-[#00F5D4] uppercase text-sm mb-4 block">
                 Selected Work
               </span>
               <h2 className="font-heading font-black text-white text-4xl sm:text-5xl md:text-7xl uppercase tracking-tighter leading-[0.9]">
-                Proof <br className="hidden sm:block" /> Over Promises.
+                Proof <br className="hidden sm:block" /> Over <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Promises</span>.
               </h2>
             </div>
-            <p className="font-body text-white/50 max-w-sm md:text-right text-sm sm:text-base">
+            <p className="font-body text-white/60 max-w-sm md:text-right text-sm sm:text-base">
               We don't sell metrics; we build businesses. Here is how we've transformed our partners' growth trajectories.
             </p>
           </div>
@@ -27,7 +27,7 @@ export default function WorkGallery() {
 
         <div className="space-y-12 sm:space-y-24">
           {caseStudies.map((study, index) => (
-            <ScrollReveal key={study.slug} delay={index * 150}>
+            <ScrollReveal key={study.slug} data-reveal="zoom-cinematic" delay={index * 150}>
               <div className="group flex flex-col lg:flex-row gap-8 lg:gap-16 items-center p-6 sm:p-10 rounded-[2.5rem] bg-white/5 border border-white/10 hover:bg-white/[0.07] transition-colors duration-500 relative overflow-hidden">
                 
                 {/* Image Section */}
@@ -36,6 +36,8 @@ export default function WorkGallery() {
                   <motion.img 
                     src={study.image}
                     alt={study.clientName}
+                    width={800}
+                    height={500}
                     loading="lazy"
                     decoding="async"
                     className="absolute inset-0 w-full h-full object-cover"

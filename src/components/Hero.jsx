@@ -1,39 +1,33 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
-import artistImage from '../assets/Artist.webp';
-import brandsImage from '../assets/Brands.webp';
-import clinicsImage from '../assets/Clinics.webp';
-import startupsImage from '../assets/Startups.webp';
-import restaurantsImage from '../assets/Restaurants.webp';
-
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20to%20know%20how%20you%20can%20grow%20my%20business.';
 
 /* ─── Rotating Industry Configuration ─── */
 const ROTATING_INDUSTRIES = [
   {
     name: 'Restaurants',
-    image: restaurantsImage,
+    image: '/Restaurants.webp',
     alt: 'Restaurants',
   },
   {
     name: 'Clinics',
-    image: clinicsImage,
+    image: '/Clinics.webp',
     alt: 'Clinics',
   },
   {
     name: 'Startups',
-    image: startupsImage,
+    image: '/Startups.webp',
     alt: 'Startups',
   },
   {
     name: 'Brands',
-    image: brandsImage,
+    image: '/Brands.webp',
     alt: 'Brands',
   },
   {
     name: 'Artist',
-    image: artistImage,
+    image: '/Artist.webp',
     alt: 'Artist',
   },
 ];
@@ -91,7 +85,7 @@ const MetaAdsCard = ({ mousePos }) => (
         </svg>
       </div>
       <div>
-        <h4 className="font-heading font-black text-white text-xs uppercase tracking-wider">Meta Performance Engine</h4>
+        <p className="font-heading font-black text-white text-xs uppercase tracking-wider">Meta Performance Engine</p>
         <p className="font-body text-[10px] text-white/50">Active Scale Campaign</p>
       </div>
     </div>
@@ -127,6 +121,8 @@ const CreativeCard = ({ mousePos }) => (
       <img
         src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=400&auto=format&fit=crop"
         alt="Ad Creative"
+        width={400}
+        height={144}
         fetchPriority="high"
         decoding="async"
         className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80 group-hover/img:scale-110 transition-transform duration-700"
@@ -190,6 +186,8 @@ const MobileCreativeCard = () => (
       <img
         src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=400&auto=format&fit=crop"
         alt="Ad Creative"
+        width={400}
+        height={128}
         fetchPriority="high"
         decoding="async"
         className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80"
@@ -253,12 +251,6 @@ function RotatingIndustries() {
         height: '1.35em', // Responsive height scaling to match visual font weight
       }}
     >
-      {/* Hidden container to ensure browser caches/preloads images immediately on initial paint */}
-      <div style={{ display: 'none' }} aria-hidden="true">
-        {ROTATING_INDUSTRIES.map((ind) => (
-          <img key={ind.name} src={ind.image} alt="" loading="eager" />
-        ))}
-      </div>
 
       <AnimatePresence mode="wait">
         <motion.img

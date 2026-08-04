@@ -8,8 +8,8 @@ export default function WorkPage() {
   return (
     <div className="pt-20 md:pt-36 pb-20 min-h-screen bg-background">
       <PageMeta
-        title="Our Work — Client Success Stories"
-        description="Explore how Juntoz has helped ambitious brands scale revenue with proven digital growth strategies."
+        title="Our Work — Beauty Brand Marketing Success Stories | Juntoz"
+        description="See the exact funnels, ad campaigns, and brand systems we deployed to turn beauty salons and makeup artists into booked-out brands."
         path="/work"
       />
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">

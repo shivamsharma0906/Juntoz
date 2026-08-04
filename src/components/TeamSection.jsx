@@ -1,5 +1,4 @@
 import ScrollReveal from './ScrollReveal';
-import ImageReveal from './ImageReveal';
 
 // PLACEHOLDER: Team Members
 const teamMembers = [

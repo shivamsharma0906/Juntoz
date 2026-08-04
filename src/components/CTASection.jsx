@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import ScrollReveal from './ScrollReveal.jsx';
 import BalloonHeading from './BalloonHeading.jsx';
 
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20want%20to%20book%20a%20strategy%20call.';
@@ -96,11 +95,10 @@ export default function CTASection() {
 
           <div
             ref={headingRef}
-            className={`mb-8 transition-[opacity,transform] delay-100 will-change-transform ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-            style={{ transitionDuration: visible ? '0ms' : '1000ms' }}
+            className={`mb-8 transition-all duration-[900ms] delay-100 will-change-transform ${visible ? 'opacity-100 scale-100 blur-0 translate-y-0' : 'opacity-0 scale-[0.86] blur-[8px] translate-y-6'}`}
           >
             <div className="flex justify-center my-3">
-              <BalloonHeading src="/growth_balloon.png" alt="Growth" className="h-16 sm:h-24 md:h-36 lg:h-44 mx-auto" />
+              <BalloonHeading src="/growth_balloon.webp" alt="Growth" className="h-16 sm:h-24 md:h-36 lg:h-44 mx-auto" />
             </div>
             <h2 className="font-heading font-black uppercase leading-[0.82] tracking-tighter select-none">
               <span className="block text-white" style={{ fontSize: 'clamp(1.8rem,6vw,7.5rem)' }}>
@@ -115,18 +113,18 @@ export default function CTASection() {
                   backgroundClip: 'text',
                   filter: 'drop-shadow(0 0 40px rgba(255,58,242,0.45))',
                   display: 'block',
-                }}>
+                  }}>
                   YOUR EMPIRE?
                 </span>
               </span>
             </h2>
           </div>
 
-          <p className={`font-body text-white/50 text-sm sm:text-lg md:text-xl max-w-lg mx-auto leading-relaxed mb-8 sm:mb-10 transition-all duration-1000 delay-200 ${visible ? 'opacity-100' : 'opacity-0'}`}>
+          <p className={`font-body text-white/50 text-sm sm:text-lg md:text-xl max-w-lg mx-auto leading-relaxed mb-8 sm:mb-10 transition-all duration-[1000ms] delay-200 ${visible ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-[0.95] blur-[4px]'}`}>
             Let's discuss how our integrated growth system can scale your business. No fluff, just results.
           </p>
 
-          <div className={`mb-16 transition-all duration-1000 delay-500 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`mb-16 transition-all duration-[1000ms] delay-500 ${visible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-[0.95] translate-y-8'}`}>
             <div className="relative inline-block p-[3px] rounded-full overflow-hidden">
               <div className="absolute cta-spin-ring"
                 style={{ inset: '-40px', background: 'conic-gradient(from 0deg, #FF3AF2, #7B2FFF, #00F5D4, #7B2FFF, #FF3AF2)' }} />

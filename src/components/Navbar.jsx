@@ -51,16 +51,17 @@ export default function Navbar() {
     };
   }, []);
 
-  // Immediately close dropdown if hovering other menu links
-  useEffect(() => {
-    if (hovered && hovered !== 'Who We Help') {
+  // Helper to handle link hover and immediately close dropdown on non-dropdown links
+  const handleHover = (linkHrefOrName) => {
+    setHovered(linkHrefOrName);
+    if (linkHrefOrName && linkHrefOrName !== 'Who We Help') {
       if (closeTimeoutRef.current) {
         clearTimeout(closeTimeoutRef.current);
         closeTimeoutRef.current = null;
       }
       setDropdownOpen(false);
     }
-  }, [hovered]);
+  };
 
   useEffect(() => {
     const onScroll = () => {
@@ -238,12 +239,12 @@ export default function Navbar() {
                             clearTimeout(closeTimeoutRef.current);
                             closeTimeoutRef.current = null;
                           }
-                          setHovered(link.name);
+                          handleHover(link.name);
                           setDropdownOpen(true);
                         }}
                         onMouseLeave={() => {
                           closeTimeoutRef.current = setTimeout(() => {
-                            setHovered(null);
+                            handleHover(null);
                             setDropdownOpen(false);
                           }, 180);
                         }}
@@ -286,8 +287,8 @@ export default function Navbar() {
                       key={link.name}
                       to={link.href}
                       ref={(el) => { linkRefs.current[link.href] = el; }}
-                      onMouseEnter={() => setHovered(link.href)}
-                      onMouseLeave={() => setHovered(null)}
+                      onMouseEnter={() => handleHover(link.href)}
+                      onMouseLeave={() => handleHover(null)}
                       className={`relative font-heading font-bold uppercase tracking-widest text-xs px-5 py-2.5 rounded-full transition-colors duration-200 z-10
                         ${isActive ? 'text-white' : 'text-white/60 hover:text-white'}`}
                     >

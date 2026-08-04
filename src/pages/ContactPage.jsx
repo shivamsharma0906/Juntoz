@@ -167,8 +167,8 @@ export default function ContactPage() {
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
 
       <PageMeta
-        title="Contact Juntoz — Book a Free Strategy Call"
-        description="Ready to scale your business revenue? Contact Juntoz today and get a free growth strategy call within 24 hours."
+        title="Book a Growth Strategy Call — Scale Your Brand | Juntoz"
+        description="Ready to stop chasing single clients and command premium pricing? Schedule a free 1-on-1 strategy call with Juntoz and get a custom growth blueprint."
         path="/contact"
       />
         <ScrollReveal data-reveal="up" className="mb-10 sm:mb-16 text-center">
@@ -180,7 +180,7 @@ export default function ContactPage() {
             Let's Talk{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">Growth</span>
           </h1>
-          <p className="font-body text-white/50 text-sm md:text-base max-w-lg mx-auto leading-relaxed">
+          <p className="font-body text-white/60 text-sm md:text-base max-w-lg mx-auto leading-relaxed">
             Ready to scale your business revenue? Drop us a message and we'll get back to you within minutes on WhatsApp.
           </p>
         </ScrollReveal>

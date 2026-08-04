@@ -117,8 +117,8 @@ export default function CaseStudies() {
                         <div key={j} className="flex items-center justify-between px-4 py-3 rounded-xl bg-white/5 border border-white/10 group-hover:border-white/20 transition-colors">
                           <span className="font-body text-white/50 text-[10px] uppercase tracking-widest font-bold">{r.label}</span>
                           <div className="flex items-center gap-3">
-                            <span className="font-heading font-black text-white/30 text-sm line-through decoration-white/20">{r.before}</span>
-                            <span className="text-white/40 text-xs">→</span>
+                            <span className="font-heading font-black text-white/60 text-sm line-through decoration-white/20">{r.before}</span>
+                            <span className="text-white/60 text-xs">→</span>
                             <span className="font-heading font-black text-base md:text-lg" style={{ color: c.color }}>{r.after}</span>
                           </div>
                         </div>

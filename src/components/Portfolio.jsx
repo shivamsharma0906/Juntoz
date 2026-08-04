@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useCallback } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
 
 import { clientData } from '../data/clients.js';
@@ -46,12 +46,6 @@ export default function Portfolio() {
     dragRef.current.scrollLeft = scrollLeft.current - walk;
   }, []);
 
-  const highlightAmount = (text) => {
-    const amountRegex = /(₹[\d,]+|[\d]+%|[\d]+K)/g;
-    return text.split(amountRegex).map((part, i) =>
-      amountRegex.test(part) ? <span key={i} className="font-black text-accent-2 drop-shadow-[0_0_8px_rgba(0,245,212,0.4)]">{part}</span> : part
-    );
-  };
 
   return (
     <section ref={sectionRef} id="portfolio" className="relative py-12 sm:py-16 md:py-24 bg-background overflow-hidden">
@@ -80,7 +74,7 @@ export default function Portfolio() {
 
         {/* ── Mobile: horizontal drag-scroll / Desktop: 3-col grid ── */}
         {/* Drag hint — mobile only */}
-        <div className="flex sm:hidden items-center gap-2 mb-4 text-white/30 px-1">
+        <div className="flex sm:hidden items-center gap-2 mb-4 text-white/60 px-1">
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
           </svg>
@@ -120,19 +114,19 @@ export default function Portfolio() {
                 animation: `portfolio-card-in 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 120}ms both`,
               }}
             >
-              <div
-                className="group relative bg-[#05050C] rounded-[2rem] overflow-hidden p-[1px] transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02]"
-                style={{ boxShadow: `0 10px 40px rgba(0,0,0,0.5)` }}
-              >
-                {/* Border Shimmer */}
-                <div className="absolute inset-0 bg-gradient-to-br opacity-40 group-hover:opacity-100 transition-opacity duration-500 animate-[gradient-shift_4s_ease-in-out_infinite]"
-                  style={{ background: `linear-gradient(135deg, ${p.hex}60, transparent, ${p.hex}60)` }} />
+              <div className="group relative rounded-[2rem] overflow-hidden p-[1px] transition-all duration-500 hover:-translate-y-1.5 h-full flex flex-col">
+                {/* Outer Border Shimmer */}
+                <div
+                  className="absolute inset-0 opacity-20 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: `linear-gradient(135deg, ${p.hex}80, transparent 65%, ${p.hex}80)` }}
+                />
 
-                <div className="relative h-full bg-[#080810]/95 backdrop-blur-2xl rounded-[31px] p-5 xs:p-6 sm:p-8 flex flex-col z-10 overflow-hidden">
-                  
-                  {/* Internal ambient glow */}
-                  <div className="absolute -bottom-20 -right-20 w-48 h-48 rounded-full blur-[60px] opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: p.hex }} />
+                <div className="relative h-full bg-[#0E0E1C]/35 backdrop-blur-xl rounded-[31px] p-5 xs:p-6 sm:p-8 flex flex-col z-10 overflow-hidden">
+                  {/* Corner light pool on hover */}
+                  <div 
+                    className="absolute -top-28 -right-28 w-64 h-64 rounded-full blur-[80px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
+                    style={{ background: p.hex }} 
+                  />
 
                   {/* Top Labels */}
                   <div className="flex items-start justify-between mb-6 sm:mb-8 relative z-10">
@@ -142,7 +136,7 @@ export default function Portfolio() {
                     >
                       {p.tag}
                     </span>
-                    <span className="font-body text-[10px] font-bold uppercase tracking-widest text-white/30 pt-1 text-right pl-2">{p.location}</span>
+                    <span className="font-body text-[10px] font-bold uppercase tracking-widest text-white/60 pt-1 text-right pl-2">{p.location}</span>
                   </div>
 
                   {/* Main Metric */}

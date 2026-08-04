@@ -49,55 +49,63 @@ function FAQItem({ item, index, isOpen, onToggle }) {
 
   return (
     <div
-      className="rounded-2xl overflow-hidden"
+      className="group relative rounded-2xl overflow-hidden p-[1px] transition-all duration-500"
       style={{
-        background: isOpen ? 'rgba(0,245,212,0.04)' : 'rgba(255,255,255,0.03)',
-        border: `1px solid ${isOpen ? 'rgba(0,245,212,0.25)' : 'rgba(255,255,255,0.08)'}`,
-        transition: 'background 0.35s ease, border-color 0.35s ease',
+        background: isOpen 
+          ? 'linear-gradient(135deg, rgba(0, 245, 212, 0.6), transparent 60%, rgba(0, 245, 212, 0.6))'
+          : 'linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent 60%, rgba(255, 255, 255, 0.15))',
       }}
     >
-      {/* ── Question row ── */}
-      <button
-        onClick={() => onToggle(index)}
-        className="w-full flex items-start gap-3 px-5 py-4 sm:px-6 sm:py-5 text-left"
-        style={{ cursor: 'pointer', background: 'transparent' }}
-        aria-expanded={isOpen}
+      <div 
+        className="w-full h-full rounded-2xl backdrop-blur-xl transition-colors duration-500"
+        style={{
+           backgroundColor: isOpen ? 'rgba(0, 245, 212, 0.08)' : 'rgba(14, 14, 28, 0.65)',
+        }}
       >
-        {/* Heart icon */}
-        <span
-          className="shrink-0 mt-0.5"
-          style={{
-            color: isOpen ? '#00F5D4' : 'rgba(255,255,255,0.25)',
-            transition: 'color 0.3s ease',
-          }}
+        {/* ── Question row ── */}
+        <button
+          onClick={() => onToggle(index)}
+          className="w-full flex items-start gap-3 px-5 py-4 sm:px-6 sm:py-5 text-left"
+          style={{ cursor: 'pointer', background: 'transparent' }}
+          aria-expanded={isOpen}
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill={isOpen ? '#00F5D4' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: 'fill 0.3s ease' }}>
-            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-          </svg>
-        </span>
+          {/* Question icon */}
+          <span
+            className="shrink-0 mt-0.5"
+            style={{
+              color: isOpen ? '#00F5D4' : 'rgba(255,255,255,0.4)',
+              transition: 'color 0.3s ease',
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </span>
 
-        {/* Question text */}
-        <span
-          className="flex-1 font-body font-semibold leading-snug"
-          style={{
-            fontSize: 'clamp(0.78rem, 1.8vw, 0.92rem)',
-            color: isOpen ? '#ffffff' : 'rgba(255,255,255,0.70)',
-            transition: 'color 0.3s ease',
-          }}
-        >
-          {item.q}
-        </span>
+          {/* Question text */}
+          <span
+            className="flex-1 font-body font-semibold leading-snug"
+            style={{
+              fontSize: 'clamp(0.78rem, 1.8vw, 0.92rem)',
+              color: isOpen ? '#ffffff' : 'rgba(255,255,255,0.70)',
+              transition: 'color 0.3s ease',
+            }}
+          >
+            {item.q}
+          </span>
 
-        {/* Plus / Cross icon */}
-        <span
-          className="shrink-0 flex items-center justify-center w-6 h-6 rounded-full ml-2 mt-0.5"
-          style={{
-            background: isOpen ? 'rgba(0,245,212,0.15)' : 'rgba(255,255,255,0.07)',
-            border: `1px solid ${isOpen ? 'rgba(0,245,212,0.35)' : 'rgba(255,255,255,0.12)'}`,
-            transition: 'background 0.3s ease, border-color 0.3s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1)',
-            transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
-          }}
-        >
+          {/* Plus / Cross icon */}
+          <span
+            className="shrink-0 flex items-center justify-center w-6 h-6 rounded-full ml-2 mt-0.5"
+            style={{
+              background: isOpen ? 'rgba(0,245,212,0.15)' : 'rgba(255,255,255,0.07)',
+              border: `1px solid ${isOpen ? 'rgba(0,245,212,0.35)' : 'rgba(255,255,255,0.12)'}`,
+              transition: 'background 0.3s ease, border-color 0.3s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1)',
+              transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+            }}
+          >
           <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke={isOpen ? '#00F5D4' : 'rgba(255,255,255,0.5)'} strokeWidth="1.8" strokeLinecap="round" style={{ transition: 'stroke 0.3s ease' }}>
             <line x1="6" y1="1" x2="6" y2="11" />
             <line x1="1" y1="6" x2="11" y2="6" />
@@ -128,6 +136,7 @@ function FAQItem({ item, index, isOpen, onToggle }) {
             {item.a}
           </p>
         </div>
+      </div>
       </div>
     </div>
   );

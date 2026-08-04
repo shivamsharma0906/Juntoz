@@ -54,7 +54,7 @@ function StatBadge({ value, label, color, delay, position }) {
   return (
     <div
       ref={ref}
-      className={`absolute ${position} z-20 animate-float-badge`}
+      className={`absolute ${position} z-20 animate-float-badge hidden md:block`}
       style={{ animationDelay: `${delay}s`, animationDuration: `${3.5 + delay * 0.4}s` }}
     >
       <div
@@ -174,7 +174,7 @@ export default function Founder() {
           
           {/* Left Column: Photo */}
           <div className="md:col-span-5 flex justify-center">
-            <ScrollReveal data-reveal="up" className="w-full max-w-[340px] sm:max-w-[420px] md:max-w-full">
+            <ScrollReveal data-reveal="zoom-cinematic" className="w-full max-w-[340px] sm:max-w-[420px] md:max-w-full">
               <div className="relative w-full group">
                 {/* Spinning ring decorations */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[105%] h-[105%] rounded-[3rem] pointer-events-none z-0 hidden sm:block"
@@ -247,7 +247,7 @@ export default function Founder() {
 
           {/* Right Column: Copy & Details */}
           <div className="md:col-span-7 space-y-6 md:space-y-8">
-            <ScrollReveal data-reveal="up" className="text-center md:text-left">
+            <ScrollReveal data-reveal="zoom-cinematic" className="text-center md:text-left">
               <span className="font-heading font-bold text-xs uppercase tracking-widest text-white/40 mb-3 block">
                 Meet the Founder
               </span>

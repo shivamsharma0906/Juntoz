@@ -15,18 +15,21 @@ const GOOGLE_URL = 'https://www.google.com/maps/place/Juntoz+Digital+Marketing+A
 
 /* ── StatCard: Hover effects and animated borders ── */
 function StatCard({ s, started }) {
+  const { value } = useCountUp(s.value, { duration: 2000, started });
+  const display = s.decimal ? value.toFixed(1) : value;
+
   return (
-    <div className="group relative rounded-3xl overflow-hidden p-[1px] transition-transform duration-500 hover:scale-[1.03]">
-      {/* Animated gradient border */}
+    <div className="group relative rounded-[2rem] overflow-hidden p-[1px] transition-all duration-500 hover:-translate-y-1.5 flex flex-col h-full">
+      {/* Outer Border Shimmer */}
       <div 
-        className="absolute inset-0 bg-gradient-to-br opacity-50 group-hover:opacity-100 transition-opacity duration-500 animate-[gradient-shift_4s_ease-in-out_infinite]"
-        style={{ background: `linear-gradient(135deg, ${s.color}60, transparent, ${s.color}60)` }} 
+        className="absolute inset-0 opacity-20 group-hover:opacity-100 transition-opacity duration-500"
+        style={{ background: `linear-gradient(135deg, ${s.color}80, transparent 65%, ${s.color}80)` }} 
       />
       
-      <div className="relative h-full bg-[#05050C]/90 backdrop-blur-xl rounded-[23px] p-6 md:p-8 flex flex-col items-center text-center gap-4">
-        {/* Glow behind icon */}
+      <div className="relative h-full bg-[#0E0E1C]/35 backdrop-blur-xl rounded-[31px] p-6 md:p-8 flex flex-col items-center text-center gap-4 z-10 overflow-hidden">
+        {/* Glow behind card on hover */}
         <div 
-          className="absolute top-8 w-24 h-24 rounded-full blur-[40px] opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"
+          className="absolute -top-24 -right-24 w-56 h-56 rounded-full blur-[65px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
           style={{ background: s.color }}
         />
 
@@ -48,11 +51,7 @@ function StatCard({ s, started }) {
             textShadow: `0 0 30px ${s.color}40`,
           }}
         >
-          {(() => {
-            const { value } = useCountUp(s.value, { duration: 2000, started });
-            const display = s.decimal ? value.toFixed(1) : value;
-            return <span>{display}{s.suffix}</span>;
-          })()}
+          <span>{display}{s.suffix}</span>
         </div>
         
         {/* Divider line */}
@@ -132,7 +131,7 @@ export default function Results() {
                </svg>
              </a>
           </div>
-          <p className="font-body text-white/30 text-xs font-bold uppercase tracking-[0.2em] mt-6">
+          <p className="font-body text-white/60 text-xs font-bold uppercase tracking-[0.2em] mt-6">
             100+ 5-Star Reviews from Real Clients
           </p>
         </ScrollReveal>

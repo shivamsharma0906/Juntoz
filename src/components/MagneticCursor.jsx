@@ -60,20 +60,23 @@ const MagneticCursor = memo(function MagneticCursor() {
 
         el.dataset.magnetCursorInited = '1';
 
+        let rect = null;
+
         const onEnterEl = (e) => {
-          const rect = el.getBoundingClientRect();
+          rect = el.getBoundingClientRect();
           const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.3;
           const dy = (e.clientY - (rect.top  + rect.height / 2)) * 0.3;
           el.style.transition = 'transform 0.3s cubic-bezier(0.34,1.56,0.64,1)';
           el.style.transform  = `translate(${dx}px, ${dy}px)`;
         };
         const onMoveEl = (e) => {
-          const rect = el.getBoundingClientRect();
+          if (!rect) rect = el.getBoundingClientRect();
           const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.25;
           const dy = (e.clientY - (rect.top  + rect.height / 2)) * 0.25;
           el.style.transform  = `translate(${dx}px, ${dy}px)`;
         };
         const onLeaveEl = () => {
+          rect = null;
           el.style.transition = 'transform 0.55s cubic-bezier(0.34,1.56,0.64,1)';
           el.style.transform  = 'translate(0,0)';
           setTimeout(() => {

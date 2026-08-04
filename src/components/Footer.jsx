@@ -133,7 +133,7 @@ export default function Footer() {
                 </svg>
               </div>
               <div>
-                <span className="block text-[9px] text-white/30 uppercase tracking-widest font-heading font-bold mb-1">Email Us</span>
+                <span className="block text-[9px] text-white/60 uppercase tracking-widest font-heading font-bold mb-1">Email Us</span>
                 <span className="block text-xs font-heading font-black text-white/80 group-hover:text-white truncate">Sujal.Mehta@juntoz.in</span>
               </div>
             </a>
@@ -152,7 +152,7 @@ export default function Footer() {
                 </svg>
               </div>
               <div>
-                <span className="block text-[9px] text-white/30 uppercase tracking-widest font-heading font-bold mb-1">Call Us</span>
+                <span className="block text-[9px] text-white/60 uppercase tracking-widest font-heading font-bold mb-1">Call Us</span>
                 <span className="block text-xs font-heading font-black text-white/80 group-hover:text-white truncate">+91 90040 01800</span>
               </div>
             </a>
@@ -173,7 +173,7 @@ export default function Footer() {
                 </svg>
               </div>
               <div>
-                <span className="block text-[9px] text-white/30 uppercase tracking-widest font-heading font-bold mb-1">Direct Message</span>
+                <span className="block text-[9px] text-white/60 uppercase tracking-widest font-heading font-bold mb-1">Direct Message</span>
                 <span className="block text-xs font-heading font-black text-white/80 group-hover:text-white truncate">@_juntoz</span>
               </div>
             </a>
@@ -231,7 +231,7 @@ export default function Footer() {
 
           {/* Capabilities Links */}
           <div className="md:col-span-3 space-y-4">
-            <span className="block font-heading font-bold text-xs uppercase tracking-wider text-white/30">Capabilities</span>
+            <span className="block font-heading font-bold text-xs uppercase tracking-wider text-white/60">Capabilities</span>
             <ul className="space-y-3">
               {footerServices.map((link) => (
                 <li key={link.to}>
@@ -250,7 +250,7 @@ export default function Footer() {
 
           {/* Company Links */}
           <div className="md:col-span-3 space-y-4">
-            <span className="block font-heading font-bold text-xs uppercase tracking-wider text-white/30">Company</span>
+            <span className="block font-heading font-bold text-xs uppercase tracking-wider text-white/60">Company</span>
             <ul className="space-y-3">
               {footerCompany.map((link) => (
                 <li key={link.to}>
@@ -269,7 +269,7 @@ export default function Footer() {
 
           {/* Contact Details Column */}
           <div className="md:col-span-2 space-y-4">
-            <span className="block font-heading font-bold text-xs uppercase tracking-wider text-white/30">HQ Location</span>
+            <span className="block font-heading font-bold text-xs uppercase tracking-wider text-white/60">HQ Location</span>
             <ul className="space-y-3 font-body text-sm text-white/60">
               <li>
                 <span className="block text-[10px] text-white/35 uppercase tracking-widest font-heading font-bold">Studio Office</span>
@@ -285,7 +285,7 @@ export default function Footer() {
 
         {/* ════ SECTION 3: COPYRIGHT & LEGAL ════ */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/5">
-          <p className="font-body text-xs text-white/30 tracking-wider">
+          <p className="font-body text-xs text-white/60 tracking-wider">
             © {new Date().getFullYear()} Juntoz Agency. All rights reserved.
           </p>
           <p className="font-body text-xs uppercase tracking-widest text-white/20">

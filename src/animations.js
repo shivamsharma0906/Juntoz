@@ -211,8 +211,15 @@ function initImageParallax() {
     rafId = requestAnimationFrame(() => {
       rafId = null;
       const wh = window.innerHeight;
-      imgs.forEach((img) => {
-        const rect = img.getBoundingClientRect();
+      
+      // Batch layout reads first
+      const reads = imgs.map((img) => ({
+        img,
+        rect: img.getBoundingClientRect(),
+      }));
+
+      // Batch style writes after all reads are done
+      reads.forEach(({ img, rect }) => {
         if (rect.bottom < -wh * 0.5 || rect.top > wh * 1.5) return;
         const relY = (rect.top + rect.height / 2 - wh / 2) / wh;
         img.style.transform = `translateY(${relY * 30}px)`;

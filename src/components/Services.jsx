@@ -100,13 +100,14 @@ export default function Services({ compactTop = false }) {
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 max-w-7xl">
         {/* Header */}
-        <ScrollReveal data-reveal="up" className="text-center mb-6 md:mb-14 px-4 sm:px-0">
+        <ScrollReveal data-reveal="flip-3d" className="text-center mb-6 md:mb-14 px-4 sm:px-0">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-2">
             <span className="w-2 h-2 rounded-full bg-[#00F5D4] header-pulse" />
             <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Departments</span>
           </div>
           <div className="flex justify-center my-3">
-            <BalloonHeading src="/services_balloon_gradient.png" alt="Services" className="h-20 sm:h-32 md:h-44 lg:h-52 mx-auto" />
+            <h2 className="sr-only">Our Departments and Services</h2>
+            <BalloonHeading src="/services_balloon_gradient.webp" alt="Services" className="h-20 sm:h-32 md:h-44 lg:h-52 mx-auto" />
           </div>
           <p className="font-body text-white/50 text-sm md:text-base max-w-lg mx-auto leading-relaxed px-2 sm:px-0">
             Your outsourced marketing team. From strategy and branding to content, websites, and performance marketing—we handle everything that drives growth.
@@ -149,19 +150,17 @@ export default function Services({ compactTop = false }) {
         >
           {DEPARTMENTS.map((s, i) => (
             <ScrollReveal key={i} data-reveal="up" delay={i * 100} className="w-[calc(100vw-3rem)] sm:w-[350px] lg:w-auto lg:min-w-0 snap-center shrink-0 overflow-hidden">
-              <div
-                className="group relative h-full bg-[#05050C] rounded-[2rem] p-[1px] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02]"
-                style={{ boxShadow: `0 10px 40px rgba(0,0,0,0.3)` }}
-              >
+              <div className="group relative h-full rounded-[2rem] p-[1px] overflow-hidden transition-all duration-500 hover:-translate-y-1.5 flex flex-col">
+                {/* Outer Border Shimmer */}
                 <div
-                  className="service-border-anim absolute inset-0 bg-gradient-to-br opacity-40 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: `linear-gradient(135deg, ${s.color}60, transparent, ${s.color}60)` }}
+                  className="absolute inset-0 opacity-20 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: `linear-gradient(135deg, ${s.color}80, transparent 65%, ${s.color}80)` }}
                 />
 
-                <div className="relative h-full bg-[#080810]/95 backdrop-blur-2xl rounded-[31px] p-5 xs:p-6 sm:p-8 flex flex-col z-10 overflow-hidden">
-
+                <div className="relative h-full bg-[#0E0E1C]/35 backdrop-blur-xl rounded-[31px] p-5 xs:p-6 sm:p-8 flex flex-col z-10 overflow-hidden">
+                  {/* Corner light pool on hover */}
                   <div
-                    className="absolute -top-16 -right-16 w-40 h-40 rounded-full blur-[50px] opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"
+                    className="absolute -top-28 -right-28 w-64 h-64 rounded-full blur-[80px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
                     style={{ background: s.color }}
                     aria-hidden="true"
                   />

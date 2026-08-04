@@ -8,8 +8,8 @@ export default function AboutPage() {
   return (
     <div className="pt-16 sm:pt-20 md:pt-24 pb-12 bg-background min-h-screen">
       <PageMeta
-        title="About Juntoz — Your Integrated Digital Growth Team"
-        description="Learn about Juntoz, our mission, leadership, and how we help businesses scale with data-driven marketing systems."
+        title="About Juntoz — The Beauty Growth Marketing Agency"
+        description="Meet the team behind India's premier marketing agency for makeup artists and salons. We build high-conversion booking engines that command premium pricing."
         path="/about"
       />
       <SimpleAbout />

@@ -15,7 +15,7 @@ export default function CaseStudyPage() {
     <div className="pt-20 md:pt-36 pb-20 min-h-screen bg-background">
       <PageMeta
         title={`${study.clientName} Case Study — Juntoz`}
-        description={study.problem}
+        description={`Read how Juntoz helped ${study.clientName} scale revenue: ${study.result}`}
         path={`/work/${study.slug}`}
       />
       <div className="container mx-auto px-4 sm:px-6 max-w-4xl">

@@ -7,7 +7,7 @@ export const COMPANY_STATS = {
 export const featuredQuote = {
   name: 'Vikram Mehta',
   role: 'Founder, CloudKitchens India',
-  quote: `"We hired 4 different agencies before finding Juntoz. They were the first team that actually understood our unit economics. They didn't just bring leads; they built a <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">predictable growth machine</span>."`,
+  quote: `"We worked with four agencies before Juntoz. They looked beyond marketing metrics and built a <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">predictable growth machine</span> that continues to deliver results."`,
   initials: 'VM'
 };
 

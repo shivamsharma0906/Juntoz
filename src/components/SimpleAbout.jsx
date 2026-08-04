@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import teamImage from './image.png';
 import ScrollReveal from './ScrollReveal.jsx';
@@ -40,12 +39,6 @@ export default function SimpleAbout() {
                     whileHover={{ scale: 1.03 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
                   />
-                  
-                  {/* Floating location tag */}
-                  <div className="absolute bottom-6 left-6 z-20 flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-black/60 backdrop-blur-md border border-white/15 shadow-lg select-none">
-                    <span className="w-2 h-2 rounded-full bg-[#00F5D4] animate-pulse" />
-                    <span className="font-heading font-bold text-[10px] uppercase tracking-wider text-white">Juntoz Studio / Mumbai HQ</span>
-                  </div>
                 </div>
               </div>
             </ScrollReveal>
@@ -72,7 +65,7 @@ export default function SimpleAbout() {
             </ScrollReveal>
 
             <ScrollReveal data-reveal="up" delay={200} className="space-y-4">
-              <p className="font-body text-white/90 text-lg font-semibold leading-relaxed">
+              <p className="font-body text-white/60 text-lg font-semibold leading-relaxed">
                 We are an integrated boutique team of media buyers, designers, and software engineers designed to scale your pipeline, not just buy vanity clicks.
               </p>
               <p className="font-body text-white/50 text-sm leading-relaxed">

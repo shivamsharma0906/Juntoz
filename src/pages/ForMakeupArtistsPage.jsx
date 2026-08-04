@@ -74,8 +74,8 @@ export default function ForMakeupArtistsPage() {
   return (
     <div className="pt-20 md:pt-28 bg-[#050508] text-white overflow-hidden">
       <PageMeta
-        title="Marketing for Makeup Artists (MUAs) — Juntoz"
-        description="Book more brides and fill your off-season calendar. WhatsApp booking funnels, Instagram Reels growth, and local ads designed exclusively for makeup artists."
+        title="Marketing & Funnels for Elite Makeup Artists (MUAs) | Juntoz"
+        description="We turn elite makeup artists into booked-out luxury brands. Build automated WhatsApp booking pipelines and fill your bridal calendar year-round."
         path="/for-makeup-artists"
       />
 
@@ -209,7 +209,7 @@ export default function ForMakeupArtistsPage() {
               The Reality Check
             </span>
             <h2 className="font-heading font-black text-white text-3xl sm:text-5xl uppercase tracking-tighter">
-              Why Generic Agencies Fail MUAs
+              Why Generic Agencies <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF3AF2] to-[#7B2FFF]">Fail MUAs</span>
             </h2>
             <p className="font-body text-white/50 text-sm">
               Click on each challenge below to reveal the Juntoz Solution.
@@ -285,7 +285,7 @@ export default function ForMakeupArtistsPage() {
               Execution Plan
             </span>
             <h2 className="font-heading font-black text-white text-3xl sm:text-5xl uppercase tracking-tighter">
-              Our Stepped Growth System
+              Our Stepped <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF3AF2] to-[#7B2FFF]">Growth System</span>
             </h2>
             <p className="font-body text-white/50 text-sm">
               We translate your artistic skill into a robust commercial machine. Hover or tap each step.
@@ -381,7 +381,7 @@ export default function ForMakeupArtistsPage() {
                 Proof
               </span>
               <h2 className="font-heading font-black text-white text-3xl sm:text-5xl uppercase tracking-tighter">
-                MUA Success Stories
+                MUA <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF3AF2] to-[#7B2FFF]">Success Stories</span>
               </h2>
             </div>
             <p className="font-body text-white/50 max-w-xs text-sm">
