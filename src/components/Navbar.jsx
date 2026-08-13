@@ -34,6 +34,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [indicatorStyle, setIndicatorStyle] = useState({ opacity: 0 });
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
 
   const navRef = useRef(null);
   const linkRefs = useRef({});
@@ -69,14 +70,19 @@ export default function Navbar() {
       const currentY = window.scrollY;
       setScrolled(currentY > 30);
 
-      if (currentY > 80) {
-        if (currentY > lastScrollY.current + 6) {
-          setVisible(false); // Hide on scroll down
-        } else if (currentY < lastScrollY.current - 6) {
-          setVisible(true);  // Reveal on scroll up
-        }
-      } else {
+      // On desktop (>= 768px), navbar remains fixed at top always. On mobile, toggle visibility on scroll.
+      if (window.innerWidth >= 768) {
         setVisible(true);
+      } else {
+        if (currentY > 80) {
+          if (currentY > lastScrollY.current + 6) {
+            setVisible(false); // Hide on scroll down on mobile
+          } else if (currentY < lastScrollY.current - 6) {
+            setVisible(true);  // Reveal on scroll up on mobile
+          }
+        } else {
+          setVisible(true);
+        }
       }
       lastScrollY.current = currentY;
     };
@@ -85,7 +91,10 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const t = setTimeout(() => setMenuOpen(false), 0);
+    const t = setTimeout(() => {
+      setMenuOpen(false);
+      setMobileDropdownOpen(false);
+    }, 0);
     return () => clearTimeout(t);
   }, [location]);
 
@@ -101,18 +110,24 @@ export default function Navbar() {
       activeHref = 'Who We Help';
     }
 
-    const el = linkRefs.current[activeHref];
-    if (el && navRef.current) {
-      const navRect = navRef.current.getBoundingClientRect();
-      const elRect = el.getBoundingClientRect();
-      setIndicatorStyle({
-        left: elRect.left - navRect.left + 'px',
-        width: elRect.width + 'px',
-        opacity: 1,
-      });
-    } else {
-      setIndicatorStyle({ opacity: 0 });
-    }
+    const updateIndicator = () => {
+      const el = linkRefs.current[activeHref];
+      if (el && navRef.current) {
+        const navRect = navRef.current.getBoundingClientRect();
+        const elRect = el.getBoundingClientRect();
+        setIndicatorStyle({
+          left: elRect.left - navRect.left + 'px',
+          width: elRect.width + 'px',
+          opacity: 1,
+        });
+      } else {
+        setIndicatorStyle({ opacity: 0 });
+      }
+    };
+
+    updateIndicator();
+    window.addEventListener('resize', updateIndicator);
+    return () => window.removeEventListener('resize', updateIndicator);
   }, [hovered, location.pathname]);
 
   const onNavMouseMove = useCallback((e) => {
@@ -148,9 +163,10 @@ export default function Navbar() {
     }, 500);
   }, []);
 
+  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
   const navEnter = {
     opacity: mounted ? 1 : 0,
-    transform: mounted ? (visible ? 'translateY(0)' : 'translateY(-100%)') : 'translateY(-20px)',
+    transform: mounted ? (visible || isDesktop ? 'translateY(0)' : 'translateY(-100%)') : 'translateY(-20px)',
     transition: 'opacity 0.6s ease 0.1s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
   };
 
@@ -249,7 +265,7 @@ export default function Navbar() {
                             setDropdownOpen(false);
                           }, 180);
                         }}
-                        className={`relative font-heading font-bold uppercase tracking-widest text-xs px-5 py-2.5 rounded-full transition-colors duration-200 z-10 cursor-pointer select-none group
+                        className={`relative font-heading font-bold uppercase tracking-widest text-[11px] lg:text-xs px-3.5 lg:px-5 py-2 sm:py-2.5 rounded-full transition-colors duration-200 z-10 cursor-pointer select-none group
                           ${isSubpageActive ? 'text-white' : 'text-white/60 hover:text-white'}`}
                       >
                         <span className="flex items-center gap-1.5">
@@ -290,7 +306,7 @@ export default function Navbar() {
                       ref={(el) => { linkRefs.current[link.href] = el; }}
                       onMouseEnter={() => handleHover(link.href)}
                       onMouseLeave={() => handleHover(null)}
-                      className={`relative font-heading font-bold uppercase tracking-widest text-xs px-5 py-2.5 rounded-full transition-colors duration-200 z-10
+                      className={`relative font-heading font-bold uppercase tracking-widest text-[11px] lg:text-xs px-3.5 lg:px-5 py-2 sm:py-2.5 rounded-full transition-colors duration-200 z-10
                         ${isActive ? 'text-white' : 'text-white/60 hover:text-white'}`}
                     >
                       {link.name}
@@ -389,47 +405,75 @@ export default function Navbar() {
           />
         </div>
 
-        <div className="h-24 shrink-0" />
+        <div className="h-20 shrink-0" />
 
-        <div className="flex-1 flex flex-col justify-between px-8 pb-12 relative z-10 overflow-y-auto">
-          <nav className="flex flex-col gap-2 my-auto">
+        <div className="flex-1 flex flex-col justify-between px-6 sm:px-8 pb-8 relative z-10 overflow-y-auto">
+          <nav className="flex flex-col gap-1.5 my-auto py-2">
             {navLinks.map((link, i) => {
               if (link.isDropdown) {
+                const isSubActive = location.pathname === '/for-makeup-artists' || location.pathname === '/for-salons';
                 return (
                   <div 
                     key={link.name} 
-                    className="flex flex-col border-b border-white/10 py-4"
+                    className="flex flex-col my-0.5 rounded-2xl transition-all duration-300"
                     style={{
-                      transitionDelay: menuOpen ? `${i * 60}ms` : '0ms',
+                      transitionDelay: menuOpen ? `${i * 50}ms` : '0ms',
                       opacity: menuOpen ? 1 : 0,
                       transform: menuOpen ? 'translateX(0)' : 'translateX(-20px)',
                       transitionProperty: 'opacity, transform',
                       transitionDuration: '0.4s',
                     }}
                   >
-                    <div className="flex items-center gap-4 mb-2 pl-2">
-                      <span className="font-heading font-black text-xs tracking-widest text-[#00F5D4]">0{i + 1}</span>
-                      <span className="font-heading font-black text-lg uppercase tracking-tight text-white/50">{link.name}</span>
-                    </div>
-                    <div className="flex flex-col gap-1 pl-6">
-                      {link.dropdownItems.map((item) => {
-                        const isSubActive = location.pathname === item.href;
-                        return (
-                          <Link
-                            key={item.name}
-                            to={item.href}
-                            onClick={() => setMenuOpen(false)}
-                            className={`flex items-center justify-between py-3.5 px-3 rounded-2xl transition-all duration-300
-                              ${isSubActive ? 'text-white bg-white/5' : 'text-white/60 hover:text-white'}`}
-                          >
-                            <span className="font-heading font-black text-xl uppercase tracking-tight">{item.name}</span>
-                            <svg className="w-5 h-5 text-[#00F5D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-                          </Link>
-                        );
-                      })}
-                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setMobileDropdownOpen(prev => !prev)}
+                      className={`w-full flex items-center justify-between py-3 px-4 rounded-2xl border transition-all duration-300 ${
+                        isSubActive || mobileDropdownOpen 
+                          ? 'bg-white/[0.06] border-white/15 text-white' 
+                          : 'bg-transparent border-white/5 text-white/70 hover:text-white'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="font-body text-[10px] font-bold text-[#00F5D4] bg-[#00F5D4]/10 border border-[#00F5D4]/20 px-2 py-0.5 rounded-full">
+                          0{i + 1}
+                        </span>
+                        <span className="font-heading font-black text-lg uppercase tracking-tight">{link.name}</span>
+                      </div>
+                      <svg 
+                        className={`w-4 h-4 text-[#00F5D4] transition-transform duration-300 ${mobileDropdownOpen ? 'rotate-180' : ''}`} 
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+
+                    {mobileDropdownOpen && (
+                      <div className="flex flex-col gap-1.5 p-2 mt-1 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
+                        {link.dropdownItems.map((item) => {
+                          const isItemActive = location.pathname === item.href;
+                          return (
+                            <Link
+                              key={item.name}
+                              to={item.href}
+                              onClick={() => setMenuOpen(false)}
+                              className={`flex items-center justify-between py-2.5 px-3.5 rounded-xl transition-all duration-200 ${
+                                isItemActive
+                                  ? 'bg-[#00F5D4]/10 border border-[#00F5D4]/30 text-[#00F5D4] font-bold'
+                                  : 'text-white/70 hover:text-white hover:bg-white/5 border border-transparent'
+                              }`}
+                            >
+                              <div className="flex items-center gap-2.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#00F5D4]" />
+                                <span className="font-heading font-bold text-xs uppercase tracking-wide">{item.name}</span>
+                              </div>
+                              <svg className="w-3.5 h-3.5 text-[#00F5D4]/70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                              </svg>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 );
               }
@@ -440,20 +484,32 @@ export default function Navbar() {
                   key={link.name}
                   to={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className={`group flex items-center justify-between py-4 px-2 border-b transition-all duration-400 ${isActive ? 'text-white border-[#00F5D4]/40 font-bold' : 'text-white/50 hover:text-white border-white/10'}`}
+                  className={`group flex items-center justify-between py-3 px-4 my-0.5 rounded-2xl border transition-all duration-300 ${
+                    isActive 
+                      ? 'bg-white/[0.08] border-[#00F5D4]/40 text-white font-bold shadow-[0_0_20px_rgba(0,245,212,0.15)]' 
+                      : 'bg-transparent border-white/5 text-white/70 hover:text-white hover:bg-white/[0.04]'
+                  }`}
                   style={{
-                    transitionDelay: menuOpen ? `${i * 60}ms` : '0ms',
+                    transitionDelay: menuOpen ? `${i * 50}ms` : '0ms',
                     opacity: menuOpen ? 1 : 0,
                     transform: menuOpen ? 'translateX(0)' : 'translateX(-20px)',
+                    transitionProperty: 'opacity, transform',
+                    transitionDuration: '0.4s',
                   }}
                 >
-                  <div className="flex items-center gap-4">
-                    <span className="font-heading font-black text-xs tracking-widest text-[#00F5D4]">0{i + 1}</span>
-                    <span className="font-heading font-black text-2xl sm:text-3xl uppercase tracking-tight">{link.name}</span>
+                  <div className="flex items-center gap-3">
+                    <span className="font-body text-[10px] font-bold text-[#00F5D4] bg-[#00F5D4]/10 border border-[#00F5D4]/20 px-2 py-0.5 rounded-full">
+                      0{i + 1}
+                    </span>
+                    <span className="font-heading font-black text-lg uppercase tracking-tight">{link.name}</span>
                   </div>
                   <svg
-                    className={`w-6 h-6 transition-all duration-300 ${isActive ? 'opacity-100 text-[#00F5D4]' : 'opacity-0 group-hover:opacity-60 -translate-x-2 group-hover:translate-x-0'}`}
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                    className={`w-4 h-4 transition-all duration-300 ${
+                      isActive 
+                        ? 'opacity-100 text-[#00F5D4] translate-x-0' 
+                        : 'opacity-40 text-white/40 group-hover:opacity-100 group-hover:text-[#00F5D4] group-hover:translate-x-1'
+                    }`}
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
@@ -463,11 +519,11 @@ export default function Navbar() {
           </nav>
 
           <div
-            className="space-y-4 pt-6"
+            className="space-y-4 pt-4"
             style={{
               opacity: menuOpen ? 1 : 0,
               transform: menuOpen ? 'translateY(0)' : 'translateY(16px)',
-              transition: `opacity 0.4s ease ${navLinks.length * 60 + 80}ms, transform 0.4s ease ${navLinks.length * 60 + 80}ms`,
+              transition: `opacity 0.4s ease ${navLinks.length * 50 + 60}ms, transform 0.4s ease ${navLinks.length * 50 + 60}ms`,
             }}
           >
             <a
@@ -475,19 +531,19 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}
-              className="flex items-center justify-center gap-3 w-full py-4 rounded-full font-heading font-black text-base uppercase tracking-widest text-background transition-all duration-300 active:scale-95 shadow-[0_0_30px_rgba(0,245,212,0.4)]"
+              className="flex items-center justify-center gap-3 w-full py-3.5 rounded-full font-heading font-black text-xs uppercase tracking-widest text-background transition-all duration-300 active:scale-95 shadow-[0_0_30px_rgba(0,245,212,0.4)]"
               style={{
                 background: 'linear-gradient(135deg, #00F5D4 0%, #7B2FFF 100%)',
               }}
             >
-              <svg className="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
                 <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.875L.057 23.386a.5.5 0 0 0 .614.599l5.728-1.539A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75A9.75 9.75 0 1 1 12 2.25 9.75 9.75 0 0 1 12 21.75z" />
               </svg>
               Start The Conversation
             </a>
 
-            <div className="flex items-center justify-center gap-4 pt-2">
+            <div className="flex items-center justify-center gap-3 pt-1">
               {[
                 { href: 'https://www.instagram.com/_juntoz', label: 'Instagram', path: IG_PATH },
                 { href: 'https://www.linkedin.com/in/juntoz-digital-marketing-agency-b0a114290/', label: 'LinkedIn', path: LI_PATH },
@@ -498,10 +554,10 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95"
                   style={{ border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.03)' }}
                 >
-                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d={s.path} /></svg>
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d={s.path} /></svg>
                 </a>
               ))}
             </div>
