@@ -17,6 +17,8 @@ const WorkPage = lazy(() => import('./pages/WorkPage'));
 const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage'));
 const ResultsPage = lazy(() => import('./pages/ResultsPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
+const FounderPage = lazy(() => import('./pages/FounderPage'));
+const CoFounderPage = lazy(() => import('./pages/CoFounderPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
@@ -183,6 +185,8 @@ function App() {
                 <Route path="/work/:slug" element={<CaseStudyPage />} />
                 <Route path="/results" element={<ResultsPage />} />
                 <Route path="/about" element={<AboutPage />} />
+                <Route path="/founder" element={<FounderPage />} />
+                <Route path="/co-founder" element={<CoFounderPage />} />
                 <Route path="/blog" element={<BlogPage />} />
                 <Route path="/blog/:slug" element={<BlogPostPage />} />
                 <Route path="/for-makeup-artists" element={<ForMakeupArtistsPage />} />

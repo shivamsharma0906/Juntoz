@@ -1,6 +1,6 @@
 import About from '../components/About';
 import SimpleAbout from '../components/SimpleAbout';
-import Founder from '../components/Founder';
+import TeamTeaser from '../components/TeamTeaser';
 import BusinessCard from '../components/BusinessCard';
 import PageMeta from '../components/PageMeta';
 
@@ -13,7 +13,7 @@ export default function AboutPage() {
         path="/about"
       />
       <SimpleAbout />
-      <Founder />
+      <TeamTeaser />
       <About />
       <BusinessCard />
     </div>

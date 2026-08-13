@@ -118,43 +118,49 @@ export default function Footer() {
           </div>
 
           {/* Interactive contact widgets */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full lg:max-w-2xl">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 w-full lg:max-w-2xl">
             {/* Email card */}
             <a
               href="mailto:Sujal.Mehta@juntoz.in"
-              className="group flex flex-col justify-between p-6 rounded-3xl border border-white/5 bg-[#0E0E1C]/35 hover:border-[#00F5D4]/40 hover:bg-[#0E0E1C]/60 transition-all duration-300 relative overflow-hidden"
+              className="group flex flex-row sm:flex-col items-center sm:items-start justify-between p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-white/5 bg-[#0E0E1C]/35 hover:border-[#00F5D4]/40 hover:bg-[#0E0E1C]/60 active:scale-[0.98] transition-all duration-300 relative overflow-hidden"
               onMouseEnter={(e) => { e.currentTarget.style.willChange = 'transform'; }}
               onMouseLeave={(e) => { resetTilt(e); e.currentTarget.style.willChange = 'auto'; }}
               onMouseMove={tilt}
             >
-              <div className="w-10 h-10 rounded-2xl bg-[#00F5D4]/10 border border-[#00F5D4]/20 flex items-center justify-center mb-6 transition-colors duration-300 group-hover:bg-[#00F5D4]/20">
+              <div className="w-10 h-10 rounded-xl sm:rounded-2xl bg-[#00F5D4]/10 border border-[#00F5D4]/20 flex items-center justify-center shrink-0 mb-0 sm:mb-6 transition-colors duration-300 group-hover:bg-[#00F5D4]/20">
                 <svg className="w-4 h-4 text-[#00F5D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
-              <div>
-                <span className="block text-[9px] text-white/60 uppercase tracking-widest font-heading font-bold mb-1">Email Us</span>
+              <div className="flex-1 min-w-0 ml-3.5 sm:ml-0 sm:w-full">
+                <span className="block text-[9px] text-white/60 uppercase tracking-widest font-heading font-bold mb-0.5 sm:mb-1">Email Us</span>
                 <span className="block text-xs font-heading font-black text-white/80 group-hover:text-white truncate">Sujal.Mehta@juntoz.in</span>
               </div>
+              <svg className="w-4 h-4 block sm:hidden shrink-0 ml-2 text-white/30 group-hover:text-[#00F5D4] group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
             </a>
 
             {/* Phone card */}
             <a
               href="tel:+919004001800"
-              className="group flex flex-col justify-between p-6 rounded-3xl border border-white/5 bg-[#0E0E1C]/35 hover:border-[#FF3AF2]/40 hover:bg-[#0E0E1C]/60 transition-all duration-300 relative overflow-hidden"
+              className="group flex flex-row sm:flex-col items-center sm:items-start justify-between p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-white/5 bg-[#0E0E1C]/35 hover:border-[#FF3AF2]/40 hover:bg-[#0E0E1C]/60 active:scale-[0.98] transition-all duration-300 relative overflow-hidden"
               onMouseEnter={(e) => { e.currentTarget.style.willChange = 'transform'; }}
               onMouseLeave={(e) => { resetTilt(e); e.currentTarget.style.willChange = 'auto'; }}
               onMouseMove={tilt}
             >
-              <div className="w-10 h-10 rounded-2xl bg-[#FF3AF2]/10 border border-[#FF3AF2]/20 flex items-center justify-center mb-6 transition-colors duration-300 group-hover:bg-[#FF3AF2]/20">
+              <div className="w-10 h-10 rounded-xl sm:rounded-2xl bg-[#FF3AF2]/10 border border-[#FF3AF2]/20 flex items-center justify-center shrink-0 mb-0 sm:mb-6 transition-colors duration-300 group-hover:bg-[#FF3AF2]/20">
                 <svg className="w-4 h-4 text-[#FF3AF2]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
-              <div>
-                <span className="block text-[9px] text-white/60 uppercase tracking-widest font-heading font-bold mb-1">Call Us</span>
+              <div className="flex-1 min-w-0 ml-3.5 sm:ml-0 sm:w-full">
+                <span className="block text-[9px] text-white/60 uppercase tracking-widest font-heading font-bold mb-0.5 sm:mb-1">Call Us</span>
                 <span className="block text-xs font-heading font-black text-white/80 group-hover:text-white truncate">+91 90040 01800</span>
               </div>
+              <svg className="w-4 h-4 block sm:hidden shrink-0 ml-2 text-white/30 group-hover:text-[#FF3AF2] group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
             </a>
 
             {/* Instagram card */}
@@ -162,28 +168,31 @@ export default function Footer() {
               href="https://www.instagram.com/_juntoz"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col justify-between p-6 rounded-3xl border border-white/5 bg-[#0E0E1C]/35 hover:border-[#7B2FFF]/40 hover:bg-[#0E0E1C]/60 transition-all duration-300 relative overflow-hidden"
+              className="group flex flex-row sm:flex-col items-center sm:items-start justify-between p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-white/5 bg-[#0E0E1C]/35 hover:border-[#7B2FFF]/40 hover:bg-[#0E0E1C]/60 active:scale-[0.98] transition-all duration-300 relative overflow-hidden"
               onMouseEnter={(e) => { e.currentTarget.style.willChange = 'transform'; }}
               onMouseLeave={(e) => { resetTilt(e); e.currentTarget.style.willChange = 'auto'; }}
               onMouseMove={tilt}
             >
-              <div className="w-10 h-10 rounded-2xl bg-[#7B2FFF]/10 border border-[#7B2FFF]/20 flex items-center justify-center mb-6 transition-colors duration-300 group-hover:bg-[#7B2FFF]/20">
+              <div className="w-10 h-10 rounded-xl sm:rounded-2xl bg-[#7B2FFF]/10 border border-[#7B2FFF]/20 flex items-center justify-center shrink-0 mb-0 sm:mb-6 transition-colors duration-300 group-hover:bg-[#7B2FFF]/20">
                 <svg className="w-4 h-4 text-[#7B2FFF] fill-current" viewBox="0 0 24 24">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                 </svg>
               </div>
-              <div>
-                <span className="block text-[9px] text-white/60 uppercase tracking-widest font-heading font-bold mb-1">Direct Message</span>
+              <div className="flex-1 min-w-0 ml-3.5 sm:ml-0 sm:w-full">
+                <span className="block text-[9px] text-white/60 uppercase tracking-widest font-heading font-bold mb-0.5 sm:mb-1">Direct Message</span>
                 <span className="block text-xs font-heading font-black text-white/80 group-hover:text-white truncate">@_juntoz</span>
               </div>
+              <svg className="w-4 h-4 block sm:hidden shrink-0 ml-2 text-white/30 group-hover:text-[#7B2FFF] group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
             </a>
           </div>
         </div>
 
         {/* ════ SECTION 2: MAP / INFO GRID ════ */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-12 gap-8 sm:gap-10 md:gap-12">
           {/* Logo & Tagline Column */}
-          <div className="md:col-span-4 space-y-6">
+          <div className="col-span-2 sm:col-span-2 md:col-span-4 space-y-5 sm:space-y-6">
             <Link to="/" onClick={() => window.scrollTo(0, 0)} className="inline-block">
               <img
                 src={logo}
@@ -192,14 +201,14 @@ export default function Footer() {
                 decoding="async"
                 width="224"
                 height="56"
-                className="h-12 w-auto transition-opacity duration-300 hover:opacity-80"
+                className="h-10 sm:h-12 w-auto transition-opacity duration-300 hover:opacity-80"
               />
             </Link>
-            <p className="font-body text-white/50 text-sm leading-relaxed max-w-sm">
+            <p className="font-body text-white/50 text-xs sm:text-sm leading-relaxed max-w-sm">
               India's premium dedicated digital growth partner engineering local SEO, location-targeted ads, and custom loyalty channels for clinics, salons, and beauty brands.
             </p>
             {/* Social Icons row */}
-            <div className="flex gap-3">
+            <div className="flex gap-3 pt-1">
               {socials.map((s) => (
                 <a
                   key={s.label}
@@ -207,7 +216,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 text-white/60 bg-white/5 transition-all duration-300"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center border border-white/10 text-white/60 bg-white/5 active:scale-95 transition-all duration-300"
                   onMouseEnter={e => {
                     e.currentTarget.style.borderColor = s.color + '80';
                     e.currentTarget.style.boxShadow = `0 0 15px ${s.color}35`;
@@ -230,15 +239,15 @@ export default function Footer() {
           </div>
 
           {/* Capabilities Links */}
-          <div className="md:col-span-3 space-y-4">
+          <div className="col-span-1 md:col-span-3 space-y-3 sm:space-y-4">
             <span className="block font-heading font-bold text-xs uppercase tracking-wider text-white/60">Capabilities</span>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5 sm:space-y-3">
               {footerServices.map((link) => (
                 <li key={link.to}>
                   <Link
                     to={link.to}
                     onClick={() => window.scrollTo(0, 0)}
-                    className="group font-body text-sm text-white/60 hover:text-[#00F5D4] transition-colors duration-300 flex items-center gap-2"
+                    className="group font-body text-xs sm:text-sm text-white/60 hover:text-[#00F5D4] transition-colors duration-300 flex items-center gap-2 py-0.5"
                   >
                     <span className="w-2 h-[1px] bg-white/20 transition-all duration-300 group-hover:w-4 group-hover:bg-[#00F5D4]" />
                     {link.label}
@@ -249,15 +258,15 @@ export default function Footer() {
           </div>
 
           {/* Company Links */}
-          <div className="md:col-span-3 space-y-4">
+          <div className="col-span-1 md:col-span-3 space-y-3 sm:space-y-4">
             <span className="block font-heading font-bold text-xs uppercase tracking-wider text-white/60">Company</span>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5 sm:space-y-3">
               {footerCompany.map((link) => (
                 <li key={link.to}>
                   <Link
                     to={link.to}
                     onClick={() => window.scrollTo(0, 0)}
-                    className="group font-body text-sm text-white/60 hover:text-[#FF3AF2] transition-colors duration-300 flex items-center gap-2"
+                    className="group font-body text-xs sm:text-sm text-white/60 hover:text-[#FF3AF2] transition-colors duration-300 flex items-center gap-2 py-0.5"
                   >
                     <span className="w-2 h-[1px] bg-white/20 transition-all duration-300 group-hover:w-4 group-hover:bg-[#FF3AF2]" />
                     {link.label}
@@ -268,9 +277,9 @@ export default function Footer() {
           </div>
 
           {/* Contact Details Column */}
-          <div className="md:col-span-2 space-y-4">
+          <div className="col-span-2 sm:col-span-2 md:col-span-2 space-y-3 sm:space-y-4 pr-16 sm:pr-0">
             <span className="block font-heading font-bold text-xs uppercase tracking-wider text-white/60">HQ Location</span>
-            <ul className="space-y-3 font-body text-sm text-white/60">
+            <ul className="grid grid-cols-2 sm:block gap-4 space-y-0 sm:space-y-3 font-body text-xs sm:text-sm text-white/60">
               <li>
                 <span className="block text-[10px] text-white/35 uppercase tracking-widest font-heading font-bold">Studio Office</span>
                 <span className="block mt-0.5">Mumbai, MH, India</span>
@@ -284,11 +293,11 @@ export default function Footer() {
         </div>
 
         {/* ════ SECTION 3: COPYRIGHT & LEGAL ════ */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/5">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pt-6 sm:pt-8 text-center sm:text-left border-t border-white/5">
           <p className="font-body text-xs text-white/60 tracking-wider">
             © {new Date().getFullYear()} Juntoz Agency. All rights reserved.
           </p>
-          <p className="font-body text-xs uppercase tracking-widest text-white/20">
+          <p className="font-body text-[10px] sm:text-xs uppercase tracking-widest text-white/30">
             Where Strategy Meets Growth.
           </p>
         </div>
@@ -297,23 +306,24 @@ export default function Footer() {
 
       {/* ════ SECTION 4: GIGANTIC WATERMARK BACKGROUND ════ */}
       <div
-        className="relative w-full overflow-hidden pointer-events-none select-none"
-        style={{ height: 'clamp(70px, 14vw, 220px)' }}
+        className="relative w-full overflow-hidden pointer-events-none select-none mt-4 sm:mt-0"
+        style={{ height: 'clamp(90px, 17vw, 240px)' }}
       >
         {/* Color glows behind text */}
-        <div className="absolute bottom-0 left-0 right-0 h-[80%] bg-gradient-to-t from-[#FF3AF2]/10 to-transparent" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] h-[70%] bg-gradient-to-t from-[#7B2FFF]/30 to-transparent blur-md" />
-        <div className="absolute bottom-0 left-0 right-0 h-[30%] bg-gradient-to-t from-[#00F5D4]/10 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-[85%] bg-gradient-to-t from-[#FF3AF2]/15 to-transparent" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[80%] bg-gradient-to-t from-[#7B2FFF]/35 to-transparent blur-xl" />
+        <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-[#00F5D4]/15 to-transparent" />
 
         {/* Scaled breathing text */}
         <div
           className="footer-juntoz-breathe absolute bottom-0 left-1/2 -translate-x-1/2 whitespace-nowrap font-heading font-black uppercase text-center"
           style={{
-            fontSize: 'clamp(50px, 14vw, 220px)',
-            lineHeight: 0.7,
-            letterSpacing: '-0.04em',
+            fontSize: 'clamp(72px, 18.5vw, 240px)',
+            lineHeight: 0.72,
+            letterSpacing: '-0.03em',
             color: '#050508',
-            WebkitTextStroke: '1.5px rgba(255,255,255,0.18)',
+            WebkitTextStroke: 'clamp(1.5px, 0.4vw, 2.5px) rgba(255,255,255,0.32)',
+            filter: 'drop-shadow(0 0 25px rgba(123,47,255,0.3))',
           }}
         >
           JUNTOZ

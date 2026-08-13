@@ -31,7 +31,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [hovered, setHovered] = useState(null);
   const [mounted, setMounted] = useState(false);
-  const [indicatorStyle, setIndicatorStyle] = useState({});
+  const [indicatorStyle, setIndicatorStyle] = useState({ opacity: 0 });
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const navRef = useRef(null);
