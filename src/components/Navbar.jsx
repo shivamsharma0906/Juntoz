@@ -6,6 +6,7 @@ const WA_HARD =
   'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20want%20to%20book%20a%20strategy%20call.';
 
 const navLinks = [
+  { name: 'Home', href: '/' },
   { name: 'Work', href: '/work' },
   { name: 'Services', href: '/services' },
   { 
