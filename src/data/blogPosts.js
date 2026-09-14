@@ -24,7 +24,7 @@ export const blogPosts = [
     date: 'August 05, 2026',
     readTime: '6 min read',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop',
-    color: '#00F5D4',
+    color: '#E84A2A',
   },
   {
     slug: 'meta-ads-cac-escalation-2026',
@@ -44,7 +44,7 @@ export const blogPosts = [
     date: 'August 12, 2026',
     readTime: '5 min read',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop',
-    color: '#FF3AF2',
+    color: '#E84A2A',
   },
   {
     slug: 'whatsapp-automation-pipeline',
@@ -64,7 +64,7 @@ export const blogPosts = [
     date: 'July 28, 2026',
     readTime: '5 min read',
     image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop',
-    color: '#7B2FFF',
+    color: '#E84A2A',
   },
   {
     slug: 'scale-brand-authority-2026',
@@ -82,6 +82,6 @@ export const blogPosts = [
     date: 'July 15, 2026',
     readTime: '4 min read',
     image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop',
-    color: '#00F5D4',
+    color: '#E84A2A',
   }
 ];

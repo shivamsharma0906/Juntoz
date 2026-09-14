@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
 import TeamMemberProfile from '../components/TeamMemberProfile';
-// {/* TODO: photo not yet provided, use a neutral placeholder avatar/blank state until real photo is added */}
 import coFounderImg from '../components/CoFounder.webp';
 import { COMPANY_STATS } from '../data/clients';
 
@@ -35,7 +34,7 @@ export default function CoFounderPage() {
   ];
 
   return (
-    <div className="pt-16 sm:pt-20 md:pt-24 pb-12 bg-background min-h-screen">
+    <div className="pt-28 md:pt-36 pb-16 bg-[#F7F6F2] min-h-screen">
       <PageMeta
         title="Saloni Mehta — Co-Founder | Juntoz"
         description="Meet Saloni Mehta, Co-Founder & Head of Operations & Client Success at Juntoz. Bringing operational expertise, leadership, and client management experience."
@@ -44,13 +43,12 @@ export default function CoFounderPage() {
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl pt-4">
         <Link
           to="/about"
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-body font-semibold tracking-wider text-white/60 hover:text-[#00F5D4] transition-colors duration-200 group"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-body font-semibold tracking-wider text-[#5F5F5A] hover:text-[#111111] transition-colors duration-200 group"
         >
           <span className="transition-transform duration-200 group-hover:-translate-x-1">←</span> Back to About
         </Link>
       </div>
 
-      {/* TODO: photo not yet provided, use a neutral placeholder avatar/blank state until real photo is added */}
       <TeamMemberProfile
         name="Saloni Mehta"
         role="Co-Founder, Juntoz"
@@ -59,7 +57,6 @@ export default function CoFounderPage() {
         photoAlt="Saloni Mehta — Co-Founder, Juntoz"
         bioParagraphs={bioParagraphs}
         stats={[
-          // TODO: confirm exact figure (4 years Showell + 3 years Allied Safety)
           { value: 7, label: 'Years Experience' },
           { value: COMPANY_STATS.clientsScaled, label: 'Clients Scaled' },
         ]}
@@ -77,19 +74,8 @@ export default function CoFounderPage() {
         sectionLabel="Leadership & Operations"
         subheading="Meet the Co-Founder"
         heading={
-          <h2 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl text-white uppercase tracking-tighter leading-[0.9]">
-            Operational Excellence{' '}
-            <span
-              style={{
-                background: 'linear-gradient(120deg, #00F5D4, #7B2FFF)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                filter: 'drop-shadow(0 0 24px rgba(0,245,212,0.35))',
-              }}
-            >
-              Drives
-            </span>{' '}
-            Growth.
+          <h2 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl text-[#111111] uppercase tracking-tight leading-[1.05]">
+            Operational Excellence <span className="text-[#E84A2A]">Drives</span> Growth.
           </h2>
         }
         bioHeading="About Saloni Mehta"

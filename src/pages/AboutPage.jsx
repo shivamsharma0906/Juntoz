@@ -6,10 +6,10 @@ import PageMeta from '../components/PageMeta';
 
 export default function AboutPage() {
   return (
-    <div className="pt-16 sm:pt-20 md:pt-24 pb-12 bg-background min-h-screen">
+    <div className="pt-24 sm:pt-28 md:pt-32 pb-16 bg-[#F7F6F2] min-h-screen text-[#111111]">
       <PageMeta
-        title="About Juntoz — The Beauty Growth Marketing Agency"
-        description="Meet the team behind India's premier marketing agency for makeup artists and salons. We build high-conversion booking engines that command premium pricing."
+        title="About Juntoz — Growth-Focused Digital Marketing Agency"
+        description="Meet the strategists, performance marketers, and engineers behind Juntoz. We help ambitious businesses scale through integrated digital growth systems."
         path="/about"
       />
       <SimpleAbout />

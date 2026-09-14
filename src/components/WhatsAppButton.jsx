@@ -59,7 +59,7 @@ export default function WhatsAppButton() {
       `}</style>
 
       <a
-        href="https://wa.me/919004001800"
+        href="https://wa.me/919004001800?text=Hi%20Sujal!%20I%27m%20a%20makeup%20artist%20and%20I%27d%20love%20to%20chat%20about%20your%20growth%20services."
         target="_blank"
         rel="noopener noreferrer"
         className="wa-btn"

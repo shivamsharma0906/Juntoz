@@ -2,35 +2,32 @@ import { useState, useRef, useEffect } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
 
 const proofStats = [
-  { value: 200, suffix: '+', label: 'Clients Scaled', color: '#FF3AF2', icon: '📈' },
-  { value: 100, suffix: '+', label: 'Active Projects', color: '#00F5D4', icon: '🎯' },
-  { value: 5.0, suffix: '★', label: 'Client Rating', color: '#7B2FFF', icon: '⭐' },
+  { value: 5, suffix: '+ Yrs', label: 'Agency Experience', icon: '⏳' },
+  { value: 200, suffix: '+', label: 'Clients Scaled', icon: '📈' },
+  { value: 5.0, suffix: '★', label: 'Google Client Rating', icon: '⭐' },
 ];
 
 const values = [
   {
     n: '01',
-    headline: 'High Conversion',
-    sub: 'Not Just Traffic',
-    color: '#FF3AF2',
-    icon: '⚡',
-    description: 'Transform digital interactions into qualified opportunities with our conversion-focused funnel architecture and custom copy systems.',
+    headline: 'Commercial Revenue',
+    sub: 'Not Just Vanity Metrics',
+    icon: '📊',
+    description: 'We measure success by qualified inbound inquiries, verified customer appointments, and revenue pipeline — not superficial impressions or likes.',
   },
   {
     n: '02',
-    headline: 'Real Pipeline',
-    sub: 'Not Vanity Metrics',
-    color: '#00F5D4',
-    icon: '📊',
-    description: 'Track genuine revenue growth, capacity utility, and customer acquisition instead of just generic clicks or impressions.',
+    headline: 'Brand Rate Defense',
+    sub: 'Command Premium Pricing',
+    icon: '👑',
+    description: 'We build editorial-grade digital assets, landing pages, and positioning frameworks that establish market authority and eliminate price bargaining.',
   },
   {
     n: '03',
-    headline: 'Predictable Scale',
-    sub: 'Growth Systems',
-    color: '#7B2FFF',
-    icon: '🚀',
-    description: 'Establish a reliable, data-backed and highly scalable booking flow to support your business expansion and operations.',
+    headline: 'Systemic Consistency',
+    sub: 'Always-On Growth Engine',
+    icon: '⚙️',
+    description: 'We counter business dry spells by integrating paid ads, local Google search dominance, and automated lead qualification into an ongoing revenue machine.',
   },
 ];
 
@@ -67,39 +64,22 @@ const StatCounter = ({ stat, isVisible }) => {
 
   return (
     <div
-      className="group relative flex flex-col md:flex-row items-center gap-4 flex-1 p-6 rounded-3xl border border-white/10 bg-[#0E0E1C]/45 backdrop-blur-xl transition-all duration-500 hover:scale-[1.03]"
-      style={{ boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}
+      className="group relative flex flex-col md:flex-row items-center gap-4 flex-1 p-6 rounded-3xl border border-[#DEDED7] bg-white shadow-subtle transition-all duration-300 hover:-translate-y-1 hover:border-[#111111]/30"
     >
-      {/* Ambient hover glow */}
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-        style={{ background: `radial-gradient(120px circle at center, ${stat.color}15 0%, transparent 100%)` }}
-      />
-
       {/* Icon block */}
       <div 
-        className="relative z-10 w-12 h-12 rounded-full flex items-center justify-center text-xl shrink-0 shadow-lg border"
-        style={{
-          background: `linear-gradient(135deg, ${stat.color}20, transparent)`,
-          borderColor: `${stat.color}35`,
-          filter: `drop-shadow(0 0 8px ${stat.color}25)`
-        }}
+        className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 border border-[#DEDED7] bg-[#F7F6F2] text-[#111111]"
       >
         {stat.icon}
       </div>
 
       {/* Text block */}
-      <div className="relative z-10 flex-1 text-center md:text-left">
-        <div
-          className="font-heading font-black text-3xl leading-none"
-          style={{
-            color: stat.color,
-            textShadow: `0 0 15px ${stat.color}40`,
-          }}
-        >
-          {formattedValue}{stat.suffix}
+      <div className="flex-1 text-center md:text-left">
+        <div className="font-heading font-black text-3xl leading-none text-[#111111] flex items-baseline justify-center md:justify-start">
+          <span>{formattedValue}</span>
+          <span className="text-[#E84A2A] ml-0.5">{stat.suffix}</span>
         </div>
-        <div className="font-heading font-bold text-[10px] uppercase tracking-wider text-white/50 mt-1">
+        <div className="font-sans font-bold text-[11px] uppercase tracking-wider text-[#5F5F5A] mt-1.5">
           {stat.label}
         </div>
       </div>
@@ -130,12 +110,9 @@ export default function About() {
     <section 
       ref={setSectionRef}
       id="about-metrics" 
-      className="py-16 sm:py-24 bg-[#050508] relative overflow-hidden border-t border-white/5"
+      className="py-20 sm:py-28 bg-[#F7F6F2] relative overflow-hidden border-t border-[#DEDED7]"
     >
-      {/* Glow Effects */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-[#7B2FFF]/5 blur-[150px] pointer-events-none" />
-
-      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10 space-y-12 sm:space-y-16 md:space-y-20">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10 space-y-16 md:space-y-20">
         
         {/* Stats Row */}
         <ScrollReveal data-reveal="up" className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -147,13 +124,13 @@ export default function About() {
         {/* Values Block */}
         <div className="space-y-12">
           <ScrollReveal className="text-center max-w-xl mx-auto space-y-3">
-            <span className="font-heading font-bold tracking-widest text-[#7B2FFF] uppercase text-xs block">
+            <span className="font-sans font-semibold tracking-wider text-[#E84A2A] uppercase text-xs block">
               Core Principles
             </span>
-            <h2 className="font-heading font-black text-white text-3xl sm:text-5xl uppercase tracking-tighter">
+            <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl uppercase tracking-tight">
               How We Create Impact
             </h2>
-            <p className="font-body text-white/55 text-sm leading-relaxed">
+            <p className="font-body text-[#5F5F5A] text-sm leading-relaxed">
               We align our design, code, and ad strategies with a simple focus: generating measurable business leverage.
             </p>
           </ScrollReveal>
@@ -161,52 +138,114 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {values.map((value, idx) => (
               <ScrollReveal key={value.headline} delay={idx * 150}>
-                <div className="group relative rounded-[2rem] overflow-hidden p-[1px] transition-all duration-500 hover:-translate-y-1 h-full flex flex-col">
-                  {/* Outer Border Glow */}
-                  <div 
-                    className="absolute inset-0 transition-opacity duration-500 opacity-20 group-hover:opacity-100 bg-gradient-to-br"
-                    style={{ background: `linear-gradient(135deg, ${value.color}80, transparent 60%, ${value.color}80)` }}
-                  />
-                  
-                  <div className="relative h-full bg-[#0E0E1C]/45 backdrop-blur-xl rounded-[31px] p-8 flex flex-col justify-between z-10 overflow-hidden">
-                    {/* Dynamic light pools on hover */}
-                    <div 
-                      className="absolute -top-24 -right-24 w-60 h-60 rounded-full blur-[80px] opacity-0 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none"
-                      style={{ background: value.color }}
-                    />
-                    
-                    <div className="space-y-6">
-                      <div className="flex justify-between items-start">
-                        <div 
-                          className="w-12 h-12 rounded-2xl flex items-center justify-center font-heading font-black text-base border"
-                          style={{
-                            backgroundColor: `${value.color}15`,
-                            borderColor: `${value.color}30`,
-                            color: value.color,
-                          }}
-                        >
-                          {value.icon}
-                        </div>
-                        <span className="font-heading font-black text-white/10 text-4xl">{value.n}</span>
+                <div className="group rounded-[2rem] border border-[#DEDED7] bg-white p-8 flex flex-col justify-between shadow-subtle hover:border-[#111111]/40 transition-all duration-300 hover:-translate-y-1 h-full">
+                  <div className="space-y-6">
+                    <div className="flex justify-between items-start">
+                      <div 
+                        className="w-12 h-12 rounded-2xl flex items-center justify-center font-heading font-black text-base border border-[#DEDED7] bg-[#F7F6F2] text-[#111111]"
+                      >
+                        {value.icon}
                       </div>
+                      <span className="font-sans font-bold text-[#E84A2A] text-lg">{value.n}</span>
+                    </div>
 
-                      <div className="space-y-2">
-                        <h3 className="font-heading font-black text-white text-xl uppercase tracking-tight">
-                          {value.headline}
-                        </h3>
-                        <p className="font-heading font-bold text-[10px] tracking-wider uppercase text-white/45">
-                          {value.sub}
-                        </p>
-                      </div>
-
-                      <p className="font-body text-white/55 text-sm leading-relaxed">
-                        {value.description}
+                    <div className="space-y-2">
+                      <h3 className="font-heading font-bold text-[#111111] text-xl uppercase tracking-tight">
+                        {value.headline}
+                      </h3>
+                      <p className="font-sans font-bold text-[11px] tracking-wider uppercase text-[#E84A2A]">
+                        {value.sub}
                       </p>
                     </div>
+
+                    <p className="font-body text-[#5F5F5A] text-sm leading-relaxed">
+                      {value.description}
+                    </p>
                   </div>
                 </div>
               </ScrollReveal>
             ))}
+          </div>
+        </div>
+
+        {/* ── Why a Specialist Beats a Generalist for MUAs ── */}
+        <div className="pt-14 border-t border-[#DEDED7] space-y-12">
+          <ScrollReveal className="text-center max-w-2xl mx-auto space-y-3">
+            <span className="font-sans font-semibold tracking-wider text-[#E84A2A] uppercase text-xs block">
+              The Strategic Advantage
+            </span>
+            <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl uppercase tracking-tight">
+              Why a Specialist Beats a Generalist for MUAs
+            </h2>
+            <p className="font-body text-[#5F5F5A] text-sm leading-relaxed">
+              Most digital agencies manage real estate, restaurants, and clinics on the same desk. Here is why beauty professionals scale dramatically faster with an exclusive MUA growth partner.
+            </p>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <ScrollReveal data-reveal="left" delay={100}>
+              <div className="p-8 rounded-3xl bg-white border border-[#DEDED7] space-y-4 h-full shadow-subtle">
+                <div className="flex items-center gap-3">
+                  <span className="w-8 h-8 rounded-full bg-[#FBE9E4] text-[#E84A2A] flex items-center justify-center font-bold text-xs">
+                    01
+                  </span>
+                  <h3 className="font-heading font-bold text-lg text-[#111111] uppercase tracking-wide">
+                    Wedding Calendar &amp; Muhurat Timing
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-[#5F5F5A] font-body leading-relaxed">
+                  Generalist agencies run uniform ad spend all year round, burning cash during slow periods. We understand the Indian wedding calendar intimately—scaling ad spend 3 to 6 months ahead of peak wedding dates when brides are actively shortlisting artists.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal data-reveal="right" delay={200}>
+              <div className="p-8 rounded-3xl bg-white border border-[#DEDED7] space-y-4 h-full shadow-subtle">
+                <div className="flex items-center gap-3">
+                  <span className="w-8 h-8 rounded-full bg-[#FBE9E4] text-[#E84A2A] flex items-center justify-center font-bold text-xs">
+                    02
+                  </span>
+                  <h3 className="font-heading font-bold text-lg text-[#111111] uppercase tracking-wide">
+                    Skin Texture &amp; Editorial Lighting Nuance
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-[#5F5F5A] font-body leading-relaxed">
+                  Generic marketers slap harsh filters on reels that blur skin texture and ruin professional reputation. We guide you on camera angles, ring light vs. softbox diffusion, and 4K color grading that highlight authentic bridal radiance.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal data-reveal="left" delay={300}>
+              <div className="p-8 rounded-3xl bg-white border border-[#DEDED7] space-y-4 h-full shadow-subtle">
+                <div className="flex items-center gap-3">
+                  <span className="w-8 h-8 rounded-full bg-[#FBE9E4] text-[#E84A2A] flex items-center justify-center font-bold text-xs">
+                    03
+                  </span>
+                  <h3 className="font-heading font-bold text-lg text-[#111111] uppercase tracking-wide">
+                    High-Ticket Rate Anchoring (No Bargaining)
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-[#5F5F5A] font-body leading-relaxed">
+                  Generalists generate low-intent leads asking "Rate please?" who vanish when quoted ₹25,000. We build luxury digital rate cards and WhatsApp qualification scripts that filter out price shoppers and anchor your value at ₹35k–₹70k+.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal data-reveal="right" delay={400}>
+              <div className="p-8 rounded-3xl bg-white border border-[#DEDED7] space-y-4 h-full shadow-subtle">
+                <div className="flex items-center gap-3">
+                  <span className="w-8 h-8 rounded-full bg-[#FBE9E4] text-[#E84A2A] flex items-center justify-center font-bold text-xs">
+                    04
+                  </span>
+                  <h3 className="font-heading font-bold text-lg text-[#111111] uppercase tracking-wide">
+                    Off-Season Masterclass Monetization
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-sm text-[#5F5F5A] font-body leading-relaxed">
+                  When bridal bookings dip between June and August, generalist agencies flounder. We launch sold-out Pro Masterclass batches, 1-on-1 certifications, and early-bird bridal campaigns so your income stays predictable all 12 months.
+                </p>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
 

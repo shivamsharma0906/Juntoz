@@ -21,17 +21,17 @@ export default class ErrorBoundary extends Component {
       if (this.props.fallback) return this.props.fallback;
 
       return (
-        <div className="min-h-[50vh] flex flex-col items-center justify-center px-6 text-center">
-          <p className="font-heading font-black text-white text-2xl uppercase mb-3">
+        <div className="min-h-[50vh] flex flex-col items-center justify-center px-6 py-12 text-center bg-[#F7F6F2]">
+          <p className="font-heading font-black text-[#111111] text-2xl uppercase mb-3">
             Something went wrong
           </p>
-          <p className="font-body text-white/50 text-sm max-w-md mb-6">
+          <p className="font-body text-[#5F5F5A] text-sm max-w-md mb-6">
             {this.props.message || 'This section failed to load. Please refresh the page or try again later.'}
           </p>
           <button
             type="button"
             onClick={() => window.location.reload()}
-            className="px-6 py-3 rounded-xl font-heading font-black uppercase text-xs tracking-widest text-[#050508] bg-[#00F5D4] hover:bg-[#00e1c2] transition-colors"
+            className="px-6 py-3 rounded-full font-heading font-bold uppercase text-xs tracking-widest text-white bg-[#111111] hover:bg-[#E84A2A] transition-colors shadow-sm"
           >
             Reload page
           </button>

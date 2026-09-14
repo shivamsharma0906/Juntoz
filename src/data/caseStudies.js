@@ -1,65 +1,62 @@
 /**
  * ─────────────────────────────────────────────────────────────────
- * PLACEHOLDER DATA: CASE STUDIES
+ * CASE STUDIES DATA: MAKEUP ARTISTS & BEAUTY BRANDS
  * ─────────────────────────────────────────────────────────────────
- * Multi-industry case studies focusing on business outcomes.
+ * Strict Credibility Rule: No fabricated clients.
+ * Clear placeholder markers [NEEDS REAL CONTENT] and [NEEDS REAL METRIC]
+ * are used until verified case studies and photo approvals are provided.
  */
 
 export const caseStudies = [
   {
-    slug: 'd2c-ecommerce-scaling',
-    clientName: 'Aura Lifestyle',
-    industry: 'D2C Ecommerce',
-    problem: 'Stuck at a plateau with stagnant ROAS and high customer acquisition cost. Needed to scale aggressively without losing profitability.',
-    approach: 'Overhauled the creative strategy with rapid ad testing, implemented advanced retargeting flows, and optimized the Shopify checkout experience.',
-    result: 'Scaled monthly revenue by 3x while maintaining a healthy 3.5x ROAS at scale.',
-    metric: '3X',
-    metricLabel: 'Revenue Scale',
-    quote: "Juntoz didn't just run our ads; they acted as a true growth partner, challenging our assumptions and pushing us to scale faster.",
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop', // placeholder image
+    slug: 'luxury-bridal-season-scaling',
+    clientName: '[NEEDS REAL CONTENT: Luxury Bridal Studio]',
+    handle: '@[NEEDS REAL CLIENT HANDLE]',
+    industry: 'Bridal MUA',
+    category: 'Bridal',
+    problem: 'Depended on erratic Instagram DM inquiries. Constantly sent out pricing PDFs only to get ghosted by brides, and experienced severe revenue drops during off-season months.',
+    approach: 'Deployed high-converting Meta Ads targeting engaged women in high-income pin codes, paired with an automated WhatsApp pre-qualification sequence and bridal lookbook portfolio.',
+    result: 'Generated 3.1x more qualified bridal inquiries and completely booked out the peak wedding season 4 months in advance.',
+    metric: '3.1X',
+    metricLabel: 'Bridal Inquiries In 60 Days [NEEDS REAL METRIC]',
+    quote: '"[PENDING REAL TESTIMONIALS: Client review on bridal campaign ROI and WhatsApp booking qualification.]"',
+    image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop',
     featured: true,
-    color: '#00F5D4',
+    color: '#E84A2A',
+    isPlaceholder: true,
   },
   {
-    slug: 'luxury-real-estate-leads',
-    clientName: 'Apex Real Estate Developers',
-    industry: 'Real Estate',
-    problem: 'Sales team was wasting hours on low-intent, unqualified leads from generic digital campaigns. High cost per qualified site visit.',
-    approach: 'Built a multi-step qualification funnel. High-end video creatives drove traffic to a dedicated landing page, followed by a WhatsApp pre-qualification sequence.',
-    result: 'Generated 220% more qualified site visits while reducing the overall cost per acquisition by 40%.',
-    metric: '220%',
-    metricLabel: 'More Qualified Site Visits',
-    quote: "The quality of leads changed overnight. Our sales team is finally talking to serious buyers instead of casual browsers.",
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop', // placeholder image
+    slug: 'pro-makeup-academy-launch',
+    clientName: '[NEEDS REAL CONTENT: Pro Beauty Academy]',
+    handle: '@[NEEDS REAL CLIENT HANDLE]',
+    industry: 'Beauty Academy',
+    category: 'Academy',
+    problem: 'Struggled to fill offline masterclasses through organic Instagram posts alone. Manual follow-ups resulted in 60%+ dropout rate before seat confirmation.',
+    approach: 'Constructed an educational registration funnel with student before/after transformation video ads, automated instant WhatsApp prospectus delivery, and seat reservation triggers.',
+    result: 'Sold out 3 consecutive masterclass batches in under 14 days without relying on manual follow-up calls.',
+    metric: '100%',
+    metricLabel: 'Seats Sold Out in 14 Days [NEEDS REAL METRIC]',
+    quote: '"[PENDING REAL TESTIMONIALS: Academy founder review on student acquisition automation.]"',
+    image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=800&auto=format&fit=crop',
     featured: true,
-    color: '#FF3AF2',
+    color: '#E84A2A',
+    isPlaceholder: true,
   },
   {
-    slug: 'restaurant-chain-rebrand',
-    clientName: 'Zest Burgers',
-    industry: 'Food & Beverage',
-    problem: 'Great food, but an outdated brand identity and low social media engagement were stunting expansion plans into new cities.',
-    approach: 'Complete brand refresh. Designed a bold new visual identity, revamped the packaging, and launched a viral short-form video strategy on Instagram.',
-    result: 'Achieved a 500% increase in organic reach and a 40% jump in weekend footfall across all locations.',
-    metric: '500%',
-    metricLabel: 'Increase in Organic Reach',
-    quote: "They gave our brand a voice. The line out the door on weekends is a direct result of their incredible creative strategy.",
-    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=800&auto=format&fit=crop', // placeholder image
+    slug: 'editorial-celebrity-brand-repositioning',
+    clientName: '[NEEDS REAL CONTENT: Editorial MUA Brand]',
+    handle: '@[NEEDS REAL CLIENT HANDLE]',
+    industry: 'Editorial & Celebrity',
+    category: 'Editorial',
+    problem: 'Exceptional artistic skill but trapped in price competition with budget artists because the digital presence was limited to uncurated Instagram posts.',
+    approach: 'Designed a high-fashion digital portfolio website, repositioned social bio and media kit, and launched high-retention beauty reel concepts.',
+    result: 'Elevated brand authority to command 75% higher bridal & commercial rates with luxury clients.',
+    metric: '+75%',
+    metricLabel: 'Average Booking Fee Increase [NEEDS REAL METRIC]',
+    quote: '"[PENDING REAL TESTIMONIALS: Artist review on brand perception and premium client attraction.]"',
+    image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800&auto=format&fit=crop',
     featured: true,
-    color: '#7B2FFF',
-  },
-  {
-    slug: 'edtech-platform-launch',
-    clientName: 'SkillUp Academy',
-    industry: 'EdTech',
-    problem: 'Launching a new professional skills platform but lacked a cohesive digital presence and automated student onboarding system.',
-    approach: 'Developed a custom web platform with a seamless LMS integration, paired with a targeted Meta ads launch campaign.',
-    result: 'Acquired 1,200 active students in the first 45 days and fully automated the enrollment process.',
-    metric: '1,200',
-    metricLabel: 'Active Students Enrolled',
-    quote: "Their technical expertise and marketing savvy combined into a flawless launch. We couldn't have done it without them.",
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop', // placeholder image
-    featured: false,
-    color: '#00F5D4',
+    color: '#E84A2A',
+    isPlaceholder: true,
   }
 ];

@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local shell wrappers
+powershell.cmd
+powershell.bat

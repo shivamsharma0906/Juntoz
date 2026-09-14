@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import logo from './logo.webp';
 
 const WA_HARD =
@@ -7,19 +8,20 @@ const WA_HARD =
 
 const navLinks = [
   { name: 'Home', href: '/' },
-  { name: 'Work', href: '/work' },
   { name: 'Services', href: '/services' },
   { 
-    name: 'Who We Help', 
-    href: '#',
+    name: 'Specialties', 
+    href: '#specialties',
     isDropdown: true,
-    dropdownItems: [
-      { name: 'For Makeup Artists', href: '/for-makeup-artists' },
-      { name: 'For Salons', href: '/for-salons' },
+    children: [
+      { name: 'Google Business Profile', href: '/google-business-profile', tag: 'Local 3-Pack' },
+      { name: 'For Makeup Artists', href: '/for-makeup-artists', tag: 'MUA Growth' },
+      { name: 'For Salons & Clinics', href: '/for-salons', tag: 'Local Scale' },
     ]
   },
+  { name: 'Work', href: '/work' },
   { name: 'About', href: '/about' },
-  { name: 'Blog', href: '/blog' },
+  { name: 'Insights', href: '/blog' },
   { name: 'Contact', href: '/contact' },
 ];
 
@@ -33,8 +35,7 @@ export default function Navbar() {
   const [hovered, setHovered] = useState(null);
   const [mounted, setMounted] = useState(false);
   const [indicatorStyle, setIndicatorStyle] = useState({ opacity: 0 });
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
+  const [expandedMobile, setExpandedMobile] = useState({ Specialties: false });
 
   const navRef = useRef(null);
   const linkRefs = useRef({});
@@ -43,26 +44,18 @@ export default function Navbar() {
   const spotRef = useRef(null);
   const lastScrollY = useRef(0);
   const location = useLocation();
-  const closeTimeoutRef = useRef(null);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
-    return () => {
-      clearTimeout(t);
-      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
-    };
+    return () => clearTimeout(t);
   }, []);
 
-  // Helper to handle link hover and immediately close dropdown on non-dropdown links
   const handleHover = (linkHrefOrName) => {
     setHovered(linkHrefOrName);
-    if (linkHrefOrName && linkHrefOrName !== 'Who We Help') {
-      if (closeTimeoutRef.current) {
-        clearTimeout(closeTimeoutRef.current);
-        closeTimeoutRef.current = null;
-      }
-      setDropdownOpen(false);
-    }
+  };
+
+  const toggleAccordion = (name) => {
+    setExpandedMobile((prev) => ({ ...prev, [name]: !prev[name] }));
   };
 
   useEffect(() => {
@@ -70,8 +63,8 @@ export default function Navbar() {
       const currentY = window.scrollY;
       setScrolled(currentY > 30);
 
-      // On desktop (>= 768px), navbar remains fixed at top always. On mobile, toggle visibility on scroll.
-      if (window.innerWidth >= 768) {
+      // On desktop (>= 1024px), navbar remains fixed at top always. On mobile/tablet, toggle visibility on scroll.
+      if (window.innerWidth >= 1024) {
         setVisible(true);
       } else {
         if (currentY > 80) {
@@ -90,24 +83,33 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Close menu on route navigation
   useEffect(() => {
     const t = setTimeout(() => {
       setMenuOpen(false);
-      setMobileDropdownOpen(false);
     }, 0);
     return () => clearTimeout(t);
   }, [location]);
 
+  // Prevent background scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
+  // Accessibility: Escape key closes menu
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    };
+    if (menuOpen) window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [menuOpen]);
+
   useEffect(() => {
     let activeHref = hovered ?? location.pathname;
-    // Highlight "Who We Help" if we are on one of its subpages
-    if (!hovered && (location.pathname === '/for-makeup-artists' || location.pathname === '/for-salons')) {
-      activeHref = 'Who We Help';
+    if (!hovered && (location.pathname === '/for-makeup-artists' || location.pathname === '/for-salons' || location.pathname === '/google-business-profile')) {
+      activeHref = 'Specialties';
     }
 
     const updateIndicator = () => {
@@ -163,7 +165,7 @@ export default function Navbar() {
     }, 500);
   }, []);
 
-  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
+  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
   const navEnter = {
     opacity: mounted ? 1 : 0,
     transform: mounted ? (visible || isDesktop ? 'translateY(0)' : 'translateY(-100%)') : 'translateY(-20px)',
@@ -182,63 +184,91 @@ export default function Navbar() {
         style={navEnter}
         className={`fixed top-0 w-full z-50 transition-[padding] duration-500 ${scrolled ? 'pt-2 sm:pt-4' : 'pt-3 sm:pt-6'}`}
       >
-        <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
+        <div className="container mx-auto px-3 sm:px-6 max-w-7xl">
           <div className={`
-            flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3.5 transition-all duration-500 rounded-full relative
+            flex items-center justify-between px-3.5 sm:px-6 py-2 sm:py-2.5 transition-all duration-500 rounded-full relative
             ${scrolled
-              ? 'bg-[#05050C]/90 border border-white/10 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8),0_0_20px_rgba(0,245,212,0.1)]'
-              : 'bg-white/[0.03] border border-white/10'}
+              ? 'bg-[#F7F6F2]/95 border border-[#DEDED7] shadow-[0_4px_20px_-2px_rgba(17,17,17,0.06)]'
+              : 'bg-white/90 border border-[#DEDED7] shadow-sm'}
           `}>
-            {/* Separate backdrop-blur layer to prevent browser clipping of absolutely positioned children */}
-            <div className={`absolute inset-0 rounded-full pointer-events-none z-0 ${scrolled ? 'backdrop-blur-2xl' : 'backdrop-blur-xl'}`} />
+            {/* Backdrop blur layer */}
+            <div className="absolute inset-0 rounded-full pointer-events-none z-0 backdrop-blur-md" />
 
-            {/* ── Mobile Left Spacer (to keep logo perfectly centered on mobile) ── */}
-            <div className="w-11 h-11 md:hidden pointer-events-none relative z-10" />
+            {/* ── MOBILE LEFT: Minimal Hamburger Touch Target (44px min) ── */}
+            <div className="lg:hidden flex items-center justify-start relative z-10">
+              <button
+                type="button"
+                aria-expanded={menuOpen}
+                aria-controls="mobile-menu-dropdown"
+                aria-label="Toggle navigation menu"
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-full text-[#111111] hover:bg-black/5 active:scale-95 transition-all cursor-pointer relative z-[60]"
+              >
+                <div className="w-5 h-3.5 flex flex-col justify-between items-center pointer-events-none">
+                  <span className={`block h-[1.8px] w-5 rounded-full bg-[#111111] transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
+                  <span className={`block h-[1.8px] w-5 rounded-full bg-[#111111] transition-all duration-200 ${menuOpen ? 'opacity-0 scale-0' : ''}`} />
+                  <span className={`block h-[1.8px] w-5 rounded-full bg-[#111111] transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`} />
+                </div>
+              </button>
+            </div>
 
-            {/* ── Logo (Centered on mobile, left-aligned on desktop) ── */}
-            <div style={itemEnter(0.15)} className="flex-1 md:flex-initial flex justify-center md:justify-start relative z-10">
+            {/* ── LOGO (Centered on mobile, left-aligned on desktop) ── */}
+            <div style={itemEnter(0.15)} className="flex-1 lg:flex-initial flex justify-center lg:justify-start items-center shrink-0 relative z-10 mr-0 lg:mr-2 xl:mr-4">
               <Link
                 to="/"
                 className="flex items-center shrink-0 relative z-[60] group/logo"
                 onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               >
-                <div className="relative">
-                  <div className="absolute inset-0 rounded-lg bg-[#00F5D4]/10 group-hover/logo:bg-[#00F5D4]/25 blur-[14px] transition-all duration-500 scale-150" />
-                  <img
-                    src={logo}
-                    alt="Juntoz"
-                    width="160"
-                    height="40"
-                    fetchPriority="high"
-                    className="h-7 sm:h-9 md:h-10 w-auto relative z-10 transition-all duration-400 group-hover/logo:scale-105 group-hover/logo:drop-shadow-[0_0_12px_rgba(0,245,212,0.7)]"
-                  />
-                </div>
+                <img
+                  src={logo}
+                  alt="Juntoz"
+                  width="140"
+                  height="36"
+                  fetchPriority="high"
+                  className="h-7 sm:h-8 lg:h-8 xl:h-9 w-auto relative z-10 transition-transform duration-300 group-hover/logo:scale-105"
+                />
               </Link>
             </div>
 
+            {/* ── MOBILE RIGHT: Solid Juntoz Brand Color WhatsApp Circle Button (44px min) ── */}
+            <div className="lg:hidden flex items-center justify-end relative z-10">
+              <a
+                href={WA_HARD}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Contact Juntoz on WhatsApp"
+                className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-[#E84A2A] text-white flex items-center justify-center shadow-[0_4px_14px_rgba(232,74,42,0.35)] active:scale-95 transition-all duration-200"
+              >
+                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29" />
+                </svg>
+              </a>
+            </div>
+
             {/* ── Desktop nav links capsule ── */}
-            <div style={itemEnter(0.25)} className="hidden md:block relative z-10">
+            <div style={itemEnter(0.25)} className="hidden lg:block relative z-10 shrink min-w-0">
               <div
                 ref={navRef}
                 onMouseMove={onNavMouseMove}
                 onMouseLeave={onNavMouseLeave}
-                className="flex items-center gap-1 relative bg-white/[0.04] rounded-full p-1.5 border border-white/10"
+                className="flex items-center gap-0.5 xl:gap-1 relative bg-[#F7F6F2] rounded-full p-1 border border-[#DEDED7]"
               >
-                {/* Nested clipping container for background hover spotlight and indicator */}
+                {/* Nested clipping container for background indicator */}
                 <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none z-0">
                   <div
                     ref={spotRef}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full transition-opacity duration-300"
+                    className="absolute -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full transition-opacity duration-300"
                     style={{
-                      background: 'radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 70%)',
+                      background: 'radial-gradient(circle, rgba(232,74,42,0.08) 0%, transparent 70%)',
                       opacity: 0,
                     }}
                   />
                   <div
-                    className="absolute top-1.5 bottom-1.5 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    className="absolute top-1 bottom-1 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
                     style={{ 
-                      background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))', 
-                      border: '1px solid rgba(255,255,255,0.15)', 
+                      background: '#FFFFFF', 
+                      border: '1px solid #DEDED7', 
+                      boxShadow: '0 1px 4px rgba(17,17,17,0.06)',
                       ...indicatorStyle 
                     }}
                   />
@@ -246,54 +276,53 @@ export default function Navbar() {
 
                 {navLinks.map((link) => {
                   if (link.isDropdown) {
-                    const isSubpageActive = location.pathname === '/for-makeup-artists' || location.pathname === '/for-salons';
+                    const isDropActive = location.pathname.startsWith('/for-') || location.pathname === '/google-business-profile';
                     return (
                       <div
                         key={link.name}
-                        ref={(el) => { linkRefs.current[link.name] = el; }}
-                        onMouseEnter={() => {
-                          if (closeTimeoutRef.current) {
-                            clearTimeout(closeTimeoutRef.current);
-                            closeTimeoutRef.current = null;
-                          }
-                          handleHover(link.name);
-                          setDropdownOpen(true);
-                        }}
-                        onMouseLeave={() => {
-                          closeTimeoutRef.current = setTimeout(() => {
-                            handleHover(null);
-                            setDropdownOpen(false);
-                          }, 180);
-                        }}
-                        className={`relative font-heading font-bold uppercase tracking-widest text-[11px] lg:text-xs px-3.5 lg:px-5 py-2 sm:py-2.5 rounded-full transition-colors duration-200 z-10 cursor-pointer select-none group
-                          ${isSubpageActive ? 'text-white' : 'text-white/60 hover:text-white'}`}
+                        className="relative group/drop z-20"
+                        onMouseEnter={() => handleHover(link.name)}
+                        onMouseLeave={() => handleHover(null)}
                       >
-                        <span className="flex items-center gap-1.5">
-                          {link.name}
-                          <svg className={`w-3 h-3 transition-transform duration-300 ${dropdownOpen ? 'rotate-180 text-[#00F5D4]' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <button
+                          type="button"
+                          ref={(el) => { linkRefs.current[link.name] = el; }}
+                          className={`relative inline-flex items-center gap-1 font-sans font-medium text-[11px] xl:text-xs tracking-normal xl:tracking-wider uppercase px-2.5 xl:px-4 py-1.5 xl:py-2 rounded-full transition-colors duration-200 cursor-pointer
+                            ${isDropActive ? 'text-[#111111] font-semibold' : 'text-[#5F5F5A] hover:text-[#111111]'}`}
+                        >
+                          <span>{link.name}</span>
+                          <svg className="w-3 h-3 transition-transform duration-200 group-hover/drop:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                           </svg>
-                        </span>
-                        
-                        <div
-                          className={`absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-52 z-50 transition-all duration-300 origin-top
-                            ${dropdownOpen ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}`}
-                        >
-                          <div className="w-full p-2 rounded-2xl bg-[#05050C]/95 border border-white/10 backdrop-blur-xl shadow-2xl flex flex-col gap-1">
-                            {link.dropdownItems.map((item) => (
-                              <Link
-                                key={item.name}
-                                to={item.href}
-                                className="font-heading font-bold uppercase tracking-wider text-[10px] text-white/70 hover:text-[#00F5D4] hover:bg-white/5 px-4 py-2.5 rounded-xl transition-all duration-200 text-left block"
-                              >
-                                {item.name}
-                              </Link>
-                            ))}
+                          {isDropActive && (
+                            <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#E84A2A]" />
+                          )}
+                        </button>
+
+                        {/* Dropdown Menu Box */}
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 translate-y-2 pointer-events-none group-hover/drop:opacity-100 group-hover/drop:translate-y-0 group-hover/drop:pointer-events-auto transition-all duration-200 z-50">
+                          <div className="bg-white border border-[#DEDED7] rounded-2xl p-2 shadow-card w-64 flex flex-col gap-1">
+                            {link.children.map((sub) => {
+                              const isSubActive = location.pathname === sub.href;
+                              return (
+                                <Link
+                                  key={sub.name}
+                                  to={sub.href}
+                                  className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all duration-150 group/sub ${
+                                    isSubActive
+                                      ? 'bg-[#F7F6F2] text-[#111111] font-semibold'
+                                      : 'text-[#5F5F5A] hover:bg-[#F7F6F2] hover:text-[#111111]'
+                                  }`}
+                                >
+                                  <span className="font-heading text-xs uppercase tracking-tight">{sub.name}</span>
+                                  <span className="text-[10px] uppercase font-mono tracking-wider text-[#E84A2A] bg-[#FBE9E4] px-2 py-0.5 rounded-md">
+                                    {sub.tag}
+                                  </span>
+                                </Link>
+                              );
+                            })}
                           </div>
                         </div>
-                        {isSubpageActive && (
-                          <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#00F5D4] shadow-[0_0_8px_#00F5D4]" />
-                        )}
                       </div>
                     );
                   }
@@ -306,12 +335,12 @@ export default function Navbar() {
                       ref={(el) => { linkRefs.current[link.href] = el; }}
                       onMouseEnter={() => handleHover(link.href)}
                       onMouseLeave={() => handleHover(null)}
-                      className={`relative font-heading font-bold uppercase tracking-widest text-[11px] lg:text-xs px-3.5 lg:px-5 py-2 sm:py-2.5 rounded-full transition-colors duration-200 z-10
-                        ${isActive ? 'text-white' : 'text-white/60 hover:text-white'}`}
+                      className={`relative font-sans font-medium text-[11px] xl:text-xs tracking-normal xl:tracking-wider uppercase px-2.5 xl:px-4 py-1.5 xl:py-2 rounded-full transition-colors duration-200 z-10 whitespace-nowrap
+                        ${isActive ? 'text-[#111111] font-semibold' : 'text-[#5F5F5A] hover:text-[#111111]'}`}
                     >
                       {link.name}
                       {isActive && (
-                        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#00F5D4] shadow-[0_0_8px_#00F5D4]" />
+                        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#E84A2A]" />
                       )}
                     </Link>
                   );
@@ -320,8 +349,8 @@ export default function Navbar() {
             </div>
 
             {/* ── Desktop CTA & Socials ── */}
-            <div style={itemEnter(0.35)} className="hidden md:flex items-center gap-4 relative z-10">
-              <div className="flex gap-2.5">
+            <div style={itemEnter(0.35)} className="hidden lg:flex items-center gap-2 xl:gap-3 relative z-10 shrink-0">
+              <div className="hidden xl:flex gap-2">
                 {[
                   { href: 'https://www.instagram.com/_juntoz', label: 'Instagram', path: IG_PATH },
                   { href: 'https://www.linkedin.com/in/juntoz-digital-marketing-agency-b0a114290/', label: 'LinkedIn', path: LI_PATH },
@@ -332,16 +361,16 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="group/icon w-9 h-9 rounded-full flex items-center justify-center border border-white/10 bg-white/[0.04] hover:border-[#00F5D4]/40 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_12px_rgba(0,245,212,0.3)]"
+                    className="group/icon w-8 h-8 rounded-full flex items-center justify-center border border-[#DEDED7] bg-white text-[#5F5F5A] hover:text-[#E84A2A] hover:border-[#E84A2A]/40 transition-all duration-200 hover:scale-105"
                   >
-                    <svg className="w-4 h-4 fill-current text-white/50 group-hover/icon:text-[#00F5D4] transition-colors duration-300" viewBox="0 0 24 24">
+                    <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                       <path d={s.path} />
                     </svg>
                   </a>
                 ))}
               </div>
 
-              <div className="w-px h-5 bg-white/10" />
+              <div className="hidden xl:block w-px h-4 bg-[#DEDED7]" />
 
               <a
                 ref={ctaRef}
@@ -350,239 +379,174 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 onMouseMove={onCtaMouseMove}
                 onMouseLeave={onCtaMouseLeave}
-                className="nav-cta-btn relative inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-heading font-black uppercase text-xs tracking-widest text-background overflow-hidden"
-                style={{
-                  background: 'linear-gradient(135deg, #00F5D4 0%, #7B2FFF 100%)',
-                  boxShadow: '0 0 24px rgba(0,245,212,0.4)',
-                  willChange: 'transform',
-                }}
+                className="relative inline-flex items-center gap-2 px-4 xl:px-5 py-2 rounded-full font-sans font-semibold text-[11px] xl:text-xs tracking-wider uppercase text-white bg-[#111111] hover:bg-[#E84A2A] transition-colors duration-300 shadow-sm whitespace-nowrap"
               >
-                <span className="nav-cta-sweep absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full pointer-events-none" />
-                <span className="relative z-10 font-bold">Let's Connect</span>
+                <span>Book a Strategy Call</span>
               </a>
             </div>
 
-            {/* ── Mobile Hamburger (Icon only, no "Menu" word) ── */}
-            <div className="md:hidden flex items-center justify-end relative z-10">
-              <button
-                className="flex items-center justify-center relative z-[60] group/menu w-11 h-11 rounded-full border border-white/10 bg-white/5 backdrop-blur-md active:scale-95 transition-transform"
-                onClick={() => setMenuOpen(!menuOpen)}
-                aria-label="Toggle menu"
-              >
-                <div className="flex flex-col gap-[5px] items-center justify-center w-5">
-                  <span className={`block h-[1.5px] rounded-full transition-all duration-400 ${menuOpen ? 'w-5 bg-[#00F5D4] rotate-45 translate-y-[3.25px]' : 'w-5 bg-white/80'}`} />
-                  <span className={`block h-[1.5px] rounded-full transition-all duration-400 ${menuOpen ? 'w-5 bg-[#00F5D4] -rotate-45 -translate-y-[3.25px]' : 'w-3.5 bg-[#00F5D4] group-hover/menu:w-5'}`} />
-                </div>
-              </button>
-            </div>
           </div>
         </div>
 
         <ScrollProgress />
       </nav>
 
-      {/* ── Mobile Full-Screen Glass Drawer ── */}
-      <div
-        className={`fixed inset-0 z-40 flex flex-col md:hidden transition-all duration-500 ${menuOpen ? 'opacity-100 pointer-events-auto scale-100' : 'opacity-0 pointer-events-none scale-95'}`}
-        style={{ background: 'rgba(5,5,12,0.96)', backdropFilter: 'blur(28px)' }}
-      >
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div
-            className="absolute w-[350px] h-[350px] rounded-full"
-            style={{
-              top: '-5%', left: '-15%',
-              background: 'radial-gradient(circle, rgba(123,47,255,0.2) 0%, transparent 70%)',
-              animation: menuOpen ? 'orb-drift-a 6s ease-in-out infinite' : 'none',
-            }}
-          />
-          <div
-            className="absolute w-[300px] h-[300px] rounded-full"
-            style={{
-              bottom: '10%', right: '-10%',
-              background: 'radial-gradient(circle, rgba(0,245,212,0.15) 0%, transparent 70%)',
-              animation: menuOpen ? 'orb-drift-b 8s ease-in-out infinite' : 'none',
-            }}
-          />
-        </div>
+      {/* ── MOBILE GBIM-STYLE DROPDOWN CARD & BACKDROP (Mobile-only) ── */}
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            {/* Soft Ambient Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMenuOpen(false)}
+              className="fixed inset-0 z-40 bg-black/25 backdrop-blur-[3px] lg:hidden"
+            />
 
-        <div className="h-20 shrink-0" />
+            {/* Dropdown Card (Slides directly below top bar) */}
+            <motion.div
+              id="mobile-menu-dropdown"
+              initial={{ opacity: 0, y: -14, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.98 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed top-[66px] sm:top-[76px] left-3 right-3 sm:left-5 sm:right-5 max-w-lg mx-auto z-50 lg:hidden rounded-[22px] sm:rounded-[24px] bg-white border border-[#DEDED7] shadow-[0_20px_45px_-10px_rgba(17,17,17,0.16),0_10px_20px_-5px_rgba(232,74,42,0.06)] overflow-hidden flex flex-col max-h-[calc(100dvh-84px)]"
+            >
+              {/* Menu Items List */}
+              <div className="flex-1 overflow-y-auto divide-y divide-[#F0EFEB]">
+                {navLinks.map((link) => {
+                  if (link.isDropdown) {
+                    const isExpanded = expandedMobile[link.name];
+                    const isAnyChildActive = link.children.some(c => location.pathname === c.href);
 
-        <div className="flex-1 flex flex-col justify-between px-6 sm:px-8 pb-8 relative z-10 overflow-y-auto">
-          <nav className="flex flex-col gap-1.5 my-auto py-2">
-            {navLinks.map((link, i) => {
-              if (link.isDropdown) {
-                const isSubActive = location.pathname === '/for-makeup-artists' || location.pathname === '/for-salons';
-                return (
-                  <div 
-                    key={link.name} 
-                    className="flex flex-col my-0.5 rounded-2xl transition-all duration-300"
-                    style={{
-                      transitionDelay: menuOpen ? `${i * 50}ms` : '0ms',
-                      opacity: menuOpen ? 1 : 0,
-                      transform: menuOpen ? 'translateX(0)' : 'translateX(-20px)',
-                      transitionProperty: 'opacity, transform',
-                      transitionDuration: '0.4s',
-                    }}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => setMobileDropdownOpen(prev => !prev)}
-                      className={`w-full flex items-center justify-between py-3 px-4 rounded-2xl border transition-all duration-300 ${
-                        isSubActive || mobileDropdownOpen 
-                          ? 'bg-white/[0.06] border-white/15 text-white' 
-                          : 'bg-transparent border-white/5 text-white/70 hover:text-white'
+                    return (
+                      <div key={link.name} className="flex flex-col">
+                        {/* Expandable Top-Level Row */}
+                        <button
+                          type="button"
+                          onClick={() => toggleAccordion(link.name)}
+                          className={`w-full flex items-center justify-between px-5 sm:px-6 min-h-[52px] py-3.5 text-left transition-colors duration-150 hover:bg-[#E84A2A]/[0.04] active:bg-[#E84A2A]/[0.08] ${
+                            isAnyChildActive ? 'text-[#E84A2A] font-bold' : 'text-[#111111]'
+                          }`}
+                        >
+                          <span className="font-heading font-semibold text-[15px] sm:text-[16px] tracking-tight">
+                            {link.name}
+                          </span>
+                          <svg
+                            className={`w-4 h-4 text-[#5F5F5A] transition-transform duration-200 ${
+                              isExpanded ? 'rotate-180 text-[#E84A2A]' : ''
+                            }`}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2.5}
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </button>
+
+                        {/* Accordion Sub-Items with Framer Motion Auto-Height */}
+                        <AnimatePresence initial={false}>
+                          {isExpanded && (
+                            <motion.div
+                              key="accordion-panel"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                              className="overflow-hidden bg-[#FAFAF8]"
+                            >
+                              <div className="py-1 border-t border-[#F0EFEB]/70">
+                                {link.children.map((sub) => {
+                                  const isSubActive = location.pathname === sub.href;
+                                  return (
+                                    <Link
+                                      key={sub.name}
+                                      to={sub.href}
+                                      onClick={() => setMenuOpen(false)}
+                                      className={`flex items-center justify-between pl-9 pr-5 sm:pl-10 sm:pr-6 py-2.5 transition-colors duration-150 active:bg-[#E84A2A]/10 ${
+                                        isSubActive
+                                          ? 'text-[#E84A2A] font-bold bg-[#E84A2A]/[0.06]'
+                                          : 'text-[#444444] hover:text-[#111111]'
+                                      }`}
+                                    >
+                                      <span className="font-sans text-[13.5px] sm:text-[14px] font-medium tracking-normal">
+                                        {sub.name}
+                                      </span>
+                                      <span className="text-[9px] sm:text-[9.5px] font-sans font-bold uppercase tracking-wider text-[#E84A2A] bg-[#FBE9E4] px-2 py-0.5 rounded-full">
+                                        {sub.tag}
+                                      </span>
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  }
+
+                  const isActive = location.pathname === link.href;
+                  return (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex items-center justify-between px-5 sm:px-6 min-h-[52px] py-3.5 transition-colors duration-150 hover:bg-[#E84A2A]/[0.04] active:bg-[#E84A2A]/[0.08] ${
+                        isActive ? 'text-[#E84A2A] font-bold bg-[#E84A2A]/[0.03]' : 'text-[#111111]'
                       }`}
                     >
-                      <div className="flex items-center gap-3">
-                        <span className="font-body text-[10px] font-bold text-[#00F5D4] bg-[#00F5D4]/10 border border-[#00F5D4]/20 px-2 py-0.5 rounded-full">
-                          0{i + 1}
-                        </span>
-                        <span className="font-heading font-black text-lg uppercase tracking-tight">{link.name}</span>
-                      </div>
-                      <svg 
-                        className={`w-4 h-4 text-[#00F5D4] transition-transform duration-300 ${mobileDropdownOpen ? 'rotate-180' : ''}`} 
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
+                      <span className="font-heading font-semibold text-[15px] sm:text-[16px] tracking-tight">
+                        {link.name}
+                      </span>
+                      {isActive && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#E84A2A]" />
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
 
-                    {mobileDropdownOpen && (
-                      <div className="flex flex-col gap-1.5 p-2 mt-1 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
-                        {link.dropdownItems.map((item) => {
-                          const isItemActive = location.pathname === item.href;
-                          return (
-                            <Link
-                              key={item.name}
-                              to={item.href}
-                              onClick={() => setMenuOpen(false)}
-                              className={`flex items-center justify-between py-2.5 px-3.5 rounded-xl transition-all duration-200 ${
-                                isItemActive
-                                  ? 'bg-[#00F5D4]/10 border border-[#00F5D4]/30 text-[#00F5D4] font-bold'
-                                  : 'text-white/70 hover:text-white hover:bg-white/5 border border-transparent'
-                              }`}
-                            >
-                              <div className="flex items-center gap-2.5">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#00F5D4]" />
-                                <span className="font-heading font-bold text-xs uppercase tracking-wide">{item.name}</span>
-                              </div>
-                              <svg className="w-3.5 h-3.5 text-[#00F5D4]/70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                              </svg>
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-
-              const isActive = location.pathname === link.href;
-              return (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className={`group flex items-center justify-between py-3 px-4 my-0.5 rounded-2xl border transition-all duration-300 ${
-                    isActive 
-                      ? 'bg-white/[0.08] border-[#00F5D4]/40 text-white font-bold shadow-[0_0_20px_rgba(0,245,212,0.15)]' 
-                      : 'bg-transparent border-white/5 text-white/70 hover:text-white hover:bg-white/[0.04]'
-                  }`}
-                  style={{
-                    transitionDelay: menuOpen ? `${i * 50}ms` : '0ms',
-                    opacity: menuOpen ? 1 : 0,
-                    transform: menuOpen ? 'translateX(0)' : 'translateX(-20px)',
-                    transitionProperty: 'opacity, transform',
-                    transitionDuration: '0.4s',
-                  }}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="font-body text-[10px] font-bold text-[#00F5D4] bg-[#00F5D4]/10 border border-[#00F5D4]/20 px-2 py-0.5 rounded-full">
-                      0{i + 1}
-                    </span>
-                    <span className="font-heading font-black text-lg uppercase tracking-tight">{link.name}</span>
-                  </div>
-                  <svg
-                    className={`w-4 h-4 transition-all duration-300 ${
-                      isActive 
-                        ? 'opacity-100 text-[#00F5D4] translate-x-0' 
-                        : 'opacity-40 text-white/40 group-hover:opacity-100 group-hover:text-[#00F5D4] group-hover:translate-x-1'
-                    }`}
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div
-            className="space-y-4 pt-4"
-            style={{
-              opacity: menuOpen ? 1 : 0,
-              transform: menuOpen ? 'translateY(0)' : 'translateY(16px)',
-              transition: `opacity 0.4s ease ${navLinks.length * 50 + 60}ms, transform 0.4s ease ${navLinks.length * 50 + 60}ms`,
-            }}
-          >
-            <a
-              href={WA_HARD}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center justify-center gap-3 w-full py-3.5 rounded-full font-heading font-black text-xs uppercase tracking-widest text-background transition-all duration-300 active:scale-95 shadow-[0_0_30px_rgba(0,245,212,0.4)]"
-              style={{
-                background: 'linear-gradient(135deg, #00F5D4 0%, #7B2FFF 100%)',
-              }}
-            >
-              <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.875L.057 23.386a.5.5 0 0 0 .614.599l5.728-1.539A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75A9.75 9.75 0 1 1 12 2.25 9.75 9.75 0 0 1 12 21.75z" />
-              </svg>
-              Start The Conversation
-            </a>
-
-            <div className="flex items-center justify-center gap-3 pt-1">
-              {[
-                { href: 'https://www.instagram.com/_juntoz', label: 'Instagram', path: IG_PATH },
-                { href: 'https://www.linkedin.com/in/juntoz-digital-marketing-agency-b0a114290/', label: 'LinkedIn', path: LI_PATH },
-              ].map((s) => (
+              {/* Dropdown Bottom Footer with CTA and WhatsApp */}
+              <div className="p-3.5 sm:p-4 bg-[#FBFBFA] border-t border-[#F0EFEB] flex flex-col gap-2.5">
                 <a
-                  key={s.label}
-                  href={s.href}
+                  href={WA_HARD}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95"
-                  style={{ border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.03)' }}
+                  onClick={() => setMenuOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 h-11 sm:h-12 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-white bg-[#111111] hover:bg-[#E84A2A] active:bg-[#E84A2A] active:scale-[0.98] transition-all shadow-[0_4px_16px_rgba(17,17,17,0.12)]"
                 >
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d={s.path} /></svg>
+                  <span>Book a Strategy Call</span>
+                  <span>→</span>
                 </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <style>{`
-        @keyframes nav-cta-sweep {
-          0%   { transform: translateX(-100%); }
-          100% { transform: translateX(200%);  }
-        }
-        .nav-cta-btn:hover .nav-cta-sweep {
-          animation: nav-cta-sweep 0.65s ease forwards;
-        }
+                {/* Socials row */}
+                <div className="flex items-center justify-center gap-3 pt-1">
+                  {[
+                    { href: 'https://www.instagram.com/_juntoz', label: 'Instagram', path: IG_PATH },
+                    { href: 'https://www.linkedin.com/in/juntoz-digital-marketing-agency-b0a114290/', label: 'LinkedIn', path: LI_PATH },
+                  ].map((s) => (
+                    <a
+                      key={s.label}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={s.label}
+                      className="w-8 h-8 rounded-full flex items-center justify-center border border-[#DEDED7] text-[#5F5F5A] bg-white hover:text-[#E84A2A] hover:border-[#E84A2A]/40 transition-all"
+                    >
+                      <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d={s.path} /></svg>
+                    </a>
+                  ))}
+                </div>
+              </div>
 
-        @keyframes orb-drift-a {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          50%       { transform: translate(40px, 30px) scale(1.1); }
-        }
-        @keyframes orb-drift-b {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          50%       { transform: translate(-30px, -20px) scale(1.15); }
-        }
-      `}</style>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }
@@ -601,14 +565,13 @@ function ScrollProgress() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   return (
-    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/5 overflow-hidden">
+    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#DEDED7]/40 overflow-hidden">
       <div
         ref={barRef}
         style={{
           width: '0%',
           height: '100%',
-          background: 'linear-gradient(90deg, #00F5D4, #7B2FFF, #FF3AF2)',
-          boxShadow: '0 0 10px rgba(0,245,212,0.8)',
+          background: '#E84A2A',
         }}
       />
     </div>

@@ -1,246 +1,207 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal.jsx';
-import BalloonHeading from './BalloonHeading.jsx';
 
-const DEPARTMENTS = [
+const SERVICE_PILLARS = [
   {
     num: '01',
-    icon: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-      </svg>
-    ),
-    title: 'Brand & Creative',
-    subtitle: 'Identity & Storytelling',
-    desc: 'We craft magnetic visual identities and scroll-stopping creative assets that capture attention and build authority.',
-    what: 'Attention → Trust',
-    points: ['Brand Identity & Guidelines', 'Ad Creatives & Video Production', 'Social Media Content Strategy', 'Copywriting & Storytelling'],
-    color: '#FF3AF2',
+    category: 'Strategy',
+    title: 'Growth Strategy & Market Planning',
+    subtitle: 'Commercial Direction & Roadmap',
+    desc: 'We map your target audiences, competitive positioning, and customer unit economics before a single rupee is spent on ads.',
+    deliverables: [
+      'Digital Go-To-Market Strategy',
+      'Growth & Revenue Roadmapping',
+      'Audience & Competitor Mapping',
+      'Marketing Budget Allocation'
+    ],
+    highlight: 'Strategy First'
   },
   {
     num: '02',
-    icon: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-      </svg>
-    ),
-    title: 'Performance Marketing',
-    subtitle: 'Traffic & Leads',
-    desc: 'Laser-targeted, data-driven advertising campaigns designed to acquire high-value customers at a profitable CAC.',
-    what: 'Traffic → Conversions',
-    points: ['Meta & Instagram Ads', 'Google Search & Display', 'Local SEO Dominance', 'Continuous A/B Testing'],
-    color: '#00F5D4',
+    category: 'Performance',
+    title: 'Paid Ads & Lead Generation',
+    subtitle: 'High-ROAS Customer Acquisition',
+    desc: 'Data-driven Google Search and Meta ad campaigns engineered to capture ready-to-buy intent and generate qualified inbound pipeline.',
+    deliverables: [
+      'Google Search & Display Campaigns',
+      'Meta (Instagram & Facebook) Ads',
+      'High-Intent Inbound Lead Gen',
+      'Retargeting & ROAS Optimization'
+    ],
+    highlight: 'Predictable Scale'
   },
   {
     num: '03',
-    icon: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-      </svg>
-    ),
-    title: 'Web & Engineering',
-    subtitle: 'Digital Storefronts',
-    desc: 'Lightning-fast, highly optimized landing pages and web applications built specifically for conversion.',
-    what: 'Clicks → Customers',
-    points: ['High-Converting Landing Pages', 'Custom Web Applications', 'E-commerce Optimization', 'Funnel Architecture'],
-    color: '#7B2FFF',
+    category: 'Organic Growth',
+    title: 'SEO & Google Business Profile',
+    subtitle: 'Search Maps Dominance & Calls',
+    desc: 'Rank on top of Google Search and Google Maps. Turn nearby prospective customers into daily phone calls, walk-ins, and website visitors.',
+    deliverables: [
+      'Google Business Profile (GMB) Management',
+      'Local 3-Pack Maps Optimization',
+      'Technical & On-Page SEO',
+      'Review & Reputation Systems'
+    ],
+    highlight: 'Inbound Discovery'
   },
   {
     num: '04',
-    icon: (
-      <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-      </svg>
-    ),
-    title: 'WhatsApp & CRM',
-    subtitle: 'Nurture & Retention',
-    desc: 'Automated communication systems that turn inquiries into booked appointments while you sleep.',
-    what: 'Leads → Revenue',
-    points: ['WhatsApp Automation', 'Lead Nurturing Sequences', 'CRM Integration', 'Loyalty & Retention Programs'],
-    color: '#FF6B35',
+    category: 'Brand & Creative',
+    title: 'Branding, Content & Social Media',
+    subtitle: 'Authority & Market Differentiation',
+    desc: 'Transform your brand perception to command higher rates. We direct high-hook content, visual identities, and social authority assets.',
+    deliverables: [
+      'Brand Identity & Guidelines',
+      'High-Hook Social Media Content',
+      'Graphic Design & Ad Creatives',
+      'Professional Content Shoots'
+    ],
+    highlight: 'Higher Pricing Margin'
   },
+  {
+    num: '05',
+    category: 'Digital Experience',
+    title: 'Web Design & Conversion Architecture',
+    subtitle: 'Lightning-Fast Sales Engines',
+    desc: 'Speed-optimized, mobile-first websites and dedicated landing pages built specifically to convert cold traffic into paying customers.',
+    deliverables: [
+      'Custom Website Design & Development',
+      'Direct-Response Landing Pages',
+      'Conversion Rate Optimization (CRO)',
+      'WhatsApp & CRM Integration'
+    ],
+    highlight: 'Zero Lead Leakage'
+  }
 ];
-
-const SCROLL_PADDING_PX = 24;
-const GAP_PX = 24;
 
 export default function Services({ compactTop = false }) {
   const sectionRef = useRef(null);
-  const scrollRef = useRef(null);
-  const [activeIdx, setActiveIdx] = useState(0);
-
-  const handleScroll = () => {
-    if (!scrollRef.current) return;
-    const scrollLeft = scrollRef.current.scrollLeft;
-    const card = scrollRef.current.children[0];
-    if (card) {
-      const cardWidth = card.offsetWidth + GAP_PX;
-      const rawIndex = Math.round(scrollLeft / cardWidth);
-      const index = Math.max(0, Math.min(rawIndex, DEPARTMENTS.length - 1));
-      setActiveIdx(index);
-    }
-  };
-
-  const scrollToCard = (index) => {
-    if (!scrollRef.current) return;
-    const card = scrollRef.current.children[index];
-    if (card) {
-      scrollRef.current.scrollTo({ left: card.offsetLeft - SCROLL_PADDING_PX, behavior: 'smooth' });
-      setActiveIdx(index);
-    }
-  };
 
   return (
-    <section id="services" ref={sectionRef} className={`relative pb-14 sm:pb-20 md:pb-32 bg-background overflow-hidden ${compactTop ? 'pt-8 md:pt-12' : 'pt-14 sm:pt-20 md:pt-32'}`}>
-      {/* Background Ambience */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full blur-[150px] pointer-events-none z-0 opacity-20"
-        style={{ background: 'radial-gradient(ellipse, rgba(0,245,212,0.8), transparent)' }} aria-hidden="true" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none z-0 opacity-10"
-        style={{ background: 'radial-gradient(circle, #FF3AF2, transparent)' }} aria-hidden="true" />
-
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 max-w-7xl">
-        {/* Header */}
-        <ScrollReveal data-reveal="flip-3d" className="text-center mb-6 md:mb-14 px-4 sm:px-0">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-2">
-            <span className="w-2 h-2 rounded-full bg-[#00F5D4] header-pulse" />
-            <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Departments</span>
-          </div>
-          <div className="flex justify-center my-3">
-            <h2 className="sr-only">Our Departments and Services</h2>
-            <BalloonHeading src="/services_balloon_gradient.webp" alt="Services" className="h-20 sm:h-32 md:h-44 lg:h-52 mx-auto" />
-          </div>
-          <p className="font-body text-white/50 text-sm md:text-base max-w-lg mx-auto leading-relaxed px-2 sm:px-0">
-            Your outsourced marketing team. From strategy and branding to content, websites, and performance marketing—we handle everything that drives growth.
+    <section id="services" ref={sectionRef} className={`relative pb-24 md:pb-32 bg-[#F7F6F2] overflow-hidden ${compactTop ? 'pt-10 md:pt-16' : 'pt-24 md:pt-32'}`}>
+      <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-16 max-w-7xl">
+        
+        {/* Section Header */}
+        <ScrollReveal data-reveal="up" className="text-center mb-16 sm:mb-20 max-w-3xl mx-auto">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#FBE9E4] border border-[#E84A2A]/20 font-sans font-semibold text-xs uppercase tracking-wider text-[#E84A2A] mb-4">
+            Full-Service Capabilities
+          </span>
+          <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-6">
+            End-To-End Growth Services For{' '}
+            <span className="text-[#E84A2A]">
+              Ambitious Brands.
+            </span>
+          </h2>
+          <p className="font-body text-[#5F5F5A] text-base sm:text-lg leading-relaxed">
+            We don&apos;t sell disconnected tactics. Our five core pillars connect strategy, performance advertising, organic search, creative storytelling, and web architecture into an integrated growth engine.
           </p>
         </ScrollReveal>
 
-        <style>{`
-          .hide-scrollbar::-webkit-scrollbar { display: none; }
-          .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            overscroll-behavior-x: contain;
-          }
-
-          @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50%       { background-position: 100% 50%; }
-          }
-          .service-border-anim {
-            background-size: 200% 200%;
-            animation: gradient-shift 4s ease-in-out infinite;
-          }
-
-          .header-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-
-          @media (prefers-reduced-motion: reduce) {
-            .service-border-anim,
-            .header-pulse,
-            .dot-ping {
-              animation: none !important;
-            }
-          }
-        `}</style>
-
-        <div
-          ref={scrollRef}
-          onScroll={handleScroll}
-          className="flex lg:grid lg:grid-cols-4 gap-6 pb-12 overflow-x-auto snap-x snap-mandatory lg:snap-none hide-scrollbar scroll-px-6"
-        >
-          {DEPARTMENTS.map((s, i) => (
-            <ScrollReveal key={i} data-reveal="up" delay={i * 100} className="w-[calc(100vw-3rem)] sm:w-[350px] lg:w-auto lg:min-w-0 snap-center shrink-0 overflow-hidden">
-              <div className="group relative h-full rounded-[2rem] p-[1px] overflow-hidden transition-all duration-500 hover:-translate-y-1.5 flex flex-col">
-                {/* Outer Border Shimmer */}
-                <div
-                  className="absolute inset-0 opacity-20 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: `linear-gradient(135deg, ${s.color}80, transparent 65%, ${s.color}80)` }}
-                />
-
-                <div className="relative h-full bg-[#0E0E1C]/35 backdrop-blur-xl rounded-[31px] p-5 xs:p-6 sm:p-8 flex flex-col z-10 overflow-hidden">
-                  {/* Corner light pool on hover */}
-                  <div
-                    className="absolute -top-28 -right-28 w-64 h-64 rounded-full blur-[80px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: s.color }}
-                    aria-hidden="true"
-                  />
-
-                  <div className="flex items-start justify-between mb-6 sm:mb-8 relative z-10">
-                    <div
-                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6"
-                      style={{ backgroundColor: `${s.color}15`, border: `1px solid ${s.color}35`, color: s.color, boxShadow: `0 0 20px ${s.color}20` }}
-                    >
-                      {s.icon}
-                    </div>
-                    <div
-                      className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-heading font-black text-xs shadow-lg transition-transform duration-500 group-hover:scale-110"
-                      style={{ backgroundColor: s.color, color: '#08080f', boxShadow: `0 0 15px ${s.color}40` }}
-                    >
+        {/* 5 Grouped Pillars Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch mb-16">
+          {SERVICE_PILLARS.map((s, i) => (
+            <ScrollReveal key={s.num} data-reveal="up" delay={i * 70}>
+              <div className="group relative h-full rounded-3xl bg-white border border-[#DEDED7] p-7 sm:p-8 flex flex-col justify-between shadow-subtle hover:border-[#111111]/40 hover:-translate-y-1 transition-all duration-300">
+                <div>
+                  {/* Top row: Category tag & Number */}
+                  <div className="flex items-start justify-between mb-5">
+                    <span className="text-[10px] font-sans font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#F7F6F2] border border-[#DEDED7] text-[#111111]">
+                      {s.category}
+                    </span>
+                    <span className="font-heading font-black text-2xl sm:text-3xl text-[#111111]/15 group-hover:text-[#E84A2A] transition-colors duration-300">
                       {s.num}
-                    </div>
+                    </span>
                   </div>
 
-                  <div className="mb-5 sm:mb-6 relative z-10">
-                    <h3 className="font-heading font-black text-white text-lg sm:text-xl md:text-2xl uppercase leading-tight tracking-tight mb-1.5 sm:mb-2">
-                      {s.title}
-                    </h3>
-                    <p className="font-body text-xs font-bold uppercase tracking-[0.2em]" style={{ color: s.color }}>
-                      {s.subtitle}
-                    </p>
-                  </div>
+                  {/* Title & Subtitle */}
+                  <h3 className="font-heading font-black text-xl sm:text-2xl text-[#111111] uppercase tracking-tight leading-snug mb-1">
+                    {s.title}
+                  </h3>
+                  <p className="font-sans font-medium text-xs text-[#E84A2A] tracking-wider uppercase mb-3">
+                    {s.subtitle}
+                  </p>
 
-                  <div
-                    className="mb-5 sm:mb-6 px-3.5 py-1.5 rounded-full font-body text-[10px] font-bold uppercase tracking-widest w-fit relative z-10"
-                    style={{ background: `${s.color}15`, border: `1px solid ${s.color}30`, color: s.color }}
-                  >
-                    {s.what}
-                  </div>
-
-                  <p className="font-body text-white/60 text-xs sm:text-sm leading-relaxed mb-6 sm:mb-8 flex-1 relative z-10 break-words">
+                  {/* Description */}
+                  <p className="font-body text-xs text-[#5F5F5A] leading-relaxed mb-6">
                     {s.desc}
                   </p>
 
-                  <ul className="space-y-2.5 sm:space-y-3 relative z-10 pt-5 sm:pt-6 border-t border-white/10">
-                    {s.points.map((pt, j) => (
-                      <li key={j} className="flex items-center gap-2.5 sm:gap-3 font-body text-white/70 text-xs md:text-sm break-words">
-                        <span className="w-2 h-2 rounded-full shrink-0 shadow-lg transition-transform duration-300 group-hover:scale-150" style={{ backgroundColor: s.color, boxShadow: `0 0 8px ${s.color}` }} />
-                        {pt}
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Deliverables List */}
+                  <div className="pt-4 border-t border-[#DEDED7]/80">
+                    <span className="block font-sans text-[10px] font-bold uppercase tracking-wider text-[#5F5F5A] mb-3">
+                      Core Deliverables:
+                    </span>
+                    <ul className="space-y-2">
+                      {s.deliverables.map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-xs font-body text-[#111111]/85">
+                          <span className="text-[#E84A2A] font-bold text-xs mt-0.5">✦</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Footer Tag */}
+                <div className="mt-8 pt-4 border-t border-[#DEDED7]/80 flex items-center justify-between">
+                  <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-[#5F5F5A]">Outcome</span>
+                  <span className="text-xs font-heading font-bold text-[#111111] uppercase tracking-wider">{s.highlight}</span>
                 </div>
               </div>
             </ScrollReveal>
           ))}
+
+          {/* 6th Card: Specialty Highlight */}
+          <ScrollReveal data-reveal="up" delay={350}>
+            <div className="h-full rounded-3xl bg-[#111111] text-white p-7 sm:p-8 flex flex-col justify-between shadow-card relative overflow-hidden">
+              <div>
+                <span className="inline-block text-[10px] font-sans font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-white/10 text-white border border-white/20 mb-5">
+                  Deep Industry Expertise
+                </span>
+                <h3 className="font-heading font-black text-xl sm:text-2xl uppercase tracking-tight leading-snug mb-3">
+                  Have A Specific Industry Need?
+                </h3>
+                <p className="font-body text-xs text-white/70 leading-relaxed mb-6">
+                  While we serve ambitious businesses across multiple categories, we maintain dedicated vertical practice groups with specialized playbooks for Makeup Artists and Salons.
+                </p>
+                <div className="space-y-2.5">
+                  <Link
+                    to="/for-makeup-artists"
+                    className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#E84A2A]/50 transition-all duration-200"
+                  >
+                    <span className="font-sans text-xs uppercase tracking-wider font-semibold">For Makeup Artists</span>
+                    <span className="text-xs text-[#E84A2A]">Explore →</span>
+                  </Link>
+                  <Link
+                    to="/for-salons"
+                    className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#E84A2A]/50 transition-all duration-200"
+                  >
+                    <span className="font-sans text-xs uppercase tracking-wider font-semibold">For Salons &amp; Clinics</span>
+                    <span className="text-xs text-[#E84A2A]">Explore →</span>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between">
+                <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-white/50">Verticals</span>
+                <span className="text-xs font-heading font-bold text-[#E84A2A] uppercase tracking-wider">Tailored Playbooks</span>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
 
-        <div className="mb-8 px-5 lg:hidden">
-          <div className="flex flex-wrap items-center justify-center gap-1" role="tablist" aria-label="Service slides">
-            {DEPARTMENTS.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => scrollToCard(i)}
-                aria-label={`Go to service ${i + 1}`}
-                aria-current={activeIdx === i ? 'true' : undefined}
-                role="tab"
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none"
-              >
-                <span
-                  className="relative rounded-full transition-all duration-300 inline-block"
-                  style={{
-                    width: activeIdx === i ? '32px' : '10px',
-                    height: '10px',
-                    background: activeIdx === i ? DEPARTMENTS[i].color : 'rgba(255,255,255,0.2)',
-                    boxShadow: activeIdx === i ? `0 0 12px ${DEPARTMENTS[i].color}` : 'none',
-                  }}
-                >
-                  {activeIdx === i && (
-                    <span className="dot-ping absolute inset-0 rounded-full animate-ping opacity-40" style={{ background: DEPARTMENTS[i].color }} />
-                  )}
-                </span>
-              </button>
-            ))}
-          </div>
+        {/* View Detailed Services Page CTA */}
+        <div className="text-center">
+          <Link
+            to="/services"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-[#111111] bg-white border border-[#DEDED7] hover:bg-[#111111] hover:text-white transition-all duration-300 shadow-sm"
+          >
+            <span>View Complete Service Specifications</span>
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </Link>
         </div>
 
       </div>

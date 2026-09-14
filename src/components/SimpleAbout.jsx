@@ -4,40 +4,23 @@ import ScrollReveal from './ScrollReveal.jsx';
 
 export default function SimpleAbout() {
   return (
-    <section className="py-12 md:py-16 bg-[#050508] overflow-hidden relative">
-      {/* Decorative Glows */}
-      <div 
-        className="absolute top-1/4 left-[-10%] w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none opacity-20"
-        style={{ background: 'radial-gradient(circle, rgba(123,47,255,0.35) 0%, transparent 75%)' }}
-      />
-      <div 
-        className="absolute bottom-10 right-[-10%] w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none opacity-25"
-        style={{ background: 'radial-gradient(circle, rgba(255,58,242,0.3) 0%, transparent 75%)' }}
-      />
-
+    <section className="py-16 md:py-20 bg-[#F7F6F2] overflow-hidden relative">
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
           
           {/* Left Column: Image with Luxury Frame */}
           <div className="lg:col-span-6 relative flex justify-center">
             <ScrollReveal data-reveal="scale" className="relative w-full max-w-[580px]">
-              {/* Outer frame shadow & border */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#FF3AF2]/10 to-[#7B2FFF]/10 rounded-[2.5rem] blur-xl -z-10" />
-              
               <div 
-                className="p-3 sm:p-4 rounded-[2.5rem] border border-white/10 bg-[#0E0E1C]/50 backdrop-blur-xl relative overflow-hidden"
-                style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.5)' }}
+                className="p-3 sm:p-4 rounded-[2.5rem] border border-[#DEDED7] bg-white shadow-card relative overflow-hidden"
               >
                 <div className="rounded-[2rem] overflow-hidden relative w-full aspect-[4/3] sm:aspect-[1.4/1]">
-                  {/* Subtle black overlay that fades on hover */}
-                  <div className="absolute inset-0 bg-black/10 hover:bg-transparent transition-colors duration-500 z-10" />
-                  
                   <motion.img 
                     src={teamImage} 
                     alt="Juntoz Team" 
                     className="w-full h-full object-cover block"
-                    whileHover={{ scale: 1.03 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
                   />
                 </div>
               </div>
@@ -47,46 +30,41 @@ export default function SimpleAbout() {
           {/* Right Column: Premium Copy */}
           <div className="lg:col-span-6 space-y-6 text-left lg:pl-4">
             <ScrollReveal data-reveal="up">
-              <span className="font-heading font-bold tracking-widest text-[#FF3AF2] uppercase text-xs block">
+              <span className="font-sans font-bold tracking-[0.16em] text-[#E84A2A] uppercase text-xs block">
                 Who We Are
               </span>
             </ScrollReveal>
 
             <ScrollReveal data-reveal="up" delay={100}>
-              <h2 className="font-heading font-black text-3xl sm:text-5xl uppercase tracking-tighter leading-tight text-white">
+              <h2 className="font-heading font-black text-3xl sm:text-5xl uppercase tracking-tight leading-tight text-[#111111]">
                 We Build Predictable <br />
-                <span style={{
-                  background: 'linear-gradient(120deg, #FF3AF2 20%, #7B2FFF 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}>Growth Systems.</span>
+                <span className="text-[#E84A2A]">Growth Systems.</span>
               </h2>
             </ScrollReveal>
 
             <ScrollReveal data-reveal="up" delay={200} className="space-y-4">
-              <p className="font-body text-white/60 text-lg font-semibold leading-relaxed">
+              <p className="font-body text-[#111111] text-lg font-semibold leading-relaxed">
                 We are an integrated boutique team of media buyers, designers, and software engineers designed to scale your pipeline, not just buy vanity clicks.
               </p>
-              <p className="font-body text-white/50 text-sm leading-relaxed">
-                At Juntoz, we help ambitious beauty salons, clinics, and makeup artists escape the coupon-hunter trap and algorithm fatigue. We treat marketing as a rigorous operational system, engineering localized SEO rankings, location-targeted social ads, and automated WhatsApp appointment funnels to secure premium, predictable revenue for your brand.
+              <p className="font-body text-[#5F5F5A] text-sm leading-relaxed">
+                At Juntoz, we partner with ambitious businesses across industries to engineer predictable customer acquisition. We treat marketing as an operational science: combining data-driven paid advertising, local Google search dominance, high-ticket brand positioning, and automated inquiry pipelines that turn casual traffic into high-value clients.
               </p>
             </ScrollReveal>
 
             {/* Quick value tags */}
-            <ScrollReveal data-reveal="up" delay={300} className="grid grid-cols-2 gap-4 pt-4 border-t border-white/5">
+            <ScrollReveal data-reveal="up" delay={300} className="grid grid-cols-2 gap-4 pt-4 border-t border-[#DEDED7]">
               <div className="flex items-center gap-3">
                 <span className="text-xl">🛠️</span>
                 <div>
-                  <h4 className="font-heading font-bold text-xs uppercase text-white/90">Creative &amp; Ads</h4>
-                  <p className="text-[10px] text-white/40">Visual performance setups</p>
+                  <h4 className="font-sans font-bold text-xs uppercase text-[#111111]">Creative &amp; Ads</h4>
+                  <p className="text-[11px] text-[#5F5F5A]">Visual performance setups</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-xl">⚙️</span>
                 <div>
-                  <h4 className="font-heading font-bold text-xs uppercase text-white/90">Custom Funnels</h4>
-                  <p className="text-[10px] text-white/40">Technical API integrations</p>
+                  <h4 className="font-sans font-bold text-xs uppercase text-[#111111]">Custom Funnels</h4>
+                  <p className="text-[11px] text-[#5F5F5A]">Technical API integrations</p>
                 </div>
               </div>
             </ScrollReveal>

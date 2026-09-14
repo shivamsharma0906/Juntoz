@@ -1,255 +1,112 @@
-/**
- * NumbersSection — "Let The Numbers Talk About Us"
- * Exact layout pattern from digitalcorsel.com/mumbai/
- * Dark-mode version with Juntoz brand colours.
- *
- * Layout per row:
- *   LEFT  → small label + trend arrow  |  giant metric
- *   RIGHT → client/category name (bold) + service type (muted)
- *   Separator: thin 1px horizontal line between rows
- */
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import ScrollReveal from './ScrollReveal.jsx';
 import useCountUp from '../hooks/useCountUp.js';
-import { clientData } from '../data/clients.js';
 
-/* ── Result rows ── */
-const RESULTS = clientData.filter(c => c.statsLabel).map(c => ({
-  label: c.statsLabel,
-  metric: c.statsMetric,
-  client: c.businessName || c.name,
-  service: c.statsService,
-  color: c.color,
-}));
+const STATS = [
+  {
+    num: 5,
+    suffix: '+',
+    label: 'Years Experience',
+    sublabel: 'Founded in 2021 with corporate tech & media background',
+    isVerified: true,
+  },
+  {
+    num: 200,
+    suffix: '+',
+    label: 'Client Projects Scaled',
+    sublabel: 'Across digital strategy, performance marketing, local SEO and creative shoots',
+    isVerified: false,
+  },
+  {
+    num: 5.0,
+    suffix: ' ★',
+    label: 'Google Client Rating',
+    sublabel: 'Verified 5-star Google review score in Mumbai, MH',
+    isVerified: true,
+    isDecimal: true,
+  },
+  {
+    num: 3.1,
+    suffix: 'x',
+    label: 'Avg. Pipeline Growth',
+    sublabel: 'Average inbound inquiry expansion across deployed full-funnel architectures',
+    isVerified: false,
+    isDecimal: true,
+  }
+];
 
-/* ── Local useCountUp removed in favor of shared hook ── */
-
-/* ── Trend arrow SVG ── */
-const TrendArrow = ({ color }) => (
-  <svg
-    width="18" height="18" viewBox="0 0 24 24"
-    fill="none" stroke={color} strokeWidth="2.2"
-    strokeLinecap="round" strokeLinejoin="round"
-    style={{ display: 'inline-block', verticalAlign: 'middle' }}
-  >
-    <path d="M7 17L17 7M17 7H7M17 7v10" />
-  </svg>
-);
-
-function AnimatedMetric({ metric, started, color, delay = 0 }) {
-  // Extract numeric portion e.g. "+340%" → 340
-  const num = parseInt(metric.replace(/[^0-9]/g, ''), 10);
-  const prefix = metric.startsWith('+') ? '+' : '';
-  const suffix = metric.endsWith('%') ? '%' : '';
-  const { value } = useCountUp(num, { duration: 1800, started, delay });
-
-  return (
-    <span style={{ color, textShadow: `0 0 40px ${color}45` }}>
-      {prefix}{value}{suffix}
-    </span>
-  );
-}
-
-/* ── Single result row ── */
-function ResultRow({ row, index, started, revealed }) {
-  const [hovered, setHovered] = useState(false);
+function StatItem({ stat, index, started }) {
+  const { value } = useCountUp(stat.num, { duration: 2000, started, delay: index * 100 });
+  const display = stat.isDecimal ? value.toFixed(1) : Math.round(value);
 
   return (
-    <div
-      style={{
-        opacity:    revealed ? 1 : 0,
-        transform:  revealed ? 'translateY(0)' : 'translateY(28px)',
-        transition: `opacity 0.7s ease ${0.15 + index * 0.12}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${0.15 + index * 0.12}s`,
-      }}
-    >
-      {/* Top divider */}
+    <div className="flex flex-col items-center text-center p-6 sm:p-8 rounded-3xl bg-[#1A1A1A] border border-white/10 relative group hover:border-[#E84A2A]/40 transition-all duration-300">
+      
+      {/* Giant Stat Number */}
       <div
-        style={{
-          height: '1px',
-          background: hovered
-            ? `linear-gradient(to right, ${row.color}50, rgba(255,255,255,0.08), ${row.color}20)`
-            : 'rgba(255,255,255,0.07)',
-          transition: 'background 0.4s ease',
-        }}
-      />
-
-      {/* Row content */}
-      <div
-        className="flex items-center justify-between py-5 sm:py-6 cursor-default"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        style={{ transition: 'padding 0.3s ease' }}
+        className="font-heading font-black tracking-tight leading-none mb-3 text-white flex items-baseline justify-center"
+        style={{ fontSize: 'clamp(2.5rem, 4.5vw, 4rem)' }}
       >
-        {/* ── LEFT: label + giant metric ── */}
-        <div className="flex flex-col gap-1 sm:gap-2">
-          {/* Small label + arrow */}
-          <div className="flex items-center gap-2">
-            <span
-              className="font-body font-semibold tracking-wide"
-              style={{
-                fontSize: 'clamp(0.62rem, 1.3vw, 0.78rem)',
-                color: hovered ? row.color : 'rgba(255,255,255,0.45)',
-                transition: 'color 0.35s ease',
-              }}
-            >
-              {row.label}
-            </span>
-            <span
-              style={{
-                opacity: hovered ? 1 : 0.4,
-                transform: hovered ? 'translate(2px, -2px)' : 'translate(0,0)',
-                transition: 'opacity 0.3s ease, transform 0.3s ease',
-              }}
-            >
-              <TrendArrow color={row.color} />
-            </span>
-          </div>
-
-          {/* Giant metric */}
-          <div
-            className="font-heading font-black leading-none"
-            style={{ fontSize: 'clamp(1.8rem, 5vw, 3.8rem)' }}
-          >
-            <AnimatedMetric
-              metric={row.metric}
-              started={started}
-              color={row.color}
-              delay={index * 150}
-            />
-          </div>
-        </div>
-
-        {/* ── RIGHT: client + service ── */}
-        <div
-          className="flex flex-col items-end gap-1 sm:gap-2 text-right ml-4"
-          style={{ minWidth: '120px', maxWidth: '40%' }}
-        >
-          <span
-            className="font-heading font-black text-white leading-tight"
-            style={{
-              fontSize: 'clamp(0.85rem, 2vw, 1.3rem)',
-              opacity: hovered ? 1 : 0.75,
-              transition: 'opacity 0.35s ease',
-            }}
-          >
-            {row.client}
-          </span>
-          <span
-            className="font-body leading-snug"
-            style={{
-              fontSize: 'clamp(0.65rem, 1.2vw, 0.78rem)',
-              color: hovered ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.48)',
-              transition: 'color 0.35s ease',
-            }}
-          >
-            {row.service}
-          </span>
-        </div>
+        <span>{display}</span>
+        <span className="text-[#E84A2A] ml-0.5">{stat.suffix}</span>
       </div>
+
+      {/* Label */}
+      <h3 className="font-heading font-bold text-white text-base sm:text-lg uppercase tracking-wider mb-2">
+        {stat.label}
+      </h3>
+
+      {/* Sublabel / Credibility Note */}
+      <p className="font-body text-white/65 text-xs leading-relaxed max-w-xs">
+        {stat.sublabel}
+      </p>
+
     </div>
   );
 }
 
-/* ── Main export ── */
 export default function NumbersSection() {
   const sectionRef = useRef(null);
-  const [revealed, setRevealed] = useState(false);
-  const [started,  setStarted]  = useState(false);
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setRevealed(true);
-          setTimeout(() => setStarted(true), 250);
-          obs.disconnect();
+          setStarted(true);
+          observer.disconnect();
         }
       },
-      { threshold: 0.12 }
+      { threshold: 0.2 }
     );
-    obs.observe(el);
-    return () => obs.disconnect();
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-10 sm:py-14">
-
-      {/* ── Ambient background glows ── */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-0 left-0 w-[500px] h-[500px]"
-          style={{
-            background: 'radial-gradient(ellipse at top left, rgba(0,245,212,0.06) 0%, transparent 65%)',
-            filter: 'blur(40px)',
-          }}
-        />
-        <div
-          className="absolute bottom-0 right-0 w-[400px] h-[400px]"
-          style={{
-            background: 'radial-gradient(ellipse at bottom right, rgba(123,47,255,0.08) 0%, transparent 65%)',
-            filter: 'blur(40px)',
-          }}
-        />
-      </div>
-
-      <div className="container mx-auto px-5 sm:px-8 max-w-6xl relative z-10">
-
-        {/* ── Big heading — left-aligned, mixed weights like original ── */}
-        <div
-          className="text-center mb-8 sm:mb-10"
-          style={{
-            opacity:    revealed ? 1 : 0,
-            transform:  revealed ? 'translateY(0)' : 'translateY(24px)',
-            transition: 'opacity 0.75s ease 0.05s, transform 0.75s cubic-bezier(0.22,1,0.36,1) 0.05s',
-          }}
-        >
-          <h2
-            className="font-heading text-white leading-[1.0] tracking-tight"
-            style={{ fontSize: 'clamp(1.6rem, 4vw, 3rem)' }}
-          >
-            Let The{' '}
-            <span className="font-black" style={{
-              background: 'linear-gradient(120deg, #00F5D4, #7B2FFF)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              Numbers
-            </span>
-            <br />
-            Talk{' '}
-            <span className="font-black" style={{
-              background: 'linear-gradient(120deg, #7B2FFF, #FF3AF2)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              About Us.
-            </span>
+    <section ref={sectionRef} id="stats-band" className="py-24 md:py-32 bg-[#111111] border-y border-white/10 relative overflow-hidden">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-7xl relative z-10">
+        
+        {/* Eyebrow & Heading */}
+        <ScrollReveal data-reveal="up" className="text-center mb-16 max-w-2xl mx-auto">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/15 font-sans font-semibold text-xs uppercase tracking-wider text-white/80 mb-3">
+            Credibility &amp; Track Record
+          </span>
+          <h2 className="font-heading font-black text-white text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight">
+            Data-Driven Results Built On Real Experience
           </h2>
+        </ScrollReveal>
+
+        {/* 4 Stats Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {STATS.map((stat, i) => (
+            <ScrollReveal key={stat.label} data-reveal="up" delay={i * 100}>
+              <StatItem stat={stat} index={i} started={started} />
+            </ScrollReveal>
+          ))}
         </div>
 
-        {/* ── Rows ── */}
-        {RESULTS.map((row, i) => (
-          <ResultRow
-            key={i}
-            row={row}
-            index={i}
-            started={started}
-            revealed={revealed}
-          />
-        ))}
-
-        {/* Final bottom divider */}
-        <div
-          style={{
-            height: '1px',
-            background: 'rgba(255,255,255,0.07)',
-            opacity: revealed ? 1 : 0,
-            transition: 'opacity 0.7s ease 0.65s',
-          }}
-        />
       </div>
     </section>
   );

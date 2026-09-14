@@ -12,28 +12,28 @@ import { useState, useRef, useEffect } from 'react';
 
 const FAQS = [
   {
-    q: 'Is it necessary to have a digital marketing agency for my salon?',
-    a: 'Yes — if you want consistent, predictable bookings. Most salons rely only on word-of-mouth, which plateaus. A dedicated agency like Juntoz builds you a full-funnel system: Instagram growth, ads, WhatsApp follow-up, and local SEO so new clients find and book you every month.',
+    q: 'What types of businesses does Juntoz work with?',
+    a: 'Juntoz works with ambitious, growth-focused businesses across multiple sectors—including high-growth startups, local service businesses and clinics, D2C e-commerce brands, B2B companies, and our specialized vertical in makeup artists and luxury salons. If your business has a viable offer and wants predictable customer acquisition, we build the system to scale it.',
   },
   {
-    q: 'How are your services useful for an already established beauty business?',
-    a: 'Established businesses often have the talent but lack a scalable client acquisition system. We audit what\'s working, plug the revenue leaks, and layer paid + organic strategies to increase your monthly bookings and average ticket value without increasing your workload.',
+    q: 'Why work with a full-service growth agency instead of freelancers?',
+    a: 'Freelancers typically execute isolated tasks (one writes posts, another runs basic ads, a third designs graphics), leaving you to connect the dots. Juntoz provides an integrated growth engine: market positioning, high-converting creatives, paid acquisition management, local search optimization, and conversion tracking functioning as one synchronized pipeline.',
   },
   {
-    q: 'Do we get customised growth strategies for our beauty brand?',
-    a: 'Absolutely. Every salon, MUA, and skin clinic is different. We start with a deep audit of your current presence, competitors, and target clients before building a bespoke roadmap — no copy-paste templates.',
+    q: 'Do you only work with beauty brands and makeup artists?',
+    a: 'No. Juntoz is a full-service digital marketing agency serving businesses across multiple industries. Because we achieved industry-leading results in the beauty, salon, and bridal education sector, we maintain dedicated specialist playbooks for makeup artists, academies, and salons—alongside our broader commercial marketing practice.',
   },
   {
-    q: 'Can Juntoz provide performance marketing (paid ads) services?',
-    a: 'Yes. We run highly targeted Meta (Instagram & Facebook) ads and Google Ads campaigns tailored specifically for beauty businesses. We handle creative, targeting, A/B testing, and optimisation to ensure your ad spend returns measurable bookings.',
+    q: 'How do you approach Google Business Profile (GMB) and Local Search?',
+    a: 'We optimize every facet of your Google presence: high-intent local category alignment, weekly geo-tagged updates, schema-aligned citations, and structured review generation workflows. This ensures when nearby customers search for your core services, your business appears prominently in the Google 3-Pack.',
   },
   {
-    q: 'Why is local SEO important for my salon or beauty clinic?',
-    a: 'When someone searches "best salon near me" or "MUA in Mumbai," your business must appear at the top. We optimise your Google Business Profile, build local citations, and manage reviews so you capture that high-intent traffic daily.',
+    q: 'What kind of ad budget is required to see real ROI?',
+    a: 'We structure performance advertising campaigns calibrated to your unit economics and customer lifetime value (LTV). For local businesses and service clinics, we start with focused localized test budgets. For scaling brands, we deploy multi-stage acquisition and retargeting funnels to maximize return on ad spend (ROAS).',
   },
   {
-    q: 'How long before I start seeing real results from your services?',
-    a: 'Most clients see measurable improvements in reach and enquiries within the first 30 days. Significant booking growth typically follows within 60–90 days as campaigns optimise. We set realistic timelines upfront so expectations are always aligned.',
+    q: 'How quickly can we expect measurable business results?',
+    a: 'Paid lead generation and customer acquisition campaigns on Meta and Google typically begin delivering qualified inquiries within the first 7 to 14 days. Foundational assets—such as Google Business Profile dominance, SEO ranking, and brand conversion architecture—compound over 60 to 90 days to drive long-term organic equity.',
   },
 ];
 
@@ -49,64 +49,47 @@ function FAQItem({ item, index, isOpen, onToggle }) {
 
   return (
     <div
-      className="group relative rounded-2xl overflow-hidden p-[1px] transition-all duration-500"
-      style={{
-        background: isOpen 
-          ? 'linear-gradient(135deg, rgba(0, 245, 212, 0.6), transparent 60%, rgba(0, 245, 212, 0.6))'
-          : 'linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent 60%, rgba(255, 255, 255, 0.15))',
-      }}
+      className={`rounded-2xl overflow-hidden border transition-colors duration-300 ${
+        isOpen ? 'bg-[#F7F6F2] border-[#111111]/30 shadow-subtle' : 'bg-[#F7F6F2] border-[#DEDED7]'
+      }`}
     >
-      <div 
-        className="w-full h-full rounded-2xl backdrop-blur-xl transition-colors duration-500"
-        style={{
-           backgroundColor: isOpen ? 'rgba(0, 245, 212, 0.08)' : 'rgba(14, 14, 28, 0.65)',
-        }}
+      {/* ── Question row ── */}
+      <button
+        onClick={() => onToggle(index)}
+        className="w-full flex items-start gap-3 px-5 py-4 sm:px-6 sm:py-5 text-left transition-colors"
+        style={{ cursor: 'pointer', background: 'transparent' }}
+        aria-expanded={isOpen}
       >
-        {/* ── Question row ── */}
-        <button
-          onClick={() => onToggle(index)}
-          className="w-full flex items-start gap-3 px-5 py-4 sm:px-6 sm:py-5 text-left"
-          style={{ cursor: 'pointer', background: 'transparent' }}
-          aria-expanded={isOpen}
+        {/* Question icon */}
+        <span
+          className="shrink-0 mt-0.5"
+          style={{
+            color: isOpen ? '#E84A2A' : '#5F5F5A',
+            transition: 'color 0.3s ease',
+          }}
         >
-          {/* Question icon */}
-          <span
-            className="shrink-0 mt-0.5"
-            style={{
-              color: isOpen ? '#00F5D4' : 'rgba(255,255,255,0.4)',
-              transition: 'color 0.3s ease',
-            }}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-              <line x1="12" y1="17" x2="12.01" y2="17"></line>
-            </svg>
-          </span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </span>
 
-          {/* Question text */}
-          <span
-            className="flex-1 font-body font-semibold leading-snug"
-            style={{
-              fontSize: 'clamp(0.78rem, 1.8vw, 0.92rem)',
-              color: isOpen ? '#ffffff' : 'rgba(255,255,255,0.70)',
-              transition: 'color 0.3s ease',
-            }}
-          >
-            {item.q}
-          </span>
+        {/* Question text */}
+        <span
+          className="flex-1 font-body font-semibold text-sm sm:text-base leading-snug text-[#111111]"
+        >
+          {item.q}
+        </span>
 
-          {/* Plus / Cross icon */}
-          <span
-            className="shrink-0 flex items-center justify-center w-6 h-6 rounded-full ml-2 mt-0.5"
-            style={{
-              background: isOpen ? 'rgba(0,245,212,0.15)' : 'rgba(255,255,255,0.07)',
-              border: `1px solid ${isOpen ? 'rgba(0,245,212,0.35)' : 'rgba(255,255,255,0.12)'}`,
-              transition: 'background 0.3s ease, border-color 0.3s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1)',
-              transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
-            }}
-          >
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke={isOpen ? '#00F5D4' : 'rgba(255,255,255,0.5)'} strokeWidth="1.8" strokeLinecap="round" style={{ transition: 'stroke 0.3s ease' }}>
+        {/* Plus / Cross icon */}
+        <span
+          className="shrink-0 flex items-center justify-center w-6 h-6 rounded-full ml-2 mt-0.5 border border-[#DEDED7] bg-white transition-transform duration-300"
+          style={{
+            transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+          }}
+        >
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke={isOpen ? '#E84A2A' : '#111111'} strokeWidth="1.8" strokeLinecap="round">
             <line x1="6" y1="1" x2="6" y2="11" />
             <line x1="1" y1="6" x2="11" y2="6" />
           </svg>
@@ -118,25 +101,18 @@ function FAQItem({ item, index, isOpen, onToggle }) {
         style={{
           height: `${height}px`,
           overflow: 'hidden',
-          transition: 'height 0.4s cubic-bezier(0.4,0,0.2,1)',
+          transition: 'height 0.35s cubic-bezier(0.4,0,0.2,1)',
         }}
       >
         <div
           ref={bodyRef}
           className="px-5 sm:px-6 pb-5"
-          style={{ paddingLeft: 'calc(1.25rem + 16px + 0.75rem)' }} /* align with question text */
+          style={{ paddingLeft: 'calc(1.25rem + 18px + 0.75rem)' }}
         >
-          <p
-            className="font-body leading-relaxed"
-            style={{
-              fontSize: 'clamp(0.76rem, 1.7vw, 0.88rem)',
-              color: 'rgba(255,255,255,0.50)',
-            }}
-          >
+          <p className="font-body text-[#5F5F5A] text-xs sm:text-sm leading-relaxed">
             {item.a}
           </p>
         </div>
-      </div>
       </div>
     </div>
   );
@@ -170,53 +146,36 @@ export default function FAQSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden py-10 sm:py-14"
+      className="relative overflow-hidden py-24 md:py-32 bg-[#FFFFFF]"
     >
-
-      {/* ── Subtle background ── */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div style={{ position:'absolute', top:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(123,47,255,0.2) 40%, rgba(0,245,212,0.2) 60%, transparent 95%)' }} />
-        <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(255,58,242,0.15) 40%, rgba(123,47,255,0.15) 60%, transparent 95%)' }} />
-        <div style={{ position:'absolute', top:'10%', right:'-5%', width:'400px', height:'400px', background:'radial-gradient(ellipse, rgba(123,47,255,0.07) 0%, transparent 65%)', filter:'blur(50px)' }} />
-        <div style={{ position:'absolute', bottom:'10%', left:'-5%', width:'350px', height:'350px', background:'radial-gradient(ellipse, rgba(0,245,212,0.05) 0%, transparent 65%)', filter:'blur(50px)' }} />
-      </div>
-
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
 
-        {/* ── Heading — centred, bold, mixed weight like reference ── */}
+        {/* ── Heading ── */}
         <div
-          className="text-center mb-8 sm:mb-10"
+          className="text-center mb-14 sm:mb-18 max-w-2xl mx-auto"
           style={{
             opacity:    revealed ? 1 : 0,
             transform:  revealed ? 'translateY(0)' : 'translateY(24px)',
             transition: 'opacity 0.75s ease 0.05s, transform 0.75s cubic-bezier(0.22,1,0.36,1) 0.05s',
           }}
         >
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#FBE9E4] border border-[#E84A2A]/20 font-sans font-semibold text-xs uppercase tracking-wider text-[#E84A2A] mb-4">
+            Common Questions
+          </span>
           <h2
-            className="font-heading text-white leading-tight tracking-tight"
-            style={{ fontSize: 'clamp(1.65rem, 5.5vw, 4rem)' }}
+            className="font-heading font-black text-[#111111] leading-tight tracking-tight uppercase"
+            style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}
           >
-            Frequently{' '}
-            <span
-              className="font-black"
-              style={{
-                background: 'linear-gradient(120deg, #00F5D4, #7B2FFF)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Asked
-            </span>{' '}
-            <span className="font-black text-white">Questions</span>
+            Frequently Asked{' '}
+            <span className="text-[#E84A2A]">Questions</span>
           </h2>
         </div>
 
         {/* ── 2-column accordion grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
           {/* Column 1 */}
-          <div className="flex flex-col gap-3 sm:gap-4">
+          <div className="flex flex-col gap-4">
             {col1.map((item, i) => {
               const globalIndex = i * 2;
               return (
@@ -240,7 +199,7 @@ export default function FAQSection() {
           </div>
 
           {/* Column 2 */}
-          <div className="flex flex-col gap-3 sm:gap-4">
+          <div className="flex flex-col gap-4">
             {col2.map((item, i) => {
               const globalIndex = i * 2 + 1;
               return (

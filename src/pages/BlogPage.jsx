@@ -1,239 +1,235 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from '../data/blogPosts';
 import ScrollReveal from '../components/ScrollReveal';
 import PageMeta from '../components/PageMeta';
 
-const CATEGORIES = ['All', ...new Set(blogPosts.map(p => p.category))];
-
-function CardTitle({ title, color, size = 'sm' }) {
-  const textClass = size === 'lg'
-    ? 'font-heading font-black uppercase tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6 leading-none'
-    : 'font-heading font-black uppercase tracking-tight text-xl sm:text-2xl mb-4 leading-snug';
-
-  return (
-    <h2 className={`${textClass} relative`}>
-      <span className="block text-white transition-opacity duration-500 group-hover:opacity-0">{title}</span>
-      <span
-        className="absolute inset-0 block text-transparent bg-clip-text opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{ backgroundImage: `linear-gradient(90deg, #ffffff, ${color})` }}
-      >
-        {title}
-      </span>
-    </h2>
-  );
-}
+const CATEGORIES = ['All', ...new Set(blogPosts.map((p) => p.category))];
 
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredPosts = activeCategory === 'All'
-    ? blogPosts
-    : blogPosts.filter(p => p.category === activeCategory);
+  const filteredPosts = useMemo(() => {
+    return blogPosts.filter((post) => {
+      const matchesCategory =
+        activeCategory === 'All' || post.category === activeCategory;
+      const matchesSearch =
+        searchQuery.trim() === '' ||
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [activeCategory, searchQuery]);
 
   const featuredPost = filteredPosts[0];
-  const remainingPosts = filteredPosts.slice(1);
+  const secondaryPosts = filteredPosts.slice(1);
 
   return (
-    <div className="pt-24 sm:pt-32 md:pt-40 pb-24 min-h-screen bg-background relative overflow-hidden">
+    <div className="pt-28 sm:pt-36 md:pt-40 pb-24 min-h-screen bg-[#F7F6F2] relative overflow-hidden">
       <PageMeta
-        title="Growth Blog — Salon & MUA Marketing Strategies | Juntoz"
-        description="Get tactical guides on Meta Ads testing, speed-to-lead WhatsApp automation, and booking funnel optimization to scale your beauty brand."
+        title="Insights & Growth Blueprints | Juntoz Digital Marketing Agency"
+        description="Actionable frameworks on performance advertising, local Google search dominance, conversion systems, and business scaling from Juntoz."
         path="/blog"
       />
 
-      {/* ── Background Immersive Glow Elements ── */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-[#FF3AF2]/5 blur-[140px] animate-[float-glow_15s_ease-in-out_infinite] pointer-events-none z-0" />
-      <div className="absolute top-40 right-1/4 w-[600px] h-[600px] rounded-full bg-[#00F5D4]/5 blur-[160px] animate-[float-glow_20s_ease-in-out_infinite_alternate] pointer-events-none z-0" />
-
-      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
-
-        {/* ── Creative Typographic Header ── */}
-        <div className="mb-16 md:mb-24 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-10 border-b border-white/10 pb-12">
+      <div className="container mx-auto px-5 sm:px-8 md:px-12 lg:px-16 max-w-7xl relative z-10">
+        
+        {/* ── Editorial Masthead Header ── */}
+        <div className="mb-12 sm:mb-16 pb-8 sm:pb-12 border-b border-[#DEDED7]">
           <ScrollReveal data-reveal="up" className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00F5D4] animate-pulse" />
-              <span className="font-body font-bold text-white/80 text-[10px] tracking-[0.2em] uppercase">The Knowledge base</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#DEDED7] bg-white shadow-2xs mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#E84A2A] animate-pulse" />
+              <span className="font-sans font-bold text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-[#111111]">
+                Strategic Intelligence &amp; Playbooks
+              </span>
             </div>
-            
-            <h1 className="font-heading font-black text-white text-5xl sm:text-7xl md:text-8xl uppercase tracking-tighter leading-none mb-6">
-              The <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF3AF2] via-[#9855FF] to-[#00F5D4]">Growth</span> <br /> Hub.
+
+            <h1 className="font-heading font-black text-[#111111] uppercase tracking-[-0.03em] leading-[0.96] mb-5 text-[2.5rem] sm:text-[3.5rem] md:text-[4.25rem]">
+              Growth <span className="text-[#E84A2A]">Insights.</span>
             </h1>
-            
-            <p className="font-body text-white/50 text-sm sm:text-base max-w-xl leading-relaxed">
-              Tactical blueprints, technical breakdowns, and marketing architectures designed to scale modern businesses into category leaders.
+
+            <p className="font-body text-[#5F5F5A] text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+              Actionable blueprints, paid media teardowns, and conversion architectures written by the practitioners scaling businesses every day.
             </p>
           </ScrollReveal>
 
-          {/* ── Floating Category selector dock ── */}
-          <ScrollReveal data-reveal="fade" delay={150} className="w-full md:w-auto flex justify-center md:justify-end">
-            <div className="inline-flex flex-wrap items-center justify-center bg-[#0E0E1C]/45 backdrop-blur-xl border border-white/10 p-2 rounded-3xl gap-2 shadow-2xl">
-              {CATEGORIES.map(category => (
+          {/* ── Filter & Search Control Bar ── */}
+          <ScrollReveal data-reveal="up" delay={120} className="mt-8 pt-6 border-t border-[#DEDED7]/80 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+              {CATEGORIES.map((category) => {
+                const isActive = activeCategory === category;
+                return (
+                  <button
+                    key={category}
+                    type="button"
+                    onClick={() => setActiveCategory(category)}
+                    className={`font-sans text-[11px] sm:text-xs uppercase tracking-wider font-bold px-4 py-2 rounded-full transition-all duration-200 cursor-pointer ${
+                      isActive
+                        ? 'bg-[#111111] text-white shadow-xs'
+                        : 'bg-white border border-[#DEDED7] text-[#5F5F5A] hover:text-[#111111] hover:border-[#111111]'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Keyword Search Input */}
+            <div className="relative w-full md:w-72 shrink-0">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search strategies..."
+                className="w-full bg-white border border-[#DEDED7] rounded-full px-4 py-2 pl-9 text-xs font-body text-[#111111] placeholder:text-[#5F5F5A]/70 focus:outline-hidden focus:border-[#E84A2A] transition-colors"
+              />
+              <svg
+                className="w-4 h-4 text-[#5F5F5A] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              {searchQuery && (
                 <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`font-heading font-bold text-[10px] uppercase tracking-widest px-5 py-3 rounded-2xl transition-all duration-500 cursor-pointer ${
-                    activeCategory === category
-                      ? 'bg-white text-background shadow-[0_0_15px_rgba(255,255,255,0.2)]'
-                      : 'bg-transparent text-white/50 hover:text-white hover:bg-white/5'
-                  }`}
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#5F5F5A] hover:text-[#111111]"
                 >
-                  {category}
+                  ✕
                 </button>
-              ))}
+              )}
             </div>
           </ScrollReveal>
         </div>
 
-        {/* ── Featured Post (Asymmetric Hero Layout) ── */}
+        {/* ── Leading Editorial Feature Article ── */}
         {featuredPost && (
-          <ScrollReveal data-reveal="up" delay={200} className="mb-16 md:mb-24">
-            <Link to={`/blog/${featuredPost.slug}`} className="group block relative rounded-[2.5rem] overflow-hidden p-[1px] transition-all duration-500 hover:-translate-y-1.5">
-              
-              {/* Dynamic border gradient mapping */}
-              <div
-                className="absolute inset-0 opacity-20 group-hover:opacity-100 transition-opacity duration-700"
-                style={{ background: `linear-gradient(135deg, ${featuredPost.color}80, transparent 60%, ${featuredPost.color}80)` }}
-              />
-
-              <div className="relative bg-[#08080E]/90 backdrop-blur-2xl rounded-[39px] overflow-hidden flex flex-col lg:flex-row">
-                
-                {/* Content Frame */}
-                <div className="w-full lg:w-[55%] p-8 sm:p-12 lg:p-16 flex flex-col justify-between relative z-20 order-2 lg:order-1 min-h-[380px] lg:min-h-[500px]">
-                  
-                  {/* Subtle ambient light pool */}
-                  <div
-                    className="absolute -top-32 -left-32 w-80 h-80 rounded-full blur-[100px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: featuredPost.color }}
-                  />
-
+          <ScrollReveal data-reveal="up" delay={150} className="mb-12 sm:mb-16">
+            <Link
+              to={`/blog/${featuredPost.slug}`}
+              className="group block relative rounded-3xl overflow-hidden bg-white border border-[#DEDED7] shadow-[0_8px_30px_-6px_rgba(17,17,17,0.06)] hover:shadow-hover hover:-translate-y-1 transition-all duration-300"
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+                {/* Text Editorial Box (7 Cols) */}
+                <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-between order-2 lg:order-1">
                   <div>
-                    <div className="flex items-center gap-4 mb-6 relative z-10">
-                      <span
-                        className="font-body font-bold text-[9px] tracking-[0.2em] uppercase px-3.5 py-1.5 rounded-full border"
-                        style={{
-                          color: featuredPost.color,
-                          borderColor: `${featuredPost.color}30`,
-                          background: `${featuredPost.color}08`
-                        }}
-                      >
+                    <div className="flex flex-wrap items-center gap-2.5 mb-4 sm:mb-5">
+                      <span className="font-heading font-black text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-full bg-[#FBE9E4] text-[#E84A2A] border border-[#E84A2A]/20">
                         {featuredPost.category}
                       </span>
-                      <span className="font-body text-white/40 text-xs font-semibold">{featuredPost.readTime}</span>
+                      <span className="text-[11px] text-[#5F5F5A] font-body font-semibold">
+                        {featuredPost.readTime}
+                      </span>
+                      <span className="text-[#DEDED7]">•</span>
+                      <span className="text-[11px] text-[#5F5F5A] font-body">
+                        {featuredPost.date}
+                      </span>
                     </div>
 
-                    <div className="relative z-10 mb-4">
-                      <CardTitle title={featuredPost.title} color={featuredPost.color} size="lg" />
-                    </div>
+                    <h2 className="font-heading font-black uppercase tracking-tight text-2xl sm:text-3xl md:text-4xl text-[#111111] group-hover:text-[#E84A2A] transition-colors leading-[1.04] mb-4">
+                      {featuredPost.title}
+                    </h2>
 
-                    <p className="relative z-10 font-body text-white/50 text-sm sm:text-base leading-relaxed mb-8 max-w-xl">
+                    <p className="font-body text-[#5F5F5A] text-sm sm:text-base leading-relaxed mb-6 max-w-xl">
                       {featuredPost.excerpt}
                     </p>
                   </div>
 
-                  <div className="relative z-10 flex items-center justify-between pt-8 border-t border-white/5 mt-auto">
-                    <div className="flex flex-col">
-                      <span className="font-body text-white/80 text-[10px] font-bold uppercase tracking-widest leading-none">{featuredPost.author}</span>
-                      <span className="font-body text-white/40 text-[9px] uppercase tracking-widest mt-2">{featuredPost.date}</span>
+                  <div className="pt-6 border-t border-[#DEDED7] flex items-center justify-between mt-auto">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-[#111111] text-white flex items-center justify-center font-heading font-black text-[10px]">
+                        JZ
+                      </div>
+                      <div>
+                        <span className="block font-heading font-bold text-xs uppercase tracking-tight text-[#111111]">
+                          {featuredPost.author}
+                        </span>
+                        <span className="block font-body text-[10px] text-[#5F5F5A] uppercase tracking-wider">
+                          Strategic Contributor
+                        </span>
+                      </div>
                     </div>
-                    <div
-                      className="w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-105 border border-white/10 group-hover:border-white/30"
-                      style={{
-                        background: `${featuredPost.color}08`,
-                        color: featuredPost.color
-                      }}
-                    >
-                      <svg className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+
+                    <div className="inline-flex items-center gap-2 text-xs font-heading font-bold uppercase tracking-wider text-[#111111] group-hover:text-[#E84A2A] transition-colors">
+                      <span>Read Blueprint</span>
+                      <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </div>
                   </div>
-
                 </div>
 
-                {/* Media Image Frame with Neon Scanning Sweep */}
-                <div className="w-full lg:w-[45%] h-[300px] lg:h-auto relative overflow-hidden order-1 lg:order-2">
-                  <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-l from-[#08080E] via-[#08080E]/20 to-transparent z-10" />
-                  
-                  {/* Glowing scan bar animation */}
-                  <div 
-                    className="absolute left-0 w-full h-[2px] opacity-0 group-hover:opacity-75 transition-opacity duration-300 z-20 animate-[scan_3s_ease-in-out_infinite]"
-                    style={{ background: `linear-gradient(90deg, transparent, ${featuredPost.color}, transparent)`, boxShadow: `0 0 10px ${featuredPost.color}` }}
+                {/* Media Image Frame (5 Cols) */}
+                <div className="lg:col-span-5 relative h-56 sm:h-72 lg:h-auto min-h-[260px] overflow-hidden order-1 lg:order-2 bg-[#EAE8E1]">
+                  <img
+                    src={featuredPost.image}
+                    alt={featuredPost.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-
-                  <img 
-                    src={featuredPost.image} 
-                    alt={featuredPost.title} 
-                    className="w-full h-full object-cover transition-transform duration-[1000ms] group-hover:scale-105" 
-                  />
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#111111]/85 backdrop-blur-md text-white text-[10px] font-heading font-bold uppercase tracking-wider">
+                    Featured Insight
+                  </div>
                 </div>
-
               </div>
             </Link>
           </ScrollReveal>
         )}
 
-        {/* ── Remaining Posts (Staggered Grid) ── */}
-        {remainingPosts.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {remainingPosts.map((post, idx) => (
-              <ScrollReveal key={post.slug} data-reveal="up" delay={idx * 100}>
-                <Link to={`/blog/${post.slug}`} className="group block relative rounded-[2rem] overflow-hidden p-[1px] transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
-
-                  {/* Active Neon Border glow on hover */}
-                  <div
-                    className="absolute inset-0 opacity-20 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: `linear-gradient(135deg, ${post.color}80, transparent 65%, ${post.color}80)` }}
-                  />
-
-                  <div className="relative h-full bg-[#0E0E1C]/35 backdrop-blur-xl rounded-[31px] p-8 flex flex-col z-10 overflow-hidden">
-                    
-                    {/* Corner gradient light pool */}
-                    <div
-                      className="absolute -top-32 -right-32 w-72 h-72 rounded-full blur-[80px] opacity-0 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none"
-                      style={{ background: post.color }}
-                    />
-
-                    <div className="flex items-center gap-4 mb-6 relative z-10">
-                      <span
-                        className="font-body font-bold text-[9px] tracking-[0.2em] uppercase px-3 py-1 rounded-full border"
-                        style={{
-                          color: post.color,
-                          borderColor: `${post.color}35`,
-                          background: `${post.color}08`
-                        }}
-                      >
+        {/* ── Secondary Articles Grid ── */}
+        {secondaryPosts.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
+            {secondaryPosts.map((post, idx) => (
+              <ScrollReveal key={post.slug} data-reveal="up" delay={idx * 60}>
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="group block h-full bg-white rounded-3xl p-6 sm:p-7 border border-[#DEDED7] shadow-sm hover:shadow-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Media Thumbnail */}
+                    <div className="w-full h-44 rounded-2xl overflow-hidden bg-[#EAE8E1] mb-5 relative">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <span className="absolute top-3 left-3 font-heading font-bold text-[9px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-xs text-[#111111] border border-[#DEDED7]">
                         {post.category}
                       </span>
-                      <span className="font-body text-white/40 text-xs font-semibold">{post.readTime}</span>
                     </div>
 
-                    <div className="flex-1 relative z-10">
-                      <CardTitle title={post.title} color={post.color} size="sm" />
-                      <p className="font-body text-white/50 text-xs sm:text-sm leading-relaxed mb-8">
-                        {post.excerpt}
-                      </p>
+                    <div className="flex items-center gap-2 text-[11px] text-[#5F5F5A] font-body mb-2.5">
+                      <span>{post.readTime}</span>
+                      <span>•</span>
+                      <span>{post.date}</span>
                     </div>
 
-                    <div className="pt-6 relative z-10 border-t border-white/5 flex items-center justify-between mt-auto">
-                      <div className="flex flex-col">
-                        <span className="font-body text-white/70 text-[10px] font-bold uppercase tracking-widest leading-none">{post.author}</span>
-                        <span className="font-body text-white/40 text-[9px] uppercase tracking-widest mt-2">{post.date}</span>
-                      </div>
+                    <h3 className="font-heading font-black text-lg sm:text-xl text-[#111111] group-hover:text-[#E84A2A] transition-colors uppercase tracking-tight mb-2.5 leading-snug">
+                      {post.title}
+                    </h3>
 
-                      <div
-                        className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 border border-white/10 group-hover:border-white/30"
-                        style={{
-                          background: `${post.color}08`,
-                          color: post.color
-                        }}
-                      >
-                        <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </div>
-                    </div>
+                    <p className="font-body text-[#5F5F5A] text-xs sm:text-sm leading-relaxed mb-6 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+                  </div>
 
+                  <div className="pt-4 border-t border-[#DEDED7] flex items-center justify-between mt-auto">
+                    <span className="font-body text-[#111111] text-[11px] font-bold uppercase tracking-wider">
+                      {post.author}
+                    </span>
+
+                    <span className="w-8 h-8 rounded-full flex items-center justify-center bg-[#F7F6F2] border border-[#DEDED7] text-[#111111] group-hover:bg-[#111111] group-hover:text-white transition-colors duration-200">
+                      <svg className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </span>
                   </div>
                 </Link>
               </ScrollReveal>
@@ -241,26 +237,63 @@ export default function BlogPage() {
           </div>
         )}
 
+        {/* ── Empty State ── */}
         {filteredPosts.length === 0 && (
-          <div className="py-24 text-center">
-            <p className="font-body text-white/40 text-lg">No posts found in this category.</p>
+          <div className="py-20 text-center bg-white rounded-3xl border border-[#DEDED7] p-8">
+            <h3 className="font-heading font-bold text-lg text-[#111111] uppercase mb-2">
+              No matching playbooks found
+            </h3>
+            <p className="font-body text-xs sm:text-sm text-[#5F5F5A] max-w-md mx-auto mb-5">
+              Try adjusting your search query or reset the filter to view all strategic insights.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveCategory('All');
+                setSearchQuery('');
+              }}
+              className="px-6 py-2.5 rounded-full bg-[#111111] text-white font-heading font-bold text-xs uppercase tracking-wider hover:bg-[#E84A2A] transition-colors"
+            >
+              Reset Filters
+            </button>
           </div>
         )}
 
-      </div>
+        {/* ── Editorial Growth Strategy Callout Banner ── */}
+        <ScrollReveal data-reveal="up" className="mt-14 sm:mt-18">
+          <div className="rounded-3xl bg-[#111111] text-white p-8 sm:p-12 lg:p-14 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="max-w-xl text-center md:text-left z-10">
+              <span className="inline-block font-sans font-bold text-[10px] uppercase tracking-[0.16em] text-[#E84A2A] mb-2">
+                Commercial Audit
+              </span>
+              <h3 className="font-heading font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight leading-tight mb-3">
+                Want these frameworks deployed for your business?
+              </h3>
+              <p className="font-body text-xs sm:text-sm text-white/70 leading-relaxed">
+                Book a 1-on-1 strategy call with Juntoz. We'll audit your paid media, local search rankings, and conversion pipeline at zero cost.
+              </p>
+            </div>
 
-      <style>{`
-        @keyframes float-glow {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(5%, 5%) scale(1.1); }
-        }
-        @keyframes scan {
-          0% { top: 0%; opacity: 0; }
-          5% { opacity: 0.75; }
-          95% { opacity: 0.75; }
-          100% { top: 100%; opacity: 0; }
-        }
-      `}</style>
+            <div className="shrink-0 z-10">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-[#111111] bg-white hover:bg-[#E84A2A] hover:text-white transition-all duration-300 shadow-sm"
+              >
+                <span>Book Strategy Call</span>
+                <span>→</span>
+              </Link>
+            </div>
+
+            {/* Subtle background decoration */}
+            <div
+              className="absolute -right-10 -bottom-10 font-heading font-black text-white/[0.03] text-9xl select-none pointer-events-none uppercase"
+            >
+              JUNTOZ
+            </div>
+          </div>
+        </ScrollReveal>
+
+      </div>
     </div>
   );
 }

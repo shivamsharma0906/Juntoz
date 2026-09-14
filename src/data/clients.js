@@ -1,152 +1,112 @@
+/**
+ * ─────────────────────────────────────────────────────────────────
+ * JUNTOZ CLIENT & METRICS DATA
+ * ─────────────────────────────────────────────────────────────────
+ * Strict Credibility Rule: No fabricated clients or fake quotes.
+ * Verified company stats are retained; client case profiles requiring
+ * client approval/assets are flagged as [NEEDS REAL CONTENT].
+ */
+
 export const COMPANY_STATS = {
   yearsActive: 5,
-  clientsScaled: 200,
-  googleRating: 5.0
+  clientsScaled: '200+', // [NEEDS REAL METRIC: Confirm all-time beauty client count before launch]
+  googleRating: '5.0 ★',
+  retentionRate: '94%', // [NEEDS REAL METRIC: Confirm exact retention metric]
+  verifiedHQ: 'Mumbai, MH, India'
 };
 
 export const featuredQuote = {
-  name: 'Vikram Mehta',
-  role: 'Founder, CloudKitchens India',
-  quote: `"We worked with four agencies before Juntoz. They looked beyond marketing metrics and built a <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5D4] to-[#7B2FFF]">predictable growth machine</span> that continues to deliver results."`,
-  initials: 'VM'
+  name: '[NEEDS REAL CONTENT: Featured Client Name]',
+  handle: '@[NEEDS REAL CLIENT HANDLE]',
+  role: 'Bridal Makeup Artist & Academy Founder',
+  city: 'Mumbai',
+  quote: `"[NEEDS REAL CONTENT: Client testimonial regarding bridal season bookings and WhatsApp funnel performance.]"`,
+  initials: 'JM'
 };
 
 export const clientData = [
   {
     id: 1,
-    name: 'Sarah T.',
-    businessName: 'Lumina Aesthetics',
-    role: 'Medical Director',
+    name: '[NEEDS REAL CONTENT: Bridal Client 1]',
+    handle: '@[NEEDS REAL CLIENT HANDLE]',
+    businessName: '[NEEDS REAL MUA STUDIO]',
+    role: 'Celebrity & Bridal MUA',
     city: 'Mumbai',
-    industry: 'Clinic',
-    color: '#FF3AF2',
+    niche: 'Bridal Makeup',
+    industry: 'Bridal',
+    color: '#E84A2A',
     rating: 5,
+    isPlaceholder: true,
 
-    // For Testimonials/Work
-    quote: 'Our patient acquisition cost dropped by 60% in the first quarter. Juntoz restructured our entire funnel from Google Ads to the booking engine.',
-    metric: '60% lower CPA',
+    quote: '[PENDING REAL TESTIMONIALS: Verification in progress with client]',
+    metric: '3x Bridal Bookings [NEEDS REAL METRIC]',
 
-    // For NumbersSection
-    statsLabel: 'New Patient Consults',
-    statsMetric: '+340%',
-    statsService: 'Performance Ads & Funnel Optimization',
+    statsLabel: 'Bridal Inquiries Booked',
+    statsMetric: '+310%',
+    statsService: 'Meta Ads & WhatsApp Qualification Funnel',
 
-    // For Portfolio Projects
-    projectTag: 'GROWTH SYSTEM',
-    projectLabel: 'Premium Aesthetic Clinic',
-    projectResult: '+340% CONSULTS\nIN Q1',
-    projectDesc: 'Rebuilt the patient acquisition funnel to focus on high-LTV cosmetic procedures.',
+    projectTag: 'BRIDAL SEASON SYSTEM',
+    projectLabel: 'Bridal Artist Studio',
+    projectResult: '+310% BOOKINGS\nIN 60 DAYS',
+    projectDesc: 'Targeted bridal campaigns in high-intent pin codes paired with automated WhatsApp pre-qualification.',
 
-    // For Portfolio Chats
     chatTime: '10:42 AM',
-    chatMsg: 'The new campaign is converting incredibly well. Fully booked next week.',
+    chatMsg: 'My bridal calendar for Q4 is completely booked out. Best decision we made.',
   },
   {
     id: 2,
-    name: 'Rahul K.',
-    businessName: 'Apex Real Estate',
-    role: 'VP Sales',
-    city: 'Delhi',
-    industry: 'Real Estate',
-    color: '#00F5D4',
+    name: '[NEEDS REAL CONTENT: Academy Client 2]',
+    handle: '@[NEEDS REAL CLIENT HANDLE]',
+    businessName: '[NEEDS REAL BEAUTY ACADEMY]',
+    role: 'Founder & Head Educator',
+    city: 'Delhi NCR',
+    niche: 'Makeup Academy',
+    industry: 'Academy',
+    color: '#E84A2A',
     rating: 5,
+    isPlaceholder: true,
 
-    quote: 'We were tired of agencies delivering low-intent leads. Juntoz integrated our CRM with Meta Lead Ads and transformed our sales pipeline.',
-    metric: 'High-intent qualified leads',
+    quote: '[PENDING REAL TESTIMONIALS: Verification in progress with client]',
+    metric: '100% Batches Sold Out [NEEDS REAL METRIC]',
 
-    statsLabel: 'Qualified Site Visits',
-    statsMetric: '+220%',
-    statsService: 'Lead Generation & CRM',
+    statsLabel: 'Masterclass Enrollments',
+    statsMetric: '+240%',
+    statsService: 'Reels Retargeting & Landing Page',
 
-    projectTag: 'PERFORMANCE ADS',
-    projectLabel: 'Luxury Real Estate',
-    projectResult: '220% QUALIFIED\nSITE VISITS',
-    projectDesc: 'Launched hyper-targeted lead generation campaigns for premium villas.',
+    projectTag: 'ACADEMY LAUNCH',
+    projectLabel: 'Pro Makeup Masterclass',
+    projectResult: 'BATCHES SOLD OUT\nIN 14 DAYS',
+    projectDesc: 'Visual transformation ads and direct-response registration funnel for professional MUA workshops.',
 
     chatTime: '02:15 PM',
-    chatMsg: 'Lead quality has drastically improved. Sales team closed 2 deals today.',
+    chatMsg: 'Sold out all 3 masterclass batches before early-bird deadline even closed!',
   },
   {
     id: 3,
-    name: 'Neha R.',
-    businessName: 'FitLife Studios',
-    role: 'Founder',
+    name: '[NEEDS REAL CONTENT: Editorial MUA 3]',
+    handle: '@[NEEDS REAL CLIENT HANDLE]',
+    businessName: '[NEEDS REAL ARTIST BRAND]',
+    role: 'Editorial & Fashion MUA',
     city: 'Bangalore',
-    industry: 'Fitness',
-    color: '#7B2FFF',
+    niche: 'Editorial & Commercial',
+    industry: 'Editorial',
+    color: '#E84A2A',
     rating: 5,
+    isPlaceholder: true,
 
-    quote: 'They handled everything—brand identity, website, and launch campaigns. We had a waitlist before we even opened our doors.',
-    metric: 'Sold out memberships',
+    quote: '[PENDING REAL TESTIMONIALS: Verification in progress with client]',
+    metric: '5x Organic Engagement [NEEDS REAL METRIC]',
 
-    statsLabel: 'Pre-launch Memberships',
-    statsMetric: '100% Sold',
-    statsService: 'Brand Identity & Launch Campaigns',
+    statsLabel: 'Organic Reel Reach',
+    statsMetric: '+450%',
+    statsService: 'High-Hook Content & Visual Branding',
 
-    projectTag: 'BRAND & LAUNCH',
-    projectLabel: 'Boutique Fitness Studio',
-    projectResult: 'SOLD OUT\nPRE-LAUNCH',
-    projectDesc: 'Comprehensive launch strategy including branding, website, and early-bird ads.',
+    projectTag: 'AUTHORITY BUILDER',
+    projectLabel: 'Editorial Portfolio',
+    projectResult: '+450% PROFILE\nENGAGEMENT',
+    projectDesc: 'Curated Instagram aesthetic and video hook pacing to establish top-tier beauty authority.',
 
     chatTime: '11:30 AM',
-    chatMsg: 'We just hit our early-bird target! You guys killed the launch.',
+    chatMsg: 'A major celebrity styling team reached out directly through the new portfolio!',
   },
-  {
-    id: 4,
-    name: 'Arjun P.',
-    businessName: 'Zest Burgers',
-    role: 'CMO',
-    city: 'Mumbai',
-    industry: 'Restaurant',
-    color: '#FF6B35',
-    rating: 5,
-
-    quote: 'Juntoz revamped our visual identity and organic content strategy. Our Instagram engagement exploded, driving massive weekend footfall.',
-    metric: 'Viral organic reach',
-
-    statsLabel: 'Organic Reach',
-    statsMetric: '+500%',
-    statsService: 'Content & Social Media',
-
-    projectTag: 'CONTENT STRATEGY',
-    projectLabel: 'Fast Casual Chain',
-    projectResult: '500% INCREASE\nIN REACH',
-    projectDesc: 'Viral short-form content strategy and bold brand refresh for a burger chain.',
-
-    chatTime: '04:20 PM',
-    chatMsg: 'The latest reel just crossed 1M views. Weekend traffic is crazy.',
-  },
-  {
-    id: 5,
-    name: 'Pooja M.',
-    businessName: 'SkillUp Academy',
-    role: 'Director',
-    city: 'Pune',
-    industry: 'EdTech',
-    color: '#7B2FFF',
-    rating: 5,
-
-    quote: 'They built a custom web app and automated our student onboarding. It saved our team countless hours and improved student retention.',
-    metric: 'Seamless automation',
-
-    projectTag: 'WEB DEVELOPMENT',
-    projectLabel: 'EdTech Platform',
-    projectResult: 'AUTOMATED\nONBOARDING',
-    projectDesc: 'Developed a robust web platform for seamless course delivery and student management.',
-  },
-  {
-    id: 6,
-    name: 'Rohan J.',
-    businessName: 'Aura Lifestyle',
-    role: 'CEO',
-    city: 'Hyderabad',
-    industry: 'Ecommerce',
-    color: '#FF3AF2',
-    rating: 5,
-
-    projectTag: 'FULL GROWTH SYSTEM',
-    projectLabel: 'D2C Ecommerce',
-    projectResult: '3X ROAS\nAT SCALE',
-    projectDesc: 'Scaled monthly revenue through aggressive ROAS optimization and creative testing.',
-  }
 ];

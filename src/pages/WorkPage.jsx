@@ -1,77 +1,115 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { caseStudies } from '../data/caseStudies';
 import ScrollReveal from '../components/ScrollReveal';
 import PageMeta from '../components/PageMeta';
-import BalloonHeading from '../components/BalloonHeading';
+
+const CATEGORIES = ['All Projects', 'Paid Acquisition', 'Local Search & GMB', 'Brand & Creative', 'Beauty Verticals'];
 
 export default function WorkPage() {
+  const [selectedCategory, setSelectedCategory] = useState('All Projects');
+
+  const filteredStudies = selectedCategory === 'All Projects'
+    ? caseStudies
+    : caseStudies.filter((s) => {
+        if (selectedCategory === 'Paid Acquisition') return s.category === 'Meta Ads' || s.category === 'Google Ads' || s.category === 'Acquisition';
+        if (selectedCategory === 'Local Search & GMB') return s.category === 'GMB' || s.category === 'Local SEO' || s.category === 'Salon';
+        if (selectedCategory === 'Brand & Creative') return s.category === 'Branding' || s.category === 'Content' || s.category === 'CRO';
+        if (selectedCategory === 'Beauty Verticals') return s.category === 'Bridal' || s.category === 'Academy' || s.category === 'Editorial' || s.category === 'Salon';
+        return true;
+      });
+
   return (
-    <div className="pt-20 md:pt-36 pb-20 min-h-screen bg-background">
+    <div className="pt-28 md:pt-36 pb-24 min-h-screen bg-[#F7F6F2]">
       <PageMeta
-        title="Our Work — Beauty Brand Marketing Success Stories | Juntoz"
-        description="See the exact funnels, ad campaigns, and brand systems we deployed to turn beauty salons and makeup artists into booked-out brands."
+        title="Case Studies & Client Growth Blueprints — Juntoz Digital Marketing Agency"
+        description="See the exact funnels, ad campaigns, and brand systems we deployed to scale businesses across performance marketing, search, and specialized verticals."
         path="/work"
       />
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         
-        <ScrollReveal data-reveal="up" className="mb-6 md:mb-14 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-2">
-            <span className="w-2 h-2 rounded-full bg-[#00F5D4] animate-pulse" />
-            <span className="font-body font-semibold text-white/80 text-[10px] tracking-widest uppercase">Our Work</span>
+        <ScrollReveal data-reveal="up" className="mb-10 md:mb-16 text-center">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-4">
+            <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+            <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">Verified Agency Proof</span>
           </div>
-          <div className="flex justify-center my-3">
-            <BalloonHeading src="/results_balloon.png" alt="Results" className="h-20 sm:h-32 md:h-44 lg:h-52 mx-auto" />
-          </div>
-          <p className="font-body text-white/50 text-sm md:text-base max-w-xl leading-relaxed mx-auto">
-            Explore how we help companies scale predictably using our proven, data-driven growth systems.
+
+          <h1 className="font-heading font-black text-[#111111] text-4xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.96] mb-5">
+            Proven <span className="text-[#E84A2A]">Results.</span>
+          </h1>
+
+          <p className="font-body text-[#5F5F5A] text-base md:text-xl max-w-2xl leading-relaxed mx-auto mb-6">
+            Explore how we help ambitious businesses, local clinics, and specialized brands scale revenue using full-funnel digital growth architectures.
           </p>
+
+          {/* Editorial Proof Bar */}
+          <div className="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 px-6 py-3 rounded-2xl bg-white border border-[#DEDED7] shadow-subtle mb-4">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#287A55] animate-pulse" />
+              <span className="font-body text-[11px] uppercase tracking-wider font-bold text-[#5F5F5A]">Verified Client Impact</span>
+            </div>
+            <span className="hidden sm:inline text-[#DEDED7]">•</span>
+            <span className="font-heading font-black text-xs uppercase tracking-wider text-[#111111]">3.1× Avg. Inquiries Growth</span>
+            <span className="hidden sm:inline text-[#DEDED7]">•</span>
+            <span className="font-heading font-black text-xs uppercase tracking-wider text-[#111111]">5.0 ★ Google Rating</span>
+          </div>
+
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 mt-8">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-5 py-2 rounded-full font-heading font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                  selectedCategory === cat
+                    ? 'bg-[#111111] text-white shadow-sm'
+                    : 'bg-white text-[#5F5F5A] hover:text-[#111111] hover:border-[#111111] border border-[#DEDED7]'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          {caseStudies.map((study, idx) => (
-            <ScrollReveal key={study.slug} data-reveal="up" delay={idx * 100}>
-              <Link to={`/work/${study.slug}`} className="group block relative rounded-[2rem] overflow-hidden p-[1px] transition-transform duration-500 hover:-translate-y-2">
-                
-                {/* animated border */}
-                <div className="absolute inset-0 bg-gradient-to-br opacity-40 group-hover:opacity-100 transition-opacity duration-500 animate-[gradient-shift_4s_ease-in-out_infinite]"
-                  style={{ background: `linear-gradient(135deg, ${study.color}60, transparent, ${study.color}60)` }} />
-                
-                <div className="relative h-full bg-[#0A0A0F]/95 backdrop-blur-2xl rounded-[31px] p-6 sm:p-8 flex flex-col z-10 overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 mt-10">
+          {filteredStudies.map((study, idx) => (
+            <ScrollReveal key={study.slug} data-reveal="up" delay={idx * 60}>
+              <Link to={`/work/${study.slug}`} className="group block h-full">
+                <div className="h-full bg-white rounded-3xl p-8 sm:p-10 flex flex-col justify-between border border-[#DEDED7] shadow-card hover:shadow-hover hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden">
                   
-                  {/* bg glow */}
-                  <div className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full blur-[80px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
-                    style={{ background: study.color }} />
+                  <div>
+                    {/* Top tags */}
+                    <div className="flex items-center justify-between mb-6">
+                      <span className="font-body font-bold text-[11px] tracking-wider uppercase px-3.5 py-1 rounded-full bg-[#FBE9E4] text-[#E84A2A] border border-[#E84A2A]/20">
+                        {study.specialty || study.category}
+                      </span>
+                      <span className="font-body text-xs font-semibold text-[#5F5F5A]">
+                        {study.timeline}
+                      </span>
+                    </div>
 
-                  {/* Top tags */}
-                  <div className="flex items-start justify-between mb-8 relative z-10">
-                    <span className="font-body font-bold text-[10px] tracking-[0.2em] uppercase px-4 py-1.5 rounded-full"
-                      style={{ background: `${study.color}15`, border: `1px solid ${study.color}40`, color: study.color }}>
-                      {study.industry}
-                    </span>
-                  </div>
-
-                  {/* Main Metric */}
-                  <div className="flex-1 flex flex-col justify-center mb-8 relative z-10">
-                    <p className="font-body text-white/40 text-xs uppercase tracking-widest mb-2 font-bold">{study.metricLabel}</p>
-                    <div className="font-heading font-black uppercase leading-[1.05] tracking-tight transition-transform duration-500 origin-left"
-                      style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: study.color, textShadow: `0 0 30px ${study.color}40` }}>
-                      {study.metric}
+                    {/* Main Metric */}
+                    <div className="mb-6">
+                      <p className="font-body text-[#5F5F5A] text-xs uppercase tracking-wider font-bold mb-1">{study.metricLabel}</p>
+                      <div className="font-heading font-black uppercase text-[#E84A2A] tracking-tight text-3xl sm:text-4xl md:text-5xl">
+                        {study.metric}
+                      </div>
                     </div>
                   </div>
 
                   {/* Client & Description */}
-                  <div className="pt-6 relative z-10 border-t border-white/10">
-                    <h3 className="font-heading font-black text-white text-xl uppercase tracking-tight mb-2">
+                  <div className="pt-6 border-t border-[#DEDED7]">
+                    <h3 className="font-heading font-black text-[#111111] text-2xl uppercase tracking-tight mb-2">
                       {study.clientName}
                     </h3>
-                    <p className="font-body text-white/50 text-sm leading-relaxed line-clamp-2">
+                    <p className="font-body text-[#5F5F5A] text-sm leading-relaxed line-clamp-2 mb-6">
                       {study.problem}
                     </p>
                     
-                    <div className="mt-6 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest transition-colors duration-300"
-                      style={{ color: study.color }}>
-                      Read Case Study
-                      <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#111111] group-hover:text-[#E84A2A] transition-colors duration-200">
+                      <span>Read Case Study</span>
+                      <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </div>
@@ -83,13 +121,6 @@ export default function WorkPage() {
         </div>
 
       </div>
-      
-      <style>{`
-        @keyframes gradient-shift {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-      `}</style>
     </div>
   );
 }
