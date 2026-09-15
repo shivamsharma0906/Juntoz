@@ -65,7 +65,7 @@ function App() {
           <ErrorBoundary message="A section of the page failed to load due to a recent update. Please reload the page to get the latest version.">
             <Suspense fallback={
               <div className="h-screen w-full flex items-center justify-center bg-[#F7F6F2]">
-                <div className="w-8 h-8 border-2 border-[#111111] border-t-[#E84A2A] rounded-full animate-spin"></div>
+                <div className="w-8 h-8 border-2 border-[#111111] border-t-[#5D2E85] rounded-full animate-spin"></div>
               </div>
             }>
               <Routes>

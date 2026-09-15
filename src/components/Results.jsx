@@ -16,9 +16,9 @@ function StatCard({ s, started }) {
   const display = s.decimal ? value.toFixed(1) : value;
 
   return (
-    <div className="group rounded-3xl bg-[#1A1A1A] border border-white/10 p-8 flex flex-col items-center text-center gap-4 transition-all duration-300 hover:border-[#E84A2A]/40 hover:-translate-y-1 shadow-card h-full">
+    <div className="group rounded-3xl bg-[#1A1A1A] border border-white/10 p-8 flex flex-col items-center text-center gap-4 transition-all duration-300 hover:border-[#5D2E85]/40 hover:-translate-y-1 shadow-card h-full">
       {/* Icon */}
-      <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#E84A2A] transition-colors duration-300 group-hover:bg-[#E84A2A] group-hover:text-white">
+      <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#5D2E85] transition-colors duration-300 group-hover:bg-[#5D2E85] group-hover:text-white">
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d={s.icon} />
         </svg>
@@ -26,11 +26,11 @@ function StatCard({ s, started }) {
 
       <div className="font-heading font-black text-4xl sm:text-5xl text-white tracking-tight leading-none mt-1">
         <span>{display}</span>
-        <span className="text-[#E84A2A]">{s.suffix}</span>
+        <span className="text-[#5D2E85]">{s.suffix}</span>
       </div>
       
       {/* Divider line */}
-      <div className="w-12 h-px bg-white/12 transition-all duration-300 group-hover:w-20 group-hover:bg-[#E84A2A]" />
+      <div className="w-12 h-px bg-white/12 transition-all duration-300 group-hover:w-20 group-hover:bg-[#5D2E85]" />
       
       {/* Label */}
       <p className="font-body text-white/65 text-xs font-bold uppercase tracking-wider leading-relaxed">
@@ -60,12 +60,12 @@ export default function Results() {
         {/* Header */}
         <ScrollReveal data-reveal="up" className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
             <span className="font-body font-bold text-white/80 text-[11px] tracking-wider uppercase">By The Numbers</span>
           </div>
           
           <h2 className="font-heading font-black text-white text-3xl sm:text-5xl md:text-6xl uppercase leading-tight tracking-tight mb-4">
-            Proof That Our <span className="text-[#E84A2A]">System Works</span>
+            Proof That Our <span className="text-[#5D2E85]">System Works</span>
           </h2>
           
           <p className="font-body text-white/65 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
@@ -88,7 +88,7 @@ export default function Results() {
             href={GOOGLE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-9 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-wider text-white bg-[#E84A2A] hover:bg-[#C93B20] transition-colors duration-200 shadow-lg active:scale-[0.98]"
+            className="inline-flex items-center gap-3 px-9 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-wider text-white bg-[#5D2E85] hover:bg-[#4C266D] transition-colors duration-200 shadow-lg active:scale-[0.98]"
           >
             <span>Read Verified Google Reviews</span>
             <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

@@ -103,7 +103,7 @@ export default function ServicesPage() {
       {/* Hero Header */}
       <section className="relative px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center mb-16 sm:mb-24">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-6">
-          <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+          <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
           <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
             Full-Service Digital Agency
           </span>
@@ -111,7 +111,7 @@ export default function ServicesPage() {
 
         <h1 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl md:text-7xl uppercase tracking-tight leading-[1.05] mb-6">
           Strategic Capabilities To <br />
-          <span className="text-[#E84A2A]">
+          <span className="text-[#5D2E85]">
             Scale Your Business.
           </span>
         </h1>
@@ -123,10 +123,10 @@ export default function ServicesPage() {
         {/* Dedicated Specialty Banner */}
         <div className="mt-8 inline-block p-5 sm:p-6 rounded-3xl bg-white border border-[#DEDED7] shadow-card text-left max-w-2xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#E84A2A]">
+            <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#5D2E85]">
               Specialist Industry Verticals
             </span>
-            <span className="text-[10px] font-sans font-bold px-2 py-0.5 rounded bg-[#FBE9E4] text-[#E84A2A]">
+            <span className="text-[10px] font-sans font-bold px-2 py-0.5 rounded bg-[#F1E7F9] text-[#5D2E85]">
               Dedicated Playbooks
             </span>
           </div>
@@ -136,13 +136,13 @@ export default function ServicesPage() {
           <div className="flex flex-wrap gap-3">
             <Link
               to="/for-makeup-artists"
-              className="text-xs font-heading font-bold text-[#111111] hover:text-[#E84A2A] underline underline-offset-4"
+              className="text-xs font-heading font-bold text-[#111111] hover:text-[#5D2E85] underline underline-offset-4"
             >
               For Makeup Artists &amp; Academies →
             </Link>
             <Link
               to="/for-salons"
-              className="text-xs font-heading font-bold text-[#111111] hover:text-[#E84A2A] underline underline-offset-4"
+              className="text-xs font-heading font-bold text-[#111111] hover:text-[#5D2E85] underline underline-offset-4"
             >
               For Salons &amp; Clinic Chains →
             </Link>
@@ -164,7 +164,7 @@ export default function ServicesPage() {
                   {/* Left Column: Details */}
                   <div className="flex-1 space-y-5">
                     <div className="flex items-center gap-3">
-                      <span className="px-3.5 py-1 rounded-full bg-[#FBE9E4] border border-[#E84A2A]/20 font-heading font-black text-xs text-[#E84A2A]">
+                      <span className="px-3.5 py-1 rounded-full bg-[#F1E7F9] border border-[#5D2E85]/20 font-heading font-black text-xs text-[#5D2E85]">
                         PILLAR {service.number}
                       </span>
                       <span className="font-body text-xs text-[#5F5F5A] uppercase tracking-wider font-semibold">
@@ -176,7 +176,7 @@ export default function ServicesPage() {
                       <h2 className="font-heading font-black text-2xl sm:text-3xl lg:text-4xl text-[#111111] uppercase tracking-tight mb-2">
                         {service.title}
                       </h2>
-                      <p className="font-heading font-bold text-sm sm:text-base text-[#E84A2A]">
+                      <p className="font-heading font-bold text-sm sm:text-base text-[#5D2E85]">
                         {service.tagline}
                       </p>
                     </div>
@@ -236,7 +236,7 @@ export default function ServicesPage() {
                       href={`https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20am%20interested%20in%20learning%20more%20about%20your%20${encodeURIComponent(service.title)}%20services.`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-3.5 px-4 rounded-xl font-heading font-bold text-xs uppercase tracking-widest text-center text-white bg-[#111111] hover:bg-[#E84A2A] transition-colors duration-200 block shadow-sm"
+                      className="w-full py-3.5 px-4 rounded-xl font-heading font-bold text-xs uppercase tracking-widest text-center text-white bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200 block shadow-sm"
                     >
                       Inquire About {service.category}
                     </a>
@@ -267,7 +267,7 @@ export default function ServicesPage() {
           <div className="pt-4">
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-white bg-[#E84A2A] hover:bg-[#C93B20] transition-colors duration-200 shadow-sm"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-white bg-[#5D2E85] hover:bg-[#4C266D] transition-colors duration-200 shadow-sm"
             >
               <span>Schedule Free Strategy Call</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

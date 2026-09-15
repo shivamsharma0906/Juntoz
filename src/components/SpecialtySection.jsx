@@ -9,12 +9,12 @@ export default function SpecialtySection() {
         {/* Section Header */}
         <ScrollReveal data-reveal="up" className="max-w-3xl mb-16 text-left">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white text-[#5F5F5A] text-xs font-semibold uppercase tracking-wider mb-4 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
             <span>Dedicated Vertical Expertise</span>
           </div>
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-5">
             Our Specialty:{' '}
-            <span className="text-[#E84A2A]">Makeup Artists &amp; Salons.</span>
+            <span className="text-[#5D2E85]">Makeup Artists &amp; Salons.</span>
           </h2>
           <p className="font-body text-[#5F5F5A] text-base md:text-lg leading-relaxed">
             We work with businesses across multiple industries — and we have developed particular, deep expertise in the beauty and personal care sector. We understand the exact dynamics of visual portfolio proof, high-hook transformation reels, local Google discovery, and WhatsApp booking speed.
@@ -29,7 +29,7 @@ export default function SpecialtySection() {
             <div className="h-full p-8 sm:p-10 rounded-3xl bg-white border border-[#DEDED7] shadow-card flex flex-col justify-between hover:border-[#111111]/30 transition-all duration-300">
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <span className="font-sans font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-[#FBE9E4] text-[#E84A2A] border border-[#E84A2A]/20">
+                  <span className="font-sans font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-[#F1E7F9] text-[#5D2E85] border border-[#5D2E85]/20">
                     Specialist Vertical 01
                   </span>
                   <span className="text-2xl">💄</span>
@@ -50,7 +50,7 @@ export default function SpecialtySection() {
                     'Luxury Portfolio & Rate Card Repositioning'
                   ].map((feat) => (
                     <div key={feat} className="flex items-center gap-2.5 text-xs font-body text-[#111111]">
-                      <span className="text-[#E84A2A] font-bold">✓</span>
+                      <span className="text-[#5D2E85] font-bold">✓</span>
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -59,7 +59,7 @@ export default function SpecialtySection() {
 
               <Link
                 to="/for-makeup-artists"
-                className="inline-flex items-center justify-between w-full px-6 py-4 rounded-2xl bg-[#111111] text-white hover:bg-[#E84A2A] font-heading font-bold text-xs uppercase tracking-widest transition-colors duration-200 shadow-sm"
+                className="inline-flex items-center justify-between w-full px-6 py-4 rounded-2xl bg-[#111111] text-white hover:bg-[#5D2E85] font-heading font-bold text-xs uppercase tracking-widest transition-colors duration-200 shadow-sm"
               >
                 <span>Explore Makeup Artist Marketing</span>
                 <span className="text-base">→</span>
@@ -72,7 +72,7 @@ export default function SpecialtySection() {
             <div className="h-full p-8 sm:p-10 rounded-3xl bg-white border border-[#DEDED7] shadow-card flex flex-col justify-between hover:border-[#111111]/30 transition-all duration-300">
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <span className="font-sans font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-[#FBE9E4] text-[#E84A2A] border border-[#E84A2A]/20">
+                  <span className="font-sans font-bold text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-[#F1E7F9] text-[#5D2E85] border border-[#5D2E85]/20">
                     Specialist Vertical 02
                   </span>
                   <span className="text-2xl">✂️</span>
@@ -93,7 +93,7 @@ export default function SpecialtySection() {
                     'Geotargeted Instagram Pin-Code Outreach'
                   ].map((feat) => (
                     <div key={feat} className="flex items-center gap-2.5 text-xs font-body text-[#111111]">
-                      <span className="text-[#E84A2A] font-bold">✓</span>
+                      <span className="text-[#5D2E85] font-bold">✓</span>
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -102,7 +102,7 @@ export default function SpecialtySection() {
 
               <Link
                 to="/for-salons"
-                className="inline-flex items-center justify-between w-full px-6 py-4 rounded-2xl bg-[#111111] text-white hover:bg-[#E84A2A] font-heading font-bold text-xs uppercase tracking-widest transition-colors duration-200 shadow-sm"
+                className="inline-flex items-center justify-between w-full px-6 py-4 rounded-2xl bg-[#111111] text-white hover:bg-[#5D2E85] font-heading font-bold text-xs uppercase tracking-widest transition-colors duration-200 shadow-sm"
               >
                 <span>Explore Salon Marketing</span>
                 <span className="text-base">→</span>

@@ -19,12 +19,12 @@ export default function HowWeGrowBusinesses() {
         {/* Section Header */}
         <ScrollReveal data-reveal="up" className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white text-[#5F5F5A] text-xs font-semibold uppercase tracking-wider mb-4 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
             <span>The Growth Architecture</span>
           </div>
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-5">
             We Don’t Provide Isolated Tasks.{' '}
-            <span className="text-[#E84A2A]">We Build Growth Systems.</span>
+            <span className="text-[#5D2E85]">We Build Growth Systems.</span>
           </h2>
           <p className="font-body text-[#5F5F5A] text-base md:text-lg leading-relaxed">
             Running ads without a landing page burns money. Posting content without conversion pathways produces vanity likes. Here is how Juntoz connects every digital touchpoint into a unified customer engine.
@@ -38,7 +38,7 @@ export default function HowWeGrowBusinesses() {
               <div className="relative p-6 rounded-3xl bg-white border border-[#DEDED7] shadow-subtle hover:border-[#111111]/40 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="font-heading font-black text-xs text-[#E84A2A] bg-[#FBE9E4] px-2.5 py-1 rounded-full border border-[#E84A2A]/20">
+                    <span className="font-heading font-black text-xs text-[#5D2E85] bg-[#F1E7F9] px-2.5 py-1 rounded-full border border-[#5D2E85]/20">
                       PHASE {s.step}
                     </span>
                     {idx < GROWTH_STAGES.length - 1 && (
@@ -61,7 +61,7 @@ export default function HowWeGrowBusinesses() {
         <ScrollReveal data-reveal="up" delay={200}>
           <div className="p-7 sm:p-9 rounded-3xl bg-white border border-[#DEDED7] shadow-card flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="space-y-2 text-left">
-              <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#E84A2A]">The Integrated Difference</span>
+              <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#5D2E85]">The Integrated Difference</span>
               <h4 className="font-heading font-black text-xl text-[#111111] uppercase tracking-tight">
                 Every marketing dollar should be accountable to revenue.
               </h4>
@@ -73,7 +73,7 @@ export default function HowWeGrowBusinesses() {
               href="https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20would%20like%20to%20audit%20our%20growth%20system."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-white bg-[#111111] hover:bg-[#E84A2A] transition-all duration-300 shadow-sm shrink-0 w-full md:w-auto"
+              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-white bg-[#111111] hover:bg-[#5D2E85] transition-all duration-300 shadow-sm shrink-0 w-full md:w-auto"
             >
               <span>Audit Your Growth System</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

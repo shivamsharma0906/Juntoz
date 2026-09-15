@@ -70,7 +70,7 @@ export default function GoogleBusinessProfilePage() {
         <div className="max-w-3xl mx-auto text-center">
           <ScrollReveal data-reveal="up">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-5">
-              <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+              <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
               <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
                 Local Search &amp; Google 3-Pack Authority
               </span>
@@ -80,7 +80,7 @@ export default function GoogleBusinessProfilePage() {
           <ScrollReveal data-reveal="up" delay={100}>
             <h1 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-[#111111] leading-[1.04] mb-6">
               Your Customers Are Already Searching. <br />
-              <span className="text-[#E84A2A]">The Question Is Whether They Find You.</span>
+              <span className="text-[#5D2E85]">The Question Is Whether They Find You.</span>
             </h1>
           </ScrollReveal>
 
@@ -95,7 +95,7 @@ export default function GoogleBusinessProfilePage() {
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-wider text-white bg-[#111111] hover:bg-[#E84A2A] transition-colors duration-200 shadow-md"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-wider text-white bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200 shadow-md"
             >
               <span>Claim Free GMB Audit on WhatsApp</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -124,19 +124,19 @@ export default function GoogleBusinessProfilePage() {
                   Query: "Best [Service] in [Your Neighborhood]"
                 </h3>
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FBE9E4] text-[#E84A2A] font-heading font-black text-xs">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F1E7F9] text-[#5D2E85] font-heading font-black text-xs">
                 <span>Top 3-Pack Captures 68% of Calls</span>
               </div>
             </div>
 
             {/* Simulated Rank Item #1 (Client Profile) */}
-            <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-[#F7F6F2] border-2 border-[#E84A2A]/40 relative">
+            <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-[#F7F6F2] border-2 border-[#5D2E85]/40 relative">
               <div className="flex flex-wrap items-center justify-between gap-2.5 mb-2 sm:mb-0">
                 <div className="flex items-center gap-2">
                   <span className="font-heading font-black text-lg text-[#111111]">Your Brand Name</span>
                   <span className="text-[#287A55] text-xs font-bold">✓ Verified</span>
                 </div>
-                <div className="px-2.5 py-1 rounded-md bg-[#E84A2A] text-white font-heading font-black text-[10px] uppercase tracking-widest shrink-0 sm:absolute sm:top-5 sm:right-6">
+                <div className="px-2.5 py-1 rounded-md bg-[#5D2E85] text-white font-heading font-black text-[10px] uppercase tracking-widest shrink-0 sm:absolute sm:top-5 sm:right-6">
                   Rank #1 • Fully Optimized
                 </div>
               </div>
@@ -184,7 +184,7 @@ export default function GoogleBusinessProfilePage() {
             <ScrollReveal key={i} data-reveal="up" delay={i * 80}>
               <div className="bg-white rounded-3xl p-8 border border-[#DEDED7] shadow-card text-center sm:text-left h-full flex flex-col justify-between">
                 <div>
-                  <div className="font-heading font-black text-4xl sm:text-5xl text-[#E84A2A] mb-2">{s.value}</div>
+                  <div className="font-heading font-black text-4xl sm:text-5xl text-[#5D2E85] mb-2">{s.value}</div>
                   <div className="font-heading font-bold text-[#111111] text-base mb-2">{s.label}</div>
                   <p className="font-body text-xs sm:text-sm text-[#5F5F5A] leading-relaxed">{s.desc}</p>
                 </div>
@@ -197,11 +197,11 @@ export default function GoogleBusinessProfilePage() {
       {/* ── 4-STEP FRAMEWORK ── */}
       <section className="container mx-auto px-4 sm:px-6 max-w-7xl mb-24">
         <ScrollReveal data-reveal="up" className="text-center max-w-2xl mx-auto mb-16">
-          <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#E84A2A] mb-2 block">
+          <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#5D2E85] mb-2 block">
             The Juntoz Playbook
           </span>
           <h2 className="font-heading font-black text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-[#111111]">
-            How We Optimize Your <span className="text-[#E84A2A]">Local Presence.</span>
+            How We Optimize Your <span className="text-[#5D2E85]">Local Presence.</span>
           </h2>
           <p className="font-body text-[#5F5F5A] text-sm sm:text-base mt-4 leading-relaxed">
             No black-hat tricks. No fake review farms. We build permanent organic local ranking authority through meticulous profile engineering and active management.
@@ -213,7 +213,7 @@ export default function GoogleBusinessProfilePage() {
             <ScrollReveal key={i} data-reveal="up" delay={i * 80}>
               <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#DEDED7] shadow-card h-full flex flex-col justify-between">
                 <div>
-                  <div className="font-heading font-black text-2xl text-[#E84A2A] mb-3">{p.step}</div>
+                  <div className="font-heading font-black text-2xl text-[#5D2E85] mb-3">{p.step}</div>
                   <h3 className="font-heading font-black text-xl text-[#111111] mb-3">{p.title}</h3>
                   <p className="font-body text-sm text-[#5F5F5A] leading-relaxed mb-6">{p.desc}</p>
                 </div>
@@ -224,7 +224,7 @@ export default function GoogleBusinessProfilePage() {
                   <ul className="space-y-2">
                     {p.deliverables.map((d, di) => (
                       <li key={di} className="flex items-center gap-2 text-xs text-[#5F5F5A] font-body">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#E84A2A]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
                         <span>{d}</span>
                       </li>
                     ))}
@@ -241,7 +241,7 @@ export default function GoogleBusinessProfilePage() {
         <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#DEDED7] shadow-card">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 border-b border-[#DEDED7]">
             <div>
-              <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#E84A2A]">
+              <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#5D2E85]">
                 Self-Assessment Tool
               </span>
               <h2 className="font-heading font-black text-2xl sm:text-3xl uppercase tracking-tight text-[#111111] mt-1">
@@ -250,7 +250,7 @@ export default function GoogleBusinessProfilePage() {
             </div>
             <div className="text-left sm:text-right shrink-0">
               <span className="font-body text-xs font-bold text-[#5F5F5A] block uppercase">Health Score</span>
-              <span className="font-heading font-black text-3xl text-[#E84A2A]">{healthScore}%</span>
+              <span className="font-heading font-black text-3xl text-[#5D2E85]">{healthScore}%</span>
             </div>
           </div>
 
@@ -264,7 +264,7 @@ export default function GoogleBusinessProfilePage() {
                   type="checkbox"
                   checked={!!checkedItems[item.id]}
                   onChange={() => toggleCheck(item.id)}
-                  className="mt-1 w-5 h-5 rounded border-[#DEDED7] text-[#E84A2A] focus:ring-[#E84A2A] cursor-pointer"
+                  className="mt-1 w-5 h-5 rounded border-[#DEDED7] text-[#5D2E85] focus:ring-[#5D2E85] cursor-pointer"
                 />
                 <span className="font-body text-sm text-[#111111] leading-relaxed select-none">
                   {item.text}
@@ -283,7 +283,7 @@ export default function GoogleBusinessProfilePage() {
               href={`https://wa.me/919004001800?text=Hi%20Sujal!%20My%20GMB%20Health%20Score%20is%20${healthScore}%25.%20I%27d%20like%20a%20detailed%20audit.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#111111] hover:bg-[#E84A2A] text-white font-heading font-bold text-xs uppercase tracking-wider transition-colors text-center"
+              className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#111111] hover:bg-[#5D2E85] text-white font-heading font-bold text-xs uppercase tracking-wider transition-colors text-center"
             >
               Get Detailed Audit Report
             </a>
@@ -295,12 +295,12 @@ export default function GoogleBusinessProfilePage() {
       <section className="container mx-auto px-4 sm:px-6 max-w-7xl">
         <div className="rounded-3xl bg-[#111111] text-white p-8 sm:p-14 text-center relative overflow-hidden">
           <div className="max-w-2xl mx-auto relative z-10">
-            <span className="inline-block px-3.5 py-1.5 rounded-full bg-white/10 text-[#E84A2A] font-heading font-black text-xs uppercase tracking-wider mb-4">
+            <span className="inline-block px-3.5 py-1.5 rounded-full bg-white/10 text-[#5D2E85] font-heading font-black text-xs uppercase tracking-wider mb-4">
               Stop Giving Away Local Customers
             </span>
             <h2 className="font-heading font-black text-3xl sm:text-5xl uppercase tracking-tight mb-6">
               Let's Put Your Business in the <br />
-              <span className="text-[#E84A2A]">Google 3-Pack.</span>
+              <span className="text-[#5D2E85]">Google 3-Pack.</span>
             </h2>
             <p className="font-body text-white/70 text-sm sm:text-base leading-relaxed mb-8">
               Send us your business name and address. We will run an audit of your current local search ranking against nearby competitors.
@@ -309,7 +309,7 @@ export default function GoogleBusinessProfilePage() {
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#E84A2A] hover:bg-[#C93B20] text-white font-heading font-bold text-xs uppercase tracking-wider transition-colors shadow-md"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#5D2E85] hover:bg-[#4C266D] text-white font-heading font-bold text-xs uppercase tracking-wider transition-colors shadow-md"
             >
               <span>Get Your Google Business Profile Audited</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

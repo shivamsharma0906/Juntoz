@@ -64,7 +64,7 @@ function FAQItem({ item, index, isOpen, onToggle }) {
         <span
           className="shrink-0 mt-0.5"
           style={{
-            color: isOpen ? '#E84A2A' : '#5F5F5A',
+            color: isOpen ? '#5D2E85' : '#5F5F5A',
             transition: 'color 0.3s ease',
           }}
         >
@@ -89,7 +89,7 @@ function FAQItem({ item, index, isOpen, onToggle }) {
             transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
           }}
         >
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke={isOpen ? '#E84A2A' : '#111111'} strokeWidth="1.8" strokeLinecap="round">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke={isOpen ? '#5D2E85' : '#111111'} strokeWidth="1.8" strokeLinecap="round">
             <line x1="6" y1="1" x2="6" y2="11" />
             <line x1="1" y1="6" x2="11" y2="6" />
           </svg>
@@ -159,7 +159,7 @@ export default function FAQSection() {
             transition: 'opacity 0.75s ease 0.05s, transform 0.75s cubic-bezier(0.22,1,0.36,1) 0.05s',
           }}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[#FBE9E4] border border-[#E84A2A]/20 font-sans font-semibold text-xs uppercase tracking-wider text-[#E84A2A] mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#F1E7F9] border border-[#5D2E85]/20 font-sans font-semibold text-xs uppercase tracking-wider text-[#5D2E85] mb-4">
             Common Questions
           </span>
           <h2
@@ -167,7 +167,7 @@ export default function FAQSection() {
             style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}
           >
             Frequently Asked{' '}
-            <span className="text-[#E84A2A]">Questions</span>
+            <span className="text-[#5D2E85]">Questions</span>
           </h2>
         </div>
 

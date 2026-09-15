@@ -38,12 +38,12 @@ export default function WhyMarketingBreaks() {
         
         {/* Section Header */}
         <ScrollReveal data-reveal="up" className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[#FBE9E4] border border-[#E84A2A]/20 font-sans font-semibold text-xs uppercase tracking-wider text-[#E84A2A] mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#F1E7F9] border border-[#5D2E85]/20 font-sans font-semibold text-xs uppercase tracking-wider text-[#5D2E85] mb-4">
             The Strategic Problem
           </span>
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-6">
             Why Most Digital Marketing <br className="hidden sm:inline" />
-            <span className="text-[#E84A2A]">
+            <span className="text-[#5D2E85]">
               Breaks Down.
             </span>
           </h2>
@@ -61,7 +61,7 @@ export default function WhyMarketingBreaks() {
                   <div>
                     {/* Top row: Number and Icon */}
                     <div className="flex items-center justify-between mb-6">
-                      <span className="font-sans font-bold text-sm tracking-wider text-[#E84A2A]">
+                      <span className="font-sans font-bold text-sm tracking-wider text-[#5D2E85]">
                         {item.num}
                       </span>
                       <span className="text-xl p-2.5 rounded-xl bg-white border border-[#DEDED7] shadow-xs">
@@ -75,7 +75,7 @@ export default function WhyMarketingBreaks() {
 
                     {/* Problem / Reality */}
                     <div className="mb-5 p-4 rounded-xl bg-white border border-[#DEDED7]">
-                      <p className="font-sans font-bold text-[11px] uppercase tracking-wider text-[#E84A2A] mb-1">
+                      <p className="font-sans font-bold text-[11px] uppercase tracking-wider text-[#5D2E85] mb-1">
                         The Pain:
                       </p>
                       <p className="font-body text-[#5F5F5A] text-sm leading-relaxed">

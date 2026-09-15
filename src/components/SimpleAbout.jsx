@@ -30,7 +30,7 @@ export default function SimpleAbout() {
           {/* Right Column: Premium Copy */}
           <div className="lg:col-span-6 space-y-6 text-left lg:pl-4">
             <ScrollReveal data-reveal="up">
-              <span className="font-sans font-bold tracking-[0.16em] text-[#E84A2A] uppercase text-xs block">
+              <span className="font-sans font-bold tracking-[0.16em] text-[#5D2E85] uppercase text-xs block">
                 Who We Are
               </span>
             </ScrollReveal>
@@ -38,7 +38,7 @@ export default function SimpleAbout() {
             <ScrollReveal data-reveal="up" delay={100}>
               <h2 className="font-heading font-black text-3xl sm:text-5xl uppercase tracking-tight leading-tight text-[#111111]">
                 We Build Predictable <br />
-                <span className="text-[#E84A2A]">Growth Systems.</span>
+                <span className="text-[#5D2E85]">Growth Systems.</span>
               </h2>
             </ScrollReveal>
 

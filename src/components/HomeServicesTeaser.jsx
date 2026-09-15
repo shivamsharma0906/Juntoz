@@ -37,7 +37,7 @@ export default function HomeServicesTeaser() {
         <div className="max-w-3xl mb-14 md:mb-18">
           <ScrollReveal data-reveal="up">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-[#F7F6F2] shadow-subtle mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+              <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
               <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
                 Core Capabilities
               </span>
@@ -47,7 +47,7 @@ export default function HomeServicesTeaser() {
           <ScrollReveal data-reveal="up" delay={80}>
             <h2 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-[#111111] leading-[1.04] mb-4">
               Some Brands Need Marketing. <br />
-              <span className="text-[#E84A2A]">Some Need A Growth System.</span>
+              <span className="text-[#5D2E85]">Some Need A Growth System.</span>
             </h2>
           </ScrollReveal>
 
@@ -67,7 +67,7 @@ export default function HomeServicesTeaser() {
                 className="group block h-full p-7 rounded-3xl bg-[#F7F6F2] border border-[#DEDED7] hover:border-[#111111] hover:bg-white transition-all duration-300 shadow-subtle hover:shadow-card hover:-translate-y-1"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <span className="font-heading font-black text-xs text-[#E84A2A] tracking-wider">
+                  <span className="font-heading font-black text-xs text-[#5D2E85] tracking-wider">
                     {p.num}
                   </span>
                   <span className="px-2.5 py-1 rounded-full bg-white group-hover:bg-[#F7F6F2] border border-[#DEDED7] font-body font-bold text-[10px] text-[#111111] uppercase tracking-wider transition-colors">
@@ -75,7 +75,7 @@ export default function HomeServicesTeaser() {
                   </span>
                 </div>
 
-                <h3 className="font-heading font-black text-lg text-[#111111] mb-2 group-hover:text-[#E84A2A] transition-colors">
+                <h3 className="font-heading font-black text-lg text-[#111111] mb-2 group-hover:text-[#5D2E85] transition-colors">
                   {p.title}
                 </h3>
 
@@ -83,7 +83,7 @@ export default function HomeServicesTeaser() {
                   {p.teaser}
                 </p>
 
-                <div className="mt-6 flex items-center gap-1.5 font-heading font-bold text-xs uppercase tracking-wider text-[#111111] group-hover:text-[#E84A2A] transition-colors">
+                <div className="mt-6 flex items-center gap-1.5 font-heading font-bold text-xs uppercase tracking-wider text-[#111111] group-hover:text-[#5D2E85] transition-colors">
                   <span>Explore Deliverables</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </div>
@@ -96,7 +96,7 @@ export default function HomeServicesTeaser() {
         <ScrollReveal data-reveal="up" delay={200} className="flex justify-center sm:justify-start">
           <Link
             to="/services"
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#111111] hover:bg-[#E84A2A] text-white font-heading font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#111111] hover:bg-[#5D2E85] text-white font-heading font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm"
           >
             <span>Explore All 5 Capabilities &amp; Deliverables</span>
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

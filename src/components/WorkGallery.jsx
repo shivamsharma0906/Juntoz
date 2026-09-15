@@ -10,11 +10,11 @@ export default function WorkGallery() {
         <ScrollReveal data-reveal="zoom-cinematic">
           <div className="mb-16 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-[#DEDED7] pb-8">
             <div className="max-w-2xl">
-              <span className="font-sans font-bold tracking-[0.16em] text-[#E84A2A] uppercase text-xs mb-3 block">
+              <span className="font-sans font-bold tracking-[0.16em] text-[#5D2E85] uppercase text-xs mb-3 block">
                 Selected Client Case Studies
               </span>
               <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl md:text-6xl uppercase tracking-tighter leading-[0.95]">
-                Proof Over <span className="text-[#E84A2A]">Promises.</span>
+                Proof Over <span className="text-[#5D2E85]">Promises.</span>
               </h2>
             </div>
             <div className="md:text-right">
@@ -23,7 +23,7 @@ export default function WorkGallery() {
               </p>
               <Link
                 to="/work"
-                className="inline-flex items-center gap-2 font-sans font-semibold text-xs uppercase tracking-wider text-[#111111] hover:text-[#E84A2A] transition-colors"
+                className="inline-flex items-center gap-2 font-sans font-semibold text-xs uppercase tracking-wider text-[#111111] hover:text-[#5D2E85] transition-colors"
               >
                 <span>View All Case Studies</span>
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -78,7 +78,7 @@ export default function WorkGallery() {
                   
                   <div className="space-y-4">
                     <div>
-                      <span className="font-sans font-bold text-[11px] tracking-[0.14em] uppercase text-[#E84A2A] block mb-1">
+                      <span className="font-sans font-bold text-[11px] tracking-[0.14em] uppercase text-[#5D2E85] block mb-1">
                         The Challenge
                       </span>
                       <p className="font-body text-[#5F5F5A] text-sm sm:text-base leading-relaxed">
@@ -100,7 +100,7 @@ export default function WorkGallery() {
                   <div className="grid grid-cols-2 gap-3 pt-4 border-t border-[#DEDED7]">
                     {study.stats && study.stats.map((stat, i) => (
                       <div key={i} className="p-3.5 rounded-xl bg-[#F7F6F2] border border-[#DEDED7]">
-                        <div className="font-heading font-black text-xl sm:text-2xl text-[#E84A2A]">
+                        <div className="font-heading font-black text-xl sm:text-2xl text-[#5D2E85]">
                           {stat.value}
                         </div>
                         <div className="font-body text-[11px] text-[#5F5F5A] mt-0.5">
@@ -114,7 +114,7 @@ export default function WorkGallery() {
                   <div className="pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <Link
                       to={`/work/${study.slug}`}
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#E84A2A] text-white font-sans font-semibold text-xs uppercase tracking-wider transition-colors duration-200 shadow-xs"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#5D2E85] text-white font-sans font-semibold text-xs uppercase tracking-wider transition-colors duration-200 shadow-xs"
                     >
                       <span>Read Case Study</span>
                       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

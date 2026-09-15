@@ -75,7 +75,7 @@ export default function CoFounderPage() {
         subheading="Meet the Co-Founder"
         heading={
           <h2 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl text-[#111111] uppercase tracking-tight leading-[1.05]">
-            Operational Excellence <span className="text-[#E84A2A]">Drives</span> Growth.
+            Operational Excellence <span className="text-[#5D2E85]">Drives</span> Growth.
           </h2>
         }
         bioHeading="About Saloni Mehta"

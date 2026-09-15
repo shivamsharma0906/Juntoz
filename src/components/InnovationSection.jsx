@@ -70,7 +70,7 @@ export default function InnovationSection() {
           {/* Left Text */}
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-5" style={fade(0.05)}>
-              <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+              <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
               <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
                 Continuous Growth Lab
               </span>
@@ -81,7 +81,7 @@ export default function InnovationSection() {
               style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', ...fade(0.1) }}
             >
               Engineered For <br />
-              <span className="text-[#E84A2A]">Measurable Scale.</span>
+              <span className="text-[#5D2E85]">Measurable Scale.</span>
             </h2>
 
             <p
@@ -94,7 +94,7 @@ export default function InnovationSection() {
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mb-8" style={fade(0.26)}>
               {BULLETS.map((b, i) => (
                 <div key={i} className="flex items-center gap-2.5">
-                  <span className="text-[#E84A2A] font-bold text-base">✓</span>
+                  <span className="text-[#5D2E85] font-bold text-base">✓</span>
                   <span className="font-body font-semibold text-sm text-[#111111]">
                     {b.text}
                   </span>
@@ -106,7 +106,7 @@ export default function InnovationSection() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4" style={fade(0.32)}>
               {FEATURES.map((f, i) => (
                 <div key={i} className="p-5 rounded-2xl bg-white border border-[#DEDED7] shadow-subtle">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-[#FBE9E4] text-[#E84A2A] mb-3">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-[#F1E7F9] text-[#5D2E85] mb-3">
                     {f.icon}
                   </div>
                   <h3 className="font-heading font-black text-sm text-[#111111] mb-1">{f.title}</h3>

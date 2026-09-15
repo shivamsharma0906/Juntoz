@@ -30,8 +30,8 @@ export default function CaseStudyPage() {
 
         {/* Header */}
         <ScrollReveal data-reveal="up" className="mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-4 bg-[#FBE9E4] border border-[#E84A2A]/20">
-            <span className="font-body font-bold text-[11px] tracking-wider uppercase text-[#E84A2A]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-4 bg-[#F1E7F9] border border-[#5D2E85]/20">
+            <span className="font-body font-bold text-[11px] tracking-wider uppercase text-[#5D2E85]">
               {study.industry}
             </span>
           </div>
@@ -51,7 +51,7 @@ export default function CaseStudyPage() {
             <p className="font-body text-white/60 text-xs sm:text-sm uppercase tracking-wider mb-3 font-bold">
               {study.metricLabel}
             </p>
-            <div className="font-heading font-black uppercase text-[#E84A2A] tracking-tight leading-none"
+            <div className="font-heading font-black uppercase text-[#5D2E85] tracking-tight leading-none"
               style={{ fontSize: 'clamp(2.5rem, 7vw, 5rem)' }}>
               {study.metric}
             </div>
@@ -80,7 +80,7 @@ export default function CaseStudyPage() {
         {study.services && (
           <ScrollReveal data-reveal="up" className="mb-12">
             <div className="p-6 rounded-2xl bg-white border border-[#DEDED7] shadow-subtle">
-              <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#E84A2A] block mb-3">
+              <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#5D2E85] block mb-3">
                 Growth Services Deployed
               </span>
               <div className="flex flex-wrap gap-2">
@@ -98,7 +98,7 @@ export default function CaseStudyPage() {
         <div className="space-y-12">
           <ScrollReveal data-reveal="up" className="bg-white p-8 sm:p-10 rounded-3xl border border-[#DEDED7] shadow-card">
             <h2 className="font-heading font-black text-[#111111] text-2xl uppercase tracking-tight mb-4 flex items-center gap-3">
-              <span className="w-5 h-1 bg-[#E84A2A] rounded-full block" /> The Challenge
+              <span className="w-5 h-1 bg-[#5D2E85] rounded-full block" /> The Challenge
             </h2>
             <p className="font-body text-[#5F5F5A] text-base sm:text-lg leading-relaxed">
               {study.problem}
@@ -124,7 +124,7 @@ export default function CaseStudyPage() {
             
             {/* Quote */}
             {study.quote && (
-              <div className="relative pl-6 sm:pl-8 py-3 border-l-4 border-[#E84A2A] bg-[#F7F6F2] rounded-r-2xl border border-y-[#DEDED7] border-r-[#DEDED7]">
+              <div className="relative pl-6 sm:pl-8 py-3 border-l-4 border-[#5D2E85] bg-[#F7F6F2] rounded-r-2xl border border-y-[#DEDED7] border-r-[#DEDED7]">
                 <p className="font-heading font-bold text-[#111111] text-lg sm:text-xl italic leading-relaxed">
                   "{study.quote}"
                 </p>
@@ -148,7 +148,7 @@ export default function CaseStudyPage() {
                 href={`https://wa.me/919004001800?text=Hi%20Sujal!%20I%20just%20read%20the%20${encodeURIComponent(study.clientName)}%20case%20study%20and%20would%20love%20a%20growth%20audit.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#E84A2A] hover:bg-[#C93B20] text-white font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg active:scale-[0.98]"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#5D2E85] hover:bg-[#4C266D] text-white font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg active:scale-[0.98]"
               >
                 Claim Your Free MUA Audit
               </a>

@@ -12,7 +12,7 @@ export default function TeamTeaser() {
       description: 'EXTC Engineer (SPIT) with 9+ years corporate leadership experience at TCS & Nokia. Built Juntoz to scale brands with predictable growth.',
       image: founderImg,
       link: '/founder',
-      accentColor: '#E84A2A',
+      accentColor: '#5D2E85',
     },
     {
       name: 'Saloni Mehta',
@@ -30,13 +30,13 @@ export default function TeamTeaser() {
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
         <ScrollReveal data-reveal="up" className="text-center mb-14 sm:mb-18">
           <span
-            className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full border mb-4 bg-[#FBE9E4] text-[#E84A2A] border-[#E84A2A]/20 shadow-xs"
+            className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full border mb-4 bg-[#F1E7F9] text-[#5D2E85] border-[#5D2E85]/20 shadow-xs"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#E84A2A]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
             Leadership &amp; Vision
           </span>
           <h2 className="font-heading font-black text-3xl sm:text-5xl text-[#111111] uppercase tracking-tight">
-            Meet the <span className="text-[#E84A2A]">Leadership</span>
+            Meet the <span className="text-[#5D2E85]">Leadership</span>
           </h2>
           <p className="font-body text-[#5F5F5A] text-sm sm:text-base max-w-xl mx-auto mt-3 leading-relaxed">
             Combining strategic growth marketing with operational excellence to scale ambitious modern brands.
@@ -75,7 +75,7 @@ export default function TeamTeaser() {
                     <h3 className="font-heading font-black text-2xl text-[#111111] uppercase tracking-wide">
                       {leader.name}
                     </h3>
-                    <p className="font-sans text-xs font-semibold text-[#E84A2A]">
+                    <p className="font-sans text-xs font-semibold text-[#5D2E85]">
                       {leader.role}
                     </p>
                     <p className="font-body text-xs text-[#5F5F5A] leading-relaxed pt-1">
@@ -90,7 +90,7 @@ export default function TeamTeaser() {
                   </span>
                   <Link
                     to={leader.link}
-                    className="inline-flex items-center gap-2 font-sans font-semibold text-xs uppercase tracking-wider text-[#111111] group-hover:text-[#E84A2A] transition-colors"
+                    className="inline-flex items-center gap-2 font-sans font-semibold text-xs uppercase tracking-wider text-[#111111] group-hover:text-[#5D2E85] transition-colors"
                   >
                     <span>View Profile</span>
                     <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>

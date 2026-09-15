@@ -34,7 +34,7 @@ export const clientData = [
     city: 'Mumbai',
     niche: 'Bridal Makeup',
     industry: 'Bridal',
-    color: '#E84A2A',
+    color: '#5D2E85',
     rating: 5,
     isPlaceholder: true,
 
@@ -62,7 +62,7 @@ export const clientData = [
     city: 'Delhi NCR',
     niche: 'Makeup Academy',
     industry: 'Academy',
-    color: '#E84A2A',
+    color: '#5D2E85',
     rating: 5,
     isPlaceholder: true,
 
@@ -90,7 +90,7 @@ export const clientData = [
     city: 'Bangalore',
     niche: 'Editorial & Commercial',
     industry: 'Editorial',
-    color: '#E84A2A',
+    color: '#5D2E85',
     rating: 5,
     isPlaceholder: true,
 

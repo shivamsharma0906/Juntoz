@@ -22,7 +22,7 @@ export const caseStudies = [
     quote: '"[PENDING REAL TESTIMONIALS: Client review on bridal campaign ROI and WhatsApp booking qualification.]"',
     image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop',
     featured: true,
-    color: '#E84A2A',
+    color: '#5D2E85',
     isPlaceholder: true,
   },
   {
@@ -39,7 +39,7 @@ export const caseStudies = [
     quote: '"[PENDING REAL TESTIMONIALS: Academy founder review on student acquisition automation.]"',
     image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=800&auto=format&fit=crop',
     featured: true,
-    color: '#E84A2A',
+    color: '#5D2E85',
     isPlaceholder: true,
   },
   {
@@ -56,7 +56,7 @@ export const caseStudies = [
     quote: '"[PENDING REAL TESTIMONIALS: Artist review on brand perception and premium client attraction.]"',
     image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800&auto=format&fit=crop',
     featured: true,
-    color: '#E84A2A',
+    color: '#5D2E85',
     isPlaceholder: true,
   }
 ];

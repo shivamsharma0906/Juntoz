@@ -40,7 +40,7 @@ function StatItem({ stat, index, started }) {
   const display = stat.isDecimal ? value.toFixed(1) : Math.round(value);
 
   return (
-    <div className="flex flex-col items-center text-center p-6 sm:p-8 rounded-3xl bg-[#1A1A1A] border border-white/10 relative group hover:border-[#E84A2A]/40 transition-all duration-300">
+    <div className="flex flex-col items-center text-center p-6 sm:p-8 rounded-3xl bg-[#1A1A1A] border border-white/10 relative group hover:border-[#5D2E85]/40 transition-all duration-300">
       
       {/* Giant Stat Number */}
       <div
@@ -48,7 +48,7 @@ function StatItem({ stat, index, started }) {
         style={{ fontSize: 'clamp(2.5rem, 4.5vw, 4rem)' }}
       >
         <span>{display}</span>
-        <span className="text-[#E84A2A] ml-0.5">{stat.suffix}</span>
+        <span className="text-[#5D2E85] ml-0.5">{stat.suffix}</span>
       </div>
 
       {/* Label */}

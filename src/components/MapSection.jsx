@@ -52,11 +52,11 @@ export default function MapSection({
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-[#F7F6F2] shadow-subtle mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
             <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">Find Our Office</span>
           </div>
           <h2 className="font-heading font-black uppercase text-[#111111] leading-tight tracking-tight text-3xl sm:text-5xl md:text-6xl mb-4">
-            Visit Our <span className="text-[#E84A2A]">Workspace</span>
+            Visit Our <span className="text-[#5D2E85]">Workspace</span>
           </h2>
           <p className="font-body text-[#5F5F5A] text-sm sm:text-base max-w-lg leading-relaxed">
             Let's discuss how we can grow your beauty brand. Drop in during business hours or locate us online.
@@ -101,14 +101,14 @@ export default function MapSection({
                     <div
                       key={day.name}
                       className={`flex items-center justify-between py-2 px-3 rounded-lg transition-all duration-200 ${isToday
-                        ? 'bg-white border-l-2 border-[#E84A2A] shadow-subtle'
+                        ? 'bg-white border-l-2 border-[#5D2E85] shadow-subtle'
                         : 'hover:bg-white/60'
                         }`}
                     >
                       <span className={`font-body text-sm ${isToday ? 'font-bold text-[#111111]' : 'font-medium text-[#5F5F5A]'}`}>
-                        {day.name} {isToday && <span className="text-[10px] text-[#E84A2A] ml-1 uppercase font-bold tracking-wider">• Today</span>}
+                        {day.name} {isToday && <span className="text-[10px] text-[#5D2E85] ml-1 uppercase font-bold tracking-wider">• Today</span>}
                       </span>
-                      <span className={`font-body text-xs font-semibold ${isToday ? 'text-[#E84A2A]' : 'text-[#5F5F5A]'}`}>
+                      <span className={`font-body text-xs font-semibold ${isToday ? 'text-[#5D2E85]' : 'text-[#5F5F5A]'}`}>
                         {day.time}
                       </span>
                     </div>
@@ -118,8 +118,8 @@ export default function MapSection({
 
               {/* Address Details */}
               <div className="flex gap-4 p-4 rounded-2xl bg-white border border-[#DEDED7] shadow-subtle mb-8">
-                <div className="w-10 h-10 rounded-xl bg-[#FBE9E4] border border-[#E84A2A]/20 flex items-center justify-center shrink-0">
-                  <svg className="w-5 h-5 text-[#E84A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                <div className="w-10 h-10 rounded-xl bg-[#F1E7F9] border border-[#5D2E85]/20 flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5 text-[#5D2E85]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -136,7 +136,7 @@ export default function MapSection({
               href="https://maps.google.com/?q=Juntoz+Digital+Marketing+Agency+Bhayandar+West+Bhakti+Plaza"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-heading font-bold uppercase text-xs tracking-wider text-white bg-[#111111] hover:bg-[#E84A2A] shadow-sm transition-colors duration-200"
+              className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-heading font-bold uppercase text-xs tracking-wider text-white bg-[#111111] hover:bg-[#5D2E85] shadow-sm transition-colors duration-200"
             >
               <span>GET DIRECTIONS ON MAPS</span>
               <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

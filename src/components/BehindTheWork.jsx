@@ -77,11 +77,11 @@ export default function BehindTheWork() {
         <ScrollReveal data-reveal="flip-3d">
           <div className="mb-14 sm:mb-18 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 border-b border-[#DEDED7] pb-8">
             <div className="max-w-2xl">
-              <span className="font-sans font-bold tracking-[0.16em] text-[#E84A2A] uppercase text-xs mb-3 block">
+              <span className="font-sans font-bold tracking-[0.16em] text-[#5D2E85] uppercase text-xs mb-3 block">
                 Behind The Work
               </span>
               <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl md:text-6xl uppercase tracking-tighter leading-[0.95]">
-                How We <br className="hidden sm:block" /> Build <span className="text-[#E84A2A]">Growth</span>.
+                How We <br className="hidden sm:block" /> Build <span className="text-[#5D2E85]">Growth</span>.
               </h2>
             </div>
             
@@ -139,7 +139,7 @@ export default function BehindTheWork() {
                   {/* Header Row: Number and Icon */}
                   <div className="flex items-center justify-between relative z-10">
                     <span 
-                      className="font-sans font-bold text-[10px] px-3.5 py-1.5 rounded-full border tracking-widest bg-[#FBE9E4] text-[#E84A2A] border-[#E84A2A]/25"
+                      className="font-sans font-bold text-[10px] px-3.5 py-1.5 rounded-full border tracking-widest bg-[#F1E7F9] text-[#5D2E85] border-[#5D2E85]/25"
                     >
                       STEP {(index + 1).toString().padStart(2, '0')}
                     </span>
@@ -171,14 +171,14 @@ export default function BehindTheWork() {
           {/* Progress Bar tracking timeline scroll */}
           <div className="hidden md:block w-full h-[2px] bg-[#DEDED7] rounded-full mt-10 relative overflow-hidden">
             <div 
-              className="absolute left-0 top-0 h-full bg-[#E84A2A] transition-all duration-150 ease-out origin-left rounded-full"
+              className="absolute left-0 top-0 h-full bg-[#5D2E85] transition-all duration-150 ease-out origin-left rounded-full"
               style={{ width: `${scrollProgress * 100}%` }}
             />
           </div>
 
           {/* Swipe Hint — mobile only */}
           <div className="flex items-center justify-center gap-2 mt-6 sm:hidden opacity-60">
-            <svg className="w-4 h-4 animate-pulse text-[#E84A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-4 h-4 animate-pulse text-[#5D2E85]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
             <span className="font-sans font-semibold text-[10px] uppercase tracking-wider text-[#5F5F5A]">Swipe to explore workflow</span>

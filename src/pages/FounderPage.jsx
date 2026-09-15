@@ -21,7 +21,7 @@ export default function FounderPage() {
     </p>,
     <p key="3">
       In 2021, he founded Juntoz with a vision to help businesses grow through{' '}
-      <span className="font-bold px-2 py-0.5 rounded text-[#E84A2A] bg-[#FBE9E4]">
+      <span className="font-bold px-2 py-0.5 rounded text-[#5D2E85] bg-[#F1E7F9]">
         digital marketing, branding, content creation, websites, SEO, Meta Ads,
         Google Ads, and AI-powered solutions
       </span>
@@ -76,7 +76,7 @@ export default function FounderPage() {
         subheading="Meet the Founder"
         heading={
           <h2 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl text-[#111111] uppercase tracking-tight leading-[1.05]">
-            An Agency That Actually <span className="text-[#E84A2A]">Gets</span> Growth.
+            An Agency That Actually <span className="text-[#5D2E85]">Gets</span> Growth.
           </h2>
         }
         bioHeading="About Sujal Mehta"

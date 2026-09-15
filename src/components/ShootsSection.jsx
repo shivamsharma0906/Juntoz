@@ -37,12 +37,12 @@ export default function ShootsSection() {
         {/* Section Header */}
         <ScrollReveal data-reveal="up" className="max-w-3xl mb-16 text-left">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-[#F7F6F2] text-[#5F5F5A] text-xs font-semibold uppercase tracking-wider mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
             <span>On-Location Production • Mumbai &amp; Delhi</span>
           </div>
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-5">
             Professional Content Shoots.{' '}
-            <span className="text-[#E84A2A]">Because Great Marketing Needs Great Content.</span>
+            <span className="text-[#5D2E85]">Because Great Marketing Needs Great Content.</span>
           </h2>
           <p className="font-body text-[#5F5F5A] text-base md:text-lg leading-relaxed">
             Poor lighting and generic stock assets degrade ad performance and cheapen your brand. Juntoz directs and shoots high-production photo and video assets in Mumbai and Delhi — purposefully styled for paid ads and viral social reach.
@@ -59,7 +59,7 @@ export default function ShootsSection() {
                     <span className="text-[10px] font-sans font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white border border-[#DEDED7] text-[#111111]">
                       {shoot.city}
                     </span>
-                    <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-[#E84A2A]">
+                    <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-[#5D2E85]">
                       {shoot.tag}
                     </span>
                   </div>
@@ -78,7 +78,7 @@ export default function ShootsSection() {
         {/* The Connection Formula Pipeline */}
         <ScrollReveal data-reveal="up" delay={150}>
           <div className="p-8 sm:p-10 rounded-3xl bg-[#F7F6F2] border border-[#DEDED7] shadow-card mb-12">
-            <span className="block font-sans font-bold text-xs uppercase tracking-wider text-[#E84A2A] mb-3">
+            <span className="block font-sans font-bold text-xs uppercase tracking-wider text-[#5D2E85] mb-3">
               The Production-To-Revenue Pipeline
             </span>
             <h4 className="font-heading font-black text-xl sm:text-2xl text-[#111111] uppercase tracking-tight mb-6">
@@ -88,15 +88,15 @@ export default function ShootsSection() {
             {/* Pipeline Flow */}
             <div className="flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm font-sans font-bold uppercase tracking-wider">
               <span className="px-4 py-2.5 rounded-xl bg-white border border-[#DEDED7] text-[#111111]">Shoot</span>
-              <span className="text-[#E84A2A]">→</span>
+              <span className="text-[#5D2E85]">→</span>
               <span className="px-4 py-2.5 rounded-xl bg-white border border-[#DEDED7] text-[#111111]">Content</span>
-              <span className="text-[#E84A2A]">→</span>
+              <span className="text-[#5D2E85]">→</span>
               <span className="px-4 py-2.5 rounded-xl bg-white border border-[#DEDED7] text-[#111111]">Social Media</span>
-              <span className="text-[#E84A2A]">→</span>
+              <span className="text-[#5D2E85]">→</span>
               <span className="px-4 py-2.5 rounded-xl bg-white border border-[#DEDED7] text-[#111111]">Ads</span>
-              <span className="text-[#E84A2A]">→</span>
+              <span className="text-[#5D2E85]">→</span>
               <span className="px-4 py-2.5 rounded-xl bg-white border border-[#DEDED7] text-[#111111]">Brand</span>
-              <span className="text-[#E84A2A]">→</span>
+              <span className="text-[#5D2E85]">→</span>
               <span className="px-4 py-2.5 rounded-xl bg-[#111111] text-white">Growth</span>
             </div>
           </div>
@@ -108,7 +108,7 @@ export default function ShootsSection() {
             href={WA_SHOOTS}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-white bg-[#111111] hover:bg-[#E84A2A] transition-all duration-300 shadow-sm"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-white bg-[#111111] hover:bg-[#5D2E85] transition-all duration-300 shadow-sm"
           >
             <span>Plan Your Next Shoot in Mumbai / Delhi</span>
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

@@ -87,7 +87,7 @@ export default function ForMakeupArtistsPage() {
             <div className="lg:col-span-7 text-left space-y-6">
               <ScrollReveal data-reveal="up">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle">
-                  <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+                  <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
                   <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
                     Specialist Practice • Juntoz Digital Agency
                   </span>
@@ -97,7 +97,7 @@ export default function ForMakeupArtistsPage() {
               <ScrollReveal data-reveal="up" delay={100}>
                 <h1 className="font-heading font-black text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight leading-[1.02] text-[#111111] mb-3">
                   Elite Bridal <br />
-                  <span className="text-[#E84A2A]">Client Acquisition.</span>
+                  <span className="text-[#5D2E85]">Client Acquisition.</span>
                 </h1>
                 <p className="font-heading font-extrabold text-xl sm:text-2xl text-[#111111] leading-snug tracking-tight mb-2">
                   Secure High-Value Bookings Year-Round.
@@ -107,15 +107,15 @@ export default function ForMakeupArtistsPage() {
               {/* Specialist Highlights Dock */}
               <ScrollReveal data-reveal="up" delay={180} className="flex flex-wrap gap-2.5 pt-1">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-[#DEDED7] shadow-subtle">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E84A2A]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
                   <span className="font-body text-xs font-bold text-[#111111]">Zero Off-Season Slump</span>
                 </div>
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-[#DEDED7] shadow-subtle">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E84A2A]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
                   <span className="font-body text-xs font-bold text-[#111111]">Pre-Qualified WhatsApp Inquiries</span>
                 </div>
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-[#DEDED7] shadow-subtle">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E84A2A]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
                   <span className="font-body text-xs font-bold text-[#111111]">Masterclass Funnel Systems</span>
                 </div>
               </ScrollReveal>
@@ -131,7 +131,7 @@ export default function ForMakeupArtistsPage() {
                   href={WA}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full font-heading font-bold uppercase tracking-wider text-white text-xs sm:text-sm bg-[#111111] hover:bg-[#E84A2A] transition-colors duration-200 shadow-sm active:scale-[0.98]"
+                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full font-heading font-bold uppercase tracking-wider text-white text-xs sm:text-sm bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200 shadow-sm active:scale-[0.98]"
                 >
                   <span>Book Free Growth Audit</span>
                   <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -147,7 +147,7 @@ export default function ForMakeupArtistsPage() {
                 <div className="p-8 border border-[#DEDED7] rounded-3xl bg-white shadow-card space-y-6">
                   {/* Card header */}
                   <div className="flex justify-between items-center pb-4 border-b border-[#DEDED7]">
-                    <span className="font-heading font-bold text-[11px] tracking-wider text-[#E84A2A] uppercase">Live Booking Funnel Demo</span>
+                    <span className="font-heading font-bold text-[11px] tracking-wider text-[#5D2E85] uppercase">Live Booking Funnel Demo</span>
                     <div className="flex gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-red-400" />
                       <span className="w-2 h-2 rounded-full bg-yellow-400" />
@@ -173,10 +173,10 @@ export default function ForMakeupArtistsPage() {
                       </div>
                     </div>
 
-                    <div className="flex gap-3 items-start p-3.5 bg-[#FBE9E4] border border-[#E84A2A]/20 rounded-2xl">
+                    <div className="flex gap-3 items-start p-3.5 bg-[#F1E7F9] border border-[#5D2E85]/20 rounded-2xl">
                       <span className="text-xl">💬</span>
                       <div>
-                        <h4 className="font-heading font-bold text-xs uppercase text-[#E84A2A]">Pre-Qualification Chat</h4>
+                        <h4 className="font-heading font-bold text-xs uppercase text-[#5D2E85]">Pre-Qualification Chat</h4>
                         <p className="text-xs text-[#5F5F5A]">WhatsApp Bot filters out low-ticket price queries</p>
                       </div>
                     </div>
@@ -205,11 +205,11 @@ export default function ForMakeupArtistsPage() {
       <section className="py-20 sm:py-28 bg-white border-y border-[#DEDED7] relative">
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           <ScrollReveal className="mb-14 text-center max-w-2xl mx-auto space-y-2">
-            <span className="font-heading font-bold tracking-wider text-[#E84A2A] uppercase text-xs block">
+            <span className="font-heading font-bold tracking-wider text-[#5D2E85] uppercase text-xs block">
               The Reality Check
             </span>
             <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl uppercase tracking-tight">
-              Why Generic Agencies <span className="text-[#E84A2A]">Fail MUAs</span>
+              Why Generic Agencies <span className="text-[#5D2E85]">Fail MUAs</span>
             </h2>
             <p className="font-body text-[#5F5F5A] text-sm sm:text-base">
               Click on each challenge below to reveal the Juntoz Solution.
@@ -225,7 +225,7 @@ export default function ForMakeupArtistsPage() {
                     onClick={() => setActivePainPoint(isSelected ? null : item.id)}
                     className={`relative p-8 rounded-3xl border transition-all duration-300 cursor-pointer h-full select-none flex flex-col justify-between ${
                       isSelected 
-                        ? 'border-[#E84A2A] bg-[#FBE9E4]/40 shadow-card' 
+                        ? 'border-[#5D2E85] bg-[#F1E7F9]/40 shadow-card' 
                         : 'border-[#DEDED7] bg-[#F7F6F2] hover:border-[#111111] hover:shadow-subtle'
                     }`}
                   >
@@ -259,7 +259,7 @@ export default function ForMakeupArtistsPage() {
                             transition={{ duration: 0.3, ease: "easeInOut" }}
                             className="pt-4 border-t border-[#DEDED7]"
                           >
-                            <span className="block font-heading font-bold text-[10px] tracking-wider text-[#E84A2A] uppercase mb-1">
+                            <span className="block font-heading font-bold text-[10px] tracking-wider text-[#5D2E85] uppercase mb-1">
                               Our Solution:
                             </span>
                             <p className="font-body text-[#111111] text-xs sm:text-sm leading-relaxed">
@@ -281,11 +281,11 @@ export default function ForMakeupArtistsPage() {
       <section className="py-20 sm:py-28 relative bg-[#F7F6F2]">
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           <ScrollReveal className="mb-16 text-center max-w-2xl mx-auto space-y-2">
-            <span className="font-heading font-bold tracking-wider text-[#E84A2A] uppercase text-xs block">
+            <span className="font-heading font-bold tracking-wider text-[#5D2E85] uppercase text-xs block">
               Execution Plan
             </span>
             <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl uppercase tracking-tight">
-              Our Stepped <span className="text-[#E84A2A]">Growth System</span>
+              Our Stepped <span className="text-[#5D2E85]">Growth System</span>
             </h2>
             <p className="font-body text-[#5F5F5A] text-sm sm:text-base">
               We translate your artistic skill into a robust commercial machine. Hover or tap each step.
@@ -353,7 +353,7 @@ export default function ForMakeupArtistsPage() {
                     <div className="pt-6 border-t border-[#DEDED7] flex justify-between items-center">
                       <div>
                         <span className="block text-[10px] text-[#5F5F5A] uppercase tracking-wider font-bold">Target Metric</span>
-                        <span className="font-heading font-bold text-sm text-[#E84A2A]">
+                        <span className="font-heading font-bold text-sm text-[#5D2E85]">
                           {MUA_SERVICES[activeStep].stat}
                         </span>
                       </div>
@@ -374,11 +374,11 @@ export default function ForMakeupArtistsPage() {
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           <ScrollReveal className="mb-16 border-b border-[#DEDED7] pb-8 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
             <div>
-              <span className="font-heading font-bold tracking-wider text-[#E84A2A] uppercase text-xs block">
+              <span className="font-heading font-bold tracking-wider text-[#5D2E85] uppercase text-xs block">
                 Proof
               </span>
               <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl uppercase tracking-tight">
-                MUA <span className="text-[#E84A2A]">Success Stories</span>
+                MUA <span className="text-[#5D2E85]">Success Stories</span>
               </h2>
             </div>
             <p className="font-body text-[#5F5F5A] max-w-xs text-sm sm:text-base leading-relaxed">
@@ -412,7 +412,7 @@ export default function ForMakeupArtistsPage() {
                   {/* Story Section */}
                   <div className="w-full lg:w-1/2 flex flex-col justify-center space-y-5 lg:pr-6">
                     <div className="space-y-1.5">
-                      <span className="font-heading font-bold text-xs tracking-wider uppercase text-[#E84A2A]">The Problem</span>
+                      <span className="font-heading font-bold text-xs tracking-wider uppercase text-[#5D2E85]">The Problem</span>
                       <p className="font-body text-[#5F5F5A] text-sm leading-relaxed">
                         {study.problem}
                       </p>

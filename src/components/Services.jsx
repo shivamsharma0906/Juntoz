@@ -84,12 +84,12 @@ export default function Services({ compactTop = false }) {
         
         {/* Section Header */}
         <ScrollReveal data-reveal="up" className="text-center mb-16 sm:mb-20 max-w-3xl mx-auto">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[#FBE9E4] border border-[#E84A2A]/20 font-sans font-semibold text-xs uppercase tracking-wider text-[#E84A2A] mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#F1E7F9] border border-[#5D2E85]/20 font-sans font-semibold text-xs uppercase tracking-wider text-[#5D2E85] mb-4">
             Full-Service Capabilities
           </span>
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-6">
             End-To-End Growth Services For{' '}
-            <span className="text-[#E84A2A]">
+            <span className="text-[#5D2E85]">
               Ambitious Brands.
             </span>
           </h2>
@@ -109,7 +109,7 @@ export default function Services({ compactTop = false }) {
                     <span className="text-[10px] font-sans font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#F7F6F2] border border-[#DEDED7] text-[#111111]">
                       {s.category}
                     </span>
-                    <span className="font-heading font-black text-2xl sm:text-3xl text-[#111111]/15 group-hover:text-[#E84A2A] transition-colors duration-300">
+                    <span className="font-heading font-black text-2xl sm:text-3xl text-[#111111]/15 group-hover:text-[#5D2E85] transition-colors duration-300">
                       {s.num}
                     </span>
                   </div>
@@ -118,7 +118,7 @@ export default function Services({ compactTop = false }) {
                   <h3 className="font-heading font-black text-xl sm:text-2xl text-[#111111] uppercase tracking-tight leading-snug mb-1">
                     {s.title}
                   </h3>
-                  <p className="font-sans font-medium text-xs text-[#E84A2A] tracking-wider uppercase mb-3">
+                  <p className="font-sans font-medium text-xs text-[#5D2E85] tracking-wider uppercase mb-3">
                     {s.subtitle}
                   </p>
 
@@ -135,7 +135,7 @@ export default function Services({ compactTop = false }) {
                     <ul className="space-y-2">
                       {s.deliverables.map((item) => (
                         <li key={item} className="flex items-start gap-2 text-xs font-body text-[#111111]/85">
-                          <span className="text-[#E84A2A] font-bold text-xs mt-0.5">✦</span>
+                          <span className="text-[#5D2E85] font-bold text-xs mt-0.5">✦</span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -168,24 +168,24 @@ export default function Services({ compactTop = false }) {
                 <div className="space-y-2.5">
                   <Link
                     to="/for-makeup-artists"
-                    className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#E84A2A]/50 transition-all duration-200"
+                    className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#5D2E85]/50 transition-all duration-200"
                   >
                     <span className="font-sans text-xs uppercase tracking-wider font-semibold">For Makeup Artists</span>
-                    <span className="text-xs text-[#E84A2A]">Explore →</span>
+                    <span className="text-xs text-[#5D2E85]">Explore →</span>
                   </Link>
                   <Link
                     to="/for-salons"
-                    className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#E84A2A]/50 transition-all duration-200"
+                    className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#5D2E85]/50 transition-all duration-200"
                   >
                     <span className="font-sans text-xs uppercase tracking-wider font-semibold">For Salons &amp; Clinics</span>
-                    <span className="text-xs text-[#E84A2A]">Explore →</span>
+                    <span className="text-xs text-[#5D2E85]">Explore →</span>
                   </Link>
                 </div>
               </div>
 
               <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between">
                 <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-white/50">Verticals</span>
-                <span className="text-xs font-heading font-bold text-[#E84A2A] uppercase tracking-wider">Tailored Playbooks</span>
+                <span className="text-xs font-heading font-bold text-[#5D2E85] uppercase tracking-wider">Tailored Playbooks</span>
               </div>
             </div>
           </ScrollReveal>

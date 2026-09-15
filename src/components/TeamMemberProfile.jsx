@@ -94,7 +94,7 @@ export default function TeamMemberProfile({
         {sectionLabel && (
           <ScrollReveal data-reveal="up" className="flex justify-center mb-8">
             <span className="inline-flex items-center gap-2 font-body text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle text-[#5F5F5A]">
-              <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+              <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
               {sectionLabel}
             </span>
           </ScrollReveal>
@@ -139,7 +139,7 @@ export default function TeamMemberProfile({
                         <div className="font-heading font-black text-white text-xl md:text-2xl uppercase tracking-tight leading-tight">
                           {name}
                         </div>
-                        <div className="font-body text-xs mt-0.5 uppercase tracking-wider font-bold text-[#E84A2A]">
+                        <div className="font-body text-xs mt-0.5 uppercase tracking-wider font-bold text-[#5D2E85]">
                           {badgeLabel || role}
                         </div>
                       </div>
@@ -165,7 +165,7 @@ export default function TeamMemberProfile({
           <div className="md:col-span-7 space-y-6 md:space-y-8">
             <ScrollReveal data-reveal="up" className="text-left">
               {subheading && (
-                <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#E84A2A] mb-2 block">
+                <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#5D2E85] mb-2 block">
                   {subheading}
                 </span>
               )}
@@ -179,7 +179,7 @@ export default function TeamMemberProfile({
                 )
               ) : (
                 <h2 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl text-[#111111] uppercase tracking-tight leading-[1.05]">
-                  An Agency That Actually <span className="text-[#E84A2A]">Gets</span> Growth.
+                  An Agency That Actually <span className="text-[#5D2E85]">Gets</span> Growth.
                 </h2>
               )}
             </ScrollReveal>
@@ -225,16 +225,16 @@ export default function TeamMemberProfile({
             {/* ── Vision card ── */}
             {vision && (vision.quote || vision.highlight) && (
               <ScrollReveal data-reveal="up" delay={160}>
-                <div className="relative p-6 rounded-2xl border-l-4 border-[#E84A2A] bg-white border border-y-[#DEDED7] border-r-[#DEDED7] shadow-subtle text-left">
+                <div className="relative p-6 rounded-2xl border-l-4 border-[#5D2E85] bg-white border border-y-[#DEDED7] border-r-[#DEDED7] shadow-subtle text-left">
                   {vision.label && (
-                    <p className="text-[#E84A2A] text-xs uppercase tracking-wider font-bold mb-2">
+                    <p className="text-[#5D2E85] text-xs uppercase tracking-wider font-bold mb-2">
                       {vision.label}
                     </p>
                   )}
                   <blockquote className="font-heading font-bold text-[#111111] text-base sm:text-lg uppercase leading-relaxed tracking-wide">
                     "{vision.quote}"
                     {vision.highlight && (
-                      <span className="text-[#E84A2A] block mt-2">
+                      <span className="text-[#5D2E85] block mt-2">
                         {vision.highlight}
                       </span>
                     )}
@@ -261,11 +261,11 @@ export default function TeamMemberProfile({
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-body text-xs font-semibold border border-[#DEDED7] bg-white shadow-subtle text-[#111111]"
                       >
                         {IconComp ? (
-                          <IconComp size={14} className="text-[#E84A2A]" />
+                          <IconComp size={14} className="text-[#5D2E85]" />
                         ) : typeof item.icon === 'function' || typeof item.icon === 'object' ? (
                           item.icon
                         ) : (
-                          <Zap size={14} className="text-[#E84A2A]" />
+                          <Zap size={14} className="text-[#5D2E85]" />
                         )}
                         {item.text}
                       </span>
@@ -282,7 +282,7 @@ export default function TeamMemberProfile({
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-wider text-white bg-[#111111] hover:bg-[#E84A2A] transition-colors duration-200 shadow-sm active:scale-[0.98]"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-wider text-white bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200 shadow-sm active:scale-[0.98]"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />

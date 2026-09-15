@@ -186,7 +186,7 @@ function ContactForm() {
       <button
         type="submit"
         id="contact-submit"
-        className="w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-heading font-bold uppercase tracking-wider text-white text-xs sm:text-sm bg-[#111111] hover:bg-[#E84A2A] transition-colors duration-200 mt-2 cursor-pointer shadow-sm active:scale-[0.99]"
+        className="w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-heading font-bold uppercase tracking-wider text-white text-xs sm:text-sm bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200 mt-2 cursor-pointer shadow-sm active:scale-[0.99]"
       >
         <span>Claim Free Strategy Consultation on WhatsApp</span>
         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -213,12 +213,12 @@ export default function ContactPage() {
       />
         <ScrollReveal data-reveal="up" className="mb-12 sm:mb-16 text-center">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
             <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">Strategic Growth Consultation</span>
           </div>
           <h1 className="font-heading font-black text-[#111111] text-3xl sm:text-6xl md:text-7xl uppercase leading-tight tracking-tight mb-6">
             Turn Digital Presence Into <br className="hidden sm:block" />
-            <span className="text-[#E84A2A]">Business Growth</span>
+            <span className="text-[#5D2E85]">Business Growth</span>
           </h1>
           <p className="font-body text-[#5F5F5A] text-base md:text-lg max-w-xl mx-auto leading-relaxed">
             Tell us about your business, current marketing bottlenecks, and growth goals. We will personally audit your digital presence, paid acquisition pipeline, and local visibility.
@@ -248,7 +248,7 @@ export default function ContactPage() {
                   rel={m.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className="group flex items-start gap-4 p-6 rounded-2xl bg-white border border-[#DEDED7] shadow-subtle hover:border-[#111111] hover:shadow-hover transition-all duration-200"
                 >
-                  <div className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-[#FBE9E4] text-[#E84A2A] border border-[#E84A2A]/20 transition-colors duration-200 group-hover:bg-[#111111] group-hover:text-white">
+                  <div className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-[#F1E7F9] text-[#5D2E85] border border-[#5D2E85]/20 transition-colors duration-200 group-hover:bg-[#111111] group-hover:text-white">
                     {m.icon}
                   </div>
                   <div className="min-w-0">

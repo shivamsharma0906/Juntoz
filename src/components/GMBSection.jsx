@@ -30,12 +30,12 @@ export default function GMBSection() {
         {/* Section Header */}
         <ScrollReveal data-reveal="up" className="max-w-3xl mb-16 text-left">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-[#F7F6F2] text-[#5F5F5A] text-xs font-semibold uppercase tracking-wider mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
             <span>Local Search &amp; Maps Dominance</span>
           </div>
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-5">
             Your Customers Are Searching On Google.{' '}
-            <span className="text-[#E84A2A]">Can They Find You?</span>
+            <span className="text-[#5D2E85]">Can They Find You?</span>
           </h2>
           <p className="font-body text-[#5F5F5A] text-base md:text-lg leading-relaxed">
             Google Business Profile (commonly called GMB) is the most valuable digital real estate for any local business. When prospects search &ldquo;near me&rdquo; or look up local services, your Maps profile determines whether they call you or your competitor.
@@ -87,7 +87,7 @@ export default function GMBSection() {
                       <h4 className="font-heading font-black text-lg text-[#111111] uppercase tracking-tight">Your Business Name</h4>
                       <p className="font-body text-xs text-[#5F5F5A]">Top-Rated Specialist • Mumbai / Pan-India</p>
                     </div>
-                    <span className="text-xs font-bold text-[#E84A2A] bg-[#FBE9E4] px-2 py-0.5 rounded">
+                    <span className="text-xs font-bold text-[#5D2E85] bg-[#F1E7F9] px-2 py-0.5 rounded">
                       #1 in 3-Pack
                     </span>
                   </div>
@@ -134,7 +134,7 @@ export default function GMBSection() {
         <ScrollReveal data-reveal="up" delay={200}>
           <div className="p-8 rounded-3xl bg-[#111111] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-card">
             <div>
-              <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-[#E84A2A] block mb-1">
+              <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-[#5D2E85] block mb-1">
                 Zero-Obligation Diagnostic
               </span>
               <h3 className="font-heading font-black text-xl sm:text-2xl uppercase tracking-tight">
@@ -148,7 +148,7 @@ export default function GMBSection() {
               href={WA_GMB}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-white bg-[#E84A2A] hover:bg-[#C93B20] transition-colors duration-200 shadow-sm shrink-0 w-full md:w-auto"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-white bg-[#5D2E85] hover:bg-[#4C266D] transition-colors duration-200 shadow-sm shrink-0 w-full md:w-auto"
             >
               <span>Get Your GMB Audited</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

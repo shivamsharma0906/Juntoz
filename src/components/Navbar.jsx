@@ -237,7 +237,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Contact Juntoz on WhatsApp"
-                className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-[#E84A2A] text-white flex items-center justify-center shadow-[0_4px_14px_rgba(232,74,42,0.35)] active:scale-95 transition-all duration-200"
+                className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-[#5D2E85] text-white flex items-center justify-center shadow-[0_4px_14px_rgba(93,46,133,0.35)] active:scale-95 transition-all duration-200"
               >
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                   <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29" />
@@ -259,7 +259,7 @@ export default function Navbar() {
                     ref={spotRef}
                     className="absolute -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full transition-opacity duration-300"
                     style={{
-                      background: 'radial-gradient(circle, rgba(232,74,42,0.08) 0%, transparent 70%)',
+                      background: 'radial-gradient(circle, rgba(93,46,133,0.08) 0%, transparent 70%)',
                       opacity: 0,
                     }}
                   />
@@ -295,7 +295,7 @@ export default function Navbar() {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                           </svg>
                           {isDropActive && (
-                            <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#E84A2A]" />
+                            <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#5D2E85]" />
                           )}
                         </button>
 
@@ -315,7 +315,7 @@ export default function Navbar() {
                                   }`}
                                 >
                                   <span className="font-heading text-xs uppercase tracking-tight">{sub.name}</span>
-                                  <span className="text-[10px] uppercase font-mono tracking-wider text-[#E84A2A] bg-[#FBE9E4] px-2 py-0.5 rounded-md">
+                                  <span className="text-[10px] uppercase font-mono tracking-wider text-[#5D2E85] bg-[#F1E7F9] px-2 py-0.5 rounded-md">
                                     {sub.tag}
                                   </span>
                                 </Link>
@@ -340,7 +340,7 @@ export default function Navbar() {
                     >
                       {link.name}
                       {isActive && (
-                        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#E84A2A]" />
+                        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#5D2E85]" />
                       )}
                     </Link>
                   );
@@ -361,7 +361,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="group/icon w-8 h-8 rounded-full flex items-center justify-center border border-[#DEDED7] bg-white text-[#5F5F5A] hover:text-[#E84A2A] hover:border-[#E84A2A]/40 transition-all duration-200 hover:scale-105"
+                    className="group/icon w-8 h-8 rounded-full flex items-center justify-center border border-[#DEDED7] bg-white text-[#5F5F5A] hover:text-[#5D2E85] hover:border-[#5D2E85]/40 transition-all duration-200 hover:scale-105"
                   >
                     <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                       <path d={s.path} />
@@ -379,7 +379,7 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 onMouseMove={onCtaMouseMove}
                 onMouseLeave={onCtaMouseLeave}
-                className="relative inline-flex items-center gap-2 px-4 xl:px-5 py-2 rounded-full font-sans font-semibold text-[11px] xl:text-xs tracking-wider uppercase text-white bg-[#111111] hover:bg-[#E84A2A] transition-colors duration-300 shadow-sm whitespace-nowrap"
+                className="relative inline-flex items-center gap-2 px-4 xl:px-5 py-2 rounded-full font-sans font-semibold text-[11px] xl:text-xs tracking-wider uppercase text-white bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-300 shadow-sm whitespace-nowrap"
               >
                 <span>Book a Strategy Call</span>
               </a>
@@ -412,7 +412,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed top-[66px] sm:top-[76px] left-3 right-3 sm:left-5 sm:right-5 max-w-lg mx-auto z-50 lg:hidden rounded-[22px] sm:rounded-[24px] bg-white border border-[#DEDED7] shadow-[0_20px_45px_-10px_rgba(17,17,17,0.16),0_10px_20px_-5px_rgba(232,74,42,0.06)] overflow-hidden flex flex-col max-h-[calc(100dvh-84px)]"
+              className="fixed top-[66px] sm:top-[76px] left-3 right-3 sm:left-5 sm:right-5 max-w-lg mx-auto z-50 lg:hidden rounded-[22px] sm:rounded-[24px] bg-white border border-[#DEDED7] shadow-[0_20px_45px_-10px_rgba(17,17,17,0.16),0_10px_20px_-5px_rgba(93,46,133,0.06)] overflow-hidden flex flex-col max-h-[calc(100dvh-84px)]"
             >
               {/* Menu Items List */}
               <div className="flex-1 overflow-y-auto divide-y divide-[#F0EFEB]">
@@ -427,8 +427,8 @@ export default function Navbar() {
                         <button
                           type="button"
                           onClick={() => toggleAccordion(link.name)}
-                          className={`w-full flex items-center justify-between px-5 sm:px-6 min-h-[52px] py-3.5 text-left transition-colors duration-150 hover:bg-[#E84A2A]/[0.04] active:bg-[#E84A2A]/[0.08] ${
-                            isAnyChildActive ? 'text-[#E84A2A] font-bold' : 'text-[#111111]'
+                          className={`w-full flex items-center justify-between px-5 sm:px-6 min-h-[52px] py-3.5 text-left transition-colors duration-150 hover:bg-[#5D2E85]/[0.04] active:bg-[#5D2E85]/[0.08] ${
+                            isAnyChildActive ? 'text-[#5D2E85] font-bold' : 'text-[#111111]'
                           }`}
                         >
                           <span className="font-heading font-semibold text-[15px] sm:text-[16px] tracking-tight">
@@ -436,7 +436,7 @@ export default function Navbar() {
                           </span>
                           <svg
                             className={`w-4 h-4 text-[#5F5F5A] transition-transform duration-200 ${
-                              isExpanded ? 'rotate-180 text-[#E84A2A]' : ''
+                              isExpanded ? 'rotate-180 text-[#5D2E85]' : ''
                             }`}
                             fill="none"
                             viewBox="0 0 24 24"
@@ -466,16 +466,16 @@ export default function Navbar() {
                                       key={sub.name}
                                       to={sub.href}
                                       onClick={() => setMenuOpen(false)}
-                                      className={`flex items-center justify-between pl-9 pr-5 sm:pl-10 sm:pr-6 py-2.5 transition-colors duration-150 active:bg-[#E84A2A]/10 ${
+                                      className={`flex items-center justify-between pl-9 pr-5 sm:pl-10 sm:pr-6 py-2.5 transition-colors duration-150 active:bg-[#5D2E85]/10 ${
                                         isSubActive
-                                          ? 'text-[#E84A2A] font-bold bg-[#E84A2A]/[0.06]'
+                                          ? 'text-[#5D2E85] font-bold bg-[#5D2E85]/[0.06]'
                                           : 'text-[#444444] hover:text-[#111111]'
                                       }`}
                                     >
                                       <span className="font-sans text-[13.5px] sm:text-[14px] font-medium tracking-normal">
                                         {sub.name}
                                       </span>
-                                      <span className="text-[9px] sm:text-[9.5px] font-sans font-bold uppercase tracking-wider text-[#E84A2A] bg-[#FBE9E4] px-2 py-0.5 rounded-full">
+                                      <span className="text-[9px] sm:text-[9.5px] font-sans font-bold uppercase tracking-wider text-[#5D2E85] bg-[#F1E7F9] px-2 py-0.5 rounded-full">
                                         {sub.tag}
                                       </span>
                                     </Link>
@@ -495,15 +495,15 @@ export default function Navbar() {
                       key={link.name}
                       to={link.href}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex items-center justify-between px-5 sm:px-6 min-h-[52px] py-3.5 transition-colors duration-150 hover:bg-[#E84A2A]/[0.04] active:bg-[#E84A2A]/[0.08] ${
-                        isActive ? 'text-[#E84A2A] font-bold bg-[#E84A2A]/[0.03]' : 'text-[#111111]'
+                      className={`flex items-center justify-between px-5 sm:px-6 min-h-[52px] py-3.5 transition-colors duration-150 hover:bg-[#5D2E85]/[0.04] active:bg-[#5D2E85]/[0.08] ${
+                        isActive ? 'text-[#5D2E85] font-bold bg-[#5D2E85]/[0.03]' : 'text-[#111111]'
                       }`}
                     >
                       <span className="font-heading font-semibold text-[15px] sm:text-[16px] tracking-tight">
                         {link.name}
                       </span>
                       {isActive && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#E84A2A]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
                       )}
                     </Link>
                   );
@@ -517,7 +517,7 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMenuOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 h-11 sm:h-12 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-white bg-[#111111] hover:bg-[#E84A2A] active:bg-[#E84A2A] active:scale-[0.98] transition-all shadow-[0_4px_16px_rgba(17,17,17,0.12)]"
+                  className="w-full flex items-center justify-center gap-2 h-11 sm:h-12 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-white bg-[#111111] hover:bg-[#5D2E85] active:bg-[#5D2E85] active:scale-[0.98] transition-all shadow-[0_4px_16px_rgba(17,17,17,0.12)]"
                 >
                   <span>Book a Strategy Call</span>
                   <span>→</span>
@@ -535,7 +535,7 @@ export default function Navbar() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className="w-8 h-8 rounded-full flex items-center justify-center border border-[#DEDED7] text-[#5F5F5A] bg-white hover:text-[#E84A2A] hover:border-[#E84A2A]/40 transition-all"
+                      className="w-8 h-8 rounded-full flex items-center justify-center border border-[#DEDED7] text-[#5F5F5A] bg-white hover:text-[#5D2E85] hover:border-[#5D2E85]/40 transition-all"
                     >
                       <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d={s.path} /></svg>
                     </a>
@@ -571,7 +571,7 @@ function ScrollProgress() {
         style={{
           width: '0%',
           height: '100%',
-          background: '#E84A2A',
+          background: '#5D2E85',
         }}
       />
     </div>

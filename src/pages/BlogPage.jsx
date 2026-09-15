@@ -39,14 +39,14 @@ export default function BlogPage() {
         <div className="mb-12 sm:mb-16 pb-8 sm:pb-12 border-b border-[#DEDED7]">
           <ScrollReveal data-reveal="up" className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#DEDED7] bg-white shadow-2xs mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#E84A2A] animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[#5D2E85] animate-pulse" />
               <span className="font-sans font-bold text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-[#111111]">
                 Strategic Intelligence &amp; Playbooks
               </span>
             </div>
 
             <h1 className="font-heading font-black text-[#111111] uppercase tracking-[-0.03em] leading-[0.96] mb-5 text-[2.5rem] sm:text-[3.5rem] md:text-[4.25rem]">
-              Growth <span className="text-[#E84A2A]">Insights.</span>
+              Growth <span className="text-[#5D2E85]">Insights.</span>
             </h1>
 
             <p className="font-body text-[#5F5F5A] text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
@@ -84,7 +84,7 @@ export default function BlogPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search strategies..."
-                className="w-full bg-white border border-[#DEDED7] rounded-full px-4 py-2 pl-9 text-xs font-body text-[#111111] placeholder:text-[#5F5F5A]/70 focus:outline-hidden focus:border-[#E84A2A] transition-colors"
+                className="w-full bg-white border border-[#DEDED7] rounded-full px-4 py-2 pl-9 text-xs font-body text-[#111111] placeholder:text-[#5F5F5A]/70 focus:outline-hidden focus:border-[#5D2E85] transition-colors"
               />
               <svg
                 className="w-4 h-4 text-[#5F5F5A] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
@@ -120,7 +120,7 @@ export default function BlogPage() {
                 <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-between order-2 lg:order-1">
                   <div>
                     <div className="flex flex-wrap items-center gap-2.5 mb-4 sm:mb-5">
-                      <span className="font-heading font-black text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-full bg-[#FBE9E4] text-[#E84A2A] border border-[#E84A2A]/20">
+                      <span className="font-heading font-black text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-full bg-[#F1E7F9] text-[#5D2E85] border border-[#5D2E85]/20">
                         {featuredPost.category}
                       </span>
                       <span className="text-[11px] text-[#5F5F5A] font-body font-semibold">
@@ -132,7 +132,7 @@ export default function BlogPage() {
                       </span>
                     </div>
 
-                    <h2 className="font-heading font-black uppercase tracking-tight text-2xl sm:text-3xl md:text-4xl text-[#111111] group-hover:text-[#E84A2A] transition-colors leading-[1.04] mb-4">
+                    <h2 className="font-heading font-black uppercase tracking-tight text-2xl sm:text-3xl md:text-4xl text-[#111111] group-hover:text-[#5D2E85] transition-colors leading-[1.04] mb-4">
                       {featuredPost.title}
                     </h2>
 
@@ -156,7 +156,7 @@ export default function BlogPage() {
                       </div>
                     </div>
 
-                    <div className="inline-flex items-center gap-2 text-xs font-heading font-bold uppercase tracking-wider text-[#111111] group-hover:text-[#E84A2A] transition-colors">
+                    <div className="inline-flex items-center gap-2 text-xs font-heading font-bold uppercase tracking-wider text-[#111111] group-hover:text-[#5D2E85] transition-colors">
                       <span>Read Blueprint</span>
                       <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -211,7 +211,7 @@ export default function BlogPage() {
                       <span>{post.date}</span>
                     </div>
 
-                    <h3 className="font-heading font-black text-lg sm:text-xl text-[#111111] group-hover:text-[#E84A2A] transition-colors uppercase tracking-tight mb-2.5 leading-snug">
+                    <h3 className="font-heading font-black text-lg sm:text-xl text-[#111111] group-hover:text-[#5D2E85] transition-colors uppercase tracking-tight mb-2.5 leading-snug">
                       {post.title}
                     </h3>
 
@@ -252,7 +252,7 @@ export default function BlogPage() {
                 setActiveCategory('All');
                 setSearchQuery('');
               }}
-              className="px-6 py-2.5 rounded-full bg-[#111111] text-white font-heading font-bold text-xs uppercase tracking-wider hover:bg-[#E84A2A] transition-colors"
+              className="px-6 py-2.5 rounded-full bg-[#111111] text-white font-heading font-bold text-xs uppercase tracking-wider hover:bg-[#5D2E85] transition-colors"
             >
               Reset Filters
             </button>
@@ -263,7 +263,7 @@ export default function BlogPage() {
         <ScrollReveal data-reveal="up" className="mt-14 sm:mt-18">
           <div className="rounded-3xl bg-[#111111] text-white p-8 sm:p-12 lg:p-14 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="max-w-xl text-center md:text-left z-10">
-              <span className="inline-block font-sans font-bold text-[10px] uppercase tracking-[0.16em] text-[#E84A2A] mb-2">
+              <span className="inline-block font-sans font-bold text-[10px] uppercase tracking-[0.16em] text-[#5D2E85] mb-2">
                 Commercial Audit
               </span>
               <h3 className="font-heading font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight leading-tight mb-3">
@@ -277,7 +277,7 @@ export default function BlogPage() {
             <div className="shrink-0 z-10">
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-[#111111] bg-white hover:bg-[#E84A2A] hover:text-white transition-all duration-300 shadow-sm"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-[#111111] bg-white hover:bg-[#5D2E85] hover:text-white transition-all duration-300 shadow-sm"
               >
                 <span>Book Strategy Call</span>
                 <span>→</span>

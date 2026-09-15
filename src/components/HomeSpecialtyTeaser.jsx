@@ -9,7 +9,7 @@ export default function HomeSpecialtyTeaser() {
         <div className="max-w-3xl mx-auto text-center mb-14 md:mb-18">
           <ScrollReveal data-reveal="up">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+              <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
               <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
                 Dedicated Vertical Practices
               </span>
@@ -19,7 +19,7 @@ export default function HomeSpecialtyTeaser() {
           <ScrollReveal data-reveal="up" delay={80}>
             <h2 className="font-heading font-black text-3xl sm:text-5xl uppercase tracking-tight text-[#111111] leading-[1.04] mb-4">
               Specialized Playbooks Where <br />
-              <span className="text-[#E84A2A]">Nuance Really Matters.</span>
+              <span className="text-[#5D2E85]">Nuance Really Matters.</span>
             </h2>
           </ScrollReveal>
 
@@ -40,7 +40,7 @@ export default function HomeSpecialtyTeaser() {
               className="group block h-full p-8 sm:p-10 rounded-3xl bg-white border border-[#DEDED7] hover:border-[#111111] transition-all duration-300 shadow-card hover:shadow-hover hover:-translate-y-1"
             >
               <div className="flex items-center justify-between mb-6">
-                <span className="px-3 py-1 rounded-full bg-[#FBE9E4] text-[#E84A2A] font-body font-bold text-xs uppercase tracking-wider">
+                <span className="px-3 py-1 rounded-full bg-[#F1E7F9] text-[#5D2E85] font-body font-bold text-xs uppercase tracking-wider">
                   Specialty Practice
                 </span>
                 <span className="text-[#5F5F5A] text-xs font-bold uppercase tracking-wider">
@@ -48,7 +48,7 @@ export default function HomeSpecialtyTeaser() {
                 </span>
               </div>
 
-              <h3 className="font-heading font-black text-2xl text-[#111111] mb-3 group-hover:text-[#E84A2A] transition-colors">
+              <h3 className="font-heading font-black text-2xl text-[#111111] mb-3 group-hover:text-[#5D2E85] transition-colors">
                 For Makeup Artists
               </h3>
 
@@ -56,7 +56,7 @@ export default function HomeSpecialtyTeaser() {
                 Lock in high-ticket bridal contracts months in advance, eliminate off-season slumps, and automate WhatsApp pre-qualification so you never waste time on price-shoppers.
               </p>
 
-              <div className="flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-wider text-[#111111] group-hover:text-[#E84A2A] transition-colors">
+              <div className="flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-wider text-[#111111] group-hover:text-[#5D2E85] transition-colors">
                 <span>View Specialist MUA Playbook</span>
                 <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
               </div>
@@ -70,7 +70,7 @@ export default function HomeSpecialtyTeaser() {
               className="group block h-full p-8 sm:p-10 rounded-3xl bg-white border border-[#DEDED7] hover:border-[#111111] transition-all duration-300 shadow-card hover:shadow-hover hover:-translate-y-1"
             >
               <div className="flex items-center justify-between mb-6">
-                <span className="px-3 py-1 rounded-full bg-[#FBE9E4] text-[#E84A2A] font-body font-bold text-xs uppercase tracking-wider">
+                <span className="px-3 py-1 rounded-full bg-[#F1E7F9] text-[#5D2E85] font-body font-bold text-xs uppercase tracking-wider">
                   Specialty Practice
                 </span>
                 <span className="text-[#5F5F5A] text-xs font-bold uppercase tracking-wider">
@@ -78,7 +78,7 @@ export default function HomeSpecialtyTeaser() {
                 </span>
               </div>
 
-              <h3 className="font-heading font-black text-2xl text-[#111111] mb-3 group-hover:text-[#E84A2A] transition-colors">
+              <h3 className="font-heading font-black text-2xl text-[#111111] mb-3 group-hover:text-[#5D2E85] transition-colors">
                 For Salons &amp; Clinics
               </h3>
 
@@ -86,7 +86,7 @@ export default function HomeSpecialtyTeaser() {
                 Pack styling chairs and treatment rooms daily with hyper-local pin-code ads, Google Maps 3-Pack domination, and automated recurring client rebooking engines.
               </p>
 
-              <div className="flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-wider text-[#111111] group-hover:text-[#E84A2A] transition-colors">
+              <div className="flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-wider text-[#111111] group-hover:text-[#5D2E85] transition-colors">
                 <span>View Specialist Salon Playbook</span>
                 <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
               </div>

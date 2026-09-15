@@ -14,7 +14,7 @@ export default function HomeWorkTeaser() {
           <div>
             <ScrollReveal data-reveal="up">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-[#F7F6F2] shadow-subtle mb-4">
-                <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+                <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
                 <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
                   Verified Client Proof
                 </span>
@@ -24,7 +24,7 @@ export default function HomeWorkTeaser() {
             <ScrollReveal data-reveal="up" delay={80}>
               <h2 className="font-heading font-black text-3xl sm:text-5xl uppercase tracking-tight text-[#111111] leading-[1.04]">
                 Real Businesses. <br />
-                <span className="text-[#E84A2A]">Documented Growth.</span>
+                <span className="text-[#5D2E85]">Documented Growth.</span>
               </h2>
             </ScrollReveal>
           </div>
@@ -32,7 +32,7 @@ export default function HomeWorkTeaser() {
           <ScrollReveal data-reveal="up" delay={120}>
             <Link
               to="/work"
-              className="inline-flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-wider text-[#111111] hover:text-[#E84A2A] transition-colors group"
+              className="inline-flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-wider text-[#111111] hover:text-[#5D2E85] transition-colors group"
             >
               <span>View All Client Case Studies</span>
               <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
@@ -65,16 +65,16 @@ export default function HomeWorkTeaser() {
                 </div>
 
                 <div className="p-7 sm:p-8">
-                  <p className="font-body font-bold text-xs uppercase tracking-wider text-[#E84A2A] mb-1">
+                  <p className="font-body font-bold text-xs uppercase tracking-wider text-[#5D2E85] mb-1">
                     {study.industry}
                   </p>
-                  <h3 className="font-heading font-black text-xl text-[#111111] mb-3 group-hover:text-[#E84A2A] transition-colors">
+                  <h3 className="font-heading font-black text-xl text-[#111111] mb-3 group-hover:text-[#5D2E85] transition-colors">
                     {study.clientName}
                   </h3>
                   <p className="font-body text-xs sm:text-sm text-[#5F5F5A] leading-relaxed mb-5 line-clamp-2">
                     {study.approach}
                   </p>
-                  <div className="flex items-center gap-1.5 font-heading font-bold text-xs uppercase tracking-wider text-[#111111] group-hover:text-[#E84A2A] transition-colors">
+                  <div className="flex items-center gap-1.5 font-heading font-bold text-xs uppercase tracking-wider text-[#111111] group-hover:text-[#5D2E85] transition-colors">
                     <span>Read Full Case Study</span>
                     <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
                   </div>

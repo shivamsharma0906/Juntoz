@@ -30,7 +30,7 @@ export default function BlogPostPage() {
       
       {/* Progress Bar */}
       <div className="fixed top-0 left-0 h-1 z-50 bg-[#DEDED7] w-full">
-        <div className="h-full transition-transform duration-150 ease-out origin-left bg-[#E84A2A]"
+        <div className="h-full transition-transform duration-150 ease-out origin-left bg-[#5D2E85]"
              style={{ transform: `scaleX(${scrollProgress})` }} />
       </div>
 
@@ -51,7 +51,7 @@ export default function BlogPostPage() {
           
           <ScrollReveal data-reveal="up">
             <div className="flex flex-wrap items-center gap-3 mb-4">
-              <span className="font-body font-bold text-[11px] tracking-wider uppercase px-3 py-1 rounded-full bg-[#E84A2A] text-white">
+              <span className="font-body font-bold text-[11px] tracking-wider uppercase px-3 py-1 rounded-full bg-[#5D2E85] text-white">
                 {post.category}
               </span>
               <span className="font-body text-white/70 text-xs font-semibold">{post.date} • {post.readTime}</span>
@@ -101,14 +101,14 @@ export default function BlogPostPage() {
         {/* Article Body */}
         <div className="flex-1 bg-white p-8 sm:p-12 rounded-3xl border border-[#DEDED7] shadow-card">
           <ScrollReveal data-reveal="up" delay={150}>
-            <p className="font-body text-lg sm:text-xl text-[#111111] leading-relaxed font-medium mb-10 pl-6 border-l-4 border-[#E84A2A] bg-[#F7F6F2] py-4 rounded-r-2xl">
+            <p className="font-body text-lg sm:text-xl text-[#111111] leading-relaxed font-medium mb-10 pl-6 border-l-4 border-[#5D2E85] bg-[#F7F6F2] py-4 rounded-r-2xl">
               {post.excerpt}
             </p>
             
             <article className="prose prose-neutral prose-lg max-w-none font-body leading-relaxed text-[#5F5F5A]
               prose-headings:font-heading prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight prose-headings:text-[#111111]
               prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
-              prose-p:mb-6 prose-a:text-[#E84A2A] prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-li:mb-2"
+              prose-p:mb-6 prose-a:text-[#5D2E85] prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-li:mb-2"
               dangerouslySetInnerHTML={{ __html: post.content }} 
             />
           </ScrollReveal>

@@ -68,12 +68,12 @@ export default function WhoWeWorkWith() {
         {/* Section Header */}
         <ScrollReveal data-reveal="up" className="max-w-3xl mb-16 text-left">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-[#F7F6F2] text-[#5F5F5A] text-xs font-semibold uppercase tracking-wider mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
             <span>Client Diversity</span>
           </div>
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-5">
             If Your Business Wants To Grow Digitally,{' '}
-            <span className="text-[#E84A2A]">We Can Help.</span>
+            <span className="text-[#5D2E85]">We Can Help.</span>
           </h2>
           <p className="font-body text-[#5F5F5A] text-base md:text-lg leading-relaxed">
             We partner with businesses across various stages and models. Whether you are an emerging startup, an established local clinic, or a high-ticket service brand, we build a marketing engine tailored to your unit economics.
@@ -87,7 +87,7 @@ export default function WhoWeWorkWith() {
               <div 
                 className={`h-full p-8 rounded-3xl border transition-all duration-300 flex flex-col justify-between ${
                   cat.isSpecialty
-                    ? 'bg-[#FBE9E4]/40 border-[#E84A2A]/40 shadow-subtle hover:border-[#E84A2A]'
+                    ? 'bg-[#F1E7F9]/40 border-[#5D2E85]/40 shadow-subtle hover:border-[#5D2E85]'
                     : 'bg-[#F7F6F2] border-[#DEDED7] hover:border-[#111111]/30 hover:bg-white shadow-subtle'
                 }`}
               >
@@ -95,14 +95,14 @@ export default function WhoWeWorkWith() {
                   <div className="flex items-center justify-between mb-6">
                     <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border ${
                       cat.isSpecialty 
-                        ? 'bg-white text-[#E84A2A] border-[#E84A2A]/30' 
+                        ? 'bg-white text-[#5D2E85] border-[#5D2E85]/30' 
                         : 'bg-white text-[#111111] border-[#DEDED7]'
                     }`}>
                       {cat.icon}
                     </div>
                     <span className={`text-[10px] font-sans font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${
                       cat.isSpecialty
-                        ? 'bg-white text-[#E84A2A] border-[#E84A2A]/30'
+                        ? 'bg-white text-[#5D2E85] border-[#5D2E85]/30'
                         : 'bg-white text-[#5F5F5A] border-[#DEDED7]'
                     }`}>
                       {cat.tag}

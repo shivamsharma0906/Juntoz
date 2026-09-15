@@ -14,15 +14,15 @@ export default function Testimonials() {
         
         {/* Section Header */}
         <ScrollReveal data-reveal="flip-3d" className="text-center mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#E84A2A]/20 bg-[#FBE9E4] mb-5 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
-            <span className="font-sans font-semibold text-[#E84A2A] text-xs tracking-wider uppercase">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#5D2E85]/20 bg-[#F1E7F9] mb-5 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
+            <span className="font-sans font-semibold text-[#5D2E85] text-xs tracking-wider uppercase">
               Trust &amp; Client Reputation
             </span>
           </div>
           
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl md:text-6xl uppercase tracking-tighter mb-4">
-            Built On <span className="text-[#E84A2A]">Verified Results</span>.
+            Built On <span className="text-[#5D2E85]">Verified Results</span>.
           </h2>
           <p className="font-body text-[#5F5F5A] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
             We hold ourselves to a strict credibility standard: no fabricated reviews or vanity metrics. Here is what beauty professionals experience working with Juntoz.
@@ -37,15 +37,15 @@ export default function Testimonials() {
                 <div className="text-3xl sm:text-4xl font-heading font-black text-[#111111] mb-2">
                   {item.metric.includes('★') ? (
                     <>
-                      <span>5.0</span> <span className="text-[#E84A2A]">★</span>
+                      <span>5.0</span> <span className="text-[#5D2E85]">★</span>
                     </>
                   ) : item.metric.includes('%') ? (
                     <>
-                      <span>100</span><span className="text-[#E84A2A]">%</span>
+                      <span>100</span><span className="text-[#5D2E85]">%</span>
                     </>
                   ) : (
                     <>
-                      <span>3.1</span><span className="text-[#E84A2A]">x</span>
+                      <span>3.1</span><span className="text-[#5D2E85]">x</span>
                     </>
                   )}
                 </div>
@@ -67,7 +67,7 @@ export default function Testimonials() {
               <div className="max-w-xl text-left">
                 <div className="flex items-center gap-2 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5 text-[#E84A2A] fill-current" viewBox="0 0 20 20">
+                    <svg key={i} className="w-5 h-5 text-[#5D2E85] fill-current" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
@@ -103,7 +103,7 @@ export default function Testimonials() {
                   href="https://wa.me/919004001800?text=Hi%20Juntoz,%20I'd%20like%20to%20learn%20more%20about%20your%20work%20with%20makeup%20artists."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#111111] hover:bg-[#E84A2A] text-white font-sans font-semibold text-xs uppercase tracking-wider transition-colors duration-200 shadow-xs"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#111111] hover:bg-[#5D2E85] text-white font-sans font-semibold text-xs uppercase tracking-wider transition-colors duration-200 shadow-xs"
                 >
                   Speak With Our Team
                 </a>

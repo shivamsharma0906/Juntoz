@@ -30,12 +30,12 @@ export default function WorkPage() {
         
         <ScrollReveal data-reveal="up" className="mb-10 md:mb-16 text-center">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#E84A2A]" />
+            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
             <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">Verified Agency Proof</span>
           </div>
 
           <h1 className="font-heading font-black text-[#111111] text-4xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight leading-[0.96] mb-5">
-            Proven <span className="text-[#E84A2A]">Results.</span>
+            Proven <span className="text-[#5D2E85]">Results.</span>
           </h1>
 
           <p className="font-body text-[#5F5F5A] text-base md:text-xl max-w-2xl leading-relaxed mx-auto mb-6">
@@ -81,7 +81,7 @@ export default function WorkPage() {
                   <div>
                     {/* Top tags */}
                     <div className="flex items-center justify-between mb-6">
-                      <span className="font-body font-bold text-[11px] tracking-wider uppercase px-3.5 py-1 rounded-full bg-[#FBE9E4] text-[#E84A2A] border border-[#E84A2A]/20">
+                      <span className="font-body font-bold text-[11px] tracking-wider uppercase px-3.5 py-1 rounded-full bg-[#F1E7F9] text-[#5D2E85] border border-[#5D2E85]/20">
                         {study.specialty || study.category}
                       </span>
                       <span className="font-body text-xs font-semibold text-[#5F5F5A]">
@@ -92,7 +92,7 @@ export default function WorkPage() {
                     {/* Main Metric */}
                     <div className="mb-6">
                       <p className="font-body text-[#5F5F5A] text-xs uppercase tracking-wider font-bold mb-1">{study.metricLabel}</p>
-                      <div className="font-heading font-black uppercase text-[#E84A2A] tracking-tight text-3xl sm:text-4xl md:text-5xl">
+                      <div className="font-heading font-black uppercase text-[#5D2E85] tracking-tight text-3xl sm:text-4xl md:text-5xl">
                         {study.metric}
                       </div>
                     </div>
@@ -107,7 +107,7 @@ export default function WorkPage() {
                       {study.problem}
                     </p>
                     
-                    <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#111111] group-hover:text-[#E84A2A] transition-colors duration-200">
+                    <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#111111] group-hover:text-[#5D2E85] transition-colors duration-200">
                       <span>Read Case Study</span>
                       <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

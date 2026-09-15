@@ -77,7 +77,7 @@ const StatCounter = ({ stat, isVisible }) => {
       <div className="flex-1 text-center md:text-left">
         <div className="font-heading font-black text-3xl leading-none text-[#111111] flex items-baseline justify-center md:justify-start">
           <span>{formattedValue}</span>
-          <span className="text-[#E84A2A] ml-0.5">{stat.suffix}</span>
+          <span className="text-[#5D2E85] ml-0.5">{stat.suffix}</span>
         </div>
         <div className="font-sans font-bold text-[11px] uppercase tracking-wider text-[#5F5F5A] mt-1.5">
           {stat.label}
@@ -124,7 +124,7 @@ export default function About() {
         {/* Values Block */}
         <div className="space-y-12">
           <ScrollReveal className="text-center max-w-xl mx-auto space-y-3">
-            <span className="font-sans font-semibold tracking-wider text-[#E84A2A] uppercase text-xs block">
+            <span className="font-sans font-semibold tracking-wider text-[#5D2E85] uppercase text-xs block">
               Core Principles
             </span>
             <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl uppercase tracking-tight">
@@ -146,14 +146,14 @@ export default function About() {
                       >
                         {value.icon}
                       </div>
-                      <span className="font-sans font-bold text-[#E84A2A] text-lg">{value.n}</span>
+                      <span className="font-sans font-bold text-[#5D2E85] text-lg">{value.n}</span>
                     </div>
 
                     <div className="space-y-2">
                       <h3 className="font-heading font-bold text-[#111111] text-xl uppercase tracking-tight">
                         {value.headline}
                       </h3>
-                      <p className="font-sans font-bold text-[11px] tracking-wider uppercase text-[#E84A2A]">
+                      <p className="font-sans font-bold text-[11px] tracking-wider uppercase text-[#5D2E85]">
                         {value.sub}
                       </p>
                     </div>
@@ -171,7 +171,7 @@ export default function About() {
         {/* ── Why a Specialist Beats a Generalist for MUAs ── */}
         <div className="pt-14 border-t border-[#DEDED7] space-y-12">
           <ScrollReveal className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="font-sans font-semibold tracking-wider text-[#E84A2A] uppercase text-xs block">
+            <span className="font-sans font-semibold tracking-wider text-[#5D2E85] uppercase text-xs block">
               The Strategic Advantage
             </span>
             <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl uppercase tracking-tight">
@@ -186,7 +186,7 @@ export default function About() {
             <ScrollReveal data-reveal="left" delay={100}>
               <div className="p-8 rounded-3xl bg-white border border-[#DEDED7] space-y-4 h-full shadow-subtle">
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-full bg-[#FBE9E4] text-[#E84A2A] flex items-center justify-center font-bold text-xs">
+                  <span className="w-8 h-8 rounded-full bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center font-bold text-xs">
                     01
                   </span>
                   <h3 className="font-heading font-bold text-lg text-[#111111] uppercase tracking-wide">
@@ -202,7 +202,7 @@ export default function About() {
             <ScrollReveal data-reveal="right" delay={200}>
               <div className="p-8 rounded-3xl bg-white border border-[#DEDED7] space-y-4 h-full shadow-subtle">
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-full bg-[#FBE9E4] text-[#E84A2A] flex items-center justify-center font-bold text-xs">
+                  <span className="w-8 h-8 rounded-full bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center font-bold text-xs">
                     02
                   </span>
                   <h3 className="font-heading font-bold text-lg text-[#111111] uppercase tracking-wide">
@@ -218,7 +218,7 @@ export default function About() {
             <ScrollReveal data-reveal="left" delay={300}>
               <div className="p-8 rounded-3xl bg-white border border-[#DEDED7] space-y-4 h-full shadow-subtle">
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-full bg-[#FBE9E4] text-[#E84A2A] flex items-center justify-center font-bold text-xs">
+                  <span className="w-8 h-8 rounded-full bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center font-bold text-xs">
                     03
                   </span>
                   <h3 className="font-heading font-bold text-lg text-[#111111] uppercase tracking-wide">
@@ -234,7 +234,7 @@ export default function About() {
             <ScrollReveal data-reveal="right" delay={400}>
               <div className="p-8 rounded-3xl bg-white border border-[#DEDED7] space-y-4 h-full shadow-subtle">
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-full bg-[#FBE9E4] text-[#E84A2A] flex items-center justify-center font-bold text-xs">
+                  <span className="w-8 h-8 rounded-full bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center font-bold text-xs">
                     04
                   </span>
                   <h3 className="font-heading font-bold text-lg text-[#111111] uppercase tracking-wide">
