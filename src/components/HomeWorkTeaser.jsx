@@ -31,7 +31,7 @@ export default function HomeWorkTeaser() {
 
           <ScrollReveal data-reveal="up" delay={120}>
             <Link
-              to="/work"
+              to="/case-studies"
               className="inline-flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-wider text-[#111111] hover:text-[#5D2E85] transition-colors group"
             >
               <span>View All Client Case Studies</span>
@@ -45,7 +45,7 @@ export default function HomeWorkTeaser() {
           {teaserStudies.map((study, i) => (
             <ScrollReveal key={study.slug || i} data-reveal="up" delay={i * 100}>
               <Link
-                to={`/work/${study.slug}`}
+                to={`/case-study/${study.slug}`}
                 className="group block rounded-3xl bg-[#F7F6F2] border border-[#DEDED7] hover:border-[#111111] transition-all duration-300 shadow-subtle hover:shadow-card hover:-translate-y-1 overflow-hidden"
               >
                 <div className="relative aspect-[16/9] overflow-hidden bg-[#EAE8E1]">

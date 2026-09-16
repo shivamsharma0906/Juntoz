@@ -10,14 +10,13 @@ const footerServices = [
 ];
 
 const footerSpecialties = [
-  { label: 'For Makeup Artists', to: '/for-makeup-artists' },
-  { label: 'For Salons & Clinics', to: '/for-salons' },
+  { label: 'Makeup Artists', to: '/for-makeup-artists' },
+  { label: 'Salons ', to: '/for-salons' },
 ];
 
 const footerCompany = [
-  { label: 'Selected Case Studies', to: '/work' },
+  { label: 'Selected Case Studies', to: '/case-studies' },
   { label: 'About Juntoz & Team', to: '/about' },
-  { label: 'Growth Insights & Articles', to: '/blog' },
   { label: 'Book a Strategy Call', to: '/contact' },
 ];
 

@@ -122,7 +122,7 @@ export default function ForMakeupArtistsPage() {
 
               <ScrollReveal data-reveal="up" delay={250}>
                 <p className="font-body text-[#5F5F5A] text-base md:text-lg max-w-xl leading-relaxed">
-                  As a full-service digital marketing agency with specialized depth in the beauty ecosystem, Juntoz helps bridal artists, educators, and creators build premium positioning funnels that target high-intent brides and secure high-ticket wedding bookings on autopilot.
+                  High-ticket bridal bookings. Sold-out masterclasses. Built on real funnels.
                 </p>
               </ScrollReveal>
 

@@ -55,7 +55,7 @@ const PLACEMENTS = {
     { Icon: props => <IconImage src="/icons/icon-sparkle.webp" alt="" glow="rgba(255,58,242,0.35)" {...props} />, pos: { bottom: '28%', left: '6%' }, size: 52, anim: 'glass-float-b', parallaxFactor: 12 },
   ],
   cta: [
-    { Icon: props => <IconImage src="/icons/icon-heart.webp"   alt="" glow="rgba(123,47,255,0.35)" {...props} />, pos: { top: '15%', left: '5%' },   size: 60, anim: 'glass-float-c', parallaxFactor: 14 },
+    { Icon: props => <IconImage src="/icons/icon-heart.webp"   alt="" glow="rgba(93,46,133,0.35)" {...props} />, pos: { top: '15%', left: '5%' },   size: 60, anim: 'glass-float-c', parallaxFactor: 14 },
     { Icon: props => <IconImage src="/icons/icon-perfume.webp" alt="" glow="rgba(0,245,212,0.3)"  {...props} />,  pos: { bottom: '20%', right: '7%' }, size: 58, anim: 'glass-float-a', parallaxFactor: 16 },
   ],
 };

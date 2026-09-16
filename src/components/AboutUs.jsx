@@ -78,9 +78,9 @@ export default function AboutUs() {
     <section ref={sectionRef} className="relative overflow-hidden pb-16 pt-8 md:pb-24 md:pt-12 bg-background">
       {/* ── Ambient Glows ── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div style={{ position:'absolute', top:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(0,245,212,0.15) 35%, rgba(123,47,255,0.15) 65%, transparent 95%)' }}/>
+        <div style={{ position:'absolute', top:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(0,245,212,0.15) 35%, rgba(93,46,133,0.15) 65%, transparent 95%)' }}/>
         <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(255,58,242,0.1) 40%, rgba(0,245,212,0.1) 60%, transparent 95%)' }}/>
-        <div style={{ position:'absolute', top:'10%', right:'5%', width:'600px', height:'600px', background:'radial-gradient(ellipse, rgba(123,47,255,0.06) 0%, transparent 70%)', filter:'blur(80px)' }}/>
+        <div style={{ position:'absolute', top:'10%', right:'5%', width:'600px', height:'600px', background:'radial-gradient(ellipse, rgba(93,46,133,0.06) 0%, transparent 70%)', filter:'blur(80px)' }}/>
         <div style={{ position:'absolute', bottom:'10%', left:'5%', width:'500px', height:'500px', background:'radial-gradient(ellipse, rgba(0,245,212,0.05) 0%, transparent 70%)', filter:'blur(80px)' }}/>
       </div>
 

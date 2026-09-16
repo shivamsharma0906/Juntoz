@@ -2,46 +2,141 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from './logo.webp';
+import { SERVICES_MEGA_MENU } from '../data/services';
 
 const WA_HARD =
   'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20want%20to%20book%20a%20strategy%20call.';
 
 const navLinks = [
   { name: 'Home', href: '/' },
-  { name: 'Services', href: '/services' },
-  { 
-    name: 'Specialties', 
-    href: '#specialties',
-    isDropdown: true,
-    children: [
-      { name: 'Google Business Profile', href: '/google-business-profile', tag: 'Local 3-Pack' },
-      { name: 'For Makeup Artists', href: '/for-makeup-artists', tag: 'MUA Growth' },
-      { name: 'For Salons & Clinics', href: '/for-salons', tag: 'Local Scale' },
-    ]
-  },
+  { name: 'Services', href: '/services', isMega: true },
+  { name: 'Specialties', href: '/specialties' },
   { name: 'Work', href: '/work' },
-  { name: 'About', href: '/about' },
-  { name: 'Insights', href: '/blog' },
+  { name: 'About Us', href: '/about' },
+  { name: 'Case Studies', href: '/case-studies' },
   { name: 'Contact', href: '/contact' },
 ];
 
 const IG_PATH = 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z';
 const LI_PATH = 'M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z';
 
+const mobileNavLinks = [
+  { name: 'Home', href: '/' },
+  {
+    name: 'Services',
+    href: '/services',
+    isDropdown: true,
+    children: [
+      { name: 'All Services Overview', href: '/services', tag: 'All' },
+      { name: 'Instagram Management', href: '/services/instagram-management', tag: 'Core' },
+      { name: 'Meta Ads & Google Ads', href: '/services/meta-google-ads', tag: 'High ROAS' },
+      { name: 'SEO', href: '/services/seo', tag: 'Organic' },
+      { name: 'GMB (Google My Business)', href: '/services/gmb', tag: 'Local 3-Pack' },
+      { name: 'Photo & Content Shoot', href: '/services/mobile-content-shoot', tag: 'Delhi & Mumbai' },
+      { name: 'AI Videos', href: '/services/ai-videos', tag: 'Trending' },
+      { name: 'Websites', href: '/services/websites', tag: 'Web' },
+    ],
+  },
+  {
+    name: 'Specialties',
+    href: '/specialties',
+    isDropdown: true,
+    children: [
+      { name: '36 Industry Playbooks', href: '/industries', tag: '36 Sectors' },
+      { name: 'All Specialties Overview', href: '/specialties', tag: 'Overview' },
+      { name: 'Makeup Artists', href: '/for-makeup-artists', tag: 'MUA Growth' },
+      { name: 'Salons & Clinics', href: '/for-salons', tag: 'Local Scale' },
+    ],
+  },
+  { name: 'Work', href: '/work' },
+  { name: 'About', href: '/about' },
+  { name: 'Case Studies', href: '/case-studies' },
+  { name: 'Contact', href: '/contact' },
+];
+
+function MegaMenuIcon({ type }) {
+  switch (type) {
+    case 'ads':
+      return (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+        </svg>
+      );
+    case 'instagram':
+      return (
+        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+        </svg>
+      );
+    case 'map':
+      return (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      );
+    case 'message':
+      return (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+      );
+    case 'web':
+      return (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      );
+    case 'funnel':
+      return (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+        </svg>
+      );
+    case 'chart':
+      return (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+        </svg>
+      );
+    case 'camera':
+      return (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      );
+    case 'video':
+      return (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+      );
+    case 'sparkles':
+    default:
+      return (
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+        </svg>
+      );
+  }
+}
+
+const TEL_LINK = 'tel:+919004001800';
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [hovered, setHovered] = useState(null);
   const [mounted, setMounted] = useState(false);
-  const [indicatorStyle, setIndicatorStyle] = useState({ opacity: 0 });
+  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [specialtiesMenuOpen, setSpecialtiesMenuOpen] = useState(false);
   const [expandedMobile, setExpandedMobile] = useState({ Specialties: false });
 
-  const navRef = useRef(null);
-  const linkRefs = useRef({});
   const ctaRef = useRef(null);
   const magnetRaf = useRef(null);
-  const spotRef = useRef(null);
+  const megaTimeoutRef = useRef(null);
+  const specialtiesTimeoutRef = useRef(null);
   const lastScrollY = useRef(0);
   const location = useLocation();
 
@@ -50,8 +145,26 @@ export default function Navbar() {
     return () => clearTimeout(t);
   }, []);
 
-  const handleHover = (linkHrefOrName) => {
-    setHovered(linkHrefOrName);
+  const handleMegaEnter = () => {
+    if (megaTimeoutRef.current) clearTimeout(megaTimeoutRef.current);
+    setMegaMenuOpen(true);
+  };
+
+  const handleMegaLeave = () => {
+    megaTimeoutRef.current = setTimeout(() => {
+      setMegaMenuOpen(false);
+    }, 150); // 150ms buffer prevents mouse-leave flicker
+  };
+
+  const handleSpecialtiesEnter = () => {
+    if (specialtiesTimeoutRef.current) clearTimeout(specialtiesTimeoutRef.current);
+    setSpecialtiesMenuOpen(true);
+  };
+
+  const handleSpecialtiesLeave = () => {
+    specialtiesTimeoutRef.current = setTimeout(() => {
+      setSpecialtiesMenuOpen(false);
+    }, 150);
   };
 
   const toggleAccordion = (name) => {
@@ -87,6 +200,8 @@ export default function Navbar() {
   useEffect(() => {
     const t = setTimeout(() => {
       setMenuOpen(false);
+      setMegaMenuOpen(false);
+      setSpecialtiesMenuOpen(false);
     }, 0);
     return () => clearTimeout(t);
   }, [location]);
@@ -100,48 +215,14 @@ export default function Navbar() {
   // Accessibility: Escape key closes menu
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') setMenuOpen(false);
-    };
-    if (menuOpen) window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [menuOpen]);
-
-  useEffect(() => {
-    let activeHref = hovered ?? location.pathname;
-    if (!hovered && (location.pathname === '/for-makeup-artists' || location.pathname === '/for-salons' || location.pathname === '/google-business-profile')) {
-      activeHref = 'Specialties';
-    }
-
-    const updateIndicator = () => {
-      const el = linkRefs.current[activeHref];
-      if (el && navRef.current) {
-        const navRect = navRef.current.getBoundingClientRect();
-        const elRect = el.getBoundingClientRect();
-        setIndicatorStyle({
-          left: elRect.left - navRect.left + 'px',
-          width: elRect.width + 'px',
-          opacity: 1,
-        });
-      } else {
-        setIndicatorStyle({ opacity: 0 });
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+        setMegaMenuOpen(false);
+        setSpecialtiesMenuOpen(false);
       }
     };
-
-    updateIndicator();
-    window.addEventListener('resize', updateIndicator);
-    return () => window.removeEventListener('resize', updateIndicator);
-  }, [hovered, location.pathname]);
-
-  const onNavMouseMove = useCallback((e) => {
-    if (!navRef.current || !spotRef.current) return;
-    const rect = navRef.current.getBoundingClientRect();
-    spotRef.current.style.left = `${e.clientX - rect.left}px`;
-    spotRef.current.style.top = `${e.clientY - rect.top}px`;
-    spotRef.current.style.opacity = '1';
-  }, []);
-
-  const onNavMouseLeave = useCallback(() => {
-    if (spotRef.current) spotRef.current.style.opacity = '0';
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   const onCtaMouseMove = useCallback((e) => {
@@ -152,7 +233,7 @@ export default function Navbar() {
     const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.25;
     if (magnetRaf.current) cancelAnimationFrame(magnetRaf.current);
     magnetRaf.current = requestAnimationFrame(() => {
-      el.style.transform = `translate(${dx}px, ${dy}px) scale(1.04)`;
+      el.style.transform = `translate(${dx}px, ${dy}px) scale(1.08)`;
     });
   }, []);
 
@@ -182,14 +263,16 @@ export default function Navbar() {
     <>
       <nav
         style={navEnter}
-        className={`fixed top-0 w-full z-50 transition-[padding] duration-500 ${scrolled ? 'pt-2 sm:pt-4' : 'pt-3 sm:pt-6'}`}
+        className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 pointer-events-none ${
+          scrolled ? 'pt-2 sm:pt-2' : 'pt-2.5 sm:pt-3.5'
+        }`}
       >
-        <div className="container mx-auto px-3 sm:px-6 max-w-7xl">
+        <div className="w-[94%] sm:w-[95%] max-w-[1380px] xl:max-w-[1460px] mx-auto pointer-events-auto relative">
           <div className={`
-            flex items-center justify-between px-3.5 sm:px-6 py-2 sm:py-2.5 transition-all duration-500 rounded-full relative
+            flex items-center justify-between px-5 sm:px-7 lg:px-8 xl:px-10 py-1.5 sm:py-2 lg:py-2.5 transition-all duration-300 rounded-full relative
             ${scrolled
-              ? 'bg-[#F7F6F2]/95 border border-[#DEDED7] shadow-[0_4px_20px_-2px_rgba(17,17,17,0.06)]'
-              : 'bg-white/90 border border-[#DEDED7] shadow-sm'}
+              ? 'bg-[#F7F6F2]/95 border border-[#DEDED7] shadow-[0_10px_30px_rgba(17,17,17,0.08)]'
+              : 'bg-white/95 border border-[#DEDED7] shadow-[0_6px_24px_rgba(17,17,17,0.05)]'}
           `}>
             {/* Backdrop blur layer */}
             <div className="absolute inset-0 rounded-full pointer-events-none z-0 backdrop-blur-md" />
@@ -212,8 +295,8 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* ── LOGO (Centered on mobile, left-aligned on desktop) ── */}
-            <div style={itemEnter(0.15)} className="flex-1 lg:flex-initial flex justify-center lg:justify-start items-center shrink-0 relative z-10 mr-0 lg:mr-2 xl:mr-4">
+            {/* ── LOGO (Left-aligned, scaled length-wise with locked aspect ratio) ── */}
+            <div style={itemEnter(0.15)} className="flex-1 lg:flex-initial flex justify-center lg:justify-start items-center shrink-0 relative z-10 mr-0 lg:mr-6">
               <Link
                 to="/"
                 className="flex items-center shrink-0 relative z-[60] group/logo"
@@ -222,170 +305,313 @@ export default function Navbar() {
                 <img
                   src={logo}
                   alt="Juntoz"
-                  width="140"
-                  height="36"
+                  width="185"
+                  height="48"
                   fetchPriority="high"
-                  className="h-7 sm:h-8 lg:h-8 xl:h-9 w-auto relative z-10 transition-transform duration-300 group-hover/logo:scale-105"
+                  className="w-[130px] sm:w-[150px] lg:w-[165px] xl:w-[180px] h-auto object-contain relative z-10 transition-transform duration-200 group-hover/logo:scale-105"
                 />
               </Link>
             </div>
 
-            {/* ── MOBILE RIGHT: Solid Juntoz Brand Color WhatsApp Circle Button (44px min) ── */}
+            {/* ── MOBILE RIGHT: Solid Juntoz Brand Color Call Circle Button ── */}
             <div className="lg:hidden flex items-center justify-end relative z-10">
               <a
-                href={WA_HARD}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Contact Juntoz on WhatsApp"
+                href={TEL_LINK}
+                aria-label="Call Juntoz"
+                title="Call Us: +91 90040 01800"
                 className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-[#5D2E85] text-white flex items-center justify-center shadow-[0_4px_14px_rgba(93,46,133,0.35)] active:scale-95 transition-all duration-200"
               >
-                <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29" />
+                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" />
                 </svg>
               </a>
             </div>
 
-            {/* ── Desktop nav links capsule ── */}
-            <div style={itemEnter(0.25)} className="hidden lg:block relative z-10 shrink min-w-0">
-              <div
-                ref={navRef}
-                onMouseMove={onNavMouseMove}
-                onMouseLeave={onNavMouseLeave}
-                className="flex items-center gap-0.5 xl:gap-1 relative bg-[#F7F6F2] rounded-full p-1 border border-[#DEDED7]"
-              >
-                {/* Nested clipping container for background indicator */}
-                <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none z-0">
-                  <div
-                    ref={spotRef}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full transition-opacity duration-300"
-                    style={{
-                      background: 'radial-gradient(circle, rgba(93,46,133,0.08) 0%, transparent 70%)',
-                      opacity: 0,
-                    }}
-                  />
-                  <div
-                    className="absolute top-1 bottom-1 rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                    style={{ 
-                      background: '#FFFFFF', 
-                      border: '1px solid #DEDED7', 
-                      boxShadow: '0 1px 4px rgba(17,17,17,0.06)',
-                      ...indicatorStyle 
-                    }}
-                  />
-                </div>
-
-                {navLinks.map((link) => {
-                  if (link.isDropdown) {
-                    const isDropActive = location.pathname.startsWith('/for-') || location.pathname === '/google-business-profile';
-                    return (
-                      <div
-                        key={link.name}
-                        className="relative group/drop z-20"
-                        onMouseEnter={() => handleHover(link.name)}
-                        onMouseLeave={() => handleHover(null)}
-                      >
-                        <button
-                          type="button"
-                          ref={(el) => { linkRefs.current[link.name] = el; }}
-                          className={`relative inline-flex items-center gap-1 font-sans font-medium text-[11px] xl:text-xs tracking-normal xl:tracking-wider uppercase px-2.5 xl:px-4 py-1.5 xl:py-2 rounded-full transition-colors duration-200 cursor-pointer
-                            ${isDropActive ? 'text-[#111111] font-semibold' : 'text-[#5F5F5A] hover:text-[#111111]'}`}
-                        >
-                          <span>{link.name}</span>
-                          <svg className="w-3 h-3 transition-transform duration-200 group-hover/drop:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                          </svg>
-                          {isDropActive && (
-                            <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#5D2E85]" />
-                          )}
-                        </button>
-
-                        {/* Dropdown Menu Box */}
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 translate-y-2 pointer-events-none group-hover/drop:opacity-100 group-hover/drop:translate-y-0 group-hover/drop:pointer-events-auto transition-all duration-200 z-50">
-                          <div className="bg-white border border-[#DEDED7] rounded-2xl p-2 shadow-card w-64 flex flex-col gap-1">
-                            {link.children.map((sub) => {
-                              const isSubActive = location.pathname === sub.href;
-                              return (
-                                <Link
-                                  key={sub.name}
-                                  to={sub.href}
-                                  className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all duration-150 group/sub ${
-                                    isSubActive
-                                      ? 'bg-[#F7F6F2] text-[#111111] font-semibold'
-                                      : 'text-[#5F5F5A] hover:bg-[#F7F6F2] hover:text-[#111111]'
-                                  }`}
-                                >
-                                  <span className="font-heading text-xs uppercase tracking-tight">{sub.name}</span>
-                                  <span className="text-[10px] uppercase font-mono tracking-wider text-[#5D2E85] bg-[#F1E7F9] px-2 py-0.5 rounded-md">
-                                    {sub.tag}
-                                  </span>
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  }
-
-                  const isActive = location.pathname === link.href;
+            {/* ── Desktop nav links (Generous spacing between options, larger text size) ── */}
+            <div style={itemEnter(0.25)} className="hidden lg:flex items-center justify-center gap-7 lg:gap-10 xl:gap-14 2xl:gap-16 flex-1 px-3 relative z-10">
+              {navLinks.map((link) => {
+                if (link.isMega) {
+                  const isServiceActive = location.pathname.startsWith('/services');
                   return (
-                    <Link
+                    <div
                       key={link.name}
-                      to={link.href}
-                      ref={(el) => { linkRefs.current[link.href] = el; }}
-                      onMouseEnter={() => handleHover(link.href)}
-                      onMouseLeave={() => handleHover(null)}
-                      className={`relative font-sans font-medium text-[11px] xl:text-xs tracking-normal xl:tracking-wider uppercase px-2.5 xl:px-4 py-1.5 xl:py-2 rounded-full transition-colors duration-200 z-10 whitespace-nowrap
-                        ${isActive ? 'text-[#111111] font-semibold' : 'text-[#5F5F5A] hover:text-[#111111]'}`}
+                      className="relative"
+                      onMouseEnter={handleMegaEnter}
+                      onMouseLeave={handleMegaLeave}
                     >
-                      {link.name}
-                      {isActive && (
-                        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#5D2E85]" />
-                      )}
-                    </Link>
+                      <Link
+                        to={link.href}
+                        onFocus={handleMegaEnter}
+                        className={`relative inline-flex items-center gap-1.5 font-sans font-semibold text-[19px] lg:text-[20px] xl:text-[21.5px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 ${
+                          isServiceActive || megaMenuOpen ? 'text-[#5D2E85]' : 'text-[#1F1F1D] hover:text-[#5D2E85]'
+                        }`}
+                      >
+                        <span>{link.name}</span>
+                        <svg
+                          className={`w-4 h-4 text-[#777772] transition-transform duration-200 ${
+                            megaMenuOpen ? 'rotate-180 text-[#5D2E85]' : ''
+                          }`}
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2.5}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                        {isServiceActive && (
+                          <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
+                        )}
+                      </Link>
+                    </div>
                   );
-                })}
-              </div>
+                }
+
+                if (link.name === 'Specialties') {
+                  const isSpecialtiesActive = location.pathname.startsWith('/specialties') || location.pathname.startsWith('/industries') || location.pathname.startsWith('/for-');
+                  return (
+                    <div
+                      key={link.name}
+                      className="relative"
+                      onMouseEnter={handleSpecialtiesEnter}
+                      onMouseLeave={handleSpecialtiesLeave}
+                    >
+                      <Link
+                        to={link.href}
+                        onFocus={handleSpecialtiesEnter}
+                        className={`relative inline-flex items-center gap-1.5 font-sans font-semibold text-[19px] lg:text-[20px] xl:text-[21.5px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 ${
+                          isSpecialtiesActive || specialtiesMenuOpen ? 'text-[#5D2E85]' : 'text-[#1F1F1D] hover:text-[#5D2E85]'
+                        }`}
+                      >
+                        <span>{link.name}</span>
+                        <svg
+                          className={`w-4 h-4 text-[#777772] transition-transform duration-200 ${
+                            specialtiesMenuOpen ? 'rotate-180 text-[#5D2E85]' : ''
+                          }`}
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2.5}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                        {isSpecialtiesActive && (
+                          <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
+                        )}
+                      </Link>
+
+                      {/* Dropdown Panel for Specialties */}
+                      <AnimatePresence>
+                        {specialtiesMenuOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                            transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
+                            className="absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[340px] bg-white border border-[#DEDED7] rounded-2xl shadow-[0_20px_45px_rgba(0,0,0,0.12),0_4px_16px_rgba(93,46,133,0.06)] p-3 z-50 pointer-events-auto"
+                          >
+                            <div className="flex flex-col gap-1">
+                              <Link
+                                to="/industries"
+                                onClick={() => setSpecialtiesMenuOpen(false)}
+                                className="flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 hover:bg-[#F1E7F9]/60 group"
+                              >
+                                <div className="w-9 h-9 rounded-xl bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center shrink-0 mt-0.5 text-base group-hover:bg-[#5D2E85] group-hover:text-white transition-colors">
+                                  🏢
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="font-heading font-bold text-[14px] text-[#111111] group-hover:text-[#5D2E85] transition-colors">
+                                      36 Industry Playbooks
+                                    </span>
+                                    <span className="text-[9px] font-mono font-bold uppercase text-[#5D2E85] bg-[#F1E7F9] px-1.5 py-0.5 rounded">
+                                      36 Sectors
+                                    </span>
+                                  </div>
+                                  <p className="text-[12px] text-[#5F5F5A] leading-snug mt-0.5">
+                                    Search &amp; filter our 36 specialized sector growth frameworks.
+                                  </p>
+                                </div>
+                              </Link>
+
+                              <Link
+                                to="/specialties"
+                                onClick={() => setSpecialtiesMenuOpen(false)}
+                                className="flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 hover:bg-[#F7F6F2] group"
+                              >
+                                <div className="w-9 h-9 rounded-xl bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center shrink-0 mt-0.5 text-base group-hover:bg-[#5D2E85] group-hover:text-white transition-colors">
+                                  ✨
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <span className="font-heading font-bold text-[14px] text-[#111111] group-hover:text-[#5D2E85] transition-colors block">
+                                    Specialties &amp; Industries Overview
+                                  </span>
+                                  <p className="text-[12px] text-[#5F5F5A] leading-snug mt-0.5">
+                                    All industries &amp; bespoke MUA architectures on one page.
+                                  </p>
+                                </div>
+                              </Link>
+
+                              <Link
+                                to="/for-makeup-artists"
+                                onClick={() => setSpecialtiesMenuOpen(false)}
+                                className="flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 hover:bg-[#F7F6F2] group"
+                              >
+                                <div className="w-9 h-9 rounded-xl bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center shrink-0 mt-0.5 text-base group-hover:bg-[#5D2E85] group-hover:text-white transition-colors">
+                                  💄
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <span className="font-heading font-bold text-[14px] text-[#111111] group-hover:text-[#5D2E85] transition-colors block">
+                                    For Makeup Artists &amp; Academies
+                                  </span>
+                                  <p className="text-[12px] text-[#5F5F5A] leading-snug mt-0.5">
+                                    Bridal bookings, masterclasses &amp; viral reels.
+                                  </p>
+                                </div>
+                              </Link>
+
+                              <Link
+                                to="/for-salons"
+                                onClick={() => setSpecialtiesMenuOpen(false)}
+                                className="flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 hover:bg-[#F7F6F2] group"
+                              >
+                                <div className="w-9 h-9 rounded-xl bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center shrink-0 mt-0.5 text-base group-hover:bg-[#5D2E85] group-hover:text-white transition-colors">
+                                  ✂️
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <span className="font-heading font-bold text-[14px] text-[#111111] group-hover:text-[#5D2E85] transition-colors block">
+                                    For Salons &amp; Clinic Chains
+                                  </span>
+                                  <p className="text-[12px] text-[#5F5F5A] leading-snug mt-0.5">
+                                    Local Google Maps 3-Pack and appointment scale.
+                                  </p>
+                                </div>
+                              </Link>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                }
+
+                const isActive =
+                  link.href === '/'
+                    ? location.pathname === '/'
+                    : location.pathname === link.href ||
+                      location.pathname.startsWith(link.href + '/') ||
+                      (link.href === '/case-studies' && location.pathname.startsWith('/case-study'));
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className={`relative font-sans font-semibold text-[19px] lg:text-[20px] xl:text-[21.5px] tracking-tight transition-colors duration-200 z-10 whitespace-nowrap py-1.5 ${
+                      isActive ? 'text-[#5D2E85]' : 'text-[#1F1F1D] hover:text-[#5D2E85]'
+                    }`}
+                  >
+                    {link.name}
+                    {isActive && (
+                      <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
+                    )}
+                  </Link>
+                );
+              })}
             </div>
 
-            {/* ── Desktop CTA & Socials ── */}
-            <div style={itemEnter(0.35)} className="hidden lg:flex items-center gap-2 xl:gap-3 relative z-10 shrink-0">
-              <div className="hidden xl:flex gap-2">
-                {[
-                  { href: 'https://www.instagram.com/_juntoz', label: 'Instagram', path: IG_PATH },
-                  { href: 'https://www.linkedin.com/in/juntoz-digital-marketing-agency-b0a114290/', label: 'LinkedIn', path: LI_PATH },
-                ].map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={s.label}
-                    className="group/icon w-8 h-8 rounded-full flex items-center justify-center border border-[#DEDED7] bg-white text-[#5F5F5A] hover:text-[#5D2E85] hover:border-[#5D2E85]/40 transition-all duration-200 hover:scale-105"
-                  >
-                    <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                      <path d={s.path} />
-                    </svg>
-                  </a>
-                ))}
-              </div>
-
-              <div className="hidden xl:block w-px h-4 bg-[#DEDED7]" />
-
+            {/* ── Desktop Call Button (Solid circular button, #5D2E85, shadow elevation) ── */}
+            <div style={itemEnter(0.35)} className="hidden lg:flex items-center shrink-0 relative z-10 ml-0 lg:ml-4">
               <a
                 ref={ctaRef}
-                href={WA_HARD}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={TEL_LINK}
+                title="Schedule a call: +91 90040 01800"
+                aria-label="Call us"
                 onMouseMove={onCtaMouseMove}
                 onMouseLeave={onCtaMouseLeave}
-                className="relative inline-flex items-center gap-2 px-4 xl:px-5 py-2 rounded-full font-sans font-semibold text-[11px] xl:text-xs tracking-wider uppercase text-white bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-300 shadow-sm whitespace-nowrap"
+                className="w-11 h-11 xl:w-12 xl:h-12 rounded-full bg-[#5D2E85] text-white flex items-center justify-center shadow-[0_4px_16px_rgba(93,46,133,0.35)] hover:shadow-[0_6px_22px_rgba(93,46,133,0.5)] hover:scale-105 active:scale-95 transition-all duration-200 ease-out group/call cursor-pointer"
               >
-                <span>Book a Strategy Call</span>
+                <svg className="w-5 h-5 fill-current text-white transition-transform duration-200 group-hover/call:rotate-12" viewBox="0 0 24 24">
+                  <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" />
+                </svg>
               </a>
             </div>
 
           </div>
+
+          {/* ── DESKTOP SERVICES MEGA-MENU PANEL (Rounded panel aligned with wide navbar) ── */}
+          <AnimatePresence>
+            {megaMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: 8, scale: 0.99 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 8, scale: 0.99 }}
+                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                onMouseEnter={handleMegaEnter}
+                onMouseLeave={handleMegaLeave}
+                className="hidden lg:block absolute top-[calc(100%+10px)] left-0 right-0 w-full bg-white border border-[#DEDED7] rounded-[24px] shadow-[0_24px_54px_rgba(0,0,0,0.12),0_4px_16px_rgba(93,46,133,0.06)] px-8 xl:px-12 py-8 z-50 pointer-events-auto"
+              >
+                <div className="max-w-7xl mx-auto">
+                  <div className="grid grid-cols-3 gap-8 xl:gap-12">
+                    {SERVICES_MEGA_MENU.map((col) => (
+                      <div key={col.category} className="flex flex-col">
+                        <div className="pb-3 mb-4 border-b border-[#F0EFEB]">
+                          <span className="block font-sans font-bold text-xs uppercase tracking-wider text-[#777772]">
+                            {col.category}
+                          </span>
+                          <span className="block text-xs text-[#5F5F5A] mt-0.5">
+                            {col.description}
+                          </span>
+                        </div>
+
+                        <div className="flex flex-col gap-3.5">
+                          {col.items.map((item) => (
+                            <Link
+                              key={item.title}
+                              to={item.href}
+                              onClick={() => setMegaMenuOpen(false)}
+                              className="group/item flex items-start gap-3.5 p-2 -mx-2 rounded-xl transition-all duration-150 hover:bg-[#F7F6F2]"
+                            >
+                              <div className="w-9 h-9 rounded-lg bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center shrink-0 mt-0.5 transition-colors duration-200 group-hover/item:bg-[#5D2E85] group-hover/item:text-white">
+                                <MegaMenuIcon type={item.icon} />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2">
+                                  <span className="font-heading font-semibold text-[14.5px] text-[#111111] group-hover/item:text-[#5D2E85] transition-colors leading-snug">
+                                    {item.title}
+                                  </span>
+                                  {item.badge && (
+                                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#5D2E85] bg-[#F1E7F9] px-2 py-0.5 rounded-md leading-none shrink-0">
+                                      {item.badge}
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-[12.5px] text-[#5F5F5A] leading-relaxed mt-1 line-clamp-2">
+                                  {item.desc}
+                                </p>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Bottom Footer Band */}
+                  <div className="mt-6 pt-4 border-t border-[#F0EFEB] flex items-center justify-between text-xs sm:text-sm">
+                    <span className="text-[#5F5F5A]">
+                      Looking for custom MUA campaign execution?
+                    </span>
+                    <Link
+                      to="/services"
+                      onClick={() => setMegaMenuOpen(false)}
+                      className="font-sans font-semibold text-[#5D2E85] hover:text-[#4C266D] inline-flex items-center gap-1.5 group/link"
+                    >
+                      <span>View all services &amp; deliverables</span>
+                      <span className="transition-transform duration-200 group-hover/link:translate-x-1">→</span>
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         <ScrollProgress />
@@ -416,7 +642,7 @@ export default function Navbar() {
             >
               {/* Menu Items List */}
               <div className="flex-1 overflow-y-auto divide-y divide-[#F0EFEB]">
-                {navLinks.map((link) => {
+                {mobileNavLinks.map((link) => {
                   if (link.isDropdown) {
                     const isExpanded = expandedMobile[link.name];
                     const isAnyChildActive = link.children.some(c => location.pathname === c.href);
@@ -427,17 +653,15 @@ export default function Navbar() {
                         <button
                           type="button"
                           onClick={() => toggleAccordion(link.name)}
-                          className={`w-full flex items-center justify-between px-5 sm:px-6 min-h-[52px] py-3.5 text-left transition-colors duration-150 hover:bg-[#5D2E85]/[0.04] active:bg-[#5D2E85]/[0.08] ${
-                            isAnyChildActive ? 'text-[#5D2E85] font-bold' : 'text-[#111111]'
-                          }`}
+                          className={`w-full flex items-center justify-between px-5 sm:px-6 min-h-[52px] py-3.5 text-left transition-colors duration-150 hover:bg-[#5D2E85]/[0.04] active:bg-[#5D2E85]/[0.08] ${isAnyChildActive ? 'text-[#5D2E85] font-bold' : 'text-[#111111]'
+                            }`}
                         >
                           <span className="font-heading font-semibold text-[15px] sm:text-[16px] tracking-tight">
                             {link.name}
                           </span>
                           <svg
-                            className={`w-4 h-4 text-[#5F5F5A] transition-transform duration-200 ${
-                              isExpanded ? 'rotate-180 text-[#5D2E85]' : ''
-                            }`}
+                            className={`w-4 h-4 text-[#5F5F5A] transition-transform duration-200 ${isExpanded ? 'rotate-180 text-[#5D2E85]' : ''
+                              }`}
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -466,11 +690,10 @@ export default function Navbar() {
                                       key={sub.name}
                                       to={sub.href}
                                       onClick={() => setMenuOpen(false)}
-                                      className={`flex items-center justify-between pl-9 pr-5 sm:pl-10 sm:pr-6 py-2.5 transition-colors duration-150 active:bg-[#5D2E85]/10 ${
-                                        isSubActive
+                                      className={`flex items-center justify-between pl-9 pr-5 sm:pl-10 sm:pr-6 py-2.5 transition-colors duration-150 active:bg-[#5D2E85]/10 ${isSubActive
                                           ? 'text-[#5D2E85] font-bold bg-[#5D2E85]/[0.06]'
                                           : 'text-[#444444] hover:text-[#111111]'
-                                      }`}
+                                        }`}
                                     >
                                       <span className="font-sans text-[13.5px] sm:text-[14px] font-medium tracking-normal">
                                         {sub.name}
@@ -489,15 +712,19 @@ export default function Navbar() {
                     );
                   }
 
-                  const isActive = location.pathname === link.href;
+                  const isActive =
+                    link.href === '/'
+                      ? location.pathname === '/'
+                      : location.pathname === link.href ||
+                        location.pathname.startsWith(link.href + '/') ||
+                        (link.href === '/case-studies' && location.pathname.startsWith('/case-study'));
                   return (
                     <Link
                       key={link.name}
                       to={link.href}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex items-center justify-between px-5 sm:px-6 min-h-[52px] py-3.5 transition-colors duration-150 hover:bg-[#5D2E85]/[0.04] active:bg-[#5D2E85]/[0.08] ${
-                        isActive ? 'text-[#5D2E85] font-bold bg-[#5D2E85]/[0.03]' : 'text-[#111111]'
-                      }`}
+                      className={`flex items-center justify-between px-5 sm:px-6 min-h-[52px] py-3.5 transition-colors duration-150 hover:bg-[#5D2E85]/[0.04] active:bg-[#5D2E85]/[0.08] ${isActive ? 'text-[#5D2E85] font-bold bg-[#5D2E85]/[0.03]' : 'text-[#111111]'
+                        }`}
                     >
                       <span className="font-heading font-semibold text-[15px] sm:text-[16px] tracking-tight">
                         {link.name}

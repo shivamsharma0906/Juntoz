@@ -221,7 +221,7 @@ export default function ContactPage() {
             <span className="text-[#5D2E85]">Business Growth</span>
           </h1>
           <p className="font-body text-[#5F5F5A] text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-            Tell us about your business, current marketing bottlenecks, and growth goals. We will personally audit your digital presence, paid acquisition pipeline, and local visibility.
+            Share your goal — we'll audit your presence and map a clear growth plan.
           </p>
         </ScrollReveal>
 

@@ -79,10 +79,10 @@ export default function AboutImpact() {
     >
       {/* ── ambient glows ── */}
       <div className="absolute inset-0 pointer-events-none">
-        <div style={{ position:'absolute', top:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(0,245,212,0.2) 35%, rgba(123,47,255,0.2) 65%, transparent 95%)' }} />
+        <div style={{ position:'absolute', top:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(0,245,212,0.2) 35%, rgba(93,46,133,0.2) 65%, transparent 95%)' }} />
         <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(255,58,242,0.15) 40%, rgba(0,245,212,0.15) 60%, transparent 95%)' }} />
         <div style={{ position:'absolute', top:'20%', left:'-5%', width:'400px', height:'400px', background:'radial-gradient(ellipse, rgba(0,245,212,0.07) 0%, transparent 65%)', filter:'blur(60px)' }} />
-        <div style={{ position:'absolute', bottom:'10%', right:'-5%', width:'350px', height:'350px', background:'radial-gradient(ellipse, rgba(123,47,255,0.08) 0%, transparent 65%)', filter:'blur(60px)' }} />
+        <div style={{ position:'absolute', bottom:'10%', right:'-5%', width:'350px', height:'350px', background:'radial-gradient(ellipse, rgba(93,46,133,0.08) 0%, transparent 65%)', filter:'blur(60px)' }} />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
@@ -167,14 +167,14 @@ export default function AboutImpact() {
               <ImageReveal
                 src="/team-meeting.webp"
                 alt="Juntoz team reviewing beauty brand growth strategy"
-                color="#7B2FFF"
+                color="#5D2E85"
                 direction="left"
                 imgStyle={{ filter: 'brightness(0.92) contrast(1.05) saturate(0.95)' }}
               />
               {/* Overlay gradient to blend with dark bg */}
               <div
                 className="absolute inset-0"
-                style={{ background: 'linear-gradient(135deg, rgba(0,245,212,0.05) 0%, transparent 50%, rgba(123,47,255,0.08) 100%)' }}
+                style={{ background: 'linear-gradient(135deg, rgba(0,245,212,0.05) 0%, transparent 50%, rgba(93,46,133,0.08) 100%)' }}
               />
             </div>
 

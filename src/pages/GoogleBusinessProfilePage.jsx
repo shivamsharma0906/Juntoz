@@ -85,8 +85,8 @@ export default function GoogleBusinessProfilePage() {
           </ScrollReveal>
 
           <ScrollReveal data-reveal="up" delay={150}>
-            <p className="font-body text-[#5F5F5A] text-base md:text-xl leading-relaxed mb-8 max-w-2xl mx-auto">
-              When prospective clients search "best salon near me", "bridal makeup artist in Bandra", or "dermatology clinic in South Delhi", Google shows 3 map results. If you aren't in that top 3, your competitors get the calls.
+            <p className="font-body text-[#5F5F5A] text-base md:text-lg leading-relaxed mb-8 max-w-xl mx-auto">
+              If you're not in Google's Local 3-Pack, your competitors are taking those calls.
             </p>
           </ScrollReveal>
 
@@ -204,7 +204,7 @@ export default function GoogleBusinessProfilePage() {
             How We Optimize Your <span className="text-[#5D2E85]">Local Presence.</span>
           </h2>
           <p className="font-body text-[#5F5F5A] text-sm sm:text-base mt-4 leading-relaxed">
-            No black-hat tricks. No fake review farms. We build permanent organic local ranking authority through meticulous profile engineering and active management.
+            Permanent organic rankings — no black-hat tricks, no fake reviews.
           </p>
         </ScrollReveal>
 
@@ -303,7 +303,7 @@ export default function GoogleBusinessProfilePage() {
               <span className="text-[#5D2E85]">Google 3-Pack.</span>
             </h2>
             <p className="font-body text-white/70 text-sm sm:text-base leading-relaxed mb-8">
-              Send us your business name and address. We will run an audit of your current local search ranking against nearby competitors.
+              Share your business name — we'll run a free local ranking audit.
             </p>
             <a
               href={WA}

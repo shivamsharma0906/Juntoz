@@ -1,394 +1,500 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-/* ─── Growth System Architecture Nodes with Category-Specific Accents ─── */
-const GROWTH_NODES = [
-  {
-    id: 'ads',
-    number: '01',
-    title: 'Performance Ads',
-    channel: 'Meta & Google Ads Engine',
-    tag: 'Paid Growth',
-    description: 'Targeted full-funnel campaigns capturing high-intent buyer demand.',
-    borderAccent: 'border-l-[#3B82F6]',
-    tagBg: 'bg-blue-50/80 text-blue-700 border-blue-200/60',
-  },
-  {
-    id: 'search',
-    number: '02',
-    title: 'Search & Maps Visibility',
-    channel: 'GMB 3-Pack & Local SEO',
-    tag: 'Local & SEO',
-    description: 'Dominating local search queries right when customers are ready to buy.',
-    borderAccent: 'border-l-[#10B981]',
-    tagBg: 'bg-emerald-50/80 text-emerald-700 border-emerald-200/60',
-  },
-  {
-    id: 'brand',
-    number: '03',
-    title: 'Creative & Brand Direction',
-    channel: 'Content & Positioning',
-    tag: 'Rate Defense',
-    description: 'Editorial visuals and compelling hooks that command premium pricing.',
-    borderAccent: 'border-l-[#8B5CF6]',
-    tagBg: 'bg-purple-50/80 text-purple-700 border-purple-200/60',
-  },
-  {
-    id: 'conversion',
-    number: '04',
-    title: 'Inbound Conversion Engine',
-    channel: 'Funnel Architecture & CRM',
-    tag: 'Lead Capture',
-    description: 'High-converting landing flows with rapid response automation.',
-    borderAccent: 'border-l-[#5D2E85]',
-    tagBg: 'bg-[#F1E7F9] text-[#5D2E85] border-[#5D2E85]/20',
-  },
-];
-
 /* ─── Animation Variants ─── */
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.04,
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 12 },
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.55,
       ease: [0.16, 1, 0.3, 1],
     },
   },
 };
 
-const cardContainerVariants = {
-  hidden: { opacity: 0, y: 18 },
+const visualVariants = {
+  hidden: { opacity: 0, scale: 0.96 },
   visible: {
     opacity: 1,
-    y: 0,
+    scale: 1,
     transition: {
-      duration: 0.6,
+      duration: 0.65,
       ease: [0.16, 1, 0.3, 1],
-      staggerChildren: 0.07,
-      delayChildren: 0.16,
+      delay: 0.15,
     },
   },
 };
 
-const nodeVariants = {
-  hidden: { opacity: 0, x: 10 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.38,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-};
+/* ─── Full-Funnel Illustration Component ───
+   [CONSIDER CUSTOM ILLUSTRATION LATER]
+   Layered SVG + HTML composition representing Awareness → Consideration → Conversion → Advocacy
+   with floating glassmorphic metrics HUD card overlay.
+─── */
+function FullFunnelVisual() {
+  return (
+    <div className="relative w-full max-w-[500px] lg:max-w-[540px] xl:max-w-[580px] mx-auto flex items-center justify-center select-none">
+      
+      {/* Background radial glow */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-[#5D2E85]/10 via-[#06B6D4]/10 to-transparent rounded-full blur-3xl -z-10" />
+
+      {/* Main SVG Composition */}
+      <svg
+        viewBox="0 0 520 480"
+        className="w-full h-auto drop-shadow-md overflow-visible"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          {/* Funnel Tier Gradients */}
+          <linearGradient id="funnelTopRim" x1="160" y1="80" x2="360" y2="80" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#1E3A8A" />
+            <stop offset="0.5" stopColor="#2563EB" />
+            <stop offset="1" stopColor="#1D4ED8" />
+          </linearGradient>
+
+          <radialGradient id="funnelInnerHole" cx="260" cy="88" r="95" fx="260" fy="88" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#0F172A" />
+            <stop offset="0.75" stopColor="#1E293B" />
+            <stop offset="1" stopColor="#1E3A8A" />
+          </radialGradient>
+
+          <linearGradient id="tier1Grad" x1="160" y1="90" x2="360" y2="185" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#2563EB" />
+            <stop offset="0.5" stopColor="#3B82F6" />
+            <stop offset="1" stopColor="#1D4ED8" />
+          </linearGradient>
+
+          <linearGradient id="tier2Grad" x1="190" y1="185" x2="330" y2="265" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#0D9488" />
+            <stop offset="0.5" stopColor="#14B8A6" />
+            <stop offset="1" stopColor="#0F766E" />
+          </linearGradient>
+
+          <linearGradient id="tier3Grad" x1="210" y1="265" x2="310" y2="345" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#D97706" />
+            <stop offset="0.5" stopColor="#F59E0B" />
+            <stop offset="1" stopColor="#B45309" />
+          </linearGradient>
+
+          <linearGradient id="tier4Grad" x1="225" y1="345" x2="295" y2="420" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#E11D48" />
+            <stop offset="0.5" stopColor="#F43F5E" />
+            <stop offset="1" stopColor="#BE123C" />
+          </linearGradient>
+
+          {/* Orbital rings gradient */}
+          <linearGradient id="orbitCyanPurple" x1="80" y1="120" x2="440" y2="360" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#06B6D4" stopOpacity="0.8" />
+            <stop offset="0.5" stopColor="#5D2E85" stopOpacity="0.6" />
+            <stop offset="1" stopColor="#38BDF8" stopOpacity="0.7" />
+          </linearGradient>
+        </defs>
+
+        {/* ── Swirling Orbital Glow Rings ── */}
+        <ellipse
+          cx="260"
+          cy="210"
+          rx="220"
+          ry="115"
+          transform="rotate(-18 260 210)"
+          stroke="url(#orbitCyanPurple)"
+          strokeWidth="2.2"
+          strokeDasharray="8 8"
+          opacity="0.65"
+        />
+        <ellipse
+          cx="260"
+          cy="230"
+          rx="180"
+          ry="85"
+          transform="rotate(14 260 230)"
+          stroke="url(#orbitCyanPurple)"
+          strokeWidth="1.8"
+          strokeDasharray="5 7"
+          opacity="0.45"
+        />
+
+        {/* ── STAGE 1: Awareness (Top Cone) ── */}
+        <path
+          d="M 150 90 L 195 185 L 325 185 L 370 90 Z"
+          fill="url(#tier1Grad)"
+          stroke="#1E3A8A"
+          strokeWidth="1.5"
+        />
+
+        {/* Inner 3D Funnel Mouth */}
+        <ellipse
+          cx="260"
+          cy="88"
+          rx="110"
+          ry="32"
+          fill="url(#funnelInnerHole)"
+          stroke="url(#funnelTopRim)"
+          strokeWidth="3.5"
+        />
+
+        {/* Inward Traffic Flow Arrows inside Mouth */}
+        <path
+          d="M 230 65 Q 245 80 250 95"
+          stroke="#FBBF24"
+          strokeWidth="3"
+          strokeLinecap="round"
+          markerEnd="url(#goldArrow)"
+        />
+        <path
+          d="M 290 65 Q 275 80 270 95"
+          stroke="#FBBF24"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+        <polygon points="250,98 243,90 257,90" fill="#FBBF24" />
+        <polygon points="270,98 263,90 277,90" fill="#FBBF24" />
+
+        {/* Top Megaphones inside Awareness ring */}
+        <g transform="translate(205, 120) scale(0.85)">
+          <path d="M4 12v4a1 1 0 001 1h2l4 3V8l-4 3H5a1 1 0 00-1 1z" fill="#FCD34D" stroke="#D97706" strokeWidth="1.2" />
+        </g>
+        <g transform="translate(285, 120) scale(0.85) scale(-1, 1)">
+          <path d="M4 12v4a1 1 0 001 1h2l4 3V8l-4 3H5a1 1 0 00-1 1z" fill="#FCD34D" stroke="#D97706" strokeWidth="1.2" />
+        </g>
+
+        {/* ── STAGE 2: Consideration (Teal Band) ── */}
+        <path
+          d="M 195 188 L 220 268 L 300 268 L 325 188 Z"
+          fill="url(#tier2Grad)"
+          stroke="#0F766E"
+          strokeWidth="1.5"
+        />
+        <ellipse cx="260" cy="188" rx="65" ry="11" fill="#14B8A6" opacity="0.6" />
+        {/* Search lens in consideration */}
+        <g transform="translate(250, 220)">
+          <circle cx="9" cy="9" r="6" stroke="#FFFFFF" strokeWidth="2.2" fill="none" />
+          <line x1="14" y1="14" x2="19" y2="19" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" />
+        </g>
+
+        {/* ── STAGE 3: Conversion (Amber Band) ── */}
+        <path
+          d="M 220 270 L 235 345 L 285 345 L 300 270 Z"
+          fill="url(#tier3Grad)"
+          stroke="#B45309"
+          strokeWidth="1.5"
+        />
+        <ellipse cx="260" cy="270" rx="40" ry="8" fill="#F59E0B" opacity="0.6" />
+        {/* Shopping Cart Icon in Conversion */}
+        <g transform="translate(248, 295)">
+          <path d="M2 2h3l2.5 10h10l2-7H6.5" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          <circle cx="9" cy="15" r="1.5" fill="#FFFFFF" />
+          <circle cx="16" cy="15" r="1.5" fill="#FFFFFF" />
+        </g>
+
+        {/* ── STAGE 4: Advocacy (Rose / Pink Cup) ── */}
+        <path
+          d="M 235 348 L 240 415 Q 260 426 280 415 L 285 348 Z"
+          fill="url(#tier4Grad)"
+          stroke="#BE123C"
+          strokeWidth="1.5"
+        />
+        <ellipse cx="260" cy="348" rx="25" ry="6" fill="#F43F5E" opacity="0.8" />
+        
+        {/* Heart emblem in Advocacy */}
+        <path
+          d="M260 388 C260 388 250 380 250 372 C250 367 254 363 259 365 C260 365.3 260 365.3 260 365.3 C260 365.3 260 365.3 261 365 C266 363 270 367 270 372 C270 380 260 388 260 388 Z"
+          fill="#FFFFFF"
+        />
+
+        {/* Floating Hearts & Stars at Base */}
+        <circle cx="230" cy="425" r="3" fill="#F43F5E" />
+        <circle cx="288" cy="422" r="2.5" fill="#FBBF24" />
+        <polygon points="296,432 298,437 303,437 299,440 300,445 296,442 292,445 293,440 289,437 294,437" fill="#F59E0B" />
+        <polygon points="222,434 224,438 228,438 225,441 226,445 222,442 218,445 219,441 216,438 220,438" fill="#F43F5E" />
+      </svg>
+
+      {/* ── Stage Text Labels & Floating Icons (HTML Overlay) ── */}
+
+      {/* Top Awareness Banner & Icons */}
+      <div className="absolute top-2 left-1/2 -translate-x-1/2 flex items-center gap-3 pointer-events-none">
+        <span className="font-heading font-bold text-xs sm:text-sm tracking-wider uppercase text-[#111111] bg-white/90 backdrop-blur-xs px-3 py-1 rounded-full border border-[#DEDED7] shadow-xs">
+          Awareness
+        </span>
+      </div>
+
+      {/* Floating Megaphone (Top Left) */}
+      <div className="absolute top-6 left-2 sm:left-4 flex items-center gap-2 p-1.5 rounded-xl bg-white/90 border border-[#DEDED7] shadow-xs pointer-events-none animate-bounce" style={{ animationDuration: '3s' }}>
+        <span className="text-base sm:text-lg">📢</span>
+        <span className="font-heading font-bold text-[10px] sm:text-[11px] uppercase tracking-wider text-[#111111]">Awareness</span>
+      </div>
+
+      {/* Floating Search / Cart (Top Right) */}
+      <div className="absolute top-6 right-2 sm:right-6 flex items-center gap-2 p-1.5 rounded-xl bg-white/90 border border-[#DEDED7] shadow-xs pointer-events-none">
+        <span className="text-base sm:text-lg">🛒</span>
+        <span className="font-heading font-bold text-[10px] sm:text-[11px] uppercase tracking-wider text-[#111111]">Conversion</span>
+      </div>
+
+      {/* Consideration Label (Middle Left) */}
+      <div className="absolute top-[44%] left-0 sm:left-2 flex items-center gap-1.5 p-1 sm:p-1.5 rounded-lg bg-white/90 border border-[#DEDED7] shadow-xs pointer-events-none">
+        <span className="text-xs sm:text-sm">🔍</span>
+        <span className="font-heading font-bold text-[9.5px] sm:text-[11px] uppercase tracking-wider text-[#0D9488]">Consideration</span>
+      </div>
+
+      {/* Conversion Label (Lower Left) */}
+      <div className="absolute top-[65%] left-2 sm:left-6 flex items-center gap-1.5 p-1 sm:p-1.5 rounded-lg bg-white/90 border border-[#DEDED7] shadow-xs pointer-events-none">
+        <span className="text-xs sm:text-sm">🛒</span>
+        <span className="font-heading font-bold text-[9.5px] sm:text-[11px] uppercase tracking-wider text-[#D97706]">Conversion</span>
+      </div>
+
+      {/* Advocacy Label (Bottom Left) */}
+      <div className="absolute bottom-4 left-6 sm:left-12 flex items-center gap-1.5 p-1 sm:p-1.5 rounded-lg bg-white/90 border border-[#DEDED7] shadow-xs pointer-events-none">
+        <span className="text-xs sm:text-sm">❤️</span>
+        <span className="font-heading font-bold text-[9.5px] sm:text-[11px] uppercase tracking-wider text-[#E11D48]">Advocacy</span>
+      </div>
+
+      {/* ── FLOATING METRICS HUD CARD (Rotated overlay bottom-right) ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 15, rotate: 2 }}
+        animate={{ opacity: 1, y: 0, rotate: 2.5 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        whileHover={{ rotate: 0, scale: 1.03, transition: { duration: 0.2 } }}
+        className="absolute bottom-2 sm:bottom-6 -right-2 sm:-right-6 w-[205px] sm:w-[245px] xl:w-[265px] bg-white/95 backdrop-blur-md border-2 border-cyan-400/40 rounded-2xl p-3 sm:p-4 shadow-[0_16px_36px_rgba(6,182,212,0.22),0_4px_16px_rgba(93,46,133,0.08)] z-20"
+      >
+        <div className="space-y-2 sm:space-y-2.5">
+          
+          {/* Stat 1: Performance ROI + Sparkline */}
+          <div className="flex items-center justify-between pb-1.5 border-b border-gray-100">
+            <div>
+              <span className="block font-sans font-bold text-[8.5px] sm:text-[9.5px] uppercase tracking-wider text-gray-500">
+                Performance Ads
+              </span>
+              <span className="font-heading font-black text-xs sm:text-sm text-[#111111]">
+                2.5x ROI
+              </span>
+            </div>
+            {/* Mini Sparkline Chart */}
+            <svg className="w-12 h-6 text-[#287A55]" viewBox="0 0 48 24" fill="none">
+              <path d="M2 18 L12 14 L22 17 L32 8 L44 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <circle cx="44" cy="4" r="2.5" fill="currentColor" />
+            </svg>
+          </div>
+
+          {/* Stat 2: Search Visibility */}
+          <div className="flex items-center justify-between pb-1.5 border-b border-gray-100">
+            <div>
+              <span className="block font-sans font-bold text-[8.5px] sm:text-[9.5px] uppercase tracking-wider text-gray-500">
+                Search Visibility
+              </span>
+              <span className="font-heading font-black text-xs sm:text-sm text-[#2563EB]">
+                Top 1 Ranking
+              </span>
+            </div>
+            <span className="text-xs">🏆</span>
+          </div>
+
+          {/* Stat 3: Client Conversion */}
+          <div className="flex items-center justify-between pb-1.5 border-b border-gray-100">
+            <div>
+              <span className="block font-sans font-bold text-[8.5px] sm:text-[9.5px] uppercase tracking-wider text-gray-500">
+                Client Conversion
+              </span>
+              <span className="font-heading font-black text-xs sm:text-sm text-[#059669]">
+                15% Increase
+              </span>
+            </div>
+            <span className="text-xs text-[#059669] font-bold">▲</span>
+          </div>
+
+          {/* Rating Badge */}
+          <div className="flex items-center justify-between pt-0.5">
+            <span className="font-sans font-bold text-[8.5px] sm:text-[9px] uppercase tracking-wider text-gray-400">
+              Verified Rating
+            </span>
+            <span className="font-heading font-bold text-[10px] sm:text-xs text-[#5D2E85] bg-[#F1E7F9] px-2 py-0.5 rounded-full">
+              ★ 4.8/5 Stars
+            </span>
+          </div>
+
+        </div>
+      </motion.div>
+
+    </div>
+  );
+}
 
 export default function Hero() {
   return (
     <section
       id="hero"
       aria-label="Juntoz Homepage Hero"
-      className="relative flex flex-col justify-between overflow-x-clip bg-[#F7F6F2] pt-20 sm:pt-24 lg:pt-24 xl:pt-28 pb-12 sm:pb-16 lg:pb-7 lg:min-h-screen lg:h-[100dvh]"
+      className="relative flex flex-col justify-between overflow-x-clip bg-[#F7F6F2] pt-24 sm:pt-28 lg:pt-28 xl:pt-32 pb-12 sm:pb-16 lg:pb-8"
     >
       {/* ── Background Color Depth & Radial Lighting Sheen ── */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Soft radial glow behind hero */}
         <div
           className="absolute -top-24 sm:-top-32 left-1/2 -translate-x-1/2 w-[340px] sm:w-[600px] lg:w-[1100px] h-[340px] sm:h-[500px] lg:h-[650px] rounded-full opacity-60 lg:opacity-70 blur-[75px] sm:blur-[110px] lg:blur-[140px]"
           style={{ background: 'radial-gradient(circle, #FFFDF8 0%, #F5F3EC 65%, transparent 100%)' }}
         />
-        {/* Blurred brand color blob behind right card */}
         <div
-          className="absolute top-1/4 -right-16 sm:right-4 lg:right-10 w-[240px] sm:w-[320px] lg:w-[440px] h-[240px] sm:h-[320px] lg:h-[440px] rounded-full opacity-10 blur-[80px] lg:blur-[120px]"
-          style={{ background: 'radial-gradient(circle, #5D2E85 0%, #8662A4 45%, transparent 75%)' }}
-        />
-        {/* Ambient bottom illumination */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-28 sm:h-36 opacity-30 pointer-events-none"
-          style={{ background: 'linear-gradient(to top, rgba(93,46,133,0.04), transparent)' }}
+          className="absolute top-1/3 -right-16 sm:right-4 lg:right-10 w-[260px] sm:w-[380px] lg:w-[480px] h-[260px] sm:h-[380px] lg:h-[480px] rounded-full opacity-15 blur-[90px] lg:blur-[130px]"
+          style={{ background: 'radial-gradient(circle, #5D2E85 0%, #38BDF8 50%, transparent 75%)' }}
         />
       </div>
 
-      {/* ── Main Hero Container (Expanded for widescreen, structured for mobile flow) ── */}
+      {/* ── Main Hero Container ── */}
       <div className="container mx-auto px-4 xs:px-5 sm:px-8 md:px-10 lg:px-12 xl:px-16 2xl:px-20 max-w-[1440px] xl:max-w-[1560px] 2xl:max-w-[1680px] relative z-10 flex flex-col justify-between h-full my-auto">
         
-        {/* Top & Middle: Responsive Split Grid (Stacked on mobile/tablet, 2-Col on desktop) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 sm:gap-10 lg:gap-10 xl:gap-16 items-center my-auto">
+        {/* Top & Middle: 2-Column Split (Stacked on mobile, 2-Col on desktop) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-10 xl:gap-14 items-center my-auto">
           
-          {/* ── LEFT COLUMN: Editorial Typography & Strategic Positioning (7 Cols) ── */}
+          {/* ── LEFT COLUMN: Headline & Value Proposition (6.5 Cols) ── */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-7 flex flex-col items-start text-left w-full"
+            className="lg:col-span-6 xl:col-span-6 flex flex-col items-start text-left w-full"
           >
-            {/* 1. Brand / Eyebrow Tag with Compact Mobile Sizing */}
-            <motion.div variants={itemVariants} className="mb-3 sm:mb-4 lg:mb-5">
-              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-[#DEDED7] bg-white/90 backdrop-blur-xs shadow-[0_2px_8px_rgba(93,46,133,0.05)]">
-                <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#5D2E85] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#5D2E85]"></span>
-                </span>
-                <span className="font-sans font-semibold text-[9.5px] xs:text-[10px] sm:text-[11px] uppercase tracking-[0.11em] sm:tracking-[0.14em] text-[#111111] whitespace-nowrap">
-                  Growth-Focused Digital Marketing Agency
-                </span>
-              </div>
-            </motion.div>
-
-            {/* 2. Editorial Sculpted H1 Headline with Fluid Clamp & Natural 3-Line Cadence */}
+            {/* 4-Line Selective Accent Headline (From Awareness To / Advocacy: Our / Full-Funnel / System.) */}
             <motion.h1
               variants={itemVariants}
-              style={{ fontFamily: "'Satoshi', 'Plus Jakarta Sans', 'Inter', sans-serif" }}
-              className="font-black text-[#111111] uppercase tracking-[-0.03em] sm:tracking-[-0.025em] leading-[1.01] sm:leading-[0.98] mb-3 sm:mb-4 lg:mb-5 text-[clamp(2.15rem,8.4vw,2.75rem)] sm:text-[3.25rem] md:text-[3.6rem] lg:text-[4.2rem] xl:text-[4.85rem] 2xl:text-[5.35rem]"
+              style={{
+                fontFamily: "'Satoshi', 'Plus Jakarta Sans', 'Inter', sans-serif",
+              }}
+              className="font-heading font-bold text-[#111111] uppercase tracking-tight leading-[1.08] mb-4 sm:mb-5 text-[2.15rem] xs:text-[2.35rem] sm:text-[2.75rem] md:text-[3rem] lg:text-[2.85rem] xl:text-[3.25rem]"
             >
-              <span className="block">We Turn</span>
-              <span className="block">Digital Presence</span>
-              <span className="block">
-                Into{' '}
-                <span className="bg-gradient-to-r from-[#5D2E85] via-[#5D2E85] to-[#CE3819] bg-clip-text text-transparent">
-                  Business Growth.
-                </span>
+              <span className="block whitespace-nowrap">From Awareness To</span>
+              <span className="block whitespace-nowrap">
+                Advocacy: <span className="text-[#5D2E85]">Our</span>
               </span>
+              <span className="block whitespace-nowrap">Full-Funnel</span>
+              <span className="block whitespace-nowrap">System.</span>
             </motion.h1>
 
-            {/* 3. Short Strategic Value Proposition */}
+            {/* Subhead: 2 Short Sentences */}
             <motion.p
               variants={itemVariants}
-              className="font-body text-[#5F5F5A] text-[13.5px] xs:text-[14px] sm:text-base lg:text-[16.5px] xl:text-[17.5px] leading-relaxed max-w-xl xl:max-w-2xl mb-5 sm:mb-6 lg:mb-7 font-normal"
+              className="font-body text-[#5F5F5A] text-base sm:text-lg lg:text-[17.5px] leading-relaxed max-w-lg mb-7 sm:mb-8 font-normal"
             >
-              Juntoz helps ambitious businesses build visibility, generate demand, and turn digital attention into measurable growth.
+              We build the engine, you own the growth. Full-funnel marketing, scientifically proven.
             </motion.p>
 
-            {/* 4. Primary & Secondary CTAs (Full-width vertical stack on mobile, horizontal row on desktop) */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto mb-4 sm:mb-5 lg:mb-6"
-            >
+            {/* Single Layered Pill CTA Button */}
+            <motion.div variants={itemVariants}>
               <Link
-                to="/work"
-                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 min-h-[46px] h-[48px] sm:h-[50px] xl:h-[54px] px-6 sm:px-7 xl:px-8 rounded-full font-heading font-bold text-xs xl:text-[13px] uppercase tracking-widest text-white bg-[#111111] hover:bg-[#5D2E85] active:bg-[#5D2E85] active:scale-[0.98] sm:hover:scale-[1.02] sm:hover:-translate-y-0.5 transition-all duration-200 shadow-[0_6px_18px_-3px_rgba(93,46,133,0.25)] hover:shadow-[0_12px_28px_-4px_rgba(93,46,133,0.42)]"
+                to="/case-studies"
+                className="group relative inline-flex items-center gap-3 p-1 rounded-full bg-[#5D2E85]/10 border border-[#5D2E85]/35 hover:border-[#5D2E85] transition-all duration-300 shadow-[0_8px_24px_rgba(93,46,133,0.20)] hover:shadow-[0_12px_32px_rgba(93,46,133,0.32)] hover:scale-[1.02] active:scale-[0.98]"
               >
-                <span>Explore Our Work</span>
-                <svg
-                  className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+                <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-white border border-[#5D2E85]/30 group-hover:border-[#5D2E85]/60 transition-colors">
+                  {/* Circular Icon Inset on Left */}
+                  <div className="w-5 h-5 rounded-full border-[2px] border-[#5D2E85] flex items-center justify-center shrink-0">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
+                  </div>
+                  <span className="font-heading font-bold text-xs sm:text-sm uppercase tracking-wider text-[#5D2E85]">
+                    View Case Study
+                  </span>
+                </div>
               </Link>
-
-              <Link
-                to="/services"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 min-h-[46px] h-[48px] sm:h-[50px] xl:h-[54px] px-6 sm:px-7 xl:px-8 rounded-full font-heading font-bold text-xs xl:text-[13px] uppercase tracking-widest text-[#111111] bg-white/95 backdrop-blur-xs border border-[#DEDED7] hover:border-[#111111] hover:bg-[#111111] hover:text-white active:bg-[#111111] active:text-white active:scale-[0.98] sm:hover:scale-[1.02] sm:hover:-translate-y-0.5 transition-all duration-200 shadow-[0_2px_12px_rgba(17,17,17,0.04)] hover:shadow-[0_8px_24px_rgba(17,17,17,0.12)]"
-              >
-                <span>Our Services</span>
-              </Link>
-            </motion.div>
-
-            {/* 5. Structured Trust Signals (Clean 2-column grid on mobile, inline wrap on tablet/desktop) */}
-            <motion.div
-              variants={itemVariants}
-              className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-x-4 gap-y-2 text-[10.5px] xs:text-[11px] sm:text-xs text-[#5F5F5A] font-body pt-3 sm:pt-4 border-t border-[#DEDED7]/80 w-full mb-1 lg:mb-0"
-            >
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-[#287A55]/12 text-[#287A55] flex items-center justify-center text-[9px] sm:text-[10px] font-bold shrink-0">
-                  ✓
-                </span>
-                <span className="font-medium text-[#222220] whitespace-nowrap">Full-Funnel Growth</span>
-              </div>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-[#287A55]/12 text-[#287A55] flex items-center justify-center text-[9px] sm:text-[10px] font-bold shrink-0">
-                  ✓
-                </span>
-                <span className="font-medium text-[#222220] whitespace-nowrap">Data-Driven Strategy</span>
-              </div>
-              <div className="flex items-center gap-1.5 sm:gap-2 col-span-2 sm:col-span-1">
-                <span className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-[#287A55]/12 text-[#287A55] flex items-center justify-center text-[9px] sm:text-[10px] font-bold shrink-0">
-                  ✓
-                </span>
-                <span className="font-medium text-[#222220] whitespace-nowrap">Verified Execution</span>
-              </div>
             </motion.div>
           </motion.div>
 
-          {/* ── RIGHT COLUMN: Growth System Visual (Full-width stacked below headline on mobile, tuned density) ── */}
+          {/* ── RIGHT COLUMN: Funnel Visual with Metrics Overlay (5.5-6 Cols) ── */}
           <motion.div
-            variants={cardContainerVariants}
+            variants={visualVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-5 relative w-full flex justify-center lg:justify-end mt-2 sm:mt-4 lg:mt-0"
+            className="lg:col-span-6 xl:col-span-6 relative w-full flex justify-center lg:justify-end mt-4 sm:mt-6 lg:mt-0"
           >
-            {/* The Growth System Frame (Full-width with matching margins on mobile, scaled on desktop) */}
-            <div className="w-full max-w-none lg:max-w-[490px] xl:max-w-[540px] 2xl:max-w-[570px] bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-[#DEDED7] ring-1 ring-white/80 p-3.5 xs:p-4 sm:p-5 xl:p-7 shadow-[0_16px_36px_-10px_rgba(93,46,133,0.08),0_8px_18px_-4px_rgba(17,17,17,0.04)] relative flex flex-col justify-between overflow-hidden">
-              
-              {/* Subtle top gradient sheen */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#5D2E85]/40 to-transparent pointer-events-none" />
+            <FullFunnelVisual />
 
-              {/* Header: System Status with live pulsing dot */}
-              <div className="flex items-center justify-between pb-2.5 sm:pb-3.5 xl:pb-4 border-b border-[#DEDED7] mb-2.5 sm:mb-3.5 xl:mb-4">
-                <div className="flex items-center gap-2 sm:gap-2.5">
-                  <div className="w-6 h-6 sm:w-7 sm:h-7 xl:w-8 xl:h-8 rounded-lg bg-[#111111] text-white flex items-center justify-center font-heading font-black text-[10px] sm:text-[11px] xl:text-xs shrink-0">
-                    JZ
-                  </div>
-                  <div>
-                    <p className="font-heading font-bold text-[11px] sm:text-xs xl:text-sm uppercase tracking-wider text-[#111111] leading-none mb-0.5">
-                      Growth System
-                    </p>
-                    <p className="font-body text-[9.5px] sm:text-[10px] xl:text-[11px] text-[#5F5F5A]">Multi-Channel Growth Engine</p>
-                  </div>
-                </div>
-
-                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-[#F7F6F2] border border-[#DEDED7] shrink-0">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#287A55] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#287A55]"></span>
-                  </span>
-                  <span className="font-sans font-semibold text-[9px] sm:text-[10px] uppercase tracking-wider text-[#111111] whitespace-nowrap">
-                    Live System
-                  </span>
-                </div>
+            {/* ── Floating Revenue Badge ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 16, scale: 0.92 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: 0.7, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute bottom-4 right-0 sm:right-4 lg:-right-2 xl:right-0 z-20"
+            >
+              <div className="flex flex-col items-center justify-center px-6 py-4 rounded-2xl bg-[#5D2E85] shadow-[0_12px_36px_rgba(93,46,133,0.45)] min-w-[130px]">
+                <span className="font-heading font-black text-white text-2xl sm:text-3xl tracking-tight leading-none mb-1">
+                  ₹3Cr+
+                </span>
+                <span className="font-sans font-bold text-white/75 text-[11px] uppercase tracking-wider">
+                  Revenue Generated
+                </span>
               </div>
-
-              {/* 4 Connected Growth Nodes with Category-Specific Left Borders */}
-              <div className="space-y-1.5 xs:space-y-2 xl:space-y-2.5 mb-2.5 sm:mb-3.5 xl:mb-4">
-                {GROWTH_NODES.map((node) => (
-                  <motion.div
-                    key={node.id}
-                    variants={nodeVariants}
-                    whileHover={{ x: 3, transition: { duration: 0.18 } }}
-                    className={`group p-2 xs:p-2.5 sm:p-3 xl:p-3.5 rounded-xl bg-[#F7F6F2]/80 hover:bg-[#F7F6F2] border border-[#DEDED7] border-l-[2.5px] sm:border-l-[3.5px] ${node.borderAccent} hover:border-[#5D2E85]/40 transition-all duration-200`}
-                  >
-                    <div className="flex items-start justify-between gap-1.5 mb-0.5 sm:mb-1">
-                      <div className="flex items-baseline gap-1 sm:gap-1.5 min-w-0">
-                        <span className="font-mono text-[9.5px] sm:text-[10px] xl:text-[11px] text-[#5F5F5A] font-bold shrink-0">
-                          {node.number}
-                        </span>
-                        <h4 className="font-heading font-bold text-[11px] sm:text-xs xl:text-[13px] text-[#111111] uppercase tracking-tight group-hover:text-[#5D2E85] transition-colors leading-tight truncate">
-                          {node.title}
-                        </h4>
-                      </div>
-                      <span className={`font-sans text-[8.5px] sm:text-[9px] xl:text-[10px] uppercase tracking-wider font-semibold px-1.5 sm:px-2 py-0.5 rounded-full border shrink-0 whitespace-nowrap ${node.tagBg}`}>
-                        {node.tag}
-                      </span>
-                    </div>
-                    <p className="font-body text-[10px] xs:text-[10.5px] sm:text-[11px] xl:text-[12px] text-[#5F5F5A] leading-snug pl-3 sm:pl-4">
-                      {node.description}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Bottom System Integration Outcome with Soft Elevated Gradient Tint */}
-              <div className="p-2.5 xs:p-3 sm:p-3.5 xl:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#F1E7F9]/60 via-[#F7F6F2] to-white border border-[#DEDED7] flex items-center justify-between gap-2 shadow-2xs">
-                <div className="min-w-0">
-                  <span className="block font-sans text-[8.5px] sm:text-[9px] sm:text-[10px] uppercase font-bold text-[#5F5F5A] tracking-wider leading-none mb-0.5">
-                    Compound Outcome
-                  </span>
-                  <p className="font-heading font-black text-[11px] xs:text-xs sm:text-sm xl:text-[15px] text-[#111111] uppercase tracking-tight truncate">
-                    Predictable Revenue &amp; Scale
-                  </p>
-                </div>
-                <div className="text-right shrink-0">
-                  <span className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] sm:text-[11px] font-heading font-bold uppercase tracking-wider text-[#5D2E85] bg-white px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full border border-[#5D2E85]/25 shadow-2xs whitespace-nowrap">
-                    <span>Full Engine</span>
-                    <span>↗</span>
-                  </span>
-                </div>
-              </div>
-
-            </div>
+            </motion.div>
           </motion.div>
 
         </div>
 
-        {/* ── LOWER SECTION: Integrated Strategic Proof Bar (Hidden on mobile to preserve clean first viewport, visible on desktop) ── */}
+        {/* ── LOWER SECTION: 4-Column Stats Row ── */}
         <motion.div
           variants={itemVariants}
           initial="hidden"
           animate="visible"
-          className="hidden lg:grid grid-cols-4 gap-6 xl:gap-8 pt-5 xl:pt-6 border-t border-[#DEDED7]/80 w-full mt-auto"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 pt-8 sm:pt-10 border-t border-[#DEDED7] w-full mt-12 sm:mt-16 lg:mt-12"
         >
+          {/* Stat 1: Revenue Generated */}
           <div className="flex flex-col">
-            <div className="flex items-baseline gap-1.5 mb-0.5">
-              <span className="font-heading font-black text-2xl xl:text-3xl text-[#111111] tracking-tight">
-                3.2<span className="text-[#5D2E85]">×</span>
-              </span>
-              <span className="font-sans font-bold text-[9px] uppercase tracking-wider text-[#287A55] bg-[#287A55]/10 px-1.5 py-0.5 rounded">
-                Avg Lift
-              </span>
-            </div>
-            <p className="font-heading font-bold text-xs xl:text-[13px] uppercase tracking-wider text-[#111111] mb-0.5">
-              Pipeline Expansion
-            </p>
-            <p className="font-body text-[11px] xl:text-[12px] text-[#5F5F5A] leading-snug">
-              Average inbound inquiry expansion across deployed systems
-            </p>
+            <span className="font-heading font-bold text-2xl sm:text-3xl lg:text-[2rem] text-[#5D2E85] tracking-tight mb-1">
+              ₹3Cr+
+            </span>
+            <span className="font-sans font-bold text-[11px] sm:text-xs uppercase tracking-wider text-[#111111] mb-1">
+              Revenue Generated
+            </span>
+            <span className="font-body text-xs sm:text-[13px] text-[#5F5F5A] leading-snug">
+              Tracked client revenue attributed to Juntoz campaigns
+            </span>
           </div>
 
+          {/* Stat 2: Google Maps Dominance */}
           <div className="flex flex-col">
-            <div className="flex items-baseline gap-1.5 mb-0.5">
-              <span className="font-heading font-black text-2xl xl:text-3xl text-[#111111] tracking-tight">
-                Top 3
-              </span>
-              <span className="font-sans font-bold text-[9px] uppercase tracking-wider text-[#3B82F6] bg-blue-50 px-1.5 py-0.5 rounded">
-                Local SEO
-              </span>
-            </div>
-            <p className="font-heading font-bold text-xs xl:text-[13px] uppercase tracking-wider text-[#111111] mb-0.5">
+            <span className="font-heading font-bold text-2xl sm:text-3xl lg:text-[2rem] text-[#111111] tracking-tight mb-1">
+              Top 3 {/* [NEEDS REAL METRIC] */}
+            </span>
+            <span className="font-sans font-bold text-[11px] sm:text-xs uppercase tracking-wider text-[#111111] mb-1">
               Google Maps Dominance
-            </p>
-            <p className="font-body text-[11px] xl:text-[12px] text-[#5F5F5A] leading-snug">
-              3-pack visibility right when high-intent customers search
-            </p>
+            </span>
+            <span className="font-body text-xs sm:text-[13px] text-[#5F5F5A] leading-snug">
+              3-pack visibility for high-intent customer search
+            </span>
           </div>
 
+          {/* Stat 3: Projects Scaled */}
           <div className="flex flex-col">
-            <div className="flex items-baseline gap-1.5 mb-0.5">
-              <span className="font-heading font-black text-2xl xl:text-3xl text-[#111111] tracking-tight">
-                200<span className="text-[#5D2E85]">+</span>
-              </span>
-              <span className="font-sans font-bold text-[9px] uppercase tracking-wider text-[#8B5CF6] bg-purple-50 px-1.5 py-0.5 rounded">
-                Deployed
-              </span>
-            </div>
-            <p className="font-heading font-bold text-xs xl:text-[13px] uppercase tracking-wider text-[#111111] mb-0.5">
+            <span className="font-heading font-bold text-2xl sm:text-3xl lg:text-[2rem] text-[#111111] tracking-tight mb-1">
+              200+ {/* [NEEDS REAL METRIC] */}
+            </span>
+            <span className="font-sans font-bold text-[11px] sm:text-xs uppercase tracking-wider text-[#111111] mb-1">
               Projects Scaled
-            </p>
-            <p className="font-body text-[11px] xl:text-[12px] text-[#5F5F5A] leading-snug">
+            </span>
+            <span className="font-body text-xs sm:text-[13px] text-[#5F5F5A] leading-snug">
               Multi-channel ads, custom conversion funnels &amp; branding
-            </p>
+            </span>
           </div>
 
+          {/* Stat 4: Client Satisfaction */}
           <div className="flex flex-col">
-            <div className="flex items-baseline gap-1.5 mb-0.5">
-              <span className="font-heading font-black text-2xl xl:text-3xl text-[#111111] tracking-tight">
-                5.0<span className="text-[#5D2E85]">★</span>
+            <div className="flex items-center gap-1.5 mb-1">
+              <span className="font-heading font-bold text-2xl sm:text-3xl lg:text-[2rem] text-[#111111] tracking-tight">
+                5.0+ {/* [NEEDS REAL METRIC] */}
               </span>
-              <span className="font-sans font-bold text-[9px] uppercase tracking-wider text-[#287A55] bg-[#287A55]/10 px-1.5 py-0.5 rounded">
-                Verified
-              </span>
+              <span className="text-[#5D2E85] text-xl leading-none">★</span>
             </div>
-            <p className="font-heading font-bold text-xs xl:text-[13px] uppercase tracking-wider text-[#111111] mb-0.5">
+            <span className="font-sans font-bold text-[11px] sm:text-xs uppercase tracking-wider text-[#111111] mb-1">
               Client Satisfaction
-            </p>
-            <p className="font-body text-[11px] xl:text-[12px] text-[#5F5F5A] leading-snug">
-              Transparent live attribution and verified ROI reporting
-            </p>
+            </span>
+            <span className="font-body text-xs sm:text-[13px] text-[#5F5F5A] leading-snug">
+              Transparent ROI reporting and verifiable ROI reporting
+            </span>
           </div>
         </motion.div>
 

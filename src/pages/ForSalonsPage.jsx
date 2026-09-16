@@ -120,7 +120,7 @@ export default function ForSalonsPage() {
 
               <ScrollReveal data-reveal="up" delay={250}>
                 <p className="font-body text-[#5F5F5A] text-base md:text-lg max-w-xl leading-relaxed">
-                  As a full-service digital agency with specialized local growth expertise, Juntoz engineers automated local search, Google Business Profile dominance, and customer retention systems specifically designed to scale salon and clinic revenue.
+                  Google Maps 3-Pack. Full chairs. Automated local growth.
                 </p>
               </ScrollReveal>
 

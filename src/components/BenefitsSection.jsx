@@ -26,7 +26,7 @@ const BENEFITS = [
   },
   {
     num: '02',
-    color: '#7B2FFF',
+    color: '#5D2E85',
     title: 'Experienced Team',
     desc: 'A powerhouse of beauty marketing veterans and creative minds driving measurable bookings and real revenue growth.',
     icon: (
@@ -83,7 +83,7 @@ function BenefitCard({ b, index, revealed }) {
       <div
         className="relative h-full flex flex-col p-6 sm:p-7 rounded-2xl overflow-hidden"
         style={{
-          background: hovered ? `rgba(${b.color === '#00F5D4' ? '0,245,212' : b.color === '#7B2FFF' ? '123,47,255' : '255,58,242'},0.06)` : 'rgba(255,255,255,0.03)',
+          background: hovered ? `rgba(${b.color === '#00F5D4' ? '0,245,212' : b.color === '#5D2E85' ? '93,46,133' : '255,58,242'},0.06)` : 'rgba(255,255,255,0.03)',
           border: `1px solid ${hovered ? b.color + '40' : 'rgba(255,255,255,0.07)'}`,
           transition: 'background 0.4s ease, border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease',
           transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
@@ -195,9 +195,9 @@ export default function BenefitsSection() {
       {/* ── Background ── */}
       <div className="absolute inset-0 pointer-events-none">
         <div style={{ position:'absolute', inset:0, background:'linear-gradient(180deg, transparent 0%, rgba(5,5,20,0.4) 40%, rgba(5,5,20,0.4) 60%, transparent 100%)' }} />
-        <div style={{ position:'absolute', top:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(0,245,212,0.2) 35%, rgba(123,47,255,0.2) 65%, transparent 95%)' }} />
+        <div style={{ position:'absolute', top:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(0,245,212,0.2) 35%, rgba(93,46,133,0.2) 65%, transparent 95%)' }} />
         <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'1px', background:'linear-gradient(to right, transparent 5%, rgba(255,58,242,0.15) 40%, rgba(0,245,212,0.15) 60%, transparent 95%)' }} />
-        <div style={{ position:'absolute', top:'20%', right:0, width:'350px', height:'350px', background:'radial-gradient(ellipse, rgba(123,47,255,0.08) 0%, transparent 65%)', filter:'blur(50px)' }} />
+        <div style={{ position:'absolute', top:'20%', right:0, width:'350px', height:'350px', background:'radial-gradient(ellipse, rgba(93,46,133,0.08) 0%, transparent 65%)', filter:'blur(50px)' }} />
         <div style={{ position:'absolute', bottom:'20%', left:0, width:'300px', height:'300px', background:'radial-gradient(ellipse, rgba(0,245,212,0.06) 0%, transparent 65%)', filter:'blur(50px)' }} />
       </div>
 

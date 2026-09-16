@@ -5,89 +5,123 @@ import HowWeGrowBusinesses from '../components/HowWeGrowBusinesses';
 
 const AGENCY_SERVICES = [
   {
-    id: 'strategy',
+    id: 'instagram-management',
     number: '01',
-    category: 'Strategy',
-    title: 'Growth Strategy & Commercial Planning',
-    tagline: 'Precision Market Roadmapping Before Ad Spend',
-    desc: 'Wasting budget on disconnected marketing campaigns without a clear business model is the fastest way to burn capital. We analyze your customer acquisition economics, competitor landscape, and target buyer journey to construct an actionable growth blueprint with measurable ROI targets.',
+    category: 'Social Growth',
+    title: 'Instagram Management',
+    tagline: 'Aesthetic Feed Curation, High-Retention Reels & Inbound DM Inquiries',
+    desc: 'Transform your Instagram from a quiet profile into an active booking engine. We manage your end-to-end grid curation, story funnels, engagement sequences, and direct message lead qualification so profile visitors convert into high-ticket bookings.',
     included: [
-      'Comprehensive Digital & Competitive Landscape Audit',
-      'Customer Unit Economics & Target CAC/LTV Modeling',
-      'Omnichannel Go-To-Market (GTM) Strategy',
-      'Quarterly Milestone & Media Budget Allocation Roadmap'
+      'Signature Aesthetic Grid Planning & Bio Optimization',
+      'Viral Reel Scripting, Audio Trend Selection & Editing',
+      'Daily Story Sequences & Interactive Engagement Polling',
+      'Inbound DM Lead Triage & Consultation Scheduling'
     ],
-    deliverable: 'Custom Growth Strategy Blueprint + KPI Execution Roadmap',
-    idealFor: 'Businesses with unclear marketing ROI, stagnant lead pipelines, or new market expansion goals.',
-    investment: 'Strategic Project or Integrated into Monthly Retainer'
+    deliverable: 'Fully Managed Monthly Instagram Calendar & Daily Lead Engine',
+    idealFor: 'Artists, beauty professionals, and brands seeking an authoritative aesthetic that drives consistent inbound DMs.',
+    investment: 'Monthly Management Retainer'
   },
   {
-    id: 'performance-ads',
+    id: 'meta-google-ads',
     number: '02',
-    category: 'Performance',
-    title: 'Performance Paid Ads (Meta & Google)',
-    tagline: 'High-Intent Customer Acquisition With Proven ROAS',
-    desc: 'We build and scale high-converting advertising campaigns across Meta (Instagram/Facebook) and Google Search/Display. Every rupee spent is tracked against pipeline value, qualified leads, and verifiable revenue rather than vanity impressions.',
+    category: 'Performance Advertising',
+    title: 'Meta Ads & Google Ads',
+    tagline: 'High-Intent Paid Acquisition Engineered for Predictable Bookings & Proven ROAS',
+    desc: 'Stop burning budget on boosted posts. We build data-backed paid advertising funnels across Instagram, Facebook, and Google Search that pinpoint ready-to-buy clients and fill your appointment calendar with profitable bookings.',
     included: [
-      'Google Search Intent & High-Converting Keyword Campaigns',
-      'Meta Performance Creative & Retargeting Architectures',
-      'Rapid Multi-Hook Ad Creative Testing & Iteration',
-      'Daily ROAS Tracking, Audience Refreshing & Budget Scaling'
+      'High-Intent Google Search & Keyword Bidding Campaigns',
+      'Meta Dynamic Creative Testing & Retargeting Architectures',
+      'Conversion-Engineered Ad Copy & Hook Variations',
+      'Continuous ROAS Tracking, Pixel Setup & Budget Scaling'
     ],
-    deliverable: 'Scalable Paid Acquisition Engine with Weekly Transparent Reporting',
-    idealFor: 'Companies and clinics looking for consistent, predictable weekly inbound inquiries and sales.',
-    investment: 'Monthly Management Retainer + Direct Ad Spend'
+    deliverable: 'Predictable Inbound Paid Lead Engine with Transparent Weekly Reporting',
+    idealFor: 'Businesses ready to scale client volume and keep schedules booked weeks in advance.',
+    investment: 'Monthly Management Retainer + Direct Media Spend'
   },
   {
-    id: 'gmb-seo',
+    id: 'seo',
     number: '03',
-    category: 'Organic Growth',
-    title: 'SEO & Google Business Profile (GMB) Management',
-    tagline: 'Local 3-Pack Maps Dominance & Search Visibility',
-    desc: 'When high-intent customers search for your services in your city or neighborhood, your profile determines who gets the call. We optimize your Google Business Profile and local search footprint to rank in the Local 3-Pack and capture high-intent inbound search traffic.',
+    category: 'Organic Search',
+    title: 'SEO (Search Engine Optimization)',
+    tagline: 'Dominant Organic Google Rankings for Long-Term Inbound Authority',
+    desc: 'Capture clients actively searching for your services on Google without paying for every click. We optimize your website architecture, high-intent service keywords, and regional backlinks to achieve top rankings that compound over time.',
+    included: [
+      'Comprehensive Competitor Keyword & Search Intent Mapping',
+      'Technical SEO, Speed Optimization & Mobile Usability Audits',
+      'On-Page Metadata, Schema Markup & Content Optimization',
+      'High-Authority Niche Backlinks & Search Console Management'
+    ],
+    deliverable: 'First-Page Google Search Placement for High-Value Commercial Search Terms',
+    idealFor: 'Brands looking to establish lasting digital dominance and lower their customer acquisition costs.',
+    investment: 'Monthly SEO Retainer'
+  },
+  {
+    id: 'gmb',
+    number: '04',
+    category: 'Local Search',
+    title: 'GMB (Google My Business Management)',
+    tagline: 'Local 3-Pack Maps Dominance, Direct Calls & Walk-In Inquiries',
+    desc: 'When high-intent clients search for services "near me" or in their city, your Google Business Profile decides who gets the call. We optimize and manage your GMB listing to rank in the Local 3-Pack on Google Maps, driving daily calls and appointment visits.',
     included: [
       'Complete Google Business Profile Setup, Verification & Audit',
-      'Local 3-Pack Maps Keyword & Category Optimization',
-      'High-Resolution Geotagged Visual Uploads & Weekly Posts',
-      'Review Generation Playbook & Ongoing Reputation Monitoring'
+      'Local 3-Pack Maps Geo-Keyword & Category Optimization',
+      'Weekly High-Resolution Geotagged Visual Uploads & Posts',
+      '5-Star Review Generation Playbook & Reputation Defense'
     ],
-    deliverable: 'Dominant Local Google Presence Generating Organic Calls, Directions & Visits',
-    idealFor: 'Local businesses, clinics, studios, and firms that depend on foot traffic and direct phone calls.',
-    investment: 'Monthly Optimization & Management Package'
+    deliverable: 'Top Local Maps Ranking Driving Direct Inquiries, Calls & Directions',
+    idealFor: 'Salons, clinics, studios, academies, and regional professionals relying on local clientele.',
+    investment: 'Monthly Local Search & GMB Management'
   },
   {
-    id: 'brand-shoots',
-    number: '04',
-    category: 'Brand & Creative',
-    title: 'Branding, Social Media & Professional Shoots',
-    tagline: 'On-Location Production in Mumbai & Delhi + Premium Positioning',
-    desc: 'Generic stock assets and poor smartphone video destroy customer trust. Juntoz deploys dedicated creative crews in Mumbai and Delhi for professional brand shoots, social reels, and ad creatives that establish unshakeable market authority and justify premium pricing.',
-    included: [
-      'Complete Brand Identity Guidelines, Typography & Color Systems',
-      'On-Location Photo & Video Shoots in Mumbai & Delhi',
-      'Hook-Engineered Short-Form Video & Reel Post-Production',
-      'Conversion-First Social Media Aesthetic & Publishing Calendar'
-    ],
-    deliverable: 'Full Brand Identity Kit + High-Resolution Production Creative Assets',
-    idealFor: 'Brands looking to elevate their market perception and produce high-converting ad assets.',
-    investment: 'Per-Shoot Production or Integrated Monthly Content Retainer'
-  },
-  {
-    id: 'web-cro',
+    id: 'mobile-content-shoot',
     number: '05',
-    category: 'Digital Experience',
-    title: 'Web Design & Conversion Rate Architecture',
-    tagline: 'High-Speed Digital Engines Built to Turn Clicks into Revenue',
-    desc: 'An ad or social post is only as effective as the page it lands on. We engineer lightning-fast, mobile-first websites and dedicated campaign landing pages integrated with WhatsApp and CRM pipelines to ensure zero lead leakage.',
+    category: 'Creative Production',
+    title: 'Photo & Content Shoot (Camera & Mobile)',
+    tagline: 'On-Location Professional Camera & 4K iPhone Shoots Across Delhi & Mumbai',
+    desc: 'We provide end-to-end on-location photo and video production across Delhi NCR and Mumbai using both professional DSLR/cinema cameras and 4K iPhones. Capture crisp commercial portraits for your website and lookbooks, paired with algorithm-friendly smartphone reels and authentic behind-the-scenes transformations.',
     included: [
-      'Custom Responsive Website & Landing Page Design',
-      'Conversion Rate Optimization (CRO) & Click-Path Engineering',
-      'Instant WhatsApp & Lead Intake Form Automations',
-      'Google PageSpeed 90+ Optimization, Clean Code & CDN Deployment'
+      'Professional DSLR Camera Photography & Retouched Lookbooks',
+      'On-Location 4K iPhone Reels & Viral Transformation Sequences',
+      'Delhi & Mumbai Dedicated Crews with Pro Lighting & Wireless Audio',
+      'Batch Content Shoot Yielding 30–60 Days of Ready-to-Post Visual Assets'
     ],
-    deliverable: 'Turnkey Digital Storefront / Landing Page Deployed on Global Fast CDN',
-    idealFor: 'Companies losing ad revenue because their current website is slow, confusing, or fails to convert.',
-    investment: 'One-Time Build + Optional Ongoing Optimization'
+    deliverable: 'Curated Vault of High-Res Camera Portraits & 4K iPhone Reels',
+    idealFor: 'Professionals and brands looking for premium lookbooks and algorithm-friendly reels without hiring separate crews.',
+    investment: 'Half-Day / Full-Day Shoot or Monthly Content Retainer'
+  },
+  {
+    id: 'ai-videos',
+    number: '06',
+    category: 'Creative Tech',
+    title: 'AI Videos',
+    tagline: 'Next-Gen Generative Visuals, AI Avatars & Scalable High-Hook Creatives',
+    desc: 'Scale your video output without endless studio time. We utilize cutting-edge AI video generation tools to create captivating motion visuals, hyper-realistic voiceovers, multilingual versions, and high-converting ad variations that capture attention in the first 2 seconds.',
+    included: [
+      'High-Hook AI Voiceovers & Dynamic Promotional Video Scripts',
+      'Generative Motion Backgrounds, Visual Enhancements & AI Avatars',
+      'Multi-Variation Creative Testing for Paid Social Ad Campaigns',
+      'AI Video Upscaling, Subtitling & Aspect Ratio Formatting'
+    ],
+    deliverable: 'Scalable Library of Attention-Grabbing Generative Video Creatives',
+    idealFor: 'Brands looking to accelerate video ad testing, produce multilingual content, and stand out visually.',
+    investment: 'Campaign Project or Monthly Retainer'
+  },
+  {
+    id: 'websites',
+    number: '07',
+    category: 'Digital Storefront',
+    title: 'Websites & Conversion Funnels',
+    tagline: 'Ultra-Fast, Mobile-First Portfolios Built for Immediate Inquiries & Bookings',
+    desc: 'A great website is your 24/7 sales representative. We engineer ultra-fast, mobile-first websites and landing pages equipped with one-tap WhatsApp integration, interactive portfolios, and seamless booking funnels that ensure zero lead leakage.',
+    included: [
+      'Bespoke Mobile-First UX/UI Design & Custom Responsive Build',
+      'Instant One-Tap WhatsApp & Calendar Booking Integrations',
+      '90+ Google PageSpeed Optimization & Global CDN Deployment',
+      'Conversion Rate Optimization (CRO) & Service Pricing Menus'
+    ],
+    deliverable: 'Turnkey High-Converting Website Deployed on Global High-Speed Infrastructure',
+    idealFor: 'Professionals and brands whose current site is outdated, slow, or failing to convert traffic into inquiries.',
+    investment: 'One-Time Project Build + Optional Monthly Support'
   }
 ];
 
@@ -95,8 +129,8 @@ export default function ServicesPage() {
   return (
     <div className="pt-28 sm:pt-36 pb-24 min-h-screen bg-[#F7F6F2]">
       <PageMeta
-        title="Full-Service Digital Growth Services — Juntoz Digital Marketing Agency"
-        description="Explore Juntoz's 5 core growth pillars: Digital Strategy, Performance Paid Ads, Local SEO & Google Business Profile, Brand Shoots in Mumbai & Delhi, and Conversion Web Architecture."
+        title="Our Services — Juntoz Digital Marketing Agency"
+        description="Explore Juntoz's 7 core digital growth services: Instagram Management, Meta Ads & Google Ads, SEO, GMB, Mobile Content Shoots, AI Videos, and Websites."
         path="/services"
       />
 
@@ -116,38 +150,9 @@ export default function ServicesPage() {
           </span>
         </h1>
 
-        <p className="font-body text-[#5F5F5A] text-base sm:text-xl max-w-3xl mx-auto leading-relaxed">
-          We don&apos;t offer isolated, cookie-cutter marketing tasks. Every service connects strategy, performance advertising, local search discovery, professional visual content, and web conversion into a compounded growth engine.
+        <p className="font-body text-[#5F5F5A] text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+          Every service connects — strategy, ads, local search, content, and web — into one compounded growth engine.
         </p>
-
-        {/* Dedicated Specialty Banner */}
-        <div className="mt-8 inline-block p-5 sm:p-6 rounded-3xl bg-white border border-[#DEDED7] shadow-card text-left max-w-2xl">
-          <div className="flex items-center justify-between mb-2">
-            <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#5D2E85]">
-              Specialist Industry Verticals
-            </span>
-            <span className="text-[10px] font-sans font-bold px-2 py-0.5 rounded bg-[#F1E7F9] text-[#5D2E85]">
-              Dedicated Playbooks
-            </span>
-          </div>
-          <p className="text-xs sm:text-sm text-[#5F5F5A] font-body leading-relaxed mb-3">
-            Looking for industry-specific solutions? We have battle-tested playbooks tailored exclusively for beauty professionals:
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Link
-              to="/for-makeup-artists"
-              className="text-xs font-heading font-bold text-[#111111] hover:text-[#5D2E85] underline underline-offset-4"
-            >
-              For Makeup Artists &amp; Academies →
-            </Link>
-            <Link
-              to="/for-salons"
-              className="text-xs font-heading font-bold text-[#111111] hover:text-[#5D2E85] underline underline-offset-4"
-            >
-              For Salons &amp; Clinic Chains →
-            </Link>
-          </div>
-        </div>
       </section>
 
       {/* Services Deep Dive Grid */}
@@ -173,9 +178,11 @@ export default function ServicesPage() {
                     </div>
 
                     <div>
-                      <h2 className="font-heading font-black text-2xl sm:text-3xl lg:text-4xl text-[#111111] uppercase tracking-tight mb-2">
-                        {service.title}
-                      </h2>
+                      <Link to={`/services/${service.id}`} className="group inline-block">
+                        <h2 className="font-heading font-black text-2xl sm:text-3xl lg:text-4xl text-[#111111] group-hover:text-[#5D2E85] uppercase tracking-tight mb-2 transition-colors">
+                          {service.title}
+                        </h2>
+                      </Link>
                       <p className="font-heading font-bold text-sm sm:text-base text-[#5D2E85]">
                         {service.tagline}
                       </p>
@@ -232,14 +239,23 @@ export default function ServicesPage() {
                       </div>
                     </div>
 
-                    <a
-                      href={`https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20am%20interested%20in%20learning%20more%20about%20your%20${encodeURIComponent(service.title)}%20services.`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-3.5 px-4 rounded-xl font-heading font-bold text-xs uppercase tracking-widest text-center text-white bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200 block shadow-sm"
-                    >
-                      Inquire About {service.category}
-                    </a>
+                    <div className="space-y-2.5 pt-2">
+                      <Link
+                        to={`/services/${service.id}`}
+                        className="w-full py-3 px-4 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-center text-[#5D2E85] bg-[#F1E7F9] hover:bg-[#5D2E85] hover:text-white transition-all duration-200 block border border-[#5D2E85]/20"
+                      >
+                        Explore Full Page &amp; Audit →
+                      </Link>
+
+                      <a
+                        href={`https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20am%20interested%20in%20learning%20more%20about%20your%20${encodeURIComponent(service.title)}%20services.`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-3 px-4 rounded-xl font-heading font-bold text-xs uppercase tracking-widest text-center text-white bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200 block shadow-sm"
+                      >
+                        Inquire on WhatsApp
+                      </a>
+                    </div>
                   </div>
 
                 </div>
@@ -262,7 +278,7 @@ export default function ServicesPage() {
             Not Sure Which Service Pillar Your Business Needs First?
           </h2>
           <p className="font-body text-white/70 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Schedule a free 20-minute strategic consultation. We will analyze your current digital presence, pinpoint your primary growth bottleneck, and suggest the exact steps to scale.
+            Book 20 mins — we'll identify your biggest growth leak and fix it.
           </p>
           <div className="pt-4">
             <Link

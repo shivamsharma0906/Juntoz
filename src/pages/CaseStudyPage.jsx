@@ -8,7 +8,7 @@ export default function CaseStudyPage() {
   const study = caseStudies.find(s => s.slug === slug);
 
   if (!study) {
-    return <Navigate to="/work" replace />;
+    return <Navigate to="/case-studies" replace />;
   }
 
   return (
@@ -16,16 +16,16 @@ export default function CaseStudyPage() {
       <PageMeta
         title={`${study.clientName} Case Study — Juntoz`}
         description={`Read how Juntoz helped ${study.clientName} scale revenue: ${study.result}`}
-        path={`/work/${study.slug}`}
+        path={`/case-study/${study.slug}`}
       />
       <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
         
         {/* Back Link */}
-        <Link to="/work" className="inline-flex items-center gap-2 text-[#5F5F5A] hover:text-[#111111] mb-10 transition-colors font-body text-xs uppercase tracking-wider font-bold">
+        <Link to="/case-studies" className="inline-flex items-center gap-2 text-[#5F5F5A] hover:text-[#5D2E85] mb-10 transition-colors font-body text-xs uppercase tracking-wider font-bold">
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
           </svg>
-          Back to Work
+          Back to Case Studies
         </Link>
 
         {/* Header */}
