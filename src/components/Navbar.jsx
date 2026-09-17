@@ -296,7 +296,7 @@ export default function Navbar() {
             </div>
 
             {/* ── LOGO (Left-aligned, scaled length-wise with locked aspect ratio) ── */}
-            <div style={itemEnter(0.15)} className="flex-1 lg:flex-initial flex justify-center lg:justify-start items-center shrink-0 relative z-10 mr-0 lg:mr-6">
+            <div style={itemEnter(0.15)} className="flex-1 lg:flex-initial flex justify-center lg:justify-start items-center shrink-0 relative z-10 mr-0 lg:mr-4 xl:mr-6">
               <Link
                 to="/"
                 className="flex items-center shrink-0 relative z-[60] group/logo"
@@ -308,7 +308,7 @@ export default function Navbar() {
                   width="185"
                   height="48"
                   fetchPriority="high"
-                  className="w-[130px] sm:w-[150px] lg:w-[165px] xl:w-[180px] h-auto object-contain relative z-10 transition-transform duration-200 group-hover/logo:scale-105"
+                  className="w-[125px] sm:w-[145px] lg:w-[150px] xl:w-[170px] h-auto object-contain relative z-10 transition-transform duration-200 group-hover/logo:scale-105"
                 />
               </Link>
             </div>
@@ -327,28 +327,28 @@ export default function Navbar() {
               </a>
             </div>
 
-            {/* ── Desktop nav links (Generous spacing between options, larger text size) ── */}
-            <div style={itemEnter(0.25)} className="hidden lg:flex items-center justify-center gap-7 lg:gap-10 xl:gap-14 2xl:gap-16 flex-1 px-3 relative z-10">
+            {/* ── Desktop nav links (Clean spacing, balanced typography, whitespace protection) ── */}
+            <div style={itemEnter(0.25)} className="hidden lg:flex items-center justify-center gap-3.5 lg:gap-4 xl:gap-6.5 2xl:gap-8 flex-1 min-w-0 px-2 relative z-10">
               {navLinks.map((link) => {
                 if (link.isMega) {
                   const isServiceActive = location.pathname.startsWith('/services');
                   return (
                     <div
                       key={link.name}
-                      className="relative"
+                      className="relative shrink-0"
                       onMouseEnter={handleMegaEnter}
                       onMouseLeave={handleMegaLeave}
                     >
                       <Link
                         to={link.href}
                         onFocus={handleMegaEnter}
-                        className={`relative inline-flex items-center gap-1.5 font-sans font-semibold text-[19px] lg:text-[20px] xl:text-[21.5px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 ${
+                        className={`relative inline-flex items-center gap-1 font-sans font-semibold text-[14px] lg:text-[14.5px] xl:text-[16px] 2xl:text-[17.5px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 whitespace-nowrap ${
                           isServiceActive || megaMenuOpen ? 'text-[#5D2E85]' : 'text-[#1F1F1D] hover:text-[#5D2E85]'
                         }`}
                       >
                         <span>{link.name}</span>
                         <svg
-                          className={`w-4 h-4 text-[#777772] transition-transform duration-200 ${
+                          className={`w-3.5 h-3.5 text-[#777772] transition-transform duration-200 ${
                             megaMenuOpen ? 'rotate-180 text-[#5D2E85]' : ''
                           }`}
                           fill="none"
@@ -371,20 +371,20 @@ export default function Navbar() {
                   return (
                     <div
                       key={link.name}
-                      className="relative"
+                      className="relative shrink-0"
                       onMouseEnter={handleSpecialtiesEnter}
                       onMouseLeave={handleSpecialtiesLeave}
                     >
                       <Link
                         to={link.href}
                         onFocus={handleSpecialtiesEnter}
-                        className={`relative inline-flex items-center gap-1.5 font-sans font-semibold text-[19px] lg:text-[20px] xl:text-[21.5px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 ${
+                        className={`relative inline-flex items-center gap-1 font-sans font-semibold text-[14px] lg:text-[14.5px] xl:text-[16px] 2xl:text-[17.5px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 whitespace-nowrap ${
                           isSpecialtiesActive || specialtiesMenuOpen ? 'text-[#5D2E85]' : 'text-[#1F1F1D] hover:text-[#5D2E85]'
                         }`}
                       >
                         <span>{link.name}</span>
                         <svg
-                          className={`w-4 h-4 text-[#777772] transition-transform duration-200 ${
+                          className={`w-3.5 h-3.5 text-[#777772] transition-transform duration-200 ${
                             specialtiesMenuOpen ? 'rotate-180 text-[#5D2E85]' : ''
                           }`}
                           fill="none"
@@ -504,7 +504,7 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={`relative font-sans font-semibold text-[19px] lg:text-[20px] xl:text-[21.5px] tracking-tight transition-colors duration-200 z-10 whitespace-nowrap py-1.5 ${
+                    className={`relative shrink-0 font-sans font-semibold text-[14px] lg:text-[14.5px] xl:text-[16px] 2xl:text-[17.5px] tracking-tight transition-colors duration-200 z-10 whitespace-nowrap py-1.5 ${
                       isActive ? 'text-[#5D2E85]' : 'text-[#1F1F1D] hover:text-[#5D2E85]'
                     }`}
                   >
