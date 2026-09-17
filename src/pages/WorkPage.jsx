@@ -270,7 +270,7 @@ export default function WorkPage() {
                 Methodology Behind The Numbers
               </span>
               <h2 className="font-heading font-black text-2xl sm:text-4xl uppercase tracking-tight text-[#111111]">
-                How We Engineer <span className="text-[#5D2E85]">Consistent Growth.</span>
+                How We Drive <span className="text-[#5D2E85]">Consistent Growth.</span>
               </h2>
               <p className="font-sans text-sm sm:text-base text-[#5F5F5A] mt-3 max-w-xl mx-auto leading-relaxed">
                 4-phase system. Zero vanity metrics. Only compounding revenue.

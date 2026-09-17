@@ -5,7 +5,7 @@ const MARKETING_BREAKDOWNS = [
     num: '01',
     title: 'Isolated Tactics vs. Connected Systems (The Ad Spend Hole)',
     reality: 'Running expensive paid ads that send traffic to generic homepages with no targeted messaging, clear call-to-action, or follow-up pipeline.',
-    solution: 'We engineer full-funnel architectures connecting targeted ad hooks to dedicated conversion landing pages and instant qualification sequences.',
+    solution: 'We build full-funnel journeys that connect targeted ad hooks to high-converting landing pages and seamless lead qualification.',
     icon: '⚡',
   },
   {

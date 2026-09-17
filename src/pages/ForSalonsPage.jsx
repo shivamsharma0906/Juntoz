@@ -5,7 +5,7 @@ import ScrollReveal from '../components/ScrollReveal.jsx';
 import PageMeta from '../components/PageMeta.jsx';
 import CTASection from '../components/CTASection.jsx';
 
-const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20run%20a%20salon%20and%20I%27d%20like%20to%20get%20a%20free%20salon%20growth%20audit.';
+const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20run%20a%20salon%20and%20I%27d%20like%20to%20book%20a%20salon%20growth%20audit.';
 
 const SALON_SERVICES = [
   {
@@ -125,7 +125,7 @@ export default function ForSalonsPage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-3 min-h-[54px] rounded-full font-heading font-bold uppercase tracking-widest text-xs px-8 bg-[#111111] text-white hover:bg-[#5D2E85] transition-all duration-300 shadow-sm"
                 >
-                  <span>Book Free Salon Audit</span>
+                  <span>Book Salon Growth Audit</span>
                   <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>

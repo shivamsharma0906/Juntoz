@@ -57,7 +57,7 @@ export default function CaseStudiesShowcase() {
 
               {/* Subtext */}
               <p className="font-body text-[#5F5F5A] text-sm sm:text-base leading-relaxed max-w-md">
-                We engineer scalable acquisition systems tailored to unit economics, turning brand potential into documented commercial ROI.
+                We build scalable growth systems designed around your business, turning brand potential into measurable commercial results.
               </p>
 
               {/* Decorative Squiggle Underline */}

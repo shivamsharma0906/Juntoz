@@ -75,7 +75,7 @@ export const SERVICE_DETAILS = {
         a: 'Yes, we set up automated response triage and routing templates to capture client event dates, budget, and contact numbers, handing hot leads directly to your WhatsApp.'
       }
     ],
-    ctaText: 'Claim Free Instagram Profile Audit'
+    ctaText: 'Request Instagram Profile Audit'
   },
 
   'meta-google-ads': {
@@ -154,7 +154,7 @@ export const SERVICE_DETAILS = {
         a: 'Yes. We track the entire customer journey from click to WhatsApp conversation to deposit confirmation, providing weekly transparent ROI reporting.'
       }
     ],
-    ctaText: 'Claim Free Paid Ads Strategy Audit'
+    ctaText: 'Request Paid Ads Strategy Audit'
   },
 
   'seo': {
@@ -226,14 +226,14 @@ export const SERVICE_DETAILS = {
       },
       {
         q: 'Why should I invest in SEO if I already run Meta Ads?',
-        a: 'Ads stop the moment you stop paying. SEO builds permanent digital real estate that delivers free high-intent inbound inquiries month after month, dramatically reducing your blended CAC.'
+        a: 'Ads stop the moment you stop paying. SEO builds permanent digital real estate that delivers organic high-intent inbound inquiries month after month, dramatically reducing your blended CAC.'
       },
       {
         q: 'Do you provide ranking reports?',
         a: 'Yes, every month we deliver a transparent Search Console and keyword movement report showing exact search rankings, impressions, clicks, and inbound leads.'
       }
     ],
-    ctaText: 'Claim Free Technical SEO Audit'
+    ctaText: 'Request Technical SEO Audit'
   },
 
   'gmb': {
@@ -312,7 +312,7 @@ export const SERVICE_DETAILS = {
         a: 'Yes. Review volume, star rating, keyword inclusion in reviews, and owner response rate represent over 30% of Google’s local map ranking algorithm.'
       }
     ],
-    ctaText: 'Claim Free Google Business Profile Audit'
+    ctaText: 'Request Google Business Profile Audit'
   },
 
   'mobile-content-shoot': {
@@ -550,6 +550,6 @@ export const SERVICE_DETAILS = {
         a: 'Yes, we provide full access and a simple 15-minute video walkthrough showing how to update photos, service packages, and testimonials anytime.'
       }
     ],
-    ctaText: 'Claim Free Website & Conversion Audit'
+    ctaText: 'Request Website & Conversion Audit'
   }
 };

@@ -142,7 +142,7 @@ export default function CaseStudyPage() {
                 Want a Similar Transformation For Your Brand?
               </h3>
               <p className="font-body text-white/65 text-sm sm:text-base max-w-md mx-auto mb-8 leading-relaxed">
-                Book a free 20-minute MUA Growth Audit with our founders. We'll audit your profile and show you where your biggest revenue unlock is.
+                Book a 20-minute MUA Growth Audit with our founders. We'll audit your profile and show you where your biggest revenue unlock is.
               </p>
               <a
                 href={`https://wa.me/919004001800?text=Hi%20Sujal!%20I%20just%20read%20the%20${encodeURIComponent(study.clientName)}%20case%20study%20and%20would%20love%20a%20growth%20audit.`}
@@ -150,7 +150,7 @@ export default function CaseStudyPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#5D2E85] hover:bg-[#4C266D] text-white font-heading font-bold text-xs uppercase tracking-wider transition-all shadow-lg active:scale-[0.98]"
               >
-                Claim Your Free MUA Audit
+                Request MUA Growth Audit
               </a>
             </div>
           </ScrollReveal>

@@ -342,7 +342,7 @@ export default function ServicesPage() {
               to="/contact"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-white bg-[#5D2E85] hover:bg-[#4C266D] transition-colors duration-200 shadow-sm"
             >
-              <span>Schedule Free Strategy Call</span>
+              <span>Schedule Strategy Session</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>

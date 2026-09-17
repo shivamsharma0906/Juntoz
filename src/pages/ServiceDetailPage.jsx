@@ -4,6 +4,11 @@ import PageMeta from '../components/PageMeta';
 import ScrollReveal from '../components/ScrollReveal';
 import { SERVICE_DETAILS } from '../data/serviceDetails';
 
+import logo from '../components/logo.webp';
+import reel1Thumb from '../assets/reels/image.png';
+import reel2Thumb from '../assets/reels/image copy.png';
+import reel3Thumb from '../assets/reels/reel-bts-setup.jpg';
+
 const ALL_SERVICES_LIST = [
   { id: 'instagram-management', title: 'Instagram Management', badge: 'Core' },
   { id: 'meta-google-ads', title: 'Meta & Google Ads', badge: 'High ROAS' },
@@ -15,59 +20,332 @@ const ALL_SERVICES_LIST = [
 ];
 
 function ServiceSimulator({ serviceId, serviceTitle }) {
-  switch (serviceId) {
-    case 'instagram-management':
+  const [activeModalReel, setActiveModalReel] = useState(null);
+  const [inlinePlayingId, setInlinePlayingId] = useState(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+ switch (serviceId) {
+  case 'instagram-management': {
+    const reels = [
+      {
+        id: 'Db8PB7zoEGR',
+        url: 'https://www.instagram.com/p/Db8PB7zoEGR/',
+        title: 'Client Shoot BTS',
+        views: '94.6K views',
+        tag: 'CLIENT BTS',
+        category: 'BTS Shoot',
+        duration: '0:32',
+        videoSrc: null,
+        thumbnail: reel1Thumb,
+        hookText: 'Client Shoot BTS & Production',
+        subtext: 'High-end visual direction engineered for organic reach.',
+      },
+
+      {
+        id: 'DcROSF6Iw_O',
+        url: 'https://www.instagram.com/p/DcROSF6Iw_O/',
+        title: 'Client Transformation',
+        views: '128K views',
+        tag: 'HIGH-INTENT',
+        category: 'High-Intent',
+        duration: '0:34',
+        videoSrc: null,
+        thumbnail: reel2Thumb,
+        hookText: 'Low Cortisol. High Vibe. Real Results.',
+        subtext: '4K before-and-after sequence driving direct bookings.',
+      },
+
+      {
+        id: 'DaS_OS_qYvf',
+        url: 'https://www.instagram.com/p/DaS_OS_qYvf/',
+        title: 'BTS Setup',
+        views: '49.1K views',
+        tag: 'SOCIAL PROOF',
+        category: 'Social Proof',
+        duration: '0:22',
+        videoSrc: null,
+        thumbnail: reel3Thumb,
+        hookText: 'Be The Face Of Your Own Brand',
+        subtext: 'Behind-the-scenes framing that builds client trust.',
+      },
+    ];
+
+    const handleCardPlay = (reel) => {
+      if (reel.videoSrc) {
+        setInlinePlayingId(
+          inlinePlayingId === reel.id ? null : reel.id
+        );
+      } else {
+        setActiveModalReel(reel);
+      }
+    };
+
       return (
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#DEDED7] shadow-card">
-          <div className="flex items-center justify-between pb-5 border-b border-[#DEDED7]">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] p-0.5">
-                <div className="w-full h-full rounded-full bg-white flex items-center justify-center text-xs font-bold text-[#111111]">
-                  JZ
+        <div className="bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-[#DEDED7] shadow-card relative font-sans">
+          {/* ── TOP BAR: Profile Identity + Verified Performance Metric ── */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#DEDED7]">
+            {/* Identity */}
+            <div className="flex items-center gap-3.5">
+              <a
+                href="https://www.instagram.com/_juntoz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-11 h-11 rounded-full p-0.5 border border-[#DEDED7] bg-[#F7F6F2] shrink-0 transition-transform duration-200 hover:scale-105 motion-reduce:hover:scale-100"
+                aria-label="Visit @_juntoz on Instagram"
+              >
+                <div className="w-full h-full rounded-full bg-white flex items-center justify-center p-1.5 overflow-hidden">
+                  <img src={logo} alt="Juntoz Logo" className="w-full h-full object-contain" />
                 </div>
-              </div>
+              </a>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-heading font-black text-sm text-[#111111]">@yourbrand.official</span>
-                  <span className="text-[#5D2E85] text-xs">✓</span>
+                  <a
+                    href="https://www.instagram.com/_juntoz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-heading font-black text-sm sm:text-base text-[#111111] tracking-tight hover:text-[#5D2E85] transition-colors"
+                  >
+                    @_juntoz
+                  </a>
+                  <span
+                    className="w-4 h-4 rounded-full bg-[#5D2E85] text-white flex items-center justify-center text-[9px] font-bold"
+                    title="Verified Agency"
+                  >
+                    ✓
+                  </span>
                 </div>
-                <p className="text-[11px] text-[#5F5F5A]">Managed by Juntoz Growth System</p>
+                <p className="text-xs text-[#5F5F5A] font-medium mt-0.5">Managed by Juntoz Growth System</p>
               </div>
             </div>
-            <span className="px-3 py-1 rounded-full bg-[#F1E7F9] text-[#5D2E85] font-heading font-black text-[11px]">
-              +380% Inbound DMs
+
+            {/* KPI Performance Card (Minimalist, Real Metric) */}
+            <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#F7F6F2] border border-[#DEDED7] shrink-0 self-start sm:self-auto">
+              <div>
+                <span className="font-heading font-black text-lg sm:text-xl text-[#111111] tracking-tight leading-none block">
+                  +380%
+                </span>
+                <span className="text-[10px] font-heading font-bold text-[#5F5F5A] block tracking-wider uppercase mt-1">
+                  INBOUND DMS
+                </span>
+              </div>
+              <div className="w-8 h-8 rounded-lg bg-white border border-[#DEDED7] text-[#5D2E85] flex items-center justify-center shrink-0">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* ── 3 REEL PREVIEW CARDS (Responsive Grid on Desktop/Tablet, Horizontal Swipe Carousel on Mobile) ── */}
+          <div className="flex sm:grid sm:grid-cols-3 gap-5 mt-6 overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 pb-3 sm:pb-0">
+            {reels.map((reel) => {
+              const isInlinePlaying = inlinePlayingId === reel.id;
+
+              return (
+                <div
+                  key={reel.id}
+                  onClick={() => handleCardPlay(reel)}
+                  className="group w-[84%] sm:w-auto shrink-0 snap-start rounded-2xl bg-white border border-[#DEDED7] shadow-card hover:border-[#5D2E85] hover:shadow-md transition-all duration-300 motion-reduce:transition-none cursor-pointer flex flex-col overflow-hidden relative"
+                >
+                  {/* Media Frame (9:16 Vertical Reel Aspect Ratio) */}
+                  <div className="relative w-full aspect-[9/16] bg-[#111111] overflow-hidden flex items-center justify-center">
+                    {/* If native video available and playing inline */}
+                    {reel.videoSrc && isInlinePlaying ? (
+                      <video
+                        src={reel.videoSrc}
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        loop
+                        muted={isMuted}
+                        playsInline
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const video = e.currentTarget;
+                          if (video.paused) video.play();
+                          else video.pause();
+                        }}
+                      />
+                    ) : (
+                      <>
+                        {/* Custom Media Presentation / Thumbnail */}
+                        {reel.thumbnail ? (
+                          <img
+                            src={reel.thumbnail}
+                            alt={reel.title}
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300 ease-out motion-reduce:group-hover:scale-100"
+                          />
+                        ) : (
+                          /* Editorial Juntoz Video Slate (No Instagram chrome, No blue links) */
+                          <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a1a] via-[#111111] to-[#0a0a0a] flex flex-col justify-between p-6 group-hover:scale-[1.02] transition-transform duration-300 ease-out motion-reduce:group-hover:scale-100">
+                            {/* Ambient branding */}
+                            <div className="flex items-center justify-between opacity-40">
+                              <span className="text-[10px] font-mono tracking-widest text-white uppercase">JUNTOZ STUDIOS</span>
+                              <span className="text-[10px] font-mono tracking-wider text-white">{reel.duration}</span>
+                            </div>
+
+                            {/* Hook headline */}
+                            <div className="my-auto text-center px-2">
+                              <p className="font-heading font-black text-base sm:text-lg text-white leading-tight tracking-tight">
+                                &ldquo;{reel.hookText}&rdquo;
+                              </p>
+                              <p className="text-[11px] text-[#DEDED7]/80 mt-2 font-body leading-relaxed">
+                                {reel.subtext}
+                              </p>
+                            </div>
+
+                            <div className="flex items-center justify-center opacity-30 text-[10px] text-white tracking-widest uppercase font-mono">
+                              9:16 Reel Format
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Subtle Dark Gradient Overlay for Readability */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50 pointer-events-none group-hover:bg-black/20 transition-colors duration-200" />
+
+                        {/* Top-Left Category Badge */}
+                        <div className="absolute top-3.5 left-3.5 z-20 pointer-events-none">
+                          <span className="inline-flex items-center gap-1.5 text-[9px] sm:text-[10px] font-heading font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-white text-[#111111] border border-[#DEDED7] shadow-sm">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
+                            {reel.tag}
+                          </span>
+                        </div>
+
+                        {/* Center Circular Play Button */}
+                        <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/90 group-hover:bg-white text-[#5D2E85] border border-white/60 shadow-lg backdrop-blur-sm flex items-center justify-center group-hover:scale-105 transition-transform duration-200 motion-reduce:group-hover:scale-100">
+                            <svg className="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </>
+                    )}
+
+                    {/* In-Card Audio Toggle (When playing inline video) */}
+                    {reel.videoSrc && isInlinePlaying && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setIsMuted(!isMuted);
+                        }}
+                        className="absolute bottom-3 right-3 z-30 p-2 rounded-full bg-black/70 hover:bg-black text-white text-xs backdrop-blur-sm transition-colors"
+                        aria-label={isMuted ? "Unmute video" : "Mute video"}
+                      >
+                        {isMuted ? "🔇" : "🔊"}
+                      </button>
+                    )}
+                  </div>
+
+                  {/* ── Clean Bottom Information Area (Identical Dimensions) ── */}
+                  <div className="px-5 py-4 bg-white border-t border-[#DEDED7] flex items-center justify-between">
+                    <div>
+                      <h4 className="font-heading font-bold text-[15px] sm:text-base text-[#111111] leading-tight">
+                        {reel.title}
+                      </h4>
+                      <p className="text-xs text-[#5F5F5A] font-medium mt-1">
+                        {reel.views}
+                      </p>
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-[#F7F6F2] group-hover:bg-[#5D2E85] group-hover:text-white text-[#5F5F5A] border border-[#DEDED7] flex items-center justify-center transition-colors duration-200 shrink-0">
+                      <svg className="w-3.5 h-3.5 fill-current translate-x-0.5" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* ── BOTTOM STATUS BAR: Automated WhatsApp DM Routing ── */}
+          <div className="mt-6 p-4 rounded-xl bg-[#F7F6F2] border border-[#DEDED7] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2.5 text-[#111111]">
+              <span className="w-2 h-2 rounded-full bg-[#5D2E85] shrink-0" />
+              <span className="font-medium text-[#111111]">
+                Automated WhatsApp DM routing active · <span className="text-[#5F5F5A]">Inquiries handled in &lt; 15 mins.</span>
+              </span>
+            </div>
+            <span className="inline-flex items-center gap-1.5 text-[#5D2E85] bg-white border border-[#DEDED7] text-[10px] font-heading font-bold uppercase tracking-wider px-3 py-1 rounded-full shrink-0 shadow-2xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#5D2E85] animate-pulse" />
+              LIVE ACTIVE
             </span>
           </div>
 
-          <div className="grid grid-cols-3 gap-2.5 mt-5">
-            {[
-              { label: 'Reel Hook', views: '84.2K', tag: 'Viral' },
-              { label: 'Transformation', views: '128K', tag: 'High-Intent' },
-              { label: 'BTS Setup', views: '49.1K', tag: 'Social Proof' },
-            ].map((post, i) => (
-              <div key={i} className="aspect-[4/5] rounded-xl bg-[#F7F6F2] border border-[#DEDED7] p-3 flex flex-col justify-between relative overflow-hidden group hover:border-[#5D2E85] transition-colors">
-                <div className="flex justify-between items-start">
-                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#5D2E85] bg-white px-1.5 py-0.5 rounded shadow-xs">
-                    {post.tag}
-                  </span>
-                  <span className="text-[11px]">▶</span>
+          {/* ── JUNTOZ VIDEO LIGHTBOX MODAL (Direct On-Site Video Playback) ── */}
+          {activeModalReel && (
+            <div
+              className="fixed inset-0 z-[9999] bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+              onClick={() => setActiveModalReel(null)}
+              role="dialog"
+              aria-modal="true"
+              aria-label={`Playing ${activeModalReel.title}`}
+            >
+              <div
+                className="bg-[#111111] border border-[#222222] rounded-3xl w-full max-w-[390px] h-[680px] max-h-[92vh] flex flex-col overflow-hidden relative shadow-2xl animate-in fade-in zoom-in-95 duration-200"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Modal Top Header */}
+                <div className="px-5 py-3.5 bg-[#181818] border-b border-[#282828] flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
+                    <span className="font-heading font-bold text-xs text-white truncate max-w-[200px]">
+                      {activeModalReel.title}
+                    </span>
+                    <span className="text-[9px] font-heading font-bold uppercase px-2 py-0.5 rounded bg-white/10 text-white border border-white/10">
+                      {activeModalReel.tag}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setActiveModalReel(null)}
+                    className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-xs transition-colors cursor-pointer"
+                    aria-label="Close video player"
+                  >
+                    ✕
+                  </button>
                 </div>
-                <div>
-                  <span className="text-[10px] text-[#5F5F5A] block">{post.label}</span>
-                  <span className="font-heading font-bold text-xs text-[#111111]">{post.views} views</span>
+
+                {/* Modal Video Player Body */}
+                <div className="flex-1 w-full bg-black relative flex items-center justify-center overflow-hidden">
+                  {activeModalReel.videoSrc ? (
+                    <video
+                      src={activeModalReel.videoSrc}
+                      controls
+                      autoPlay
+                      playsInline
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    /* Clean Video Embed Player in dedicated vertical Phone Frame */
+                    <iframe
+                      src={`https://www.instagram.com/reel/${activeModalReel.id}/embed/?autoplay=1`}
+                      className="w-full h-full border-0"
+                      allowTransparency="true"
+                      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                      allowFullScreen
+                      title={activeModalReel.title}
+                    />
+                  )}
+                </div>
+
+                {/* Modal Footer Controls */}
+                <div className="px-5 py-3.5 bg-[#181818] border-t border-[#282828] flex items-center justify-between text-xs text-white">
+                  <div className="flex items-center gap-2 text-[11px] text-[#DEDED7]">
+                    <span className="font-heading font-bold">{activeModalReel.views}</span>
+                    <span>·</span>
+                    <span className="text-[#5F5F5A]">Juntoz Content Engine</span>
+                  </div>
+                  <span className="text-[10px] font-mono tracking-wider text-[#5F5F5A] uppercase">
+                    {activeModalReel.duration}
+                  </span>
                 </div>
               </div>
-            ))}
-          </div>
-
-          <div className="mt-4 p-3.5 rounded-xl bg-[#F1E7F9]/60 border border-[#5D2E85]/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-            <span className="font-medium text-[#111111]">
-              ⚡ Automated WhatsApp DM routing active: inquiries handed off in &lt; 15 mins.
-            </span>
-            <span className="text-[#5D2E85] font-bold shrink-0">Live Active</span>
-          </div>
+            </div>
+          )}
         </div>
       );
+    }
 
     case 'meta-google-ads':
       return (
@@ -317,9 +595,8 @@ export default function ServiceDetailPage({ serviceSlug: propSlug }) {
   const { serviceSlug: paramSlug } = useParams();
   const slug = propSlug || paramSlug;
 
-  // Resolve service data with normalization
   const normalizedSlug = slug ? slug.toLowerCase().replace('/services/', '').replace('/', '') : '';
-  const service = SERVICE_DETAILS[normalizedSlug] || 
+  const service = SERVICE_DETAILS[normalizedSlug] ||
                   SERVICE_DETAILS[normalizedSlug.replace('gmb', 'gmb')] ||
                   SERVICE_DETAILS['instagram-management'];
 
@@ -346,11 +623,9 @@ export default function ServiceDetailPage({ serviceSlug: propSlug }) {
         path={`/services/${service.id}`}
       />
 
-      {/* ── BREADCRUMB & HEADER ── */}
       <section className="container mx-auto px-4 sm:px-6 max-w-7xl mb-12 sm:mb-20">
         <div className="max-w-4xl mx-auto text-center">
-          
-          {/* Breadcrumb Navigation */}
+
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-6">
             <Link to="/" className="text-[11px] font-sans font-semibold text-[#5F5F5A] hover:text-[#5D2E85] transition-colors">
               Home
@@ -398,7 +673,7 @@ export default function ServiceDetailPage({ serviceSlug: propSlug }) {
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-wider text-white bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200 shadow-md"
             >
-              <span>{service.ctaText || 'Claim Free Strategic Audit'}</span>
+              <span>{service.ctaText || 'Request Strategic Growth Audit'}</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -413,13 +688,11 @@ export default function ServiceDetailPage({ serviceSlug: propSlug }) {
 
         </div>
 
-        {/* ── INTERACTIVE SERVICE SIMULATOR VISUALIZER ── */}
         <ScrollReveal data-reveal="up" delay={300} className="mt-12 sm:mt-16 max-w-4xl mx-auto">
           <ServiceSimulator serviceId={service.id} serviceTitle={service.title} />
         </ScrollReveal>
       </section>
 
-      {/* ── 3-COLUMN PROOF STATS ── */}
       <section className="container mx-auto px-4 sm:px-6 max-w-7xl mb-20 md:mb-28">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {service.stats && service.stats.map((stat, i) => (
@@ -442,7 +715,6 @@ export default function ServiceDetailPage({ serviceSlug: propSlug }) {
         </div>
       </section>
 
-      {/* ── 4-PHASE EXECUTION FRAMEWORK ── */}
       <section className="container mx-auto px-4 sm:px-6 max-w-7xl mb-20 md:mb-28">
         <ScrollReveal data-reveal="up" className="text-center max-w-2xl mx-auto mb-16">
           <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#5D2E85] mb-2 block">
@@ -495,7 +767,6 @@ export default function ServiceDetailPage({ serviceSlug: propSlug }) {
         </div>
       </section>
 
-      {/* ── INTERACTIVE HEALTH AUDIT CHECKLIST ── */}
       <section className="container mx-auto px-4 sm:px-6 max-w-4xl mb-20 md:mb-28">
         <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#DEDED7] shadow-card">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 border-b border-[#DEDED7]">
@@ -550,7 +821,6 @@ export default function ServiceDetailPage({ serviceSlug: propSlug }) {
         </div>
       </section>
 
-      {/* ── FREQUENTLY ASKED QUESTIONS (FAQS) ── */}
       {service.faqs && (
         <section className="container mx-auto px-4 sm:px-6 max-w-4xl mb-20 md:mb-28">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -577,7 +847,6 @@ export default function ServiceDetailPage({ serviceSlug: propSlug }) {
         </section>
       )}
 
-      {/* ── OTHER 6 SERVICES QUICK SWITCHER ── */}
       <section className="container mx-auto px-4 sm:px-6 max-w-7xl mb-20">
         <div className="p-8 sm:p-12 rounded-3xl bg-white border border-[#DEDED7] shadow-card">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-8">
@@ -616,7 +885,6 @@ export default function ServiceDetailPage({ serviceSlug: propSlug }) {
         </div>
       </section>
 
-      {/* ── CONVERSION BANNER ── */}
       <section className="container mx-auto px-4 sm:px-6 max-w-7xl">
         <div className="rounded-3xl bg-[#111111] text-white p-8 sm:p-14 text-center relative overflow-hidden shadow-card">
           <div className="max-w-2xl mx-auto relative z-10">

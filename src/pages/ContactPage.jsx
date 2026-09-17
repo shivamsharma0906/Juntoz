@@ -3,7 +3,7 @@ import ScrollReveal from '../components/ScrollReveal';
 import MapSection from '../components/MapSection';
 import PageMeta from '../components/PageMeta';
 
-const WA = 'https://wa.me/919004001800?text=Hi%20Sujal!%20I%27m%20a%20makeup%20artist%20and%20I%27d%20love%20to%20claim%20my%20free%20growth%20audit.';
+const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27m%20a%20makeup%20artist%20and%20I%27d%20like%20to%20book%20a%20growth%20strategy%20consultation.';
 
 const CONTACT_METHODS = [
   {

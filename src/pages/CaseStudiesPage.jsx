@@ -271,7 +271,7 @@ export default function CaseStudiesPage() {
                 The Juntoz Growth System
               </span>
               <h2 className="font-heading font-black text-3xl sm:text-5xl uppercase tracking-tight text-[#111111] mb-4">
-                How We Engineer Results.
+                How We Drive Results
               </h2>
               <p className="font-sans text-[#5F5F5A] text-sm sm:text-base leading-relaxed">
                 4 phases. Proven order. Repeatable results.

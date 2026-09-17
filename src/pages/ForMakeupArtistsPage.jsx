@@ -5,7 +5,7 @@ import ScrollReveal from '../components/ScrollReveal.jsx';
 import PageMeta from '../components/PageMeta.jsx';
 import CTASection from '../components/CTASection.jsx';
 
-const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27m%20a%20Makeup%20Artist%20and%20I%27d%20like%20to%20get%20a%20free%20MUA%20growth%20audit.';
+const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27m%20a%20Makeup%20Artist%20and%20I%27d%20like%20to%20book%20an%20MUA%20growth%20audit.';
 
 const MUA_SERVICES = [
   {
@@ -125,7 +125,7 @@ export default function ForMakeupArtistsPage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full font-heading font-bold uppercase tracking-wider text-white text-xs sm:text-sm bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200 shadow-sm active:scale-[0.98]"
                 >
-                  <span>Book Free Growth Audit</span>
+                  <span>Book MUA Growth Audit</span>
                   <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>

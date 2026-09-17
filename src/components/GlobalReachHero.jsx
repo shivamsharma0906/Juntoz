@@ -87,7 +87,7 @@ export default function GlobalReachHero() {
                 to="/contact"
                 className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full bg-[#5D2E85] hover:bg-[#4C266D] active:scale-95 text-white font-sans font-bold text-xs uppercase tracking-wider shadow-[0_4px_20px_rgba(93,46,133,0.35)] transition-all duration-200 text-center"
               >
-                <span>Book a Free Consultation</span>
+                <span>Book a Strategy Consultation</span>
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>

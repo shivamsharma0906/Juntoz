@@ -1,6 +1,6 @@
 import ScrollReveal from './ScrollReveal.jsx';
 
-const WA_GMB = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20would%20like%20to%20get%20a%20free%20Google%20Business%20Profile%20audit%20for%20my%20business.';
+const WA_GMB = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20would%20like%20to%20request%20a%20Google%20Business%20Profile%20audit%20for%20my%20business.';
 
 const GMB_BENEFITS = [
   { icon: '📍', title: 'Local Maps Discovery', desc: 'Appear directly when nearby clients search for your services within a 3–10km radius.' },
@@ -134,7 +134,7 @@ export default function GMBSection() {
                 Zero-Obligation Diagnostic
               </span>
               <h3 className="font-heading font-black text-xl sm:text-2xl uppercase tracking-tight">
-                Claim Your Free Google Business Profile Audit
+                Request Google Business Profile Audit
               </h3>
               <p className="font-body text-xs sm:text-sm text-white/70 max-w-xl mt-1">
                 We will inspect your current profile, category alignment, local search visibility, and competitor gaps — and give you an actionable checklist.

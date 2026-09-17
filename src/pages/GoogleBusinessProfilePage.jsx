@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
 import ScrollReveal from '../components/ScrollReveal';
 
-const WA = 'https://wa.me/919004001800?text=Hi%20Sujal!%20I%27d%20like%20a%20free%20Google%20Business%20Profile%20audit%20for%20my%20business.';
+const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20to%20request%20a%20Google%20Business%20Profile%20audit%20for%20my%20business.';
 
 const STATS = [
   { value: '76%', label: 'Local Searchers Visit Within 24h', desc: 'Consumers searching for local services act with immediate intent.' },
@@ -89,7 +89,7 @@ export default function GoogleBusinessProfilePage() {
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-wider text-white bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200 shadow-md"
             >
-              <span>Claim Free GMB Audit on WhatsApp</span>
+              <span>Request GMB Profile Audit on WhatsApp</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -295,7 +295,7 @@ export default function GoogleBusinessProfilePage() {
               <span className="text-[#5D2E85]">Google 3-Pack.</span>
             </h2>
             <p className="font-body text-white/70 text-sm sm:text-base leading-relaxed mb-8">
-              Share your business name — we'll run a free local ranking audit.
+              Share your business name — we'll analyze your local ranking performance.
             </p>
             <a
               href={WA}

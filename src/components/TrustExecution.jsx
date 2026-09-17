@@ -46,8 +46,7 @@ export default function TrustExecution() {
 
               {/* Mobile Concise Summary */}
               <p className="sm:hidden font-body text-[#5F5F5A] text-xs leading-relaxed mb-4">
-                We engineer cohesive growth engines that unite precision targeting, high-converting creative assets, and frictionless booking paths.
-              </p>
+We build cohesive growth systems that combine precision targeting, high-converting creative, and seamless booking journeys.              </p>
 
               {/* Desktop Full Editorial Paragraph */}
               <p className="hidden sm:block font-body text-[#5F5F5A] text-sm sm:text-base leading-[1.75]">
