@@ -50,7 +50,7 @@ function FAQItem({ item, index, isOpen, onToggle }) {
   return (
     <div
       className={`rounded-2xl overflow-hidden border transition-colors duration-300 ${
-        isOpen ? 'bg-[#F7F6F2] border-[#111111]/30 shadow-subtle' : 'bg-[#F7F6F2] border-[#DEDED7]'
+        isOpen ? 'bg-white border-[#111111]/30 shadow-subtle' : 'bg-white border-[#DEDED7]'
       }`}
     >
       {/* ── Question row ── */}
@@ -146,7 +146,7 @@ export default function FAQSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden py-24 md:py-32 bg-[#FFFFFF]"
+      className="relative overflow-hidden py-24 md:py-32 bg-[#F7F6F2]"
     >
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
 
@@ -159,9 +159,7 @@ export default function FAQSection() {
             transition: 'opacity 0.75s ease 0.05s, transform 0.75s cubic-bezier(0.22,1,0.36,1) 0.05s',
           }}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[#F1E7F9] border border-[#5D2E85]/20 font-sans font-semibold text-xs uppercase tracking-wider text-[#5D2E85] mb-4">
-            Common Questions
-          </span>
+
           <h2
             className="font-heading font-black text-[#111111] leading-tight tracking-tight uppercase"
             style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}

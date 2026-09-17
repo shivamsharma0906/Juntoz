@@ -10,10 +10,6 @@ export default function NotFoundPage() {
         path="/404"
       />
       <div className="min-h-[75vh] flex flex-col items-center justify-center px-6 pt-32 md:pt-40 pb-20 text-center bg-[#F7F6F2]">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white text-[#5F5F5A] text-xs font-semibold uppercase tracking-wider mb-6">
-          <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-          <span>Error 404</span>
-        </div>
 
         <h1 className="font-heading font-black uppercase text-[#111111] text-4xl sm:text-6xl md:text-7xl mb-4 tracking-tight">
           Page Not <span className="text-[#5D2E85]">Found</span>

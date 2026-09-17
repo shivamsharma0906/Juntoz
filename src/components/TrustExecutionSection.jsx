@@ -3,7 +3,7 @@ import ScrollReveal from './ScrollReveal';
 
 export default function TrustExecutionSection() {
   return (
-    <section className="py-20 md:py-32 bg-[#F7F6F2] relative overflow-hidden border-b border-[#DEDED7]">
+    <section className="hidden lg:block py-20 md:py-32 bg-[#F7F6F2] relative overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#5D2E85]/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#5D2E85]/3 rounded-full blur-[100px] pointer-events-none" />
@@ -14,15 +14,6 @@ export default function TrustExecutionSection() {
           {/* ════ LEFT COLUMN: Editorial Headline & Strategic Narrative ════ */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
             
-            {/* Eyebrow badge */}
-            <ScrollReveal data-reveal="up">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-6">
-                <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-                <span className="font-sans font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
-                  Proof of Execution
-                </span>
-              </div>
-            </ScrollReveal>
 
             {/* Editorial Serif Contrast Headline */}
             <ScrollReveal data-reveal="up" delay={80}>
@@ -124,14 +115,14 @@ export default function TrustExecutionSection() {
                 <div className="bg-white border border-[#DEDED7] rounded-3xl p-5 sm:p-6 shadow-[0_12px_36px_rgba(0,0,0,0.06)] relative overflow-hidden">
                   
                   {/* Card top bar */}
-                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#F0EFEB]">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#5D2E85]" />
-                      <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#111111]">
+                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#F0EFEB] gap-2">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#5D2E85] shrink-0" />
+                      <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#111111] truncate sm:whitespace-normal">
                         Peak Bridal Season Schedule
                       </span>
                     </div>
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#F1E7F9] text-[#5D2E85]">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#F1E7F9] text-[#5D2E85] whitespace-nowrap shrink-0">
                       Locked Dates
                     </span>
                   </div>
@@ -180,7 +171,7 @@ export default function TrustExecutionSection() {
                   <div className="mt-4 p-2.5 rounded-2xl bg-[#F7F6F2] border border-[#E8E7E0] flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="w-7 h-7 rounded-full bg-[#5D2E85]/15 flex items-center justify-center text-[#5D2E85]">
-                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       </div>
@@ -199,7 +190,7 @@ export default function TrustExecutionSection() {
 
               {/* CARD 2: Overlapping Growth Trend Chart Card */}
               <ScrollReveal data-reveal="up" delay={120}>
-                <div className="bg-white border border-[#DEDED7] rounded-2xl p-4 shadow-[0_16px_40px_rgba(0,0,0,0.1)] -mt-8 sm:-mt-10 ml-6 sm:ml-12 relative z-20">
+                <div className="bg-white border border-[#DEDED7] rounded-2xl p-4 shadow-[0_16px_40px_rgba(0,0,0,0.1)] -mt-4 sm:-mt-10 ml-3 sm:ml-12 relative z-20">
                   <div className="flex items-center justify-between mb-3">
                     <div>
                       <span className="text-[10px] font-mono uppercase tracking-wider text-[#5F5F5A] block">

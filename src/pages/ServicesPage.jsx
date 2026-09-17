@@ -134,131 +134,188 @@ export default function ServicesPage() {
         path="/services"
       />
 
-      {/* Hero Header */}
-      <section className="relative px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center mb-16 sm:mb-24">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-6">
-          <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-          <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
-            Full-Service Digital Agency
-          </span>
-        </div>
-
-        <h1 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl md:text-7xl uppercase tracking-tight leading-[1.05] mb-6">
-          Strategic Capabilities To <br />
-          <span className="text-[#5D2E85]">
-            Scale Your Business.
-          </span>
+      {/* ── HERO HEADER ── */}
+      <section className="relative px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center mb-10 sm:mb-24">
+        <h1 className="font-heading font-normal text-[#111111] text-3xl sm:text-5xl md:text-6xl leading-[1.12] mb-4 sm:mb-6">
+          Strategic Capabilities To{' '}
+          <span className="text-[#5D2E85]">Scale Your Business.</span>
         </h1>
-
-        <p className="font-body text-[#5F5F5A] text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+        {/* subtitle only on desktop — avoids verbose clutter on mobile */}
+        <p className="font-body text-[#5F5F5A] text-sm sm:text-lg max-w-xl mx-auto leading-relaxed hidden sm:block">
           Every service connects — strategy, ads, local search, content, and web — into one compounded growth engine.
         </p>
       </section>
 
-      {/* Services Deep Dive Grid */}
+      {/* ── SERVICE CARDS ── */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl mb-24">
-        <div className="space-y-10 sm:space-y-14">
+        <div className="space-y-4 sm:space-y-10 lg:space-y-14">
           {AGENCY_SERVICES.map((service, idx) => (
             <ScrollReveal key={service.id} data-reveal="up" delay={idx * 60}>
-              <div 
+              <div
                 id={service.id}
-                className="p-8 sm:p-12 rounded-3xl bg-white border border-[#DEDED7] hover:border-[#111111] transition-all duration-300 relative overflow-hidden shadow-card hover:shadow-hover"
+                className="rounded-2xl sm:rounded-3xl bg-white border border-[#DEDED7] hover:border-[#5D2E85]/50 transition-all duration-300 overflow-hidden shadow-card hover:shadow-hover"
               >
-                <div className="flex flex-col lg:flex-row justify-between gap-8 lg:gap-12">
-                  
-                  {/* Left Column: Details */}
-                  <div className="flex-1 space-y-5">
-                    <div className="flex items-center gap-3">
-                      <span className="px-3.5 py-1 rounded-full bg-[#F1E7F9] border border-[#5D2E85]/20 font-heading font-black text-xs text-[#5D2E85]">
-                        PILLAR {service.number}
-                      </span>
-                      <span className="font-body text-xs text-[#5F5F5A] uppercase tracking-wider font-semibold">
-                        {service.category}
-                      </span>
-                    </div>
 
-                    <div>
-                      <Link to={`/services/${service.id}`} className="group inline-block">
-                        <h2 className="font-heading font-black text-2xl sm:text-3xl lg:text-4xl text-[#111111] group-hover:text-[#5D2E85] uppercase tracking-tight mb-2 transition-colors">
-                          {service.title}
-                        </h2>
-                      </Link>
-                      <p className="font-heading font-bold text-sm sm:text-base text-[#5D2E85]">
-                        {service.tagline}
-                      </p>
-                    </div>
+                {/* ══ MOBILE CARD (< sm) ══ compact, scannable, clean */}
+                <div className="sm:hidden p-5">
 
-                    <p className="font-body text-[#5F5F5A] text-sm sm:text-base leading-relaxed">
-                      {service.desc}
-                    </p>
-
-                    {/* What's Included */}
-                    <div className="pt-5 border-t border-[#DEDED7] space-y-3">
-                      <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#111111] block">
-                        What’s Included:
-                      </span>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                        {service.included.map((item, i) => (
-                          <div key={i} className="flex items-start gap-2 text-xs sm:text-sm font-body text-[#111111]/85">
-                            <span className="text-[#287A55] font-bold mt-0.5">✓</span>
-                            <span>{item}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                  {/* Pillar badge + category */}
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#F1E7F9] border border-[#5D2E85]/20 font-heading font-black text-[11px] text-[#5D2E85]">
+                      PILLAR {service.number}
+                    </span>
+                    <span className="font-body text-[11px] text-[#5F5F5A] uppercase tracking-wider font-bold">
+                      {service.category}
+                    </span>
                   </div>
 
-                  {/* Right Column: Execution Specs & CTA */}
-                  <div className="lg:w-80 flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-[#F7F6F2] border border-[#DEDED7] space-y-5">
-                    <div className="space-y-4">
-                      <div>
-                        <span className="font-sans font-bold text-[10px] uppercase tracking-wider text-[#5F5F5A] block mb-1">
-                          Primary Deliverable
-                        </span>
-                        <p className="font-heading font-bold text-xs sm:text-sm text-[#111111]">
-                          {service.deliverable}
-                        </p>
-                      </div>
+                  {/* Title */}
+                  <h2 className="font-heading font-black text-xl text-[#111111] uppercase tracking-tight mb-1 leading-tight">
+                    {service.title}
+                  </h2>
 
-                      <div className="pt-3 border-t border-[#DEDED7]">
-                        <span className="font-sans font-bold text-[10px] uppercase tracking-wider text-[#5F5F5A] block mb-1">
-                          Ideal Partner Profile
-                        </span>
-                        <p className="font-body text-xs text-[#5F5F5A] leading-relaxed">
-                          {service.idealFor}
-                        </p>
-                      </div>
+                  {/* Tagline — 1 line */}
+                  <p className="font-heading font-semibold text-xs text-[#5D2E85] mb-3 leading-snug line-clamp-1">
+                    {service.tagline}
+                  </p>
 
-                      <div className="pt-3 border-t border-[#DEDED7]">
-                        <span className="font-sans font-bold text-[10px] uppercase tracking-wider text-[#5F5F5A] block mb-1">
-                          Engagement Model
-                        </span>
-                        <p className="font-body text-xs font-semibold text-[#111111]">
-                          {service.investment}
-                        </p>
-                      </div>
-                    </div>
+                  {/* Description — clamped to 2 lines on mobile */}
+                  <p className="font-body text-[#5F5F5A] text-xs leading-relaxed line-clamp-2 mb-4">
+                    {service.desc}
+                  </p>
 
-                    <div className="space-y-2.5 pt-2">
+                  {/* Top 2 inclusions only */}
+                  <div className="space-y-1.5 mb-4">
+                    {service.included.slice(0, 2).map((item, i) => (
+                      <div key={i} className="flex items-start gap-2 text-xs font-body text-[#111111]/85">
+                        <span className="text-[#287A55] font-bold mt-0.5 shrink-0">✓</span>
+                        <span className="line-clamp-1">{item}</span>
+                      </div>
+                    ))}
+                    {service.included.length > 2 && (
                       <Link
                         to={`/services/${service.id}`}
-                        className="w-full py-3 px-4 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-center text-[#5D2E85] bg-[#F1E7F9] hover:bg-[#5D2E85] hover:text-white transition-all duration-200 block border border-[#5D2E85]/20"
+                        className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-[#5D2E85] pl-4 mt-0.5"
                       >
-                        Explore Full Page &amp; Audit →
+                        +{service.included.length - 2} more inclusions →
                       </Link>
-
-                      <a
-                        href={`https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20am%20interested%20in%20learning%20more%20about%20your%20${encodeURIComponent(service.title)}%20services.`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full py-3 px-4 rounded-xl font-heading font-bold text-xs uppercase tracking-widest text-center text-white bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200 block shadow-sm"
-                      >
-                        Inquire on WhatsApp
-                      </a>
-                    </div>
+                    )}
                   </div>
 
+                  {/* CTA row — side-by-side buttons */}
+                  <div className="grid grid-cols-2 gap-2.5">
+                    <Link
+                      to={`/services/${service.id}`}
+                      className="py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-center text-[#5D2E85] bg-[#F1E7F9] hover:bg-[#5D2E85] hover:text-white transition-all duration-200 border border-[#5D2E85]/20"
+                    >
+                      View Details
+                    </Link>
+                    <a
+                      href={`https://wa.me/919004001800?text=Hi%20Juntoz!%20Interested%20in%20${encodeURIComponent(service.title)}.`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-center text-white bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200"
+                    >
+                      WhatsApp
+                    </a>
+                  </div>
                 </div>
+
+                {/* ══ DESKTOP CARD (≥ sm) ══ full two-column layout */}
+                <div className="hidden sm:block p-8 lg:p-12">
+                  <div className="flex flex-col lg:flex-row justify-between gap-8 lg:gap-12">
+
+                    {/* Left Column */}
+                    <div className="flex-1 space-y-5">
+                      <div className="flex items-center gap-3">
+                        <span className="px-3.5 py-1 rounded-full bg-[#F1E7F9] border border-[#5D2E85]/20 font-heading font-black text-xs text-[#5D2E85]">
+                          PILLAR {service.number}
+                        </span>
+                        <span className="font-body text-xs text-[#5F5F5A] uppercase tracking-wider font-semibold">
+                          {service.category}
+                        </span>
+                      </div>
+
+                      <div>
+                        <Link to={`/services/${service.id}`} className="group inline-block">
+                          <h2 className="font-heading font-black text-2xl sm:text-3xl lg:text-4xl text-[#111111] group-hover:text-[#5D2E85] uppercase tracking-tight mb-2 transition-colors">
+                            {service.title}
+                          </h2>
+                        </Link>
+                        <p className="font-heading font-bold text-sm sm:text-base text-[#5D2E85]">
+                          {service.tagline}
+                        </p>
+                      </div>
+
+                      <p className="font-body text-[#5F5F5A] text-sm sm:text-base leading-relaxed">
+                        {service.desc}
+                      </p>
+
+                      <div className="pt-5 border-t border-[#DEDED7] space-y-3">
+                        <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#111111] block">
+                          What&apos;s Included:
+                        </span>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                          {service.included.map((item, i) => (
+                            <div key={i} className="flex items-start gap-2 text-xs sm:text-sm font-body text-[#111111]/85">
+                              <span className="text-[#287A55] font-bold mt-0.5 shrink-0">✓</span>
+                              <span>{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Column: Execution specs + CTA */}
+                    <div className="lg:w-80 flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-[#F7F6F2] border border-[#DEDED7] space-y-5">
+                      <div className="space-y-4">
+                        <div>
+                          <span className="font-sans font-bold text-[10px] uppercase tracking-wider text-[#5F5F5A] block mb-1">
+                            Primary Deliverable
+                          </span>
+                          <p className="font-heading font-bold text-xs sm:text-sm text-[#111111]">
+                            {service.deliverable}
+                          </p>
+                        </div>
+                        <div className="pt-3 border-t border-[#DEDED7]">
+                          <span className="font-sans font-bold text-[10px] uppercase tracking-wider text-[#5F5F5A] block mb-1">
+                            Ideal Partner Profile
+                          </span>
+                          <p className="font-body text-xs text-[#5F5F5A] leading-relaxed">
+                            {service.idealFor}
+                          </p>
+                        </div>
+                        <div className="pt-3 border-t border-[#DEDED7]">
+                          <span className="font-sans font-bold text-[10px] uppercase tracking-wider text-[#5F5F5A] block mb-1">
+                            Engagement Model
+                          </span>
+                          <p className="font-body text-xs font-semibold text-[#111111]">
+                            {service.investment}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2.5 pt-2">
+                        <Link
+                          to={`/services/${service.id}`}
+                          className="w-full py-3 px-4 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-center text-[#5D2E85] bg-[#F1E7F9] hover:bg-[#5D2E85] hover:text-white transition-all duration-200 block border border-[#5D2E85]/20"
+                        >
+                          Explore Full Page &amp; Audit →
+                        </Link>
+                        <a
+                          href={`https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20am%20interested%20in%20learning%20more%20about%20your%20${encodeURIComponent(service.title)}%20services.`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full py-3 px-4 rounded-xl font-heading font-bold text-xs uppercase tracking-widest text-center text-white bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200 block shadow-sm"
+                        >
+                          Inquire on WhatsApp
+                        </a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
               </div>
             </ScrollReveal>
           ))}
@@ -268,19 +325,19 @@ export default function ServicesPage() {
       {/* ── 8-PHASE INTEGRATED GROWTH SYSTEM ── */}
       <HowWeGrowBusinesses />
 
-      {/* Conversion Banner */}
+      {/* ── CONVERSION BANNER ── */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl mt-12 sm:mt-16">
-        <div className="p-8 sm:p-14 rounded-3xl bg-[#111111] text-white text-center space-y-6 shadow-card">
+        <div className="p-7 sm:p-14 rounded-3xl bg-[#111111] text-white text-center space-y-4 sm:space-y-6 shadow-card">
           <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 font-sans font-semibold text-xs uppercase tracking-wider text-white">
             Custom Growth Roadmaps
           </span>
-          <h2 className="font-heading font-black text-2xl sm:text-4xl uppercase tracking-tight">
-            Not Sure Which Service Pillar Your Business Needs First?
+          <h2 className="font-heading font-black text-xl sm:text-4xl uppercase tracking-tight leading-tight">
+            Not Sure Which Service Pillar Fits First?
           </h2>
-          <p className="font-body text-white/70 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Book 20 mins — we'll identify your biggest growth leak and fix it.
+          <p className="font-body text-white/70 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed hidden sm:block">
+            Book 20 mins — we&apos;ll identify your biggest growth leak and fix it.
           </p>
-          <div className="pt-4">
+          <div className="pt-1 sm:pt-4">
             <Link
               to="/contact"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-heading font-bold text-xs uppercase tracking-widest text-white bg-[#5D2E85] hover:bg-[#4C266D] transition-colors duration-200 shadow-sm"

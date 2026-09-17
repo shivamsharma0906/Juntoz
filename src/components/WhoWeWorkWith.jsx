@@ -62,15 +62,11 @@ const CLIENT_CATEGORIES = [
 
 export default function WhoWeWorkWith() {
   return (
-    <section className="py-20 md:py-28 bg-[#FFFFFF] border-b border-[#DEDED7] relative">
+    <section className="py-10 sm:py-16 md:py-20 lg:py-28 bg-[#F7F6F2] relative border-b border-[#DEDED7]/70">
       <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-7xl">
         
         {/* Section Header */}
         <ScrollReveal data-reveal="up" className="max-w-3xl mb-16 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-[#F7F6F2] text-[#5F5F5A] text-xs font-semibold uppercase tracking-wider mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-            <span>Client Diversity</span>
-          </div>
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-5">
             If Your Business Wants To Grow Digitally,{' '}
             <span className="text-[#5D2E85]">We Can Help.</span>
@@ -80,27 +76,27 @@ export default function WhoWeWorkWith() {
           </p>
         </ScrollReveal>
 
-        {/* 5 Category Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* 5 Category Cards (2-Column Mobile Grid) */}
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {CLIENT_CATEGORIES.map((cat, idx) => (
             <ScrollReveal key={cat.title} data-reveal="up" delay={idx * 80}>
               <div 
-                className={`h-full p-8 rounded-3xl border transition-all duration-300 flex flex-col justify-between ${
+                className={`h-full p-4 sm:p-8 rounded-2xl sm:rounded-3xl border transition-all duration-300 flex flex-col justify-between ${
                   cat.isSpecialty
                     ? 'bg-[#F1E7F9]/40 border-[#5D2E85]/40 shadow-subtle hover:border-[#5D2E85]'
-                    : 'bg-[#F7F6F2] border-[#DEDED7] hover:border-[#111111]/30 hover:bg-white shadow-subtle'
+                    : 'bg-white border-[#DEDED7] hover:border-[#111111]/30 shadow-subtle'
                 }`}
               >
                 <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border ${
+                  <div className="flex items-center justify-between mb-3 sm:mb-6">
+                    <div className={`w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center border shrink-0 ${
                       cat.isSpecialty 
                         ? 'bg-white text-[#5D2E85] border-[#5D2E85]/30' 
                         : 'bg-white text-[#111111] border-[#DEDED7]'
                     }`}>
                       {cat.icon}
                     </div>
-                    <span className={`text-[10px] font-sans font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${
+                    <span className={`text-[9px] sm:text-[10px] font-sans font-bold uppercase tracking-wider px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border shrink-0 ${
                       cat.isSpecialty
                         ? 'bg-white text-[#5D2E85] border-[#5D2E85]/30'
                         : 'bg-white text-[#5F5F5A] border-[#DEDED7]'
@@ -109,17 +105,17 @@ export default function WhoWeWorkWith() {
                     </span>
                   </div>
 
-                  <h3 className="font-heading font-bold text-lg sm:text-xl text-[#111111] uppercase tracking-tight mb-3">
+                  <h3 className="font-heading font-bold text-xs sm:text-xl text-[#111111] uppercase tracking-tight mb-1.5 sm:mb-3 leading-snug">
                     {cat.title}
                   </h3>
-                  <p className="font-body text-[#5F5F5A] text-sm leading-relaxed mb-6">
+                  <p className="hidden sm:block font-body text-[#5F5F5A] text-sm leading-relaxed mb-6">
                     {cat.desc}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-[#DEDED7]/80 flex items-center justify-between">
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#5F5F5A]">Focus</span>
-                  <span className="font-sans font-bold text-xs text-[#111111]">{cat.metrics}</span>
+                <div className="pt-3 sm:pt-4 border-t border-[#DEDED7]/80 flex items-center justify-between mt-auto">
+                  <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider text-[#5F5F5A]">Focus</span>
+                  <span className="font-sans font-bold text-[10px] sm:text-xs text-[#111111] truncate max-w-[65%] text-right">{cat.metrics}</span>
                 </div>
               </div>
             </ScrollReveal>

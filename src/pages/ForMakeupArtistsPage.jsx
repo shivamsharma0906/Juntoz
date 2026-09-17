@@ -85,17 +85,9 @@ export default function ForMakeupArtistsPage() {
             
             {/* Left Hero Content */}
             <div className="lg:col-span-7 text-left space-y-6">
-              <ScrollReveal data-reveal="up">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle">
-                  <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-                  <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
-                    Specialist Practice • Juntoz Digital Agency
-                  </span>
-                </div>
-              </ScrollReveal>
 
               <ScrollReveal data-reveal="up" delay={100}>
-                <h1 className="font-heading font-black text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight leading-[1.02] text-[#111111] mb-3">
+                <h1 className="font-heading font-normal text-4xl sm:text-6xl lg:text-7xl leading-[1.08] text-[#111111] mb-3">
                   Elite Bridal <br />
                   <span className="text-[#5D2E85]">Client Acquisition.</span>
                 </h1>
@@ -202,7 +194,7 @@ export default function ForMakeupArtistsPage() {
       </section>
 
       {/* ════ INTERACTIVE REALITY CHECK (PAIN POINTS) ════ */}
-      <section className="py-20 sm:py-28 bg-white border-y border-[#DEDED7] relative">
+      <section className="py-20 sm:py-28 bg-[#F7F6F2] border-y border-[#DEDED7] relative">
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           <ScrollReveal className="mb-14 text-center max-w-2xl mx-auto space-y-2">
             <span className="font-heading font-bold tracking-wider text-[#5D2E85] uppercase text-xs block">
@@ -370,7 +362,7 @@ export default function ForMakeupArtistsPage() {
       </section>
 
       {/* ════ CASE STUDIES ════ */}
-      <section className="py-20 sm:py-28 bg-white border-t border-[#DEDED7]">
+      <section className="py-20 sm:py-28 bg-[#F7F6F2] border-t border-[#DEDED7]">
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           <ScrollReveal className="mb-16 border-b border-[#DEDED7] pb-8 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
             <div>
@@ -393,6 +385,7 @@ export default function ForMakeupArtistsPage() {
                   
                   {/* Image Section */}
                   <div className="w-full lg:w-1/2 h-[260px] sm:h-[350px] rounded-2xl overflow-hidden relative border border-[#DEDED7]">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent z-10 pointer-events-none" />
                     <img 
                       src={study.image}
                       alt={study.clientName}

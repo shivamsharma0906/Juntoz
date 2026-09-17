@@ -90,9 +90,7 @@ export default function NumbersSection() {
         
         {/* Eyebrow & Heading */}
         <ScrollReveal data-reveal="up" className="text-center mb-16 max-w-2xl mx-auto">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/15 font-sans font-semibold text-xs uppercase tracking-wider text-white/80 mb-3">
-            Credibility &amp; Track Record
-          </span>
+
           <h2 className="font-heading font-black text-white text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight">
             Data-Driven Results Built On Real Experience
           </h2>

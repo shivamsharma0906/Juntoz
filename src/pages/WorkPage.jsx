@@ -97,7 +97,7 @@ export default function WorkPage() {
         <section className="mb-12 md:mb-16 text-center max-w-4xl mx-auto">
 
           <ScrollReveal data-reveal="up" delay={60}>
-            <h1 className="font-heading font-black text-[#111111] text-4xl sm:text-6xl md:text-7xl uppercase tracking-tight leading-[1] mb-5">
+            <h1 className="font-heading font-normal text-[#111111] text-4xl sm:text-6xl md:text-7xl leading-[1.12] mb-5">
               Proven <span className="text-[#5D2E85]">Results.</span>
             </h1>
           </ScrollReveal>

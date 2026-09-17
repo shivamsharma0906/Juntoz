@@ -91,14 +91,6 @@ export default function TeamMemberProfile({
     >
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
         {/* ── Section label ── */}
-        {sectionLabel && (
-          <ScrollReveal data-reveal="up" className="flex justify-center mb-8">
-            <span className="inline-flex items-center gap-2 font-body text-[11px] font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle text-[#5F5F5A]">
-              <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-              {sectionLabel}
-            </span>
-          </ScrollReveal>
-        )}
 
         {/* ── Desktop split layout ── */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 mt-4">
@@ -139,7 +131,7 @@ export default function TeamMemberProfile({
                         <div className="font-heading font-black text-white text-xl md:text-2xl uppercase tracking-tight leading-tight">
                           {name}
                         </div>
-                        <div className="font-body text-xs mt-0.5 uppercase tracking-wider font-bold text-[#5D2E85]">
+                        <div className="font-body text-xs mt-0.5 uppercase tracking-wider font-bold text-[#E9D5FF]">
                           {badgeLabel || role}
                         </div>
                       </div>

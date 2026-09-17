@@ -72,7 +72,7 @@ export default function BehindTheWork() {
   };
   
   return (
-    <section id="process" className="py-24 md:py-32 relative z-10 bg-[#FFFFFF] overflow-hidden">
+    <section id="process" className="py-24 md:py-32 relative z-10 bg-[#F7F6F2] overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
         <ScrollReveal data-reveal="flip-3d">
           <div className="mb-14 sm:mb-18 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 border-b border-[#DEDED7] pb-8">
@@ -134,7 +134,7 @@ export default function BehindTheWork() {
                 className="w-[290px] sm:w-[330px] shrink-0 snap-center first:ml-0 last:mr-0 relative py-2"
               >
                 <div 
-                  className="relative h-[290px] p-7 rounded-[2rem] bg-[#F7F6F2] border border-[#DEDED7] overflow-hidden group hover:border-[#111111]/40 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between shadow-subtle"
+                  className="relative h-[290px] p-7 rounded-[2rem] bg-white border border-[#DEDED7] overflow-hidden group hover:border-[#111111]/40 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between shadow-subtle"
                 >
                   {/* Header Row: Number and Icon */}
                   <div className="flex items-center justify-between relative z-10">

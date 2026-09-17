@@ -31,15 +31,11 @@ const SHOOT_TYPES = [
 
 export default function ShootsSection() {
   return (
-    <section id="shoots" className="py-20 md:py-28 bg-[#FFFFFF] relative border-b border-[#DEDED7]">
+    <section id="shoots" className="py-20 md:py-28 bg-[#F7F6F2] relative">
       <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-7xl">
         
         {/* Section Header */}
         <ScrollReveal data-reveal="up" className="max-w-3xl mb-16 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-[#F7F6F2] text-[#5F5F5A] text-xs font-semibold uppercase tracking-wider mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-            <span>On-Location Production • Mumbai &amp; Delhi</span>
-          </div>
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-5">
             Professional Content Shoots.{' '}
             <span className="text-[#5D2E85]">Because Great Marketing Needs Great Content.</span>
@@ -53,7 +49,7 @@ export default function ShootsSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {SHOOT_TYPES.map((shoot, idx) => (
             <ScrollReveal key={shoot.title} data-reveal="up" delay={idx * 70}>
-              <div className="p-7 rounded-3xl bg-[#F7F6F2] border border-[#DEDED7] hover:border-[#111111]/30 hover:bg-white transition-all duration-300 h-full flex flex-col justify-between shadow-subtle">
+              <div className="p-7 rounded-3xl bg-white border border-[#DEDED7] hover:border-[#111111]/30 transition-all duration-300 h-full flex flex-col justify-between shadow-subtle">
                 <div>
                   <div className="flex items-center justify-between mb-5">
                     <span className="text-[10px] font-sans font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white border border-[#DEDED7] text-[#111111]">
@@ -77,7 +73,7 @@ export default function ShootsSection() {
 
         {/* The Connection Formula Pipeline */}
         <ScrollReveal data-reveal="up" delay={150}>
-          <div className="p-8 sm:p-10 rounded-3xl bg-[#F7F6F2] border border-[#DEDED7] shadow-card mb-12">
+          <div className="p-8 sm:p-10 rounded-3xl bg-white border border-[#DEDED7] shadow-card mb-12">
             <span className="block font-sans font-bold text-xs uppercase tracking-wider text-[#5D2E85] mb-3">
               The Production-To-Revenue Pipeline
             </span>

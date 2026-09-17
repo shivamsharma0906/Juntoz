@@ -3,15 +3,11 @@ import ScrollReveal from './ScrollReveal.jsx';
 
 export default function SpecialtySection() {
   return (
-    <section id="specialty" className="py-20 md:py-28 bg-[#F7F6F2] relative border-b border-[#DEDED7]">
+    <section id="specialty" className="py-20 md:py-28 bg-[#F7F6F2] relative">
       <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-7xl">
         
         {/* Section Header */}
         <ScrollReveal data-reveal="up" className="max-w-3xl mb-16 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white text-[#5F5F5A] text-xs font-semibold uppercase tracking-wider mb-4 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-            <span>Dedicated Vertical Expertise</span>
-          </div>
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-5">
             Our Specialty:{' '}
             <span className="text-[#5D2E85]">Makeup Artists &amp; Salons.</span>

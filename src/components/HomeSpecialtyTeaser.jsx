@@ -3,18 +3,10 @@ import ScrollReveal from './ScrollReveal';
 
 export default function HomeSpecialtyTeaser() {
   return (
-    <section className="py-20 md:py-28 bg-[#F7F6F2] border-b border-[#DEDED7]">
+    <section className="py-10 sm:py-16 md:py-20 lg:py-28 bg-[#F7F6F2] border-b border-[#DEDED7]/70">
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
 
         <div className="max-w-3xl mx-auto text-center mb-14 md:mb-18">
-          <ScrollReveal data-reveal="up">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-              <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
-                Dedicated Vertical Practices
-              </span>
-            </div>
-          </ScrollReveal>
 
           <ScrollReveal data-reveal="up" delay={80}>
             <h2 className="font-heading font-black text-3xl sm:text-5xl uppercase tracking-tight text-[#111111] leading-[1.04] mb-4">

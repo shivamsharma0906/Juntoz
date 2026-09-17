@@ -33,14 +33,12 @@ const MARKETING_BREAKDOWNS = [
 
 export default function WhyMarketingBreaks() {
   return (
-    <section id="problem-framing" className="py-24 md:py-32 relative z-10 bg-[#FFFFFF] border-b border-[#DEDED7]">
+    <section id="problem-framing" className="py-10 sm:py-16 md:py-24 lg:py-32 relative z-10 bg-[#F7F6F2] border-b border-[#DEDED7]/70">
       <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-7xl relative">
         
         {/* Section Header */}
         <ScrollReveal data-reveal="up" className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[#F1E7F9] border border-[#5D2E85]/20 font-sans font-semibold text-xs uppercase tracking-wider text-[#5D2E85] mb-4">
-            The Strategic Problem
-          </span>
+
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-6">
             Why Most Digital Marketing <br className="hidden sm:inline" />
             <span className="text-[#5D2E85]">
@@ -52,33 +50,33 @@ export default function WhyMarketingBreaks() {
           </p>
         </ScrollReveal>
 
-        {/* 4 Problem Framing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+        {/* 4 Problem Framing Cards (2-Column Mobile Grid) */}
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-3 sm:gap-6 lg:gap-8 items-stretch">
           {MARKETING_BREAKDOWNS.map((item, idx) => (
             <ScrollReveal key={item.num} data-reveal="up" delay={idx * 100}>
-              <div className="group relative rounded-3xl h-full flex flex-col transition-all duration-300 hover:-translate-y-1 bg-[#F7F6F2] border border-[#DEDED7] p-7 sm:p-9 shadow-subtle hover:border-[#111111]/40">
+              <div className="group relative rounded-2xl sm:rounded-3xl h-full flex flex-col transition-all duration-300 hover:-translate-y-1 bg-white border border-[#DEDED7] p-4 sm:p-9 shadow-subtle hover:border-[#111111]/40">
                 <div className="flex flex-col justify-between h-full">
                   <div>
                     {/* Top row: Number and Icon */}
-                    <div className="flex items-center justify-between mb-6">
-                      <span className="font-sans font-bold text-sm tracking-wider text-[#5D2E85]">
+                    <div className="flex items-center justify-between mb-3 sm:mb-6">
+                      <span className="font-sans font-bold text-[10px] sm:text-sm tracking-wider text-[#5D2E85]">
                         {item.num}
                       </span>
-                      <span className="text-xl p-2.5 rounded-xl bg-white border border-[#DEDED7] shadow-xs">
+                      <span className="text-base sm:text-xl p-1.5 sm:p-2.5 rounded-xl bg-white border border-[#DEDED7] shadow-xs">
                         {item.icon}
                       </span>
                     </div>
 
-                    <h3 className="font-heading font-bold text-xl sm:text-2xl text-[#111111] uppercase tracking-tight mb-4">
+                    <h3 className="font-heading font-bold text-xs sm:text-2xl text-[#111111] uppercase tracking-tight mb-2 sm:mb-4 leading-snug">
                       {item.title}
                     </h3>
 
                     {/* Problem / Reality */}
-                    <div className="mb-5 p-4 rounded-xl bg-white border border-[#DEDED7]">
-                      <p className="font-sans font-bold text-[11px] uppercase tracking-wider text-[#5D2E85] mb-1">
+                    <div className="mb-3 sm:mb-5 p-3 sm:p-4 rounded-xl bg-white border border-[#DEDED7]">
+                      <p className="font-sans font-bold text-[10px] sm:text-[11px] uppercase tracking-wider text-[#5D2E85] mb-1">
                         The Pain:
                       </p>
-                      <p className="font-body text-[#5F5F5A] text-sm leading-relaxed">
+                      <p className="font-body text-[#5F5F5A] text-xs sm:text-sm leading-relaxed">
                         {item.reality}
                       </p>
                     </div>

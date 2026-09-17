@@ -59,11 +59,6 @@ export default function Results() {
 
         {/* Header */}
         <ScrollReveal data-reveal="up" className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-            <span className="font-body font-bold text-white/80 text-[11px] tracking-wider uppercase">By The Numbers</span>
-          </div>
-          
           <h2 className="font-heading font-black text-white text-3xl sm:text-5xl md:text-6xl uppercase leading-tight tracking-tight mb-4">
             Proof That Our <span className="text-[#5D2E85]">System Works</span>
           </h2>

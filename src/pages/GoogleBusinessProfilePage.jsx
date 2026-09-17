@@ -68,17 +68,9 @@ export default function GoogleBusinessProfilePage() {
       {/* ── HERO SECTION ── */}
       <section className="container mx-auto px-4 sm:px-6 max-w-7xl mb-20 md:mb-28">
         <div className="max-w-3xl mx-auto text-center">
-          <ScrollReveal data-reveal="up">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-5">
-              <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-              <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
-                Local Search &amp; Google 3-Pack Authority
-              </span>
-            </div>
-          </ScrollReveal>
 
           <ScrollReveal data-reveal="up" delay={100}>
-            <h1 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-[#111111] leading-[1.04] mb-6">
+            <h1 className="font-heading font-normal text-3xl sm:text-5xl md:text-6xl text-[#111111] leading-[1.12] mb-6">
               Your Customers Are Already Searching. <br />
               <span className="text-[#5D2E85]">The Question Is Whether They Find You.</span>
             </h1>

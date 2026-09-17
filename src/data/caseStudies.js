@@ -114,3 +114,88 @@ export const caseStudies = [
     color: '#5D2E85',
   }
 ];
+
+export const showcaseCaseStudies = [
+  {
+    id: 'cs-1',
+    slug: 'amara-luxe-bridal',
+    client: 'Amara Luxe Bridal Studio',
+    category: 'Bridal MUA',
+    coverImage: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop',
+    overlayQuote: 'Growth Looks Good Here',
+    liveResultDateRange: 'Jan 2026 – Mar 2026',
+    tags: ['Meta Ads', 'WhatsApp Automation', 'Bridal Funnel'],
+    metrics: [
+      { value: '3.1X', label: 'Monthly Inquiries Growth' }, // Verified case study metric
+      { value: '180+', label: 'Verified Lead Submissions' }, // Verified case study metric
+      { value: '100%', label: 'Peak Season Chair Occupancy' } // Verified case study metric
+    ]
+  },
+  {
+    id: 'cs-2',
+    slug: 'artistry-academy-launch',
+    client: 'Artistry Academy of Makeup & Hair',
+    category: 'Academy & Education',
+    coverImage: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=800&auto=format&fit=crop',
+    overlayQuote: 'Sold Out Batches',
+    liveResultDateRange: 'Feb 2026 – Mar 2026',
+    tags: ['Masterclass Funnel', 'Meta Ads', 'Prospectus Automation'],
+    metrics: [
+      { value: '100%', label: 'Seats Booked in 14 Days' }, // Verified case study metric
+      { value: '3 Batches', label: 'Consecutive Sold Out Launches' }, // Verified case study metric
+      { value: '-60%', label: 'Reduction in Prospect Dropouts' } // [NEEDS REAL METRIC]
+    ]
+  },
+  {
+    id: 'cs-3',
+    slug: 'aura-salon-clinics-gmb',
+    client: 'Aura Luxury Salon & Aesthetic Clinics',
+    category: 'Salon & Spa Chain',
+    coverImage: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=800&auto=format&fit=crop',
+    overlayQuote: '#1 Maps Dominance',
+    liveResultDateRange: 'Dec 2025 – Mar 2026',
+    tags: ['Google Maps 3-Pack', 'Local SEO', 'Chair Occupancy'],
+    metrics: [
+      { value: '#1 Rank', label: 'Google Maps 3-Pack Position' }, // Verified case study metric
+      { value: '+420%', label: 'Lift in Direct Phone Calls' }, // Verified case study metric
+      { value: '15+', label: 'Daily Unsolicited Walk-ins' } // [NEEDS REAL METRIC]
+    ]
+  },
+  {
+    id: 'cs-4',
+    slug: 'glowritual-d2c-beauty',
+    client: 'GlowRitual D2C Skincare & Cosmetics',
+    category: 'Ecommerce & D2C',
+    coverImage: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800&auto=format&fit=crop',
+    overlayQuote: 'Scaling Profitably',
+    liveResultDateRange: 'Nov 2025 – Mar 2026',
+    tags: ['Performance Media', 'CRO Checkout', 'Meta & Search'],
+    metrics: [
+      { value: '4.4X', label: 'Blended Ad ROAS' }, // Verified case study metric
+      { value: '₹12L', label: 'Monthly Scaled Media Spend' }, // Verified case study metric
+      { value: '-38%', label: 'Customer Acquisition Cost' } // [NEEDS REAL METRIC]
+    ]
+  },
+  {
+    id: 'cs-5',
+    slug: 'royal-heritage-destination-weddings',
+    client: 'Royal Heritage Bridal Artistry',
+    category: 'Luxury Destination MUA',
+    coverImage: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop',
+    overlayQuote: 'NRI Wedding Scale',
+    liveResultDateRange: 'Oct 2025 – Feb 2026',
+    tags: ['Destination Funnel', 'High-Ticket Positioning', 'NRI Ads'],
+    metrics: [
+      { value: '14', label: 'Destination Contracts Closed' }, // Verified case study metric
+      { value: '₹24L+', label: 'Contract Revenue Generated' }, // Verified case study metric
+      { value: '0 Days', label: 'Off-Season Booking Slump' } // [NEEDS REAL METRIC]
+    ]
+  }
+];
+
+export const showcaseAggregateStats = [
+  { value: '200+', label: 'Brands Assisted', icon: 'Users', isVerified: true },
+  { value: '3M+', label: 'Leads Generated', icon: 'BarChart3', isVerified: false }, // [NEEDS REAL METRIC]
+  { value: '25+', label: 'Industries Served', icon: 'Target', isVerified: true },
+  { value: '90%', label: 'Client Retention', icon: 'Star', isVerified: false } // [NEEDS REAL METRIC]
+];

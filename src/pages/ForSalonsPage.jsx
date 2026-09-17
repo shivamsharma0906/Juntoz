@@ -85,15 +85,9 @@ export default function ForSalonsPage() {
             
             {/* Left Hero Content */}
             <div className="lg:col-span-7 text-left space-y-6">
-              <ScrollReveal data-reveal="up">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#DEDED7] bg-white text-[#5F5F5A] text-xs font-semibold uppercase tracking-wider">
-                  <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-                  <span>Specialist Practice • Juntoz Digital Agency</span>
-                </div>
-              </ScrollReveal>
 
               <ScrollReveal data-reveal="up" delay={100}>
-                <h1 className="font-heading font-black text-4xl sm:text-6xl lg:text-7xl uppercase tracking-tight text-[#111111] leading-[1.02] mb-3">
+                <h1 className="font-heading font-normal text-4xl sm:text-6xl lg:text-7xl text-[#111111] leading-[1.08] mb-3">
                   Salon &amp; Clinic <br />
                   <span className="text-[#5D2E85]">Growth Engine.</span>
                 </h1>
@@ -200,7 +194,7 @@ export default function ForSalonsPage() {
       </section>
 
       {/* ════ INTERACTIVE REALITY CHECK (PAIN POINTS) ════ */}
-      <section className="py-20 md:py-28 bg-white border-y border-[#DEDED7] relative">
+      <section className="py-20 md:py-28 bg-[#F7F6F2] border-y border-[#DEDED7] relative">
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           <ScrollReveal className="mb-14 text-center max-w-2xl mx-auto space-y-3">
             <span className="font-heading font-bold tracking-widest text-[#5D2E85] uppercase text-xs block">
@@ -370,7 +364,7 @@ export default function ForSalonsPage() {
       </section>
 
       {/* ════ CASE STUDIES ════ */}
-      <section className="py-20 md:py-28 bg-white border-t border-[#DEDED7]">
+      <section className="py-20 md:py-28 bg-[#F7F6F2] border-t border-[#DEDED7]">
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           <ScrollReveal className="mb-16 border-b border-[#DEDED7] pb-8 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
             <div>

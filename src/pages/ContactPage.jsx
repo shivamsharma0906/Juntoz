@@ -16,7 +16,6 @@ const CONTACT_METHODS = [
     label: 'Direct WhatsApp',
     value: '+91 90040 01800',
     href: WA,
-    sublabel: 'Fastest response — usually within minutes',
   },
   {
     icon: (
@@ -27,7 +26,6 @@ const CONTACT_METHODS = [
     label: 'Agency Founder Email',
     value: 'Sujal.Mehta@juntoz.in',
     href: 'mailto:Sujal.Mehta@juntoz.in',
-    sublabel: 'Direct inbox of Sujal Mehta',
   },
   {
     icon: (
@@ -38,7 +36,6 @@ const CONTACT_METHODS = [
     label: 'Instagram DM',
     value: '@_juntoz',
     href: 'https://www.instagram.com/_juntoz',
-    sublabel: 'DM us your portfolio link directly',
   },
 ];
 
@@ -47,8 +44,10 @@ function ContactForm() {
   const [fields, setFields] = useState({ 
     name: '', 
     phone: '', 
-    website: '', 
+    budget: '₹50,000 – ₹1,00,000 / mo',
     serviceFocus: 'Full Growth System', 
+    website: '', 
+    city: '',
     targetGoal: '' 
   });
   const [submitted, setSubmitted] = useState(false);
@@ -68,18 +67,21 @@ function ContactForm() {
     
     // Build pre-filled WhatsApp message for strategy consultation
     const msg = encodeURIComponent(
-      `Hi Juntoz! I'd like to schedule a Free Digital Growth Consultation.\n\n` +
+      `Hi Juntoz! I'm reaching out through your website contact form.\n\n` +
       `🏢 Business / Founder: ${fields.name}\n` +
       `📱 WhatsApp: ${fields.phone}\n` +
+      `💰 Monthly Budget: ${fields.budget}\n` +
+      `🎯 Area of Focus: ${fields.serviceFocus}\n` +
       `${fields.website ? `🌐 Website/Profile: ${fields.website}\n` : ''}` +
-      `🎯 Service Focus: ${fields.serviceFocus}\n` +
-      `${fields.targetGoal ? `📈 Primary Goal: ${fields.targetGoal}` : ''}`
+      `${fields.city ? `📍 Location: ${fields.city}\n` : ''}` +
+      `${fields.targetGoal ? `📝 Project Details: ${fields.targetGoal}` : ''}`
     );
     window.open(`https://wa.me/919004001800?text=${msg}`, '_blank', 'noopener,noreferrer');
     setSubmitted(true);
   };
 
-  const inputBase = `w-full bg-white border border-[#DEDED7] rounded-xl px-4 py-3.5 font-body text-[#111111] placeholder-[#5F5F5A]/50 text-sm transition-all duration-200 focus:outline-none focus:border-[#111111] focus:ring-1 focus:ring-[#111111]`;
+  const inputBase = `w-full bg-[#FAFAF8] hover:bg-white border border-[#DEDED7] focus:bg-white rounded-xl px-4 py-3.5 font-body text-[#111111] placeholder-[#5F5F5A]/50 text-sm transition-all duration-200 focus:outline-none focus:border-[#5D2E85] focus:ring-2 focus:ring-[#5D2E85]/20`;
+  const selectBase = `w-full bg-[#FAFAF8] hover:bg-white border border-[#DEDED7] focus:bg-white rounded-xl px-4 py-3.5 font-body text-[#111111] text-sm transition-all duration-200 focus:outline-none focus:border-[#5D2E85] focus:ring-2 focus:ring-[#5D2E85]/20 cursor-pointer appearance-none`;
 
   if (submitted) {
     return (
@@ -89,26 +91,34 @@ function ContactForm() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="font-heading font-black text-[#111111] text-2xl uppercase">WhatsApp Chat Opened!</h3>
+        <h3 className="font-heading font-black text-[#111111] text-2xl uppercase">Message Sent via WhatsApp!</h3>
         <p className="font-body text-[#5F5F5A] text-sm max-w-xs leading-relaxed">
-          Your strategic audit details were pre-filled in WhatsApp. Sujal or Saloni will review your business and reply shortly!
+          Your details were pre-filled and sent to our team. Sujal or Saloni will review your business and reply shortly!
         </p>
+        <button
+          type="button"
+          onClick={() => setSubmitted(false)}
+          className="text-xs font-heading font-bold text-[#5D2E85] hover:underline uppercase tracking-wider"
+        >
+          Send Another Message
+        </button>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      {/* Row 1: Name & Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="contact-name" className="block text-[11px] font-heading font-bold uppercase tracking-wider text-[#111111] mb-1.5">
-            Business / Founder Name *
+            Business / Founder Name <span className="text-[#5D2E85]">*</span>
           </label>
           <input
             id="contact-name"
             type="text"
             autoComplete="name"
-            placeholder="e.g. Acme Brands or Sujal"
+            placeholder="e.g. Acme Brands or Sujal Mehta"
             value={fields.name}
             onChange={e => { setFields(p => ({ ...p, name: e.target.value })); setErrors(p => ({ ...p, name: null })); }}
             className={`${inputBase} ${errors.name ? 'border-red-500 bg-red-50' : ''}`}
@@ -117,14 +127,14 @@ function ContactForm() {
         </div>
         <div>
           <label htmlFor="contact-phone" className="block text-[11px] font-heading font-bold uppercase tracking-wider text-[#111111] mb-1.5">
-            WhatsApp Number *
+            WhatsApp Number <span className="text-[#5D2E85]">*</span>
           </label>
           <input
             id="contact-phone"
             type="tel"
             inputMode="tel"
             autoComplete="tel"
-            placeholder="10-digit mobile number"
+            placeholder="10-digit WhatsApp number"
             value={fields.phone}
             onChange={e => { setFields(p => ({ ...p, phone: e.target.value })); setErrors(p => ({ ...p, phone: null })); }}
             className={`${inputBase} ${errors.phone ? 'border-red-500 bg-red-50' : ''}`}
@@ -133,15 +143,72 @@ function ContactForm() {
         </div>
       </div>
 
+      {/* Row 2: Monthly Budget & Primary Area of Focus */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="contact-budget" className="block text-[11px] font-heading font-bold uppercase tracking-wider text-[#111111] mb-1.5">
+            Estimated Monthly Budget
+          </label>
+          <div className="relative">
+            <select
+              id="contact-budget"
+              value={fields.budget}
+              onChange={e => setFields(p => ({ ...p, budget: e.target.value }))}
+              className={selectBase}
+            >
+              <option value="Under ₹30,000 / mo">Under ₹30,000 / month</option>
+              <option value="₹30,000 – ₹50,000 / mo">₹30,000 – ₹50,000 / month</option>
+              <option value="₹50,000 – ₹1,00,000 / mo">₹50,000 – ₹1,00,000 / month</option>
+              <option value="₹1,00,000 – ₹2,50,000 / mo">₹1,00,000 – ₹2,50,000 / month</option>
+              <option value="₹2,50,000+ / mo">₹2,50,000+ / month</option>
+              <option value="Flexible / Need Guidance">Flexible / Need Guidance</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-[#5F5F5A]">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="contact-service" className="block text-[11px] font-heading font-bold uppercase tracking-wider text-[#111111] mb-1.5">
+            Primary Area of Focus
+          </label>
+          <div className="relative">
+            <select
+              id="contact-service"
+              value={fields.serviceFocus}
+              onChange={e => setFields(p => ({ ...p, serviceFocus: e.target.value }))}
+              className={selectBase}
+            >
+              <option value="Full Growth System">Full Growth System (Strategy + Ads + Web)</option>
+              <option value="Performance Paid Ads">Performance Paid Ads (Meta &amp; Google)</option>
+              <option value="Google Business Profile & Local SEO">Google Business Profile &amp; Local SEO</option>
+              <option value="Web Design & Conversion CRO">Web Design &amp; Conversion CRO</option>
+              <option value="Professional Content Shoots">Professional Content Shoots (Mumbai/Delhi)</option>
+              <option value="Specialty: Makeup Artists">Specialty: Makeup Artists &amp; Academies</option>
+              <option value="Specialty: Salons & Clinics">Specialty: Salons &amp; Clinics</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-[#5F5F5A]">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Row 3: Website & Location */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="contact-website" className="block text-[11px] font-heading font-bold uppercase tracking-wider text-[#111111] mb-1.5">
-            Website or Social Link (optional)
+            Website or Instagram (Optional)
           </label>
           <input
             id="contact-website"
             type="text"
-            placeholder="e.g. yourwebsite.com or @handle"
+            placeholder="e.g. yourwebsite.com or @_handle"
             value={fields.website}
             onChange={e => setFields(p => ({ ...p, website: e.target.value }))}
             className={inputBase}
@@ -149,54 +216,64 @@ function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="contact-service" className="block text-[11px] font-heading font-bold uppercase tracking-wider text-[#111111] mb-1.5">
-            Primary Area of Focus
+          <label htmlFor="contact-city" className="block text-[11px] font-heading font-bold uppercase tracking-wider text-[#111111] mb-1.5">
+            City / Target Market (Optional)
           </label>
-          <select
-            id="contact-service"
-            value={fields.serviceFocus}
-            onChange={e => setFields(p => ({ ...p, serviceFocus: e.target.value }))}
-            className={`${inputBase} bg-white text-[#111111]`}
-          >
-            <option value="Full Growth System">Full Growth System (Strategy + Ads + Web)</option>
-            <option value="Performance Paid Ads">Performance Paid Ads (Meta &amp; Google)</option>
-            <option value="Google Business Profile & Local SEO">Google Business Profile &amp; Local SEO</option>
-            <option value="Web Design & Conversion CRO">Web Design &amp; Conversion CRO</option>
-            <option value="Professional Content Shoots">Professional Content Shoots (Mumbai/Delhi)</option>
-            <option value="Specialty: Makeup Artists">Specialty: Makeup Artists &amp; Academies</option>
-            <option value="Specialty: Salons & Clinics">Specialty: Salons &amp; Clinics</option>
-          </select>
+          <input
+            id="contact-city"
+            type="text"
+            placeholder="e.g. Mumbai, Delhi NCR, Pan-India"
+            value={fields.city}
+            onChange={e => setFields(p => ({ ...p, city: e.target.value }))}
+            className={inputBase}
+          />
         </div>
       </div>
 
+      {/* Row 4: Commercial Goal / Message */}
       <div>
         <label htmlFor="contact-goal" className="block text-[11px] font-heading font-bold uppercase tracking-wider text-[#111111] mb-1.5">
-          What is your primary commercial goal right now? (optional)
+          Tell us about your brand or growth goals (Optional)
         </label>
-        <input
+        <textarea
           id="contact-goal"
-          type="text"
-          placeholder="e.g. Scale qualified monthly inbound leads, dominate local maps, launch new market"
+          rows={3}
+          placeholder="e.g. Scale qualified monthly bookings, dominate local Google Maps rankings, or launch a new service line..."
           value={fields.targetGoal}
           onChange={e => setFields(p => ({ ...p, targetGoal: e.target.value }))}
-          className={inputBase}
+          className={`${inputBase} resize-none`}
         />
       </div>
 
+      {/* Submit Button */}
       <button
         type="submit"
         id="contact-submit"
-        className="w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-heading font-bold uppercase tracking-wider text-white text-xs sm:text-sm bg-[#111111] hover:bg-[#5D2E85] transition-colors duration-200 mt-2 cursor-pointer shadow-sm active:scale-[0.99]"
+        className="w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-heading font-black uppercase tracking-wider text-white text-xs sm:text-sm bg-[#111111] hover:bg-[#5D2E85] transition-all duration-200 cursor-pointer shadow-card hover:shadow-hover active:scale-[0.99] group mt-1"
       >
-        <span>Claim Free Strategy Consultation on WhatsApp</span>
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.875L.057 23.386a.5.5 0 0 0 .614.599l5.728-1.539A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75A9.75 9.75 0 1 1 12 2.25 9.75 9.75 0 0 1 12 21.75z"/>
+        <span>Send Message</span>
+        <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
         </svg>
       </button>
-      <p className="text-center font-body text-[#5F5F5A] text-xs">
-        Opens WhatsApp with your business details pre-filled. 100% free · 20-minute strategic audit · Zero pressure.
-      </p>
+
+      {/* Trust & Guarantee Micro-bar */}
+      <div className="pt-2 flex flex-col items-center gap-3">
+        <p className="text-center font-body text-[#5F5F5A] text-xs leading-relaxed">
+          Pre-fills your inquiry directly on WhatsApp · Fast response from senior strategists · 100% confidential
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] font-heading font-semibold text-[#5F5F5A]">
+          <span className="flex items-center gap-1.5">
+            <span className="text-[#287A55] font-bold">✓</span> Fast Response
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="text-[#287A55] font-bold">✓</span> Zero Spam Guarantee
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="text-[#287A55] font-bold">✓</span> Direct Founder Review
+          </span>
+        </div>
+      </div>
     </form>
   );
 }
@@ -212,11 +289,8 @@ export default function ContactPage() {
         path="/contact"
       />
         <ScrollReveal data-reveal="up" className="mb-12 sm:mb-16 text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-            <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">Strategic Growth Consultation</span>
-          </div>
-          <h1 className="font-heading font-black text-[#111111] text-3xl sm:text-6xl md:text-7xl uppercase leading-tight tracking-tight mb-6">
+          
+          <h1 className="font-heading font-normal text-[#111111] text-3xl sm:text-6xl md:text-7xl leading-tight mb-6">
             Turn Digital Presence Into <br className="hidden sm:block" />
             <span className="text-[#5D2E85]">Business Growth</span>
           </h1>
@@ -230,10 +304,21 @@ export default function ContactPage() {
 
           {/* LEFT — Contact Form (3 cols) */}
           <ScrollReveal data-reveal="up" delay={100} className="lg:col-span-3">
-            <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#DEDED7] shadow-card">
-              <h2 className="font-heading font-black text-[#111111] text-2xl uppercase tracking-tight mb-6">
-                Send Us a Message
-              </h2>
+            <div className="bg-white rounded-3xl p-5 sm:p-8 md:p-10 border border-[#DEDED7] shadow-card">
+              <div className="flex items-center justify-between gap-3 mb-6 pb-5 border-b border-[#DEDED7]">
+                <div>
+                  <span className="font-heading font-bold text-[11px] uppercase tracking-wider text-[#5D2E85] block mb-1">
+                    Direct Strategy Channel
+                  </span>
+                  <h2 className="font-heading font-black text-[#111111] text-2xl sm:text-3xl uppercase tracking-tight">
+                    Send Us a Message
+                  </h2>
+                </div>
+                <div className="hidden xs:flex items-center gap-2 px-3 py-1 rounded-full bg-[#287A55]/10 text-[#287A55] text-xs font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-[#287A55] animate-pulse" />
+                  <span>Active Today</span>
+                </div>
+              </div>
               <ContactForm />
             </div>
           </ScrollReveal>
@@ -246,15 +331,14 @@ export default function ContactPage() {
                   href={m.href}
                   target={m.href.startsWith('http') ? '_blank' : undefined}
                   rel={m.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="group flex items-start gap-4 p-6 rounded-2xl bg-white border border-[#DEDED7] shadow-subtle hover:border-[#111111] hover:shadow-hover transition-all duration-200"
+                  className="group flex items-center gap-4 p-5 sm:p-6 rounded-2xl bg-white border border-[#DEDED7] shadow-subtle hover:border-[#111111] hover:shadow-hover transition-all duration-200"
                 >
                   <div className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-[#F1E7F9] text-[#5D2E85] border border-[#5D2E85]/20 transition-colors duration-200 group-hover:bg-[#111111] group-hover:text-white">
                     {m.icon}
                   </div>
                   <div className="min-w-0">
                     <p className="font-body text-[#5F5F5A] text-[11px] uppercase tracking-wider font-bold mb-0.5">{m.label}</p>
-                    <p className="font-heading font-black text-[#111111] text-base mb-1 break-all transition-colors">{m.value}</p>
-                    <p className="font-body text-[#5F5F5A] text-xs leading-relaxed">{m.sublabel}</p>
+                    <p className="font-heading font-black text-[#111111] text-base break-all transition-colors">{m.value}</p>
                   </div>
                 </a>
               </ScrollReveal>

@@ -18,12 +18,12 @@ const includes = [
 
 function SlotIndicator({ remaining, total }) {
   return (
-    <div className="flex flex-col items-center gap-4">
-      <div className="flex gap-2.5">
+    <div className="flex flex-col items-center gap-3 sm:gap-4">
+      <div className="flex gap-1.5 sm:gap-2.5">
         {[...Array(total)].map((_, i) => (
           <div
             key={i}
-            className={`w-5 h-5 md:w-6 md:h-6 rounded-full border-2 transition-all duration-300 ${
+            className={`w-3.5 h-3.5 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-2 transition-all duration-300 ${
               i < (total - remaining)
                 ? 'bg-white/10 border-white/10'
                 : 'bg-[#FFE600] border-[#FFE600] shadow-[0_0_15px_#FFE600] animate-pulse'
@@ -31,7 +31,7 @@ function SlotIndicator({ remaining, total }) {
           />
         ))}
       </div>
-      <p className="font-heading font-black text-[#FFE600] text-lg uppercase tracking-widest drop-shadow-[0_0_10px_rgba(255,230,0,0.4)]">
+      <p className="font-heading font-black text-[#FFE600] text-sm sm:text-lg uppercase tracking-wider sm:tracking-widest drop-shadow-[0_0_10px_rgba(255,230,0,0.4)]">
         {remaining} of {total} slots remaining
       </p>
     </div>
@@ -73,7 +73,7 @@ export default function OfferSection() {
           <div className="inline-block px-5 py-2 border-2 border-[#FFE600]/30 bg-[#FFE600]/10 text-[#FFE600] font-heading font-bold uppercase tracking-widest text-xs md:text-sm mb-8 backdrop-blur-md rounded-full shadow-[0_0_20px_rgba(255,230,0,0.15)]">
             🔥 Limited Onboarding — June 2025
           </div>
-          <h2 className="font-heading font-black text-5xl sm:text-6xl md:text-7xl uppercase text-white leading-[0.95] tracking-tighter">
+          <h2 className="font-heading font-black text-3xl xs:text-4xl sm:text-6xl md:text-7xl uppercase text-white leading-[0.95] tracking-tighter">
             Everything You{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFE600] to-[#FF3AF2]">
               Get
@@ -87,7 +87,7 @@ export default function OfferSection() {
         {/* Slots + Countdown */}
         <ScrollReveal data-reveal="zoom" delay={100} className="relative group max-w-3xl mx-auto mb-16 md:mb-24">
           <div className="absolute -inset-1 bg-gradient-to-r from-[#FFE600] to-[#FF3AF2] rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-500" />
-          <div className="relative bg-[#05050C]/90 backdrop-blur-xl rounded-[2.5rem] border border-white/10 p-8 md:p-12 text-center shadow-2xl">
+          <div className="relative bg-[#05050C]/90 backdrop-blur-xl rounded-[2rem] sm:rounded-[2.5rem] border border-white/10 p-5 sm:p-8 md:p-12 text-center shadow-2xl">
             
             <SlotIndicator remaining={REMAINING_SLOTS} total={TOTAL_SLOTS} />
 
@@ -104,17 +104,17 @@ export default function OfferSection() {
               Onboarding closes in:
             </p>
             
-            <div className="flex items-center justify-center gap-6 md:gap-12">
+            <div className="flex items-center justify-center gap-4 sm:gap-6 md:gap-12">
               {[
                 { val: timeLeft.days, label: 'Days' },
                 { val: timeLeft.hours, label: 'Hours' },
                 { val: timeLeft.mins, label: 'Mins' },
               ].map((t, i) => (
                 <div key={i} className="text-center">
-                  <div className="font-heading font-black text-5xl md:text-7xl text-white leading-none drop-shadow-xl">
+                  <div className="font-heading font-black text-3xl sm:text-5xl md:text-7xl text-white leading-none drop-shadow-xl">
                     {String(t.val).padStart(2, '0')}
                   </div>
-                  <div className="font-heading font-bold text-[#FFE600] text-[10px] md:text-xs uppercase tracking-[0.2em] mt-2">{t.label}</div>
+                  <div className="font-heading font-bold text-[#FFE600] text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[0.2em] mt-2">{t.label}</div>
                 </div>
               ))}
             </div>

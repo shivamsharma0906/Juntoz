@@ -4,10 +4,12 @@ import PageMeta from '../components/PageMeta';
 
 // Lazy load below-the-fold curiosity-driven trailer sections
 const HomeServicesTeaser    = lazy(() => import('../components/HomeServicesTeaser'));
+const AboutIntro            = lazy(() => import('../components/AboutIntro'));
+const WhatWeDo              = lazy(() => import('../components/WhatWeDo'));
+const TrustExecution        = lazy(() => import('../components/TrustExecution'));
 const HomeGMBTeaser         = lazy(() => import('../components/HomeGMBTeaser'));
 const TrustExecutionSection = lazy(() => import('../components/TrustExecutionSection'));
-const HomeWorkTeaser        = lazy(() => import('../components/HomeWorkTeaser'));
-const HomeSpecialtyTeaser   = lazy(() => import('../components/HomeSpecialtyTeaser'));
+const CaseStudiesShowcase   = lazy(() => import('../components/CaseStudiesShowcase'));
 const CTASection            = lazy(() => import('../components/CTASection'));
 
 export default function Home() {
@@ -21,10 +23,12 @@ export default function Home() {
       <Hero />
       <Suspense fallback={null}>
         <HomeServicesTeaser />
+        <AboutIntro />
+        <WhatWeDo />
+        <TrustExecution />
         <HomeGMBTeaser />
         <TrustExecutionSection />
-        <HomeWorkTeaser />
-        <HomeSpecialtyTeaser />
+        <CaseStudiesShowcase />
         <CTASection />
       </Suspense>
     </>

@@ -84,9 +84,7 @@ export default function Services({ compactTop = false }) {
         
         {/* Section Header */}
         <ScrollReveal data-reveal="up" className="text-center mb-16 sm:mb-20 max-w-3xl mx-auto">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[#F1E7F9] border border-[#5D2E85]/20 font-sans font-semibold text-xs uppercase tracking-wider text-[#5D2E85] mb-4">
-            Full-Service Capabilities
-          </span>
+
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-6">
             End-To-End Growth Services For{' '}
             <span className="text-[#5D2E85]">

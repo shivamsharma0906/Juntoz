@@ -24,15 +24,11 @@ const JUNTOZ_GMB_SERVICES = [
 
 export default function GMBSection() {
   return (
-    <section id="gmb" className="py-20 md:py-28 bg-[#FFFFFF] relative border-b border-[#DEDED7]">
+    <section id="gmb" className="py-20 md:py-28 bg-[#F7F6F2] relative">
       <div className="container mx-auto px-6 md:px-12 lg:px-16 max-w-7xl">
         
         {/* Section Header */}
         <ScrollReveal data-reveal="up" className="max-w-3xl mb-16 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-[#F7F6F2] text-[#5F5F5A] text-xs font-semibold uppercase tracking-wider mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-            <span>Local Search &amp; Maps Dominance</span>
-          </div>
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.1] mb-5">
             Your Customers Are Searching On Google.{' '}
             <span className="text-[#5D2E85]">Can They Find You?</span>
@@ -49,7 +45,7 @@ export default function GMBSection() {
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
             {GMB_BENEFITS.map((item, idx) => (
               <ScrollReveal key={item.title} data-reveal="up" delay={idx * 60}>
-                <div className="p-6 rounded-2xl bg-[#F7F6F2] border border-[#DEDED7] hover:border-[#111111]/30 hover:bg-white transition-all duration-300 h-full flex flex-col justify-between">
+                <div className="p-6 rounded-2xl bg-white border border-[#DEDED7] hover:border-[#111111]/30 transition-all duration-300 h-full flex flex-col justify-between shadow-subtle">
                   <div>
                     <div className="w-10 h-10 rounded-xl bg-white border border-[#DEDED7] flex items-center justify-center text-lg mb-4">
                       {item.icon}
@@ -69,7 +65,7 @@ export default function GMBSection() {
           {/* RIGHT: Mockup of Optimized Google Local Profile (5 Cols) */}
           <div className="lg:col-span-5">
             <ScrollReveal data-reveal="scale" delay={150}>
-              <div className="p-7 sm:p-8 rounded-3xl bg-[#F7F6F2] border border-[#DEDED7] shadow-card relative overflow-hidden">
+              <div className="p-7 sm:p-8 rounded-3xl bg-white border border-[#DEDED7] shadow-card relative overflow-hidden">
                 {/* Simulated Google Header */}
                 <div className="flex items-center justify-between pb-4 border-b border-[#DEDED7] mb-5">
                   <div className="flex items-center gap-2">

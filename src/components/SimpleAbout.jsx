@@ -14,11 +14,11 @@ export default function SimpleAbout() {
               <div 
                 className="p-3 sm:p-4 rounded-[2.5rem] border border-[#DEDED7] bg-white shadow-card relative overflow-hidden"
               >
-                <div className="rounded-[2rem] overflow-hidden relative w-full aspect-[4/3] sm:aspect-[1.4/1]">
+                <div className="rounded-[2rem] overflow-hidden relative w-full">
                   <motion.img 
                     src={teamImage} 
                     alt="Juntoz Team" 
-                    className="w-full h-full object-cover block"
+                    className="w-full h-auto object-contain block"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                   />

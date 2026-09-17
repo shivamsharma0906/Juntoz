@@ -69,12 +69,6 @@ export default function InnovationSection() {
 
           {/* Left Text */}
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-5" style={fade(0.05)}>
-              <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-              <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
-                Continuous Growth Lab
-              </span>
-            </div>
 
             <h2
               className="font-heading font-black text-[#111111] leading-tight tracking-tight mb-5"

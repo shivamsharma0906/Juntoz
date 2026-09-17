@@ -46,15 +46,12 @@ export default function MapSection({
   ];
 
   return (
-    <section className="relative w-full py-20 sm:py-28 overflow-hidden bg-white border-t border-[#DEDED7]">
+    <section className="relative w-full py-20 sm:py-28 overflow-hidden bg-[#F7F6F2]">
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
 
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-[#F7F6F2] shadow-subtle mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-            <span className="font-body font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">Find Our Office</span>
-          </div>
+          
           <h2 className="font-heading font-black uppercase text-[#111111] leading-tight tracking-tight text-3xl sm:text-5xl md:text-6xl mb-4">
             Visit Our <span className="text-[#5D2E85]">Workspace</span>
           </h2>

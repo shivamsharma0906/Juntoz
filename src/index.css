@@ -18,10 +18,13 @@
   --color-success:        #287A55;
   --color-warning:        #B7791F;
 
+  /* ── Breakpoints ────────────────────────────────── */
+  --breakpoint-xs: 420px;
+
   /* ── Typography ─────────────────────────────────── */
-  --font-heading: "Plus Jakarta Sans", "Inter", sans-serif;
+  --font-heading: "Playfair Display", Georgia, serif;
   --font-body:    "Inter", "Plus Jakarta Sans", sans-serif;
-  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
 
   /* ── Subtle Animations ───────────────────────────── */
   --animate-float:           float 6s ease-in-out infinite;
@@ -44,7 +47,7 @@
   --color-background:     #F7F6F2;
   --color-surface:        #FFFFFF;
   --color-foreground:     #111111;
-  --color-muted:          #5F5F5A;
+  --color-muted:          #3A3A35;
   --color-border:         #DEDED7;
 
   --color-dark:           #111111;
@@ -66,6 +69,9 @@
     overflow-x: clip;
     max-width: 100%;
     font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   body {
     background-color: #F7F6F2;
@@ -73,10 +79,19 @@
     overflow-x: clip;
     max-width: 100%;
     font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
-  ::selection {
-    background-color: #5D2E85;
-    color: #FFFFFF;
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  *:focus {
+    outline: none;
+  }
+  *:focus-visible {
+    outline: 2px solid rgba(93, 46, 133, 0.35);
+    outline-offset: 2px;
   }
   
   .bg-background {
@@ -91,6 +106,41 @@
     }
   }
 }
+
+/* ════════════════════════════════════════════════
+   GLOBAL TEXT LEGIBILITY OVERRIDES
+   Enforces minimum readable sizes for all the tiny
+   px-based Tailwind classes used across the codebase.
+   This avoids having to edit every component file.
+════════════════════════════════════════════════ */
+
+/* Enforce minimum 12px for all sub-12px utility sizes */
+.text-\[9px\]    { font-size: 12px !important; font-weight: 600 !important; }
+.text-\[9\.5px\] { font-size: 12px !important; font-weight: 600 !important; }
+.text-\[10px\]   { font-size: 12px !important; }
+.text-\[11px\]   { font-size: 13px !important; }
+
+/* Ensure 10px/11px variants still show at 12-13px minimum even with sm: prefix */
+@media (min-width: 640px) {
+  .sm\:text-\[10px\] { font-size: 12px !important; }
+  .sm\:text-\[11px\] { font-size: 13px !important; }
+}
+
+/* Boost all muted text used as description/secondary at small sizes to readable contrast.
+   Applied via a global rule on the muted color utility at small sizes. */
+.text-\[10px\], .text-\[11px\], .text-\[9px\], .text-\[9\.5px\] {
+  /* Elevate default muted text to higher contrast at small sizes */
+  --tw-text-opacity: 1;
+}
+
+/* Font-mono is hard to read at tiny sizes — ensure minimum weight */
+.font-mono { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.text-\[9px\].font-mono,
+.text-\[10px\].font-mono,
+.text-\[11px\].font-mono { font-weight: 700 !important; }
+
+/* Ensure text-xs (12px) and text-sm (14px) are always rendered with good contrast */
+.text-xs { -webkit-font-smoothing: antialiased; }
 
 @media (min-width: 768px) {
   .leader-sticky-card {
@@ -128,14 +178,14 @@
 
 .type-body {
   font-size: clamp(1rem, 0.5vw + 0.875rem, 1.125rem);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.65;
-  color: #5F5F5A;
+  color: #333333;
 }
 
 .type-label-eyebrow {
   font-size: 0.8125rem;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: #5D2E85;

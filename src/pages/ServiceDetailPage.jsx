@@ -60,7 +60,7 @@ function ServiceSimulator({ serviceId, serviceTitle }) {
             ))}
           </div>
 
-          <div className="mt-4 p-3.5 rounded-xl bg-[#F1E7F9]/60 border border-[#5D2E85]/20 flex items-center justify-between text-xs">
+          <div className="mt-4 p-3.5 rounded-xl bg-[#F1E7F9]/60 border border-[#5D2E85]/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
             <span className="font-medium text-[#111111]">
               ⚡ Automated WhatsApp DM routing active: inquiries handed off in &lt; 15 mins.
             </span>
@@ -150,7 +150,7 @@ function ServiceSimulator({ serviceId, serviceTitle }) {
             </p>
           </div>
 
-          <div className="mt-4 flex items-center justify-between text-xs text-[#5F5F5A] px-1">
+          <div className="mt-4 flex flex-col xs:flex-row xs:items-center justify-between gap-1.5 text-xs text-[#5F5F5A] px-1">
             <span>Competitor Organic Clicks: <strong>12%</strong></span>
             <span className="text-[#5D2E85] font-bold">Your Organic Click Share: <strong>54%</strong></span>
           </div>
@@ -233,9 +233,9 @@ function ServiceSimulator({ serviceId, serviceTitle }) {
             ))}
           </div>
 
-          <div className="mt-4 p-3.5 rounded-xl bg-[#F7F6F2] border border-[#DEDED7] flex items-center justify-between text-xs">
+          <div className="mt-4 p-3.5 rounded-xl bg-[#F7F6F2] border border-[#DEDED7] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
             <span className="text-[#5F5F5A]">On-Location Crews in Delhi NCR &amp; Mumbai • Pan-India Destination Travel</span>
-            <span className="font-bold text-[#5D2E85]">5-Day Delivery</span>
+            <span className="font-bold text-[#5D2E85] shrink-0">5-Day Delivery</span>
           </div>
         </div>
       );
@@ -291,7 +291,7 @@ function ServiceSimulator({ serviceId, serviceTitle }) {
             </span>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 mt-5 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-5 text-center">
             <div className="p-4 rounded-xl bg-[#F7F6F2] border border-[#DEDED7]">
               <span className="text-[10px] uppercase text-[#5F5F5A] block">First Contentful Paint</span>
               <span className="font-heading font-black text-xl text-[#287A55]">0.8s</span>

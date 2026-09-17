@@ -38,12 +38,6 @@ export default function BlogPage() {
         {/* ── Editorial Masthead Header ── */}
         <div className="mb-12 sm:mb-16 pb-8 sm:pb-12 border-b border-[#DEDED7]">
           <ScrollReveal data-reveal="up" className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#DEDED7] bg-white shadow-2xs mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#5D2E85] animate-pulse" />
-              <span className="font-sans font-bold text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-[#111111]">
-                Strategic Intelligence &amp; Playbooks
-              </span>
-            </div>
 
             <h1 className="font-heading font-black text-[#111111] uppercase tracking-[-0.03em] leading-[0.96] mb-5 text-[2.5rem] sm:text-[3.5rem] md:text-[4.25rem]">
               Growth <span className="text-[#5D2E85]">Insights.</span>

@@ -117,17 +117,9 @@ export default function SpecialtiesPage() {
         
         {/* ════ HERO HEADER ════ */}
         <section className="relative px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center mb-10 sm:mb-14">
-          <ScrollReveal data-reveal="up">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-              <span className="font-sans font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
-                Specialties &amp; Industry Verticals
-              </span>
-            </div>
-          </ScrollReveal>
 
           <ScrollReveal data-reveal="up" delay={80}>
-            <h1 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight leading-[1.04] mb-6">
+            <h1 className="font-heading font-normal text-[#111111] text-3xl sm:text-5xl md:text-6xl leading-[1.12] mb-6">
               Specialized Growth For <br />
               <span className="text-[#5D2E85]">Your Exact Industry.</span>
             </h1>
@@ -141,52 +133,54 @@ export default function SpecialtiesPage() {
 
           {/* ════ INTERACTIVE VIEW TOGGLE TABS ════ */}
           <ScrollReveal data-reveal="up" delay={180}>
-            <div className="inline-flex items-center p-1.5 rounded-full bg-white border border-[#DEDED7] shadow-sm max-w-full overflow-x-auto">
-              <button
-                type="button"
-                onClick={() => setActiveTab('industries')}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-heading font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                  activeTab === 'industries'
-                    ? 'bg-[#5D2E85] text-white shadow-md'
-                    : 'text-[#5F5F5A] hover:text-[#111111] hover:bg-[#F7F6F2]'
-                }`}
-              >
-                <span>36 Industry Playbooks</span>
-                <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${
-                  activeTab === 'industries' ? 'bg-white/20 text-white' : 'bg-[#F1E7F9] text-[#5D2E85]'
-                }`}>
-                  36 Sectors
-                </span>
-              </button>
+            <div className="w-full flex justify-center overflow-x-auto py-1">
+              <div className="inline-flex items-center p-1 sm:p-1.5 rounded-full bg-white border border-[#DEDED7] shadow-sm max-w-full overflow-x-auto scrollbar-none">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('industries')}
+                  className={`flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full font-heading font-bold text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 ${
+                    activeTab === 'industries'
+                      ? 'bg-[#5D2E85] text-white shadow-md'
+                      : 'text-[#5F5F5A] hover:text-[#111111] hover:bg-[#F7F6F2]'
+                  }`}
+                >
+                  <span>36 Industry Playbooks</span>
+                  <span className={`text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full font-mono font-bold ${
+                    activeTab === 'industries' ? 'bg-white/20 text-white' : 'bg-[#F1E7F9] text-[#5D2E85]'
+                  }`}>
+                    36 Sectors
+                  </span>
+                </button>
 
-              <button
-                type="button"
-                onClick={() => setActiveTab('beauty')}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-heading font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                  activeTab === 'beauty'
-                    ? 'bg-[#5D2E85] text-white shadow-md'
-                    : 'text-[#5F5F5A] hover:text-[#111111] hover:bg-[#F7F6F2]'
-                }`}
-              >
-                <span>Beauty &amp; MUA Specialties</span>
-                <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${
-                  activeTab === 'beauty' ? 'bg-white/20 text-white' : 'bg-[#F1E7F9] text-[#5D2E85]'
-                }`}>
-                  6 Segments
-                </span>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('beauty')}
+                  className={`flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full font-heading font-bold text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 ${
+                    activeTab === 'beauty'
+                      ? 'bg-[#5D2E85] text-white shadow-md'
+                      : 'text-[#5F5F5A] hover:text-[#111111] hover:bg-[#F7F6F2]'
+                  }`}
+                >
+                  <span>Beauty Specialties</span>
+                  <span className={`text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full font-mono font-bold ${
+                    activeTab === 'beauty' ? 'bg-white/20 text-white' : 'bg-[#F1E7F9] text-[#5D2E85]'
+                  }`}>
+                    6 Segments
+                  </span>
+                </button>
 
-              <button
-                type="button"
-                onClick={() => setActiveTab('all')}
-                className={`hidden sm:flex items-center gap-1.5 px-4 py-2.5 rounded-full font-heading font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                  activeTab === 'all'
-                    ? 'bg-[#111111] text-white shadow-md'
-                    : 'text-[#5F5F5A] hover:text-[#111111] hover:bg-[#F7F6F2]'
-                }`}
-              >
-                <span>View All</span>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('all')}
+                  className={`hidden sm:flex items-center gap-1.5 px-4 py-2.5 rounded-full font-heading font-bold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0 ${
+                    activeTab === 'all'
+                      ? 'bg-[#111111] text-white shadow-md'
+                      : 'text-[#5F5F5A] hover:text-[#111111] hover:bg-[#F7F6F2]'
+                  }`}
+                >
+                  <span>View All</span>
+                </button>
+              </div>
             </div>
           </ScrollReveal>
         </section>
@@ -206,12 +200,6 @@ export default function SpecialtiesPage() {
         {(activeTab === 'beauty' || activeTab === 'all') && (
           <section id="beauty-specialties" className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl mb-20 sm:mb-28">
             <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-14">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#DEDED7] bg-white shadow-xs mb-3">
-                <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-                <span className="font-sans font-bold text-[#5F5F5A] text-[11px] tracking-widest uppercase">
-                  MUA &amp; Beauty Verticals
-                </span>
-              </div>
               <h2 className="font-heading font-black text-2xl sm:text-4xl uppercase tracking-tight text-[#111111]">
                 Specialized Solutions for <span className="text-[#5D2E85]">Beauty Professionals.</span>
               </h2>

@@ -14,12 +14,6 @@ export default function Testimonials() {
         
         {/* Section Header */}
         <ScrollReveal data-reveal="flip-3d" className="text-center mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#5D2E85]/20 bg-[#F1E7F9] mb-5 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-            <span className="font-sans font-semibold text-[#5D2E85] text-xs tracking-wider uppercase">
-              Trust &amp; Client Reputation
-            </span>
-          </div>
           
           <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl md:text-6xl uppercase tracking-tighter mb-4">
             Built On <span className="text-[#5D2E85]">Verified Results</span>.

@@ -40,13 +40,6 @@ export default function CTASection() {
       <div className="flex-1 flex items-center justify-center relative z-10">
         <div className="w-full max-w-4xl mx-auto px-5 sm:px-6 text-center">
 
-          {/* Eyebrow badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/15 bg-white/5 mb-6 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-            <span className="font-sans font-semibold text-white/90 text-xs uppercase tracking-wider">
-              Strategic Growth Partnership
-            </span>
-          </div>
 
           <div className="mb-6">
             <h2 className="font-heading font-black uppercase leading-tight tracking-tight select-none">

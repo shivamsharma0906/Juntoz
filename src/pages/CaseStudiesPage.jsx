@@ -96,16 +96,11 @@ export default function CaseStudiesPage() {
         {/* ════ SECTION 1: EDITORIAL HEADER ════ */}
         <section className="mb-14 md:mb-18 text-center max-w-4xl mx-auto">
           <ScrollReveal data-reveal="up">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#DEDED7] bg-white shadow-subtle mb-5">
-              <span className="w-2 h-2 rounded-full bg-[#5D2E85]" />
-              <span className="font-sans font-bold text-[#5F5F5A] text-[11px] tracking-wider uppercase">
-                Verified Client Proof &amp; Funnel Breakdowns
-              </span>
-            </div>
+            
           </ScrollReveal>
 
           <ScrollReveal data-reveal="up" delay={60}>
-            <h1 className="font-heading font-black text-[#111111] text-4xl sm:text-6xl md:text-7xl uppercase tracking-tight leading-[1.02] mb-6">
+            <h1 className="font-heading font-normal text-[#111111] text-4xl sm:text-6xl md:text-7xl leading-[1.12] mb-6">
               Real Businesses. <br />
               <span className="text-[#5D2E85]">Documented Growth.</span>
             </h1>

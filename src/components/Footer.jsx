@@ -4,14 +4,15 @@ import logo from './logo.webp';
 const footerServices = [
   { label: 'Growth Strategy & Roadmaps', to: '/services' },
   { label: 'Performance & Paid Ads', to: '/services' },
-  { label: 'Google Business Profile (GMB)', to: '/services' },
+  { label: 'Google Business Profile (GMB)', to: '/google-business-profile' },
   { label: 'Brand & Professional Shoots', to: '/services' },
   { label: 'Web Design & Conversion CRO', to: '/services' },
 ];
 
 const footerSpecialties = [
-  { label: 'Makeup Artists', to: '/for-makeup-artists' },
-  { label: 'Salons ', to: '/for-salons' },
+  { label: 'Makeup Artists & Academies', to: '/for-makeup-artists' },
+  { label: 'Salons & Aesthetic Clinics', to: '/for-salons' },
+  { label: 'All Specializations & Industries', to: '/specialties' },
 ];
 
 const footerCompany = [
@@ -130,9 +131,9 @@ export default function Footer() {
                 alt="Juntoz"
                 loading="lazy"
                 decoding="async"
-                width="160"
-                height="40"
-                className="h-8 sm:h-9 w-auto transition-opacity duration-200 hover:opacity-80"
+                width="240"
+                height="60"
+                className="w-[180px] sm:w-[220px] md:w-[240px] h-auto object-contain transition-opacity duration-200 hover:opacity-90"
               />
             </Link>
             <p className="font-body text-white/65 text-xs sm:text-sm leading-relaxed max-w-sm">
@@ -180,7 +181,7 @@ export default function Footer() {
 
               {/* Specialties (Mobile only - stacked under Capabilities on left side) */}
               <div className="md:hidden space-y-3 pt-2">
-                <span className="block font-sans font-bold text-xs uppercase tracking-wider text-[#5D2E85]">Specialties</span>
+                <span className="block font-sans font-bold text-xs uppercase tracking-wider text-white">Specialties</span>
                 <ul className="space-y-2.5">
                   {footerSpecialties.map((link) => (
                     <li key={link.label}>
@@ -199,7 +200,7 @@ export default function Footer() {
 
             {/* Specialties (Desktop only - in its own column) */}
             <div className="hidden md:block space-y-3 sm:space-y-4">
-              <span className="block font-sans font-bold text-xs uppercase tracking-wider text-[#5D2E85]">Specialties</span>
+              <span className="block font-sans font-bold text-xs uppercase tracking-wider text-white">Specialties</span>
               <ul className="space-y-2.5 sm:space-y-3">
                 {footerSpecialties.map((link) => (
                   <li key={link.label}>
@@ -215,7 +216,7 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Right Column on Mobile: Company & HQ Location */}
+            {/* Right Column on Mobile: Company & Office Location */}
             <div className="space-y-8 md:space-y-0">
               <div className="space-y-3 sm:space-y-4">
                 <span className="block font-sans font-bold text-xs uppercase tracking-wider text-white">Company</span>
@@ -234,9 +235,9 @@ export default function Footer() {
                 </ul>
               </div>
 
-              {/* HQ Location (Mobile only - stacked under Company on right side) */}
+              {/* Office Location (Mobile only - stacked under Company on right side) */}
               <div className="md:hidden space-y-3 pt-2">
-                <span className="block font-sans font-bold text-xs uppercase tracking-wider text-white">HQ Location</span>
+                <span className="block font-sans font-bold text-xs uppercase tracking-wider text-white">Office Location</span>
                 <ul className="space-y-2.5 font-body text-xs text-white/70">
                   <li>
                     <span className="block text-[10px] text-white/40 uppercase tracking-widest font-sans font-bold">Studio Office</span>
@@ -252,7 +253,7 @@ export default function Footer() {
 
             {/* Contact Details Column (Desktop only - in its own column) */}
             <div className="hidden md:block space-y-3 sm:space-y-4">
-              <span className="block font-sans font-bold text-xs uppercase tracking-wider text-white">HQ Location</span>
+              <span className="block font-sans font-bold text-xs uppercase tracking-wider text-white">Office Location</span>
               <ul className="space-y-3 font-body text-xs sm:text-sm text-white/70">
                 <li>
                   <span className="block text-[10px] text-white/40 uppercase tracking-widest font-sans font-bold">Studio Office</span>
