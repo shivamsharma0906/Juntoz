@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import logo from './logo.webp';
 import { SERVICES_MEGA_MENU } from '../data/services';
 
@@ -13,6 +13,7 @@ const navLinks = [
   { name: 'Specialties', href: '/specialties' },
   { name: 'Work', href: '/work' },
   { name: 'About Us', href: '/about' },
+  { name: 'Careers', href: '/careers' },
   { name: 'Case Studies', href: '/case-studies' },
   { name: 'Contact', href: '/contact' },
 ];
@@ -50,6 +51,7 @@ const mobileNavLinks = [
   },
   { name: 'Work', href: '/work' },
   { name: 'About', href: '/about' },
+  { name: 'Careers', href: '/careers', tag: 'Hiring' },
   { name: 'Case Studies', href: '/case-studies' },
   { name: 'Contact', href: '/contact' },
 ];
@@ -137,6 +139,9 @@ export default function Navbar() {
   const magnetRaf = useRef(null);
   const megaTimeoutRef = useRef(null);
   const specialtiesTimeoutRef = useRef(null);
+  const servicesTriggerRef = useRef(null);
+  const specialtiesTriggerRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
   const lastScrollY = useRef(0);
   const location = useLocation();
 
@@ -165,6 +170,20 @@ export default function Navbar() {
     specialtiesTimeoutRef.current = setTimeout(() => {
       setSpecialtiesMenuOpen(false);
     }, 150);
+  };
+
+  const handleServicesKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      setMegaMenuOpen((prev) => !prev);
+    }
+  };
+
+  const handleSpecialtiesKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSpecialtiesMenuOpen((prev) => !prev);
+    }
   };
 
   const toggleAccordion = (name) => {
@@ -212,18 +231,24 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  // Accessibility: Escape key closes menu
+  // Accessibility: Escape key closes menu and restores trigger focus
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
+        if (megaMenuOpen) {
+          setMegaMenuOpen(false);
+          servicesTriggerRef.current?.focus();
+        }
+        if (specialtiesMenuOpen) {
+          setSpecialtiesMenuOpen(false);
+          specialtiesTriggerRef.current?.focus();
+        }
         setMenuOpen(false);
-        setMegaMenuOpen(false);
-        setSpecialtiesMenuOpen(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [megaMenuOpen, specialtiesMenuOpen]);
 
   const onCtaMouseMove = useCallback((e) => {
     const el = ctaRef.current;
@@ -233,7 +258,7 @@ export default function Navbar() {
     const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.25;
     if (magnetRaf.current) cancelAnimationFrame(magnetRaf.current);
     magnetRaf.current = requestAnimationFrame(() => {
-      el.style.transform = `translate(${dx}px, ${dy}px) scale(1.08)`;
+      el.style.transform = `translate(${dx}px, ${dy}px) scale(1.04)`;
     });
   }, []);
 
@@ -247,35 +272,50 @@ export default function Navbar() {
   }, []);
 
   const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
-  const navEnter = {
-    opacity: mounted ? 1 : 0,
-    transform: mounted ? (visible || isDesktop ? 'translateY(0)' : 'translateY(-100%)') : 'translateY(-20px)',
-    transition: 'opacity 0.6s ease 0.1s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-  };
+  const navEnter = shouldReduceMotion
+    ? {
+        opacity: mounted ? 1 : 0,
+        transform: 'none',
+        transition: 'opacity 0.2s ease',
+      }
+    : {
+        opacity: mounted ? 1 : 0,
+        transform: mounted ? (visible || isDesktop ? 'translateY(0)' : 'translateY(-100%)') : 'translateY(-20px)',
+        transition: 'opacity 0.6s ease 0.1s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+      };
 
-  const itemEnter = (delay = 0) => ({
-    opacity: mounted ? 1 : 0,
-    transform: mounted ? 'translateY(0)' : 'translateY(-10px)',
-    transition: `opacity 0.5s ease ${delay}s, transform 0.5s cubic-bezier(0.22,1,0.36,1) ${delay}s`,
-  });
+  const itemEnter = (delay = 0) =>
+    shouldReduceMotion
+      ? {
+          opacity: mounted ? 1 : 0,
+          transform: 'none',
+          transition: 'opacity 0.2s ease',
+        }
+      : {
+          opacity: mounted ? 1 : 0,
+          transform: mounted ? 'translateY(0)' : 'translateY(-10px)',
+          transition: `opacity 0.5s ease ${delay}s, transform 0.5s cubic-bezier(0.22,1,0.36,1) ${delay}s`,
+        };
 
   return (
     <>
+      {/* ── Fixed Scroll Progress Bar (Top of Viewport, 3px Brand Purple Fill) ── */}
+      <ScrollProgress />
+
       <nav
+        aria-label="Primary"
         style={navEnter}
-        className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 pointer-events-none ${
+        className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 pointer-events-none motion-reduce:transition-none ${
           scrolled ? 'pt-2 sm:pt-2' : 'pt-2.5 sm:pt-3.5'
         }`}
       >
         <div className="w-[94%] sm:w-[95%] max-w-[1380px] xl:max-w-[1460px] mx-auto pointer-events-auto relative">
           <div className={`
-            flex items-center justify-between px-5 sm:px-7 lg:px-8 xl:px-10 py-1.5 sm:py-2 lg:py-2.5 transition-all duration-300 rounded-full relative
+            flex lg:grid lg:grid-cols-[1fr_auto_1fr] items-center justify-between lg:justify-normal px-5 sm:px-7 lg:px-5 xl:px-8 2xl:px-10 py-1.5 sm:py-2 lg:py-2.5 transition-all duration-300 rounded-full relative
             ${scrolled
-              ? 'bg-[#F7F6F2]/95 border border-[#DEDED7] shadow-[0_10px_30px_rgba(17,17,17,0.08)]'
-              : 'bg-white/95 border border-[#DEDED7] shadow-[0_6px_24px_rgba(17,17,17,0.05)]'}
+              ? 'bg-[#F7F6F2]/88 backdrop-blur-md border border-[#DEDED7] shadow-[0_10px_30px_rgba(17,17,17,0.08)]'
+              : 'bg-white/88 backdrop-blur-md border border-[#DEDED7] shadow-[0_6px_24px_rgba(17,17,17,0.05)]'}
           `}>
-            {/* Backdrop blur layer */}
-            <div className="absolute inset-0 rounded-full pointer-events-none z-0 backdrop-blur-md" />
 
             {/* ── MOBILE LEFT: Minimal Hamburger Touch Target (44px min) ── */}
             <div className="lg:hidden flex items-center justify-start relative z-10">
@@ -285,7 +325,7 @@ export default function Navbar() {
                 aria-controls="mobile-menu-dropdown"
                 aria-label="Toggle navigation menu"
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-full text-[#111111] hover:bg-black/5 active:scale-95 transition-all cursor-pointer relative z-[60]"
+                className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-full text-[#111111] hover:bg-black/5 active:scale-95 transition-all cursor-pointer relative z-[60] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85]"
               >
                 <div className="w-5 h-3.5 flex flex-col justify-between items-center pointer-events-none">
                   <span className={`block h-[1.8px] w-5 rounded-full bg-[#111111] transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
@@ -295,11 +335,11 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* ── LOGO (Left-aligned, scaled length-wise with locked aspect ratio) ── */}
-            <div style={itemEnter(0.15)} className="flex-1 lg:flex-initial flex justify-center lg:justify-start items-center shrink-0 relative z-10 mr-0 lg:mr-4 xl:mr-6">
+            {/* ── LOGO (Desktop: Left-aligned in col 1; Mobile: Centered) ── */}
+            <div style={itemEnter(0.15)} className="flex-1 lg:flex-initial flex justify-center lg:justify-start lg:justify-self-start items-center shrink-0 relative z-10 mr-0">
               <Link
                 to="/"
-                className="flex items-center shrink-0 relative z-[60] group/logo"
+                className="flex items-center shrink-0 relative z-[60] group/logo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2 rounded-lg"
                 onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               >
                 <img
@@ -308,7 +348,7 @@ export default function Navbar() {
                   width="185"
                   height="48"
                   fetchPriority="high"
-                  className="w-[125px] sm:w-[145px] lg:w-[150px] xl:w-[170px] h-auto object-contain relative z-10 transition-transform duration-200 group-hover/logo:scale-105"
+                  className="w-[125px] sm:w-[145px] lg:w-[130px] xl:w-[155px] 2xl:w-[170px] h-auto object-contain relative z-10 transition-transform duration-200 group-hover/logo:scale-105"
                 />
               </Link>
             </div>
@@ -319,7 +359,7 @@ export default function Navbar() {
                 href={TEL_LINK}
                 aria-label="Call Juntoz"
                 title="Call Us: +91 90040 01800"
-                className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-[#5D2E85] text-white flex items-center justify-center shadow-[0_4px_14px_rgba(93,46,133,0.35)] active:scale-95 transition-all duration-200"
+                className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-[#5D2E85] text-white flex items-center justify-center shadow-[0_4px_14px_rgba(93,46,133,0.35)] active:scale-95 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85]"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" />
@@ -327,8 +367,8 @@ export default function Navbar() {
               </a>
             </div>
 
-            {/* ── Desktop nav links (Clean spacing, balanced typography, whitespace protection) ── */}
-            <div style={itemEnter(0.25)} className="hidden lg:flex items-center justify-center gap-3.5 lg:gap-4 xl:gap-6.5 2xl:gap-8 flex-1 min-w-0 px-2 relative z-10">
+            {/* ── Desktop nav links (Dead-center in 3-col grid, gap-2.5 on lg, gap-5 on xl) ── */}
+            <div style={itemEnter(0.25)} className="hidden lg:flex lg:justify-self-center items-center justify-center gap-2 lg:gap-2.5 xl:gap-4.5 2xl:gap-6.5 relative z-10">
               {navLinks.map((link) => {
                 if (link.isMega) {
                   const isServiceActive = location.pathname.startsWith('/services');
@@ -340,9 +380,15 @@ export default function Navbar() {
                       onMouseLeave={handleMegaLeave}
                     >
                       <Link
+                        ref={servicesTriggerRef}
                         to={link.href}
                         onFocus={handleMegaEnter}
-                        className={`relative inline-flex items-center gap-1 font-sans font-semibold text-[14px] lg:text-[14.5px] xl:text-[16px] 2xl:text-[17.5px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 whitespace-nowrap ${
+                        onKeyDown={handleServicesKeyDown}
+                        aria-haspopup="true"
+                        aria-expanded={megaMenuOpen}
+                        aria-controls="services-mega-menu"
+                        aria-current={isServiceActive ? 'page' : undefined}
+                        className={`relative inline-flex items-center gap-1 font-sans font-semibold text-[13px] xl:text-[14.5px] 2xl:text-[16px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2 rounded-md ${
                           isServiceActive || megaMenuOpen ? 'text-[#5D2E85]' : 'text-[#1F1F1D] hover:text-[#5D2E85]'
                         }`}
                       >
@@ -376,9 +422,15 @@ export default function Navbar() {
                       onMouseLeave={handleSpecialtiesLeave}
                     >
                       <Link
+                        ref={specialtiesTriggerRef}
                         to={link.href}
                         onFocus={handleSpecialtiesEnter}
-                        className={`relative inline-flex items-center gap-1 font-sans font-semibold text-[14px] lg:text-[14.5px] xl:text-[16px] 2xl:text-[17.5px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 whitespace-nowrap ${
+                        onKeyDown={handleSpecialtiesKeyDown}
+                        aria-haspopup="true"
+                        aria-expanded={specialtiesMenuOpen}
+                        aria-controls="specialties-dropdown-menu"
+                        aria-current={isSpecialtiesActive ? 'page' : undefined}
+                        className={`relative inline-flex items-center gap-1 font-sans font-semibold text-[13px] xl:text-[14.5px] 2xl:text-[16px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2 rounded-md ${
                           isSpecialtiesActive || specialtiesMenuOpen ? 'text-[#5D2E85]' : 'text-[#1F1F1D] hover:text-[#5D2E85]'
                         }`}
                       >
@@ -403,6 +455,9 @@ export default function Navbar() {
                       <AnimatePresence>
                         {specialtiesMenuOpen && (
                           <motion.div
+                            id="specialties-dropdown-menu"
+                            role="region"
+                            aria-label="Specialties menu"
                             initial={{ opacity: 0, y: 8, scale: 0.98 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 8, scale: 0.98 }}
@@ -413,7 +468,7 @@ export default function Navbar() {
                               <Link
                                 to="/industries"
                                 onClick={() => setSpecialtiesMenuOpen(false)}
-                                className="flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 hover:bg-[#F1E7F9]/60 group"
+                                className="flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 hover:bg-[#F1E7F9]/60 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85]"
                               >
                                 <div className="w-9 h-9 rounded-xl bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center shrink-0 mt-0.5 text-base group-hover:bg-[#5D2E85] group-hover:text-white transition-colors">
                                   🏢
@@ -436,7 +491,7 @@ export default function Navbar() {
                               <Link
                                 to="/specialties"
                                 onClick={() => setSpecialtiesMenuOpen(false)}
-                                className="flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 hover:bg-[#F7F6F2] group"
+                                className="flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 hover:bg-[#F7F6F2] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85]"
                               >
                                 <div className="w-9 h-9 rounded-xl bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center shrink-0 mt-0.5 text-base group-hover:bg-[#5D2E85] group-hover:text-white transition-colors">
                                   ✨
@@ -454,7 +509,7 @@ export default function Navbar() {
                               <Link
                                 to="/for-makeup-artists"
                                 onClick={() => setSpecialtiesMenuOpen(false)}
-                                className="flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 hover:bg-[#F7F6F2] group"
+                                className="flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 hover:bg-[#F7F6F2] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85]"
                               >
                                 <div className="w-9 h-9 rounded-xl bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center shrink-0 mt-0.5 text-base group-hover:bg-[#5D2E85] group-hover:text-white transition-colors">
                                   💄
@@ -472,7 +527,7 @@ export default function Navbar() {
                               <Link
                                 to="/for-salons"
                                 onClick={() => setSpecialtiesMenuOpen(false)}
-                                className="flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 hover:bg-[#F7F6F2] group"
+                                className="flex items-start gap-3 p-2.5 rounded-xl transition-all duration-150 hover:bg-[#F7F6F2] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85]"
                               >
                                 <div className="w-9 h-9 rounded-xl bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center shrink-0 mt-0.5 text-base group-hover:bg-[#5D2E85] group-hover:text-white transition-colors">
                                   ✂️
@@ -504,7 +559,8 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={`relative shrink-0 font-sans font-semibold text-[14px] lg:text-[14.5px] xl:text-[16px] 2xl:text-[17.5px] tracking-tight transition-colors duration-200 z-10 whitespace-nowrap py-1.5 ${
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`relative shrink-0 font-sans font-semibold text-[13px] xl:text-[14.5px] 2xl:text-[16px] tracking-tight transition-colors duration-200 z-10 whitespace-nowrap py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2 rounded-md ${
                       isActive ? 'text-[#5D2E85]' : 'text-[#1F1F1D] hover:text-[#5D2E85]'
                     }`}
                   >
@@ -517,21 +573,19 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* ── Desktop Call Button (Solid circular button, #5D2E85, shadow elevation) ── */}
-            <div style={itemEnter(0.35)} className="hidden lg:flex items-center shrink-0 relative z-10 ml-0 lg:ml-4">
-              <a
+            {/* ── Desktop CTA (Right-aligned in col 3, labeled pill linking to /contact) ── */}
+            <div style={itemEnter(0.35)} className="hidden lg:flex lg:justify-self-end items-center shrink-0 relative z-10 ml-0">
+              <Link
                 ref={ctaRef}
-                href={TEL_LINK}
-                title="Schedule a call: +91 90040 01800"
-                aria-label="Call us"
+                to="/contact"
+                title="Book a Strategy Call"
                 onMouseMove={onCtaMouseMove}
                 onMouseLeave={onCtaMouseLeave}
-                className="w-11 h-11 xl:w-12 xl:h-12 rounded-full bg-[#5D2E85] text-white flex items-center justify-center shadow-[0_4px_16px_rgba(93,46,133,0.35)] hover:shadow-[0_6px_22px_rgba(93,46,133,0.5)] hover:scale-105 active:scale-95 transition-all duration-200 ease-out group/call cursor-pointer"
+                className="group/call inline-flex items-center justify-center gap-1.5 px-4 xl:px-5 py-2 xl:py-2.5 rounded-full font-sans font-semibold text-[13px] xl:text-[14px] text-white bg-[#5D2E85] hover:bg-[#4C266D] shadow-[0_4px_14px_rgba(93,46,133,0.3)] hover:shadow-[0_6px_20px_rgba(93,46,133,0.45)] active:scale-95 transition-all duration-200 cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2"
               >
-                <svg className="w-5 h-5 fill-current text-white transition-transform duration-200 group-hover/call:rotate-12" viewBox="0 0 24 24">
-                  <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" />
-                </svg>
-              </a>
+                <span>Book a Call</span>
+                <span className="text-[12px] xl:text-[13px] transition-transform duration-200 group-hover/call:translate-x-0.5">→</span>
+              </Link>
             </div>
 
           </div>
@@ -540,6 +594,9 @@ export default function Navbar() {
           <AnimatePresence>
             {megaMenuOpen && (
               <motion.div
+                id="services-mega-menu"
+                role="region"
+                aria-label="Services menu"
                 initial={{ opacity: 0, y: 8, scale: 0.99 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 8, scale: 0.99 }}
@@ -567,7 +624,7 @@ export default function Navbar() {
                               key={item.title}
                               to={item.href}
                               onClick={() => setMegaMenuOpen(false)}
-                              className="group/item flex items-start gap-3.5 p-2 -mx-2 rounded-xl transition-all duration-150 hover:bg-[#F7F6F2]"
+                              className="group/item flex items-start gap-3.5 p-2 -mx-2 rounded-xl transition-all duration-150 hover:bg-[#F7F6F2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85]"
                             >
                               <div className="w-9 h-9 rounded-lg bg-[#F1E7F9] text-[#5D2E85] flex items-center justify-center shrink-0 mt-0.5 transition-colors duration-200 group-hover/item:bg-[#5D2E85] group-hover/item:text-white">
                                 <MegaMenuIcon type={item.icon} />
@@ -602,7 +659,7 @@ export default function Navbar() {
                     <Link
                       to="/services"
                       onClick={() => setMegaMenuOpen(false)}
-                      className="font-sans font-semibold text-[#5D2E85] hover:text-[#4C266D] inline-flex items-center gap-1.5 group/link"
+                      className="font-sans font-semibold text-[#5D2E85] hover:text-[#4C266D] inline-flex items-center gap-1.5 group/link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] rounded"
                     >
                       <span>View all services &amp; deliverables</span>
                       <span className="transition-transform duration-200 group-hover/link:translate-x-1">→</span>
@@ -613,8 +670,6 @@ export default function Navbar() {
             )}
           </AnimatePresence>
         </div>
-
-        <ScrollProgress />
       </nav>
 
       {/* ── MOBILE GBIM-STYLE DROPDOWN CARD & BACKDROP (Mobile-only) ── */}
@@ -791,8 +846,12 @@ function ScrollProgress() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
   return (
-    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#DEDED7]/40 overflow-hidden">
+    <div
+      aria-hidden="true"
+      className="fixed top-0 left-0 right-0 h-[3px] z-[70] pointer-events-none"
+    >
       <div
         ref={barRef}
         style={{
@@ -800,6 +859,7 @@ function ScrollProgress() {
           height: '100%',
           background: '#5D2E85',
         }}
+        className="transition-[width] duration-75 ease-out"
       />
     </div>
   );

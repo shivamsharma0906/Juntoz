@@ -23,6 +23,8 @@ const GoogleBusinessProfilePage = lazy(() => import('./pages/GoogleBusinessProfi
 const SpecialtiesPage = lazy(() => import('./pages/SpecialtiesPage'));
 const Industries = lazy(() => import('./pages/Industries'));
 const ServiceDetailPage = lazy(() => import('./pages/ServiceDetailPage'));
+const CareersPage = lazy(() => import('./pages/CareersPage'));
+const OnboardingPage = lazy(() => import('./pages/OnboardingPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 // Re-run reveal scan on every route change (catches freshly mounted [data-reveal] elements)
@@ -104,6 +106,8 @@ function App() {
                 <Route path="/industries" element={<Industries />} />
                 <Route path="/google-business-profile" element={<GoogleBusinessProfilePage />} />
                 <Route path="/gmb" element={<GoogleBusinessProfilePage />} />
+                <Route path="/careers" element={<CareersPage />} />
+                <Route path="/onboarding" element={<OnboardingPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>

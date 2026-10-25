@@ -18,6 +18,7 @@ const footerSpecialties = [
 const footerCompany = [
   { label: 'Selected Case Studies', to: '/case-studies' },
   { label: 'About Juntoz & Team', to: '/about' },
+  { label: "Careers — We're Hiring", to: '/careers' },
   { label: 'Book a Strategy Call', to: '/contact' },
 ];
 

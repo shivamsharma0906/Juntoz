@@ -7,6 +7,7 @@ const HomeServicesTeaser    = lazy(() => import('../components/HomeServicesTease
 const AboutIntro            = lazy(() => import('../components/AboutIntro'));
 const WhatWeDo              = lazy(() => import('../components/WhatWeDo'));
 const TrustExecution        = lazy(() => import('../components/TrustExecution'));
+const ComparisonMatrix      = lazy(() => import('../components/ComparisonMatrix'));
 const HomeGMBTeaser         = lazy(() => import('../components/HomeGMBTeaser'));
 const TrustExecutionSection = lazy(() => import('../components/TrustExecutionSection'));
 const CaseStudiesShowcase   = lazy(() => import('../components/CaseStudiesShowcase'));
@@ -26,6 +27,7 @@ export default function Home() {
         <AboutIntro />
         <WhatWeDo />
         <TrustExecution />
+        <ComparisonMatrix />
         <HomeGMBTeaser />
         <TrustExecutionSection />
         <CaseStudiesShowcase />
