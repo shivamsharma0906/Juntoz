@@ -4,6 +4,11 @@
  */
 
 import type { FlowConfig, FlowStep } from '../types/onboarding';
+import {
+  getSharedCompetitorsStep,
+  getSharedClientRequirementsStep,
+  getSharedCallingSlotStep,
+} from './sharedSteps';
 
 export const COMMON_STEP_1: FlowStep = {
   id: 'business-profile',
@@ -94,7 +99,7 @@ export const COMMON_STEP_1: FlowStep = {
 };
 
 // ══════════════════════════════════════════════════════════════
-// FLOW 1: GOOGLE ADS
+// FLOW 1: GOOGLE ADS (9 STEPS)
 // ══════════════════════════════════════════════════════════════
 export const GOOGLE_ADS_FLOW: FlowConfig = {
   id: 'google-ads',
@@ -102,7 +107,7 @@ export const GOOGLE_ADS_FLOW: FlowConfig = {
   badge: 'High-Intent Search & Maps',
   shortDesc: 'Search, Local 3-Pack, Display, and YouTube discovery funnels for commercial client bookings.',
   icon: 'google',
-  estimatedMinutes: 6,
+  estimatedMinutes: 7,
   steps: [
     COMMON_STEP_1,
     {
@@ -178,9 +183,9 @@ export const GOOGLE_ADS_FLOW: FlowConfig = {
     },
     {
       id: 'google-usps',
-      eyebrow: 'STEP 04 · PACKAGES & COMPETITORS',
+      eyebrow: 'STEP 04 · PACKAGES & PRICING',
       title: 'Pricing Tiers & Edge',
-      subtitle: 'Give us your core service menu, price brackets, and competitors we must outrank.',
+      subtitle: 'Give us your core service menu, price brackets, and unique selling points.',
       fields: [
         {
           name: 'servicePricingTiers',
@@ -196,14 +201,6 @@ export const GOOGLE_ADS_FLOW: FlowConfig = {
           type: 'textarea',
           placeholder: 'e.g. 10+ years celebrity experience, Airbrush HD specialist, luxury international products (Charlotte Tilbury, Dior), private studio lounge.',
           required: true,
-        },
-        {
-          name: 'competitorUrls',
-          label: 'Key Competitor Websites or Search Names',
-          type: 'textarea',
-          placeholder: 'e.g. competitor1.in, competitor2.com\nNames of local salons/artists frequently bidding on your terms.',
-          helper: 'We reverse-engineer their keywords, search volume, and auction overlaps.',
-          required: false,
         },
       ],
     },
@@ -231,9 +228,11 @@ export const GOOGLE_ADS_FLOW: FlowConfig = {
         },
       ],
     },
+    getSharedCompetitorsStep('google-ads'),
+    getSharedClientRequirementsStep('google-ads'),
     {
       id: 'google-access',
-      eyebrow: 'STEP 06 · ASSETS & ACCESS',
+      eyebrow: 'STEP 08 · ASSETS & ACCESS',
       title: 'Creative Assets & Account Link',
       subtitle: 'Connect your ad account via partner invitation and share high-res creative files.',
       fields: [
@@ -269,20 +268,14 @@ export const GOOGLE_ADS_FLOW: FlowConfig = {
             docLink: 'https://support.google.com/google-ads/answer/7459399',
           },
         },
-        {
-          name: 'dpdpConsent',
-          label: 'Data Protection & Verification Consent',
-          type: 'consent',
-          helper: 'I confirm the information provided is accurate and authorize Juntoz to review these business assets under strict confidentiality (Digital Personal Data Protection Act, 2023).',
-          required: true,
-        },
       ],
     },
+    getSharedCallingSlotStep('google-ads', 9),
   ],
 };
 
 // ══════════════════════════════════════════════════════════════
-// FLOW 2: META ADS (INSTAGRAM & FACEBOOK)
+// FLOW 2: META ADS (8 STEPS)
 // ══════════════════════════════════════════════════════════════
 export const META_ADS_FLOW: FlowConfig = {
   id: 'meta-ads',
@@ -290,7 +283,7 @@ export const META_ADS_FLOW: FlowConfig = {
   badge: 'Scroll-Stopping Reels & DMs',
   shortDesc: 'Instagram Reels, Stories, Meta lookalike feeds, and high-converting 1-tap WhatsApp lead funnels.',
   icon: 'meta',
-  estimatedMinutes: 6,
+  estimatedMinutes: 7,
   steps: [
     COMMON_STEP_1,
     {
@@ -371,17 +364,17 @@ export const META_ADS_FLOW: FlowConfig = {
     },
     {
       id: 'meta-creative',
-      eyebrow: 'STEP 04 · CREATIVE ASSETS',
-      title: 'Visual Assets & Offers',
-      subtitle: 'High-performing Meta ads depend on authentic, scroll-stopping 9:16 vertical video footage.',
+      eyebrow: 'STEP 04 · CREATIVE & BRAND VOICE',
+      title: 'Visual Assets, Offers & Tone',
+      subtitle: 'High-performing Meta ads depend on authentic video footage, seasonal hooks, and clear brand tone.',
       fields: [
         {
           name: 'creativeAssetsDriveLink',
-          label: 'Google Drive / Dropbox Raw Video & Photo Folder',
+          label: 'Google Drive / Dropbox Raw Video & Photo Folder (Optional)',
           type: 'url',
           placeholder: 'https://drive.google.com/drive/folders/...',
-          helper: 'Raw 4K iPhone transformation videos, bridal lookbooks, b-roll footage, and unedited clips.',
-          required: true,
+          helper: 'Raw 4K iPhone transformation videos, bridal lookbooks, b-roll footage, and unedited clips. Leave blank if you will share assets later on WhatsApp or Google Drive.',
+          required: false,
         },
         {
           name: 'seasonalOffers',
@@ -391,39 +384,26 @@ export const META_ADS_FLOW: FlowConfig = {
           helper: 'Compelling hooks and limited availability triggers drive urgent inquiry responses.',
           required: false,
         },
-      ],
-    },
-    {
-      id: 'meta-positioning',
-      eyebrow: 'STEP 05 · BRAND VOICE & HOOKS',
-      title: 'Copy Style & Competitors',
-      subtitle: 'Shape the tone of voice and emotional appeal used in video captions and headlines.',
-      fields: [
         {
           name: 'brandVoicePositioning',
-          label: 'Brand Personality Tone',
+          label: 'Brand Personality & Caption Tone',
           type: 'chips',
           multiple: true,
           options: [
             { value: 'luxury-haute', label: 'Quiet Luxury & Haute Couture' },
-            { value: 'warm-relatable', label: 'Warm, Welcoming & Friendly' },
+            { value: 'warm-relatable', label: 'Warm, Welcoming & Relatable' },
             { value: 'clinical-authority', label: 'Clinical Authority & Dermatological Rigor' },
             { value: 'bold-glam', label: 'High Glam, Trendsetter & Viral' },
           ],
           required: true,
         },
-        {
-          name: 'inspirationHandles',
-          label: 'Inspiration Instagram Handles or Benchmark Competitors',
-          type: 'textarea',
-          placeholder: 'e.g. @hudabeauty, @artistryby..., @salon_brand\nHandles whose reel pacing, lighting, or aesthetic you admire.',
-          required: false,
-        },
       ],
     },
+    getSharedCompetitorsStep('meta-ads'),
+    getSharedClientRequirementsStep('meta-ads'),
     {
       id: 'meta-access',
-      eyebrow: 'STEP 06 · ASSETS & PARTNER ACCESS',
+      eyebrow: 'STEP 07 · ASSETS & PARTNER ACCESS',
       title: 'Account Sync & Pixel Setup',
       subtitle: 'Invite Juntoz via Meta Business Manager Partner Access without sharing passwords.',
       fields: [
@@ -452,20 +432,14 @@ export const META_ADS_FLOW: FlowConfig = {
           helper: 'Leave blank if you do not have a Pixel installed; our team will configure it during technical setup.',
           required: false,
         },
-        {
-          name: 'dpdpConsent',
-          label: 'Data Protection & Verification Consent',
-          type: 'consent',
-          helper: 'I confirm the information provided is accurate and authorize Juntoz to review these business assets under strict confidentiality (Digital Personal Data Protection Act, 2023).',
-          required: true,
-        },
       ],
     },
+    getSharedCallingSlotStep('meta-ads', 8),
   ],
 };
 
 // ══════════════════════════════════════════════════════════════
-// FLOW 3: GOOGLE MERCHANT CENTER (SHOPPING FEED & POLICY COMPLIANCE)
+// FLOW 3: GOOGLE MERCHANT CENTER (8 STEPS)
 // ══════════════════════════════════════════════════════════════
 export const MERCHANT_CENTER_FLOW: FlowConfig = {
   id: 'merchant-center',
@@ -473,7 +447,7 @@ export const MERCHANT_CENTER_FLOW: FlowConfig = {
   badge: 'Product Feeds & Policy Compliance',
   shortDesc: 'Product feed architecture, Free Listings, Shopping ad sync, and Misrepresentation issue resolution.',
   icon: 'shopping',
-  estimatedMinutes: 5,
+  estimatedMinutes: 7,
   steps: [
     COMMON_STEP_1,
     {
@@ -609,20 +583,382 @@ export const MERCHANT_CENTER_FLOW: FlowConfig = {
           helper: 'GST certificate, utility bill of registered address, or trademark certificate (helps resolve tough misrepresentation appeals).',
           required: false,
         },
+      ],
+    },
+    getSharedCompetitorsStep('merchant-center'),
+    getSharedClientRequirementsStep('merchant-center'),
+    getSharedCallingSlotStep('merchant-center', 8),
+  ],
+};
+export const INSTAGRAM_HANDLING_FLOW: FlowConfig = {
+  id: 'instagram-handling',
+  title: 'Instagram Handling & Curation',
+  badge: 'Aesthetic Feed & Inbound DMs',
+  shortDesc: 'Aesthetic grid planning, viral reel scripting & editing, daily story funnels, and DM lead qualification.',
+  icon: 'instagram',
+  estimatedMinutes: 7,
+  steps: [
+    COMMON_STEP_1,
+    {
+      id: 'insta-goals',
+      eyebrow: 'STEP 02 · PROFILE GOALS',
+      title: 'Curation Goals & Inbound DMs',
+      subtitle: 'Define your desired Instagram growth outcomes, target DM inquiries, and posting cadence.',
+      fields: [
         {
-          name: 'dpdpConsent',
-          label: 'Data Protection & Verification Consent',
-          type: 'consent',
-          helper: 'I confirm the information provided is accurate and authorize Juntoz to review these business assets under strict confidentiality (Digital Personal Data Protection Act, 2023).',
+          name: 'primaryGoals',
+          label: 'Primary Instagram Objectives',
+          type: 'chips',
+          multiple: true,
+          options: [
+            { value: 'aesthetic-grid', label: 'Signature Aesthetic Grid Revamp' },
+            { value: 'viral-reels', label: 'Viral Reel Reach & Video Growth' },
+            { value: 'inbound-dms', label: 'High-Ticket Inbound DM Bookings' },
+            { value: 'community-trust', label: 'Authority Building & Client Trust' },
+            { value: 'story-engagement', label: 'Daily Interactive Story Sequences' },
+          ],
+          helper: 'Select all key objectives you want our Instagram curation team to drive.',
+          required: true,
+        },
+        {
+          name: 'postingFrequency',
+          label: 'Desired Content & Reel Cadence',
+          type: 'select',
+          options: [
+            { value: '3-4-reels', label: '3–4 High-Retention Reels / week (Recommended for Growth)' },
+            { value: 'daily-active', label: 'Daily Grid & Story Posting (Aggressive Brand Authority)' },
+            { value: '2-reels', label: '2 Polished Reels / week (Consistent Baseline)' },
+            { value: 'fresh-start', label: 'Starting Fresh / Complete Account Relaunch' },
+          ],
+          required: true,
+        },
+        {
+          name: 'targetMonthlyInquiries',
+          label: 'Desired Monthly DM Consultations & Inquiries',
+          type: 'select',
+          options: [
+            { value: '20-40', label: '20 – 40 High-Value Inquiries / month' },
+            { value: '40-80', label: '40 – 80 Inquiries / month' },
+            { value: '80-150', label: '80 – 150 Inquiries / month' },
+            { value: '150-plus', label: '150+ Inquiries / month (Scale Tier)' },
+          ],
           required: true,
         },
       ],
     },
+    {
+      id: 'insta-aesthetic',
+      eyebrow: 'STEP 03 · VISUAL IDENTITY',
+      title: 'Aesthetic Palette & Brand Voice',
+      subtitle: 'Identify your preferred luxury visual mood, caption tone, and target client persona.',
+      fields: [
+        {
+          name: 'visualAesthetic',
+          label: 'Preferred Feed Aesthetic & Palette',
+          type: 'chips',
+          multiple: true,
+          options: [
+            { value: 'minimalist-luxury', label: 'Minimalist Quiet Luxury' },
+            { value: 'warm-earthy', label: 'Warm, Earthy & Sun-Drenched' },
+            { value: 'bold-glam', label: 'High Glam, Glossy & Editorial' },
+            { value: 'clinical-clean', label: 'Clean Clinical / Dermatologist Aesthetic' },
+            { value: 'pastel-romantic', label: 'Chic, Romantic & Soft Pastel' },
+          ],
+          required: true,
+        },
+        {
+          name: 'brandVoicePositioning',
+          label: 'Brand Personality & Caption Tone',
+          type: 'chips',
+          multiple: true,
+          options: [
+            { value: 'haute-luxury', label: 'Haute Luxury & Exclusive' },
+            { value: 'warm-relatable', label: 'Warm, Welcoming & Relatable' },
+            { value: 'trendsetter', label: 'Trendsetter & Viral Pop Culture' },
+            { value: 'technique-authority', label: 'Educational & Masterclass Authority' },
+          ],
+          required: true,
+        },
+        {
+          name: 'targetAudienceDemographics',
+          label: 'Primary Audience Focus',
+          type: 'chips',
+          multiple: true,
+          options: [
+            { value: 'brides-20-32', label: 'Prospective Brides (Age 21–32)' },
+            { value: 'brides-family', label: 'Mother of the Bride & Family (Age 38–55)' },
+            { value: 'working-women', label: 'Urban Professionals & Salon Goers' },
+            { value: 'academy-students', label: 'Makeup & Hair Academy Applicants' },
+            { value: 'men-grooming', label: 'Men’s Grooming & Styling' },
+          ],
+          required: true,
+        },
+      ],
+    },
+    {
+      id: 'insta-workflow',
+      eyebrow: 'STEP 04 · CONTENT PRODUCTION',
+      title: 'Content Workflow & Video Shoots',
+      subtitle: 'Specify how your reels and shoots will be produced, and link your existing asset vault.',
+      fields: [
+        {
+          name: 'contentProductionMode',
+          label: 'Content Production & Shooting Workflow',
+          type: 'select',
+          options: [
+            { value: 'juntoz-shoot', label: 'Juntoz Dedicated Shoot Crew in Delhi NCR or Mumbai' },
+            { value: 'client-shoots', label: 'We shoot raw iPhone clips in-house; Juntoz scripts & edits' },
+            { value: 'hybrid', label: 'Hybrid: Periodic on-location shoots + ongoing client clip editing' },
+            { value: 'remote-curation', label: 'Remote: We send our existing asset library via Google Drive' },
+          ],
+          helper: 'Juntoz provides on-location 4K iPhone & DSLR shoots across Delhi NCR and Mumbai.',
+          required: true,
+        },
+        {
+          name: 'contentPillars',
+          label: 'Core Content Pillars to Feature',
+          type: 'chips',
+          multiple: true,
+          options: [
+            { value: 'transformations', label: 'Before & After Bridal Transformations' },
+            { value: 'bts-process', label: 'Behind-the-Scenes & Studio Atmosphere' },
+            { value: 'reviews-social-proof', label: 'Client Reactions & Video Testimonials' },
+            { value: 'tutorials-tips', label: 'Educational Tips & Product Breakdowns' },
+            { value: 'aesthetic-details', label: 'Macro Aesthetic Details & Texture Shots' },
+          ],
+          required: true,
+        },
+        {
+          name: 'creativeAssetsDriveLink',
+          label: 'Google Drive / Dropbox Asset Folder (Optional)',
+          type: 'url',
+          placeholder: 'https://drive.google.com/drive/folders/...',
+          helper: 'Raw transformation videos, photoshoot lookbooks, brand logo files, or typography assets.',
+          required: false,
+        },
+      ],
+    },
+    getSharedCompetitorsStep('instagram-handling'),
+    getSharedClientRequirementsStep('instagram-handling'),
+    {
+      id: 'insta-access',
+      eyebrow: 'STEP 07 · ACCOUNT ACCESS',
+      title: 'Instagram & Meta Suite Access',
+      subtitle: 'Connect Juntoz to your Instagram professional account via Meta Business Suite without passwords.',
+      fields: [
+        {
+          name: 'metaBusinessPartnerStatus',
+          label: 'How We Connect to Your Instagram Professionally',
+          type: 'access-guide',
+          guide: {
+            platformName: 'Meta Business Suite / Instagram Partner Access',
+            partnerIdentifier: 'Contact: Sujal.Mehta@juntoz.in',
+            instructions: [
+              'Ensure your Instagram account is switched to a Professional / Creator account.',
+              'Ensure your Instagram is connected to your brand’s Facebook Business Page.',
+              'Log into business.facebook.com > Business Settings > Users > Partners.',
+              'Add Juntoz Partner ID or invite Sujal.Mehta@juntoz.in with Content & Community permissions.',
+              'You retain 100% ownership at all times. Never share your private login password.',
+            ],
+            docLink: 'https://www.facebook.com/business/help/1717412048534642',
+          },
+        },
+        {
+          name: 'facebookPageUrl',
+          label: 'Linked Facebook Business Page URL (Optional)',
+          type: 'url',
+          placeholder: 'https://facebook.com/yourbrand',
+          helper: 'Required for scheduled API publishing and Meta Business Suite integration.',
+          required: false,
+        },
+      ],
+    },
+    getSharedCallingSlotStep('instagram-handling', 8),
+  ],
+};
+
+// ══════════════════════════════════════════════════════════════
+// FLOW 5: GOOGLE MY BUSINESS & LOCAL MAPS (GMB) (8 STEPS)
+// ══════════════════════════════════════════════════════════════
+export const GMB_FLOW: FlowConfig = {
+  id: 'gmb',
+  title: 'Google My Business & Local Maps (GMB)',
+  badge: 'Search & Maps Dominance',
+  shortDesc: 'Top 3-Pack Maps rankings, geo-keyword optimization, review generation defense, and direct call/direction capture.',
+  icon: 'google',
+  estimatedMinutes: 7,
+  steps: [
+    COMMON_STEP_1,
+    {
+      id: 'gmb-location',
+      eyebrow: 'STEP 02 · LISTING STATUS & LOCATION',
+      title: 'Listing Status & Physical Address',
+      subtitle: 'Provide your physical location, Google Maps status, and client visitation model.',
+      fields: [
+        {
+          name: 'listingStatus',
+          label: 'Current Google Business Profile Status',
+          type: 'select',
+          options: [
+            { value: 'live-verified', label: 'Already verified & live on Google Maps' },
+            { value: 'needs-verification', label: 'Needs verification / waiting for postcard or video' },
+            { value: 'suspended-appeal', label: 'Suspended / Disabled (Needs reinstatement appeal)' },
+            { value: 'brand-new', label: 'Brand new listing (Never created before)' },
+            { value: 'ownership-conflict', label: 'Claimed by previous agency or employee (Need ownership transfer)' },
+          ],
+          required: true,
+        },
+        {
+          name: 'mapsListingUrl',
+          label: 'Current Google Maps Listing Link (Optional)',
+          type: 'url',
+          placeholder: 'https://maps.app.goo.gl/... or https://google.com/maps?cid=...',
+          helper: 'Share your live listing link if already active on Google Maps.',
+          required: false,
+        },
+        {
+          name: 'physicalAddress',
+          label: 'Complete Physical Address for Verification',
+          type: 'textarea',
+          placeholder: 'Unit/Shop Number, Building Name, Street/Road, Landmark, City, State, PIN Code',
+          helper: 'Must exactly match your electricity bill or rent agreement for Google verification.',
+          required: true,
+        },
+        {
+          name: 'serviceAreaType',
+          label: 'Client Visitation & Travel Scope',
+          type: 'select',
+          options: [
+            { value: 'storefront-only', label: 'Clients visit our physical studio / clinic (Walk-ins & Appointments)' },
+            { value: 'travel-to-client', label: 'We travel to client venues / homes (Bridal Makeup / On-site Services)' },
+            { value: 'hybrid', label: 'Hybrid: Physical Studio + Travel to Client Venues' },
+          ],
+          required: true,
+        },
+      ],
+    },
+    {
+      id: 'gmb-services',
+      eyebrow: 'STEP 03 · LOCAL SERVICES & CATEGORIES',
+      title: 'High-Intent Services & Business Hours',
+      subtitle: 'Specify your primary Google category, top search terms, and weekly operating hours.',
+      fields: [
+        {
+          name: 'primaryCategory',
+          label: 'Primary Google Business Profile Category',
+          type: 'select',
+          options: [
+            { value: 'beauty-salon', label: 'Beauty Salon / Parlour' },
+            { value: 'makeup-artist', label: 'Make-up Artist / Bridal Makeup Studio' },
+            { value: 'skin-care-clinic', label: 'Skin Care Clinic / Aesthetic Dermatology' },
+            { value: 'hair-salon', label: 'Hair Salon / Hair Extension Studio' },
+            { value: 'spa-wellness', label: 'Day Spa & Wellness Center' },
+            { value: 'training-centre', label: 'Beauty School / Makeup Academy' },
+          ],
+          helper: 'Your primary category is the single biggest ranking factor on Google Maps.',
+          required: true,
+        },
+        {
+          name: 'coreServicesList',
+          label: 'Top 5–10 Services to Rank For in Local Search',
+          type: 'textarea',
+          placeholder: 'e.g. Bridal Makeup, HD Airbrush Makeup, Hydrafacial, Laser Hair Removal, Keratin Hair Treatment, Nail Art, Pre-Bridal Packages',
+          helper: 'We will optimize your GMB service catalog and geo-keywords for these terms.',
+          required: true,
+        },
+        {
+          name: 'businessHours',
+          label: 'Weekly Operating Hours',
+          type: 'text',
+          placeholder: 'e.g. Mon–Sun: 10:00 AM – 8:00 PM (or specify closed days)',
+          required: true,
+        },
+      ],
+    },
+    {
+      id: 'gmb-visuals',
+      eyebrow: 'STEP 04 · REVIEWS & LOCAL REPUTATION',
+      title: 'Reviews, Photos & Geo-Tags',
+      subtitle: 'Review count targets, Google 5-star reputation defence, and storefront imagery.',
+      fields: [
+        {
+          name: 'currentReviewCount',
+          label: 'Current Google Review Volume',
+          type: 'select',
+          options: [
+            { value: '0-10', label: '0 – 10 Reviews (Need foundational review engine)' },
+            { value: '10-50', label: '10 – 50 Reviews (Growing local presence)' },
+            { value: '50-200', label: '50 – 200 Reviews (Strong contender for Local 3-Pack)' },
+            { value: '200-plus', label: '200+ Established Reviews (Market leader defense)' },
+          ],
+          required: true,
+        },
+        {
+          name: 'reviewGenerationGoal',
+          label: 'Primary Local Reputation Goals',
+          type: 'chips',
+          multiple: true,
+          options: [
+            { value: 'rank-local-3pack', label: 'Rank in Top 3-Pack for "Near Me" Searches' },
+            { value: 'boost-calls', label: 'Increase Inbound Phone Calls & Directions' },
+            { value: '5star-playbook', label: 'Automated WhatsApp 5-Star Review Playbook' },
+            { value: 'spam-defense', label: 'Remove Fake / Negative Competitor Reviews' },
+          ],
+          required: true,
+        },
+        {
+          name: 'exteriorSignageDriveLink',
+          label: 'Google Drive Link for Storefront & Interior Photos (Optional)',
+          type: 'url',
+          placeholder: 'https://drive.google.com/drive/folders/...',
+          helper: 'Permanent exterior sign board, reception area, treatment rooms, and staff uniforms (crucial for Google Maps photo ranking).',
+          required: false,
+        },
+      ],
+    },
+    getSharedCompetitorsStep('gmb'),
+    getSharedClientRequirementsStep('gmb'),
+    {
+      id: 'gmb-access',
+      eyebrow: 'STEP 07 · GMB MANAGER ACCESS',
+      title: 'Google Business Profile Manager Access',
+      subtitle: 'Grant Sujal.Mehta@juntoz.in manager rights directly inside Google Search without passwords.',
+      fields: [
+        {
+          name: 'gmbAccessGuide',
+          label: 'How to Invite Juntoz to Manage Your GMB Listing',
+          type: 'access-guide',
+          guide: {
+            platformName: 'Google Business Profile Manager Invitation',
+            partnerIdentifier: 'Manager: Sujal.Mehta@juntoz.in',
+            instructions: [
+              'On Google Search or Maps, search for your exact business name while logged into your owner Google account.',
+              'Click the 3 dots menu (top right of your business profile management panel) > Business Profile settings.',
+              'Click People and access > Add.',
+              'Enter Sujal.Mehta@juntoz.in and select the role "Manager".',
+              'Click Invite. You retain 100% Primary Owner rights at all times.',
+            ],
+            docLink: 'https://support.google.com/business/answer/3403107',
+          },
+        },
+        {
+          name: 'registeredPhone',
+          label: 'Primary Public Phone Number Displayed on Maps',
+          type: 'phone',
+          placeholder: 'e.g. 98200 12345',
+          helper: 'The primary customer call number that will appear directly on your Google Maps listing.',
+          required: true,
+        },
+      ],
+    },
+    getSharedCallingSlotStep('gmb', 8),
   ],
 };
 
 export const ALL_FLOWS: Record<string, FlowConfig> = {
-  'google-ads': GOOGLE_ADS_FLOW,
   'meta-ads': META_ADS_FLOW,
+  'instagram-handling': INSTAGRAM_HANDLING_FLOW,
+  'gmb': GMB_FLOW,
+  'google-ads': GOOGLE_ADS_FLOW,
   'merchant-center': MERCHANT_CENTER_FLOW,
 };

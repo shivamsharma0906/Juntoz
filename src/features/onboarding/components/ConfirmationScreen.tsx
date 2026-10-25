@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import type { OnboardingSubmissionResult } from '../types/onboarding';
+import { CALL_CONFIRMATION_SLA } from '../config/constants';
 
 interface ConfirmationScreenProps {
   result: OnboardingSubmissionResult;
@@ -12,8 +13,10 @@ export const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
   onRestart,
 }) => {
   const whatsappPrefilledText = encodeURIComponent(
-    `Hi Sujal & Juntoz Team! I just completed my client onboarding for ${result.businessName || 'my brand'} (${result.platform || 'growth marketing'}). My submission ID is ${result.submissionId || 'new'}. Excited to review the kickoff roadmap!`
+    `Hi Sujal & Juntoz Team! I just completed my onboarding intake for ${result.businessName || 'my brand'} (${result.platform || 'growth marketing'}). My submission ID is ${result.submissionId || 'new'}. Looking forward to our kickoff consultation!`
   );
+
+  const slot = result.slotDetails;
 
   const handleDownload = () => {
     const content =
@@ -51,9 +54,69 @@ export const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
         </h1>
 
         <p className="font-sans text-sm sm:text-base text-[#5F5F5A] max-w-lg mx-auto leading-relaxed">
-          Thank you, <strong>{result.clientName || 'Partner'}</strong>. Your business details, targeting coordinates, and assets for{' '}
+          Thank you, <strong>{result.clientName || 'Partner'}</strong>. Your business details, targeting coordinates, and kick-off slot request for{' '}
           <strong>{result.businessName || 'your brand'}</strong> have been securely routed to Sujal Mehta and the Juntoz growth team.
         </p>
+      </div>
+
+      {/* ── Call Request Confirmation Card ── */}
+      <div className="p-6 rounded-2xl bg-[#F1E7F9]/60 border border-[#5D2E85]/20 text-left space-y-3.5 shadow-2xs">
+        <div className="flex items-center justify-between border-b border-[#5D2E85]/15 pb-2.5">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#5D2E85] animate-pulse" />
+            <h3 className="text-xs font-sans font-bold uppercase tracking-wider text-[#5D2E85]">
+              Kickoff Call Request Logged
+            </h3>
+          </div>
+          <span className="text-[11px] font-sans font-semibold text-[#5D2E85] bg-white px-2.5 py-0.5 rounded-full border border-[#5D2E85]/20">
+            Pending Confirmation
+          </span>
+        </div>
+
+        <div className="space-y-1.5 text-xs font-sans text-[#111111]">
+          {slot?.anyTimeWorks ? (
+            <p className="font-medium">
+              <strong>Availability:</strong> Flexible / Any time works
+            </p>
+          ) : (
+            <>
+              <p>
+                <strong>Requested Date:</strong> {slot?.preferredDate || 'Tomorrow'}
+                {slot?.secondChoiceDate ? ` (Alternative: ${slot.secondChoiceDate})` : ''}
+              </p>
+              <p>
+                <strong>Time Window:</strong>{' '}
+                {slot?.formattedSlotLocal ? (
+                  <span>
+                    {slot.formattedSlotLocal} <span className="text-[#5F5F5A]">({slot.formattedSlotIST})</span>
+                  </span>
+                ) : (
+                  <span>Morning / Afternoon (IST)</span>
+                )}
+              </p>
+            </>
+          )}
+
+          <p>
+            <strong>Call Mode:</strong>{' '}
+            {slot?.callMode === 'whatsapp'
+              ? 'WhatsApp Voice/Video Call'
+              : slot?.callMode === 'google-meet'
+              ? 'Google Meet Video Call'
+              : 'Direct Cellular Phone Call'}
+          </p>
+
+          <p>
+            <strong>Contact Number:</strong> {slot?.callPhone || 'Provided in intake'}
+          </p>
+        </div>
+
+        <div className="pt-2 border-t border-[#5D2E85]/15 text-xs text-[#5D2E85] font-medium flex items-center gap-1.5">
+          <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>{CALL_CONFIRMATION_SLA}</span>
+        </div>
       </div>
 
       {/* 3-Step What Happens Next Timeline */}
@@ -75,10 +138,10 @@ export const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
             </span>
             <div className="space-y-0.5">
               <h3 className="font-sans font-semibold text-xs sm:text-sm text-[#111111]">
-                Technical Audit &amp; Keyword Validation (Within 24 Hours)
+                Call Slot Confirmation &amp; Agenda
               </h3>
               <p className="font-sans text-xs text-[#5F5F5A] leading-relaxed">
-                We review your competitors, verify Google/Meta partner permissions, audit your pixel/feed, and map out your initial 30-day budget allocation.
+                {CALL_CONFIRMATION_SLA} You will receive a calendar invite or WhatsApp message with our direct dial link.
               </p>
             </div>
           </li>
@@ -89,10 +152,10 @@ export const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
             </span>
             <div className="space-y-0.5">
               <h3 className="font-sans font-semibold text-xs sm:text-sm text-[#111111]">
-                Kickoff Roadmap &amp; Creative Plan Approval
+                Technical Audit &amp; Competitor Intelligence
               </h3>
               <p className="font-sans text-xs text-[#5F5F5A] leading-relaxed">
-                You receive a bespoke campaign architecture with ad hooks, search targets, and negative lists via email &amp; WhatsApp for your green-light.
+                Prior to the kickoff call, we audit your reference competitors, inspect auction overlap, test tracking pixels, and map initial keyword targets.
               </p>
             </div>
           </li>
@@ -103,10 +166,10 @@ export const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
             </span>
             <div className="space-y-0.5">
               <h3 className="font-sans font-semibold text-xs sm:text-sm text-[#111111]">
-                Engine Go-Live &amp; Live Telemetry Tracking
+                Strategy Kickoff &amp; Campaign Go-Live
               </h3>
               <p className="font-sans text-xs text-[#5F5F5A] leading-relaxed">
-                Campaigns launch with verified conversion tracking. Real-time inquiries start flowing directly to your WhatsApp or studio booking desk.
+                We present the 30-day ad architecture and initial creative hooks for your sign-off before deploying media spend.
               </p>
             </div>
           </li>

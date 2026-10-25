@@ -1,12 +1,16 @@
 import React from 'react';
 import type { FormField } from '../types/onboarding';
 import { BulkTagInput } from './BulkTagInput';
+import { CompetitorRepeater } from './CompetitorRepeater';
+import { CallingSlotPicker } from './CallingSlotPicker';
+import { getTomorrowDateInTimezone } from '../utils/timezoneUtils';
 
 interface FieldRendererProps {
   field: FormField;
   value: any;
   onChange: (value: any) => void;
   error?: string;
+  allFormData?: Record<string, any>;
 }
 
 export const FieldRenderer: React.FC<FieldRendererProps> = ({
@@ -14,6 +18,7 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
   value,
   onChange,
   error,
+  allFormData = {},
 }) => {
   const baseInputStyles =
     'w-full h-[52px] bg-white border border-[#E7E3DA] hover:border-[#DEDED7] focus:border-[#5D2E85] focus:ring-2 focus:ring-[#5D2E85]/15 rounded-xl px-4 font-sans text-sm text-[#111111] placeholder-[#5F5F5A]/45 transition-all duration-200 focus:outline-none';
@@ -34,17 +39,34 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
     }
   };
 
+  // Skip standalone label for repeater and slot picker as they render comprehensive headers
+  const showFieldLabel =
+    field.type !== 'consent' &&
+    field.type !== 'competitor-repeater' &&
+    field.type !== 'calling-slot';
+
   return (
     <div className="space-y-1.5">
       {/* Label and Required indicator */}
-      {field.type !== 'consent' && (
-        <label
-          htmlFor={field.name}
-          className="block text-xs font-sans font-semibold uppercase tracking-wider text-[#111111]"
-        >
-          {field.label}
-          {field.required && <span className="text-[#5D2E85] ml-1">*</span>}
-        </label>
+      {showFieldLabel && (
+        <div className="flex items-center justify-between pb-0.5">
+          <label
+            htmlFor={field.name}
+            className="block text-xs font-sans font-semibold uppercase tracking-wider text-[#111111]"
+          >
+            {field.label}
+            {field.required && <span className="text-[#5D2E85] ml-1">*</span>}
+          </label>
+          {field.maxLength && field.type === 'textarea' && (
+            <span
+              className={`text-[11px] font-sans ${
+                (value?.length || 0) >= field.maxLength ? 'text-[#991B1B] font-bold' : 'text-[#5F5F5A]'
+              }`}
+            >
+              {value?.length || 0}/{field.maxLength}
+            </span>
+          )}
+        </div>
       )}
 
       {/* Render by field type */}
@@ -86,7 +108,6 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
             inputMode="numeric"
             value={value || ''}
             onChange={(e) => {
-              // Strip non-numeric
               const digits = e.target.value.replace(/\D/g, '').slice(0, 10);
               onChange(digits);
             }}
@@ -105,6 +126,19 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
             value={value || ''}
             onChange={(e) => onChange(e.target.value)}
             placeholder={field.placeholder || 'https://...'}
+            className={`${baseInputStyles} ${error ? errorInputStyles : ''}`}
+          />
+        </div>
+      )}
+
+      {field.type === 'date' && (
+        <div>
+          <input
+            id={field.name}
+            type="date"
+            min={field.minDateTomorrow ? getTomorrowDateInTimezone() : undefined}
+            value={value || ''}
+            onChange={(e) => onChange(e.target.value)}
             className={`${baseInputStyles} ${error ? errorInputStyles : ''}`}
           />
         </div>
@@ -141,6 +175,7 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
         <textarea
           id={field.name}
           rows={3}
+          maxLength={field.maxLength}
           value={value || ''}
           onChange={(e) => onChange(e.target.value)}
           placeholder={field.placeholder}
@@ -161,6 +196,8 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
                 <button
                   key={opt.value}
                   type="button"
+                  role="button"
+                  aria-pressed={isSelected}
                   onClick={() => handleChipToggle(opt.value)}
                   className={`group inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-sans font-medium transition-all duration-200 cursor-pointer active:scale-98 ${
                     isSelected
@@ -193,6 +230,24 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
           onChange={onChange}
           placeholder={field.placeholder}
           helper={field.helper}
+          error={error}
+        />
+      )}
+
+      {field.type === 'competitor-repeater' && (
+        <CompetitorRepeater
+          value={value}
+          onChange={onChange}
+          error={error}
+          isMerchantCenter={field.customConfig?.isMerchantCenter}
+        />
+      )}
+
+      {field.type === 'calling-slot' && (
+        <CallingSlotPicker
+          value={value}
+          onChange={onChange}
+          defaultPhone={allFormData.phone}
           error={error}
         />
       )}
@@ -254,6 +309,7 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
       {field.type === 'consent' && (
         <label className="flex items-start gap-3 p-4 rounded-xl bg-[#F7F6F2] border border-[#E7E3DA] hover:border-[#5D2E85]/40 transition-colors cursor-pointer select-none">
           <input
+            id={field.name}
             type="checkbox"
             checked={value === true}
             onChange={(e) => onChange(e.target.checked)}
@@ -268,8 +324,8 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({
         </label>
       )}
 
-      {/* Helper text (only if not a consent or tag-list which handles its own helper) */}
-      {field.type !== 'consent' && field.type !== 'tag-list' && (
+      {/* Helper text (for standard inputs) */}
+      {showFieldLabel && field.type !== 'tag-list' && (
         <>
           {error ? (
             <p className="text-xs text-[#991B1B] font-medium flex items-center gap-1.5 pt-0.5" aria-live="polite">

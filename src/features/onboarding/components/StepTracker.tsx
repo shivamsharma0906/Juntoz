@@ -6,6 +6,7 @@ interface StepTrackerProps {
   currentIndex: number;
   onSelectStep?: (index: number) => void;
   maxAccessibleIndex: number;
+  completedStepIndices?: number[];
   className?: string;
 }
 
@@ -14,16 +15,19 @@ export const StepTracker: React.FC<StepTrackerProps> = ({
   currentIndex,
   onSelectStep,
   maxAccessibleIndex,
+  completedStepIndices,
   className = '',
 }) => {
   return (
-    <nav aria-label="Onboarding Progress" className={className}>
-      <ol className="space-y-4">
+    <nav aria-label="Onboarding Progress Roadmap" className={className}>
+      <ol className="space-y-3.5">
         {steps.map((step, idx) => {
-          const isCompleted = idx < currentIndex;
+          // A step is considered completed if it's explicitly in completedStepIndices or is strictly before current and valid
+          const isCompleted = completedStepIndices ? completedStepIndices.includes(idx) : idx < currentIndex;
           const isCurrent = idx === currentIndex;
-          const isUpcoming = idx > currentIndex;
+          const isUpcoming = idx > currentIndex && !isCompleted;
           const canClick = idx <= maxAccessibleIndex && onSelectStep;
+          const stepNumberStr = String(idx + 1).padStart(2, '0');
 
           return (
             <li key={step.id}>
@@ -31,13 +35,14 @@ export const StepTracker: React.FC<StepTrackerProps> = ({
                 type="button"
                 disabled={!canClick}
                 onClick={() => canClick && onSelectStep(idx)}
+                aria-current={isCurrent ? 'step' : undefined}
                 className={`group flex items-start gap-3.5 text-left w-full transition-colors ${
-                  canClick ? 'cursor-pointer' : 'cursor-default'
+                  canClick ? 'cursor-pointer' : 'cursor-not-allowed opacity-60'
                 }`}
               >
                 {/* Status Dot / Checkmark */}
                 <span className="relative flex items-center justify-center w-6 h-6 shrink-0 mt-0.5">
-                  {isCompleted && (
+                  {isCompleted && !isCurrent && (
                     <span className="w-5 h-5 rounded-full bg-[#5D2E85] text-white flex items-center justify-center text-xs shadow-xs">
                       <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -68,7 +73,7 @@ export const StepTracker: React.FC<StepTrackerProps> = ({
                         : 'text-[#5F5F5A]/60'
                     }`}
                   >
-                    0{idx + 1}
+                    {stepNumberStr}
                   </span>
                   <span
                     className={`block text-xs font-sans leading-snug transition-colors truncate ${

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import type { PlatformId, OnboardingSubmissionResult } from '../types/onboarding';
@@ -32,14 +32,40 @@ export const OnboardingShell: React.FC = () => {
   const isLastStep = activeFlow && formState.currentStepIndex === totalSteps - 1;
   const progressPercent = totalSteps > 0 ? ((formState.currentStepIndex + 1) / totalSteps) * 100 : 0;
 
+  // ── Step completion & navigation derived from validation ──
+  // Step completion is determined by actual field validity, not by historical step index.
+  const { completedIndices, maxAccessibleIndex } = useMemo(() => {
+    if (!activeFlow) return { completedIndices: [], maxAccessibleIndex: 0 };
+
+    const completed: number[] = [];
+    let maxAccessible = 0;
+    let foundFirstIncomplete = false;
+
+    for (let i = 0; i < activeFlow.steps.length; i++) {
+      const stepValidation = validateStep(activeFlow.steps[i], formState.data);
+      if (stepValidation.isValid) {
+        completed.push(i);
+        if (!foundFirstIncomplete) {
+          maxAccessible = Math.min(i + 1, activeFlow.steps.length - 1);
+        }
+      } else {
+        if (!foundFirstIncomplete) {
+          maxAccessible = i;
+          foundFirstIncomplete = true;
+        }
+      }
+    }
+
+    return { completedIndices: completed, maxAccessibleIndex: maxAccessible };
+  }, [activeFlow, formState.data]);
+
   // Handle continuing to next step
   const handleNext = () => {
-    if (!currentStep) return;
+    if (!currentStep || !activeFlow) return;
 
     const validation = validateStep(currentStep, formState.data);
     if (!validation.isValid) {
       setErrors(validation.errors);
-      // Smooth scroll to top of form surface on validation error
       window.scrollTo({ top: 120, behavior: 'smooth' });
       return;
     }
@@ -63,14 +89,27 @@ export const OnboardingShell: React.FC = () => {
       setStepIndex(formState.currentStepIndex - 1);
       window.scrollTo({ top: 80, behavior: 'smooth' });
     } else {
-      // Return to platform picker
-      setShowSwitchConfirm('google-ads'); // trigger platform switch modal or state
+      setShowSwitchConfirm('google-ads');
     }
   };
 
   // Handle final submission to /api/onboarding
   const handleSubmit = async () => {
     if (!activeFlow) return;
+
+    // Safety sweep: Verify that EVERY step in the flow is valid
+    for (let i = 0; i < activeFlow.steps.length; i++) {
+      const stepVal = validateStep(activeFlow.steps[i], formState.data);
+      if (!stepVal.isValid) {
+        setStepIndex(i);
+        setErrors(stepVal.errors);
+        setSubmissionError(
+          `Please complete all required fields in "${activeFlow.steps[i].title}" before submitting.`
+        );
+        window.scrollTo({ top: 120, behavior: 'smooth' });
+        return;
+      }
+    }
 
     setIsSubmitting(true);
     setSubmissionError(null);
@@ -87,7 +126,7 @@ export const OnboardingShell: React.FC = () => {
       cityAndRadius: formState.data.cityAndRadius,
       beautyVerticals: formState.data.beautyVerticals,
       data: formState.data,
-      honeypot: '', // bot protection
+      honeypot: '',
       submittedAt: new Date().toISOString(),
     };
 
@@ -115,6 +154,7 @@ export const OnboardingShell: React.FC = () => {
         recipient: json.recipient || 'Sujal.Mehta@juntoz.in',
         submittedAt: json.submittedAt || payload.submittedAt,
         textDossier: json.textDossier,
+        slotDetails: json.slotDetails,
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err: any) {
@@ -156,14 +196,6 @@ export const OnboardingShell: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#F7F6F2] text-[#111111] pt-24 sm:pt-28 md:pt-32 pb-24">
-      {/* ── Mobile Slim Top Progress Bar (2px purple) ── */}
-      <div className="lg:hidden fixed top-16 left-0 right-0 h-0.5 bg-[#E7E3DA] z-40">
-        <div
-          className="h-full bg-[#5D2E85] transition-all duration-300 ease-out"
-          style={{ width: `${progressPercent}%` }}
-        />
-      </div>
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-[1360px]">
         {/* Top Breadcrumb / Platform Switcher Header */}
         <div className="flex items-center justify-between pb-6 mb-6 sm:mb-8 border-b border-[#E7E3DA]">
@@ -189,6 +221,24 @@ export const OnboardingShell: React.FC = () => {
           </button>
         </div>
 
+        {/* ── Mobile In-Flow Step Progress Indicator ── */}
+        <div className="lg:hidden mb-6 bg-white p-3.5 rounded-2xl border border-[#E7E3DA] shadow-2xs">
+          <div className="flex items-center justify-between text-xs font-sans mb-2">
+            <span className="font-semibold text-[#111111]">
+              Step {formState.currentStepIndex + 1} of {totalSteps}
+            </span>
+            <span className="text-[#5D2E85] font-bold">
+              {Math.round(progressPercent)}% completed
+            </span>
+          </div>
+          <div className="h-1.5 w-full bg-[#F1E7F9] rounded-full overflow-hidden">
+            <div
+              className="h-full bg-[#5D2E85] rounded-full transition-all duration-300 ease-out"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+        </div>
+
         {/* ── 2-COLUMN SPLIT LAYOUT ── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
           
@@ -201,12 +251,12 @@ export const OnboardingShell: React.FC = () => {
 
               <h2
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                className="text-2xl sm:text-3xl lg:text-[2rem] font-normal text-[#111111] leading-tight"
+                className="text-2xl sm:text-3xl lg:text-[2rem] font-bold text-[#111111] leading-tight"
               >
                 {currentStep.title}
               </h2>
 
-              <p className="font-sans text-xs sm:text-sm text-[#5F5F5A] leading-relaxed pt-1">
+              <p className="font-body text-xs sm:text-sm text-[#5F5F5A] leading-relaxed pt-1">
                 {currentStep.subtitle}
               </p>
             </div>
@@ -219,13 +269,19 @@ export const OnboardingShell: React.FC = () => {
 
             {/* Desktop Vertical Step Tracker */}
             <div className="hidden lg:block pt-4 border-t border-[#E7E3DA]">
-              <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-[#111111]/70 block mb-4">
-                FLOW ROADMAP
-              </span>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-[#111111]/70">
+                  FLOW ROADMAP
+                </span>
+                <span className="text-[11px] font-mono text-[#5D2E85] font-semibold">
+                  Step {formState.currentStepIndex + 1}/{totalSteps}
+                </span>
+              </div>
               <StepTracker
                 steps={activeFlow.steps}
                 currentIndex={formState.currentStepIndex}
-                maxAccessibleIndex={formState.currentStepIndex}
+                maxAccessibleIndex={maxAccessibleIndex}
+                completedStepIndices={completedIndices}
                 onSelectStep={(idx) => {
                   setStepIndex(idx);
                   window.scrollTo({ top: 80, behavior: 'smooth' });
@@ -266,6 +322,7 @@ export const OnboardingShell: React.FC = () => {
                           }
                         }}
                         error={errors[field.name]}
+                        allFormData={formState.data}
                       />
                     ))}
                   </div>
@@ -382,11 +439,7 @@ export const OnboardingShell: React.FC = () => {
                 type="button"
                 onClick={() => {
                   setShowSwitchConfirm(null);
-                  setPlatform('google-ads'); // Reset to platform picker
-                  // Force null platform to show picker
-                  window.location.hash = '';
-                  // Call internal clear or null platform
-                  clearDraft();
+                  setPlatform(null);
                 }}
                 className="flex-1 py-3 rounded-full bg-[#5D2E85] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#4C266D] transition-colors cursor-pointer"
               >
