@@ -24,8 +24,8 @@ const CONTACT_METHODS = [
       </svg>
     ),
     label: 'Agency Founder Email',
-    value: 'Sujal.Mehta@juntoz.in',
-    href: 'mailto:Sujal.Mehta@juntoz.in',
+    value: 'official.juntoz@gmail.com',
+    href: 'mailto:official.juntoz@gmail.com',
   },
   {
     icon: (
@@ -44,7 +44,7 @@ function ContactForm() {
   const [fields, setFields] = useState({ 
     name: '', 
     phone: '', 
-    budget: '₹50,000 – ₹1,00,000 / mo',
+    budget: '₹10,000 – ₹20,000 / mo',
     serviceFocus: 'Full Growth System', 
     website: '', 
     city: '',
@@ -65,6 +65,18 @@ function ContactForm() {
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     
+    // Dispatch email copy to official.juntoz@gmail.com
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ...fields,
+        submittedAt: new Date().toISOString(),
+      }),
+    }).catch((err) => {
+      console.warn('Inquiry email copy dispatch note:', err);
+    });
+
     // Build pre-filled WhatsApp message for strategy consultation
     const msg = encodeURIComponent(
       `Hi Juntoz! I'm reaching out through your website contact form.\n\n` +
@@ -156,8 +168,9 @@ function ContactForm() {
               onChange={e => setFields(p => ({ ...p, budget: e.target.value }))}
               className={selectBase}
             >
-              <option value="Under ₹30,000 / mo">Under ₹30,000 / month</option>
-              <option value="₹30,000 – ₹50,000 / mo">₹30,000 – ₹50,000 / month</option>
+              <option value="₹5,000 – ₹10,000 / mo">₹5,000 – ₹10,000 / month</option>
+              <option value="₹10,000 – ₹20,000 / mo">₹10,000 – ₹20,000 / month</option>
+              <option value="₹20,000 – ₹50,000 / mo">₹20,000 – ₹50,000 / month</option>
               <option value="₹50,000 – ₹1,00,000 / mo">₹50,000 – ₹1,00,000 / month</option>
               <option value="₹1,00,000 – ₹2,50,000 / mo">₹1,00,000 – ₹2,50,000 / month</option>
               <option value="₹2,50,000+ / mo">₹2,50,000+ / month</option>

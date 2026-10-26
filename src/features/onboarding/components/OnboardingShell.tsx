@@ -151,7 +151,7 @@ export const OnboardingShell: React.FC = () => {
         businessName: formState.data.businessName,
         platform: formState.platform!,
         clientName: formState.data.clientName,
-        recipient: json.recipient || 'Sujal.Mehta@juntoz.in',
+        recipient: json.recipient || 'official.juntoz@gmail.com',
         submittedAt: json.submittedAt || payload.submittedAt,
         textDossier: json.textDossier,
         slotDetails: json.slotDetails,

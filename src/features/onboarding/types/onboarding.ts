@@ -68,7 +68,7 @@ export interface FlowConfig {
   title: string;
   badge: string;
   shortDesc: string;
-  icon: 'google' | 'meta' | 'shopping';
+  icon: 'google' | 'meta' | 'shopping' | 'instagram';
   estimatedMinutes: number;
   steps: FlowStep[];
 }

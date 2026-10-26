@@ -2,10 +2,10 @@
  * Juntoz Careers Application Serverless Endpoint
  * Vercel Serverless Function & Node.js Handler
  * Endpoint: POST /api/apply
- * Recipient: Sujal.Mehta@juntoz.in
+ * Recipient: official.juntoz@gmail.com
  */
 
-const RECIPIENT_EMAIL = 'Sujal.Mehta@juntoz.in';
+const RECIPIENT_EMAIL = process.env.RECIPIENT_EMAIL || 'official.juntoz@gmail.com';
 
 // In-memory rate limiting map for basic spam suppression
 const rateLimitMap = new Map();
@@ -304,7 +304,7 @@ export default async function handler(req, res) {
     return res.status(500).json({
       success: false,
       error: 'Internal Server Error',
-      message: 'Failed to process application. Please retry or contact Sujal.Mehta@juntoz.in directly.',
+      message: 'Failed to process application. Please retry or contact official.juntoz@gmail.com directly.',
     });
   }
 }

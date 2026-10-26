@@ -47,6 +47,26 @@ function devApiMiddleware() {
           return;
         }
 
+        if (req.url === '/api/contact' && req.method === 'POST') {
+          let bodyStr = '';
+          req.on('data', (chunk) => { bodyStr += chunk; });
+          req.on('end', async () => {
+            try {
+              const body = JSON.parse(bodyStr || '{}');
+              const { processContactInquiry } = await import('./api/contact.js');
+              const result = await processContactInquiry(body, req.socket?.remoteAddress || '127.0.0.1');
+              res.setHeader('Content-Type', 'application/json');
+              res.statusCode = result.status || 200;
+              res.end(JSON.stringify(result));
+            } catch (err) {
+              res.setHeader('Content-Type', 'application/json');
+              res.statusCode = 500;
+              res.end(JSON.stringify({ success: false, error: err.message }));
+            }
+          });
+          return;
+        }
+
         next();
       });
     },

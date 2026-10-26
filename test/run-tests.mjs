@@ -157,9 +157,9 @@ async function run() {
   console.log('✓ Testing Instagram Handling & GMB Flow Structures');
   const { INSTAGRAM_HANDLING_FLOW, GMB_FLOW, ALL_FLOWS } = await jiti.import('../src/features/onboarding/config/flows.ts');
   assert.ok(INSTAGRAM_HANDLING_FLOW);
-  assert.equal(INSTAGRAM_HANDLING_FLOW.steps.length, 8);
+  assert.equal(INSTAGRAM_HANDLING_FLOW.steps.length, 7);
   assert.ok(GMB_FLOW);
-  assert.equal(GMB_FLOW.steps.length, 8);
+  assert.equal(GMB_FLOW.steps.length, 7);
   assert.ok(ALL_FLOWS['instagram-handling']);
   assert.ok(ALL_FLOWS['gmb']);
   assert.ok(ALL_FLOWS['meta-ads']);

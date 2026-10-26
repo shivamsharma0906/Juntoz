@@ -15,7 +15,7 @@ import {
   NOTICE_PERIOD_OPTIONS,
 } from '../data/careers';
 
-const RECIPIENT_EMAIL = 'Sujal.Mehta@juntoz.in';
+const RECIPIENT_EMAIL = 'official.juntoz@gmail.com';
 const AGENCY_PHONE = '+91 90040 01800';
 
 const INITIAL_FORM_STATE = {

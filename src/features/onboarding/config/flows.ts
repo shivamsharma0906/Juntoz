@@ -131,14 +131,29 @@ export const GOOGLE_ADS_FLOW: FlowConfig = {
           required: true,
         },
         {
+          name: 'targetMonthlyInquiries',
+          label: 'Desired Monthly Qualified Inquiries',
+          type: 'select',
+          options: [
+            { value: '10-20', label: '10 – 20 Qualified Inquiries / month' },
+            { value: '20-50', label: '20 – 50 Qualified Inquiries / month' },
+            { value: '50-100', label: '50 – 100 Qualified Inquiries / month' },
+            { value: '100-250', label: '100 – 250 Qualified Inquiries / month' },
+            { value: '250-plus', label: '250+ Inquiries / month (Multi-branch / Academy)' },
+          ],
+          required: true,
+        },
+        {
           name: 'monthlyAdSpend',
           label: 'Planned Monthly Ad Spend (INR)',
           type: 'select',
           options: [
-            { value: 'under-30k', label: '₹20,000 – ₹35,000 / month (Pilot Tier)' },
-            { value: '35k-75k', label: '₹35,000 – ₹75,000 / month (Growth Tier)' },
-            { value: '75k-150k', label: '₹75,000 – ₹1,50,000 / month (Scale Tier)' },
-            { value: '150k-plus', label: '₹1,50,000+ / month (Enterprise & Multi-Location)' },
+            { value: '5k-10k', label: '₹5,000 – ₹10,000 / month' },
+            { value: '10k-20k', label: '₹10,000 – ₹20,000 / month' },
+            { value: '20k-35k', label: '₹20,000 – ₹35,000 / month' },
+            { value: '35k-75k', label: '₹35,000 – ₹75,000 / month' },
+            { value: '75k-150k', label: '₹75,000 – ₹1,50,000 / month' },
+            { value: '150k-plus', label: '₹1,50,000+ / month' },
           ],
           helper: 'Direct ad spend paid straight to Google. Our management fee is separate.',
           required: true,
@@ -229,10 +244,9 @@ export const GOOGLE_ADS_FLOW: FlowConfig = {
       ],
     },
     getSharedCompetitorsStep('google-ads'),
-    getSharedClientRequirementsStep('google-ads'),
     {
       id: 'google-access',
-      eyebrow: 'STEP 08 · ASSETS & ACCESS',
+      eyebrow: 'STEP 07 · ASSETS & ACCESS',
       title: 'Creative Assets & Account Link',
       subtitle: 'Connect your ad account via partner invitation and share high-res creative files.',
       fields: [
@@ -258,7 +272,7 @@ export const GOOGLE_ADS_FLOW: FlowConfig = {
           type: 'access-guide',
           guide: {
             platformName: 'Google Ads Manager Account',
-            partnerIdentifier: 'Sujal.Mehta@juntoz.in',
+            partnerIdentifier: 'official.juntoz@gmail.com',
             instructions: [
               'Log into ads.google.com and note your 10-digit Customer ID.',
               'Once this onboarding is submitted, Juntoz will send a Manager Link request to your ID.',
@@ -270,7 +284,7 @@ export const GOOGLE_ADS_FLOW: FlowConfig = {
         },
       ],
     },
-    getSharedCallingSlotStep('google-ads', 9),
+    getSharedCallingSlotStep('google-ads', 8),
   ],
 };
 
@@ -312,9 +326,10 @@ export const META_ADS_FLOW: FlowConfig = {
           label: 'Desired Monthly Qualified Inquiries',
           type: 'select',
           options: [
-            { value: '30-60', label: '30 – 60 Qualified Inquiries / month' },
-            { value: '60-120', label: '60 – 120 Qualified Inquiries / month' },
-            { value: '120-250', label: '120 – 250 Qualified Inquiries / month' },
+            { value: '10-20', label: '10 – 20 Qualified Inquiries / month' },
+            { value: '20-50', label: '20 – 50 Qualified Inquiries / month' },
+            { value: '50-100', label: '50 – 100 Qualified Inquiries / month' },
+            { value: '100-250', label: '100 – 250 Qualified Inquiries / month' },
             { value: '250-plus', label: '250+ Inquiries / month (Multi-branch / Academy)' },
           ],
           required: true,
@@ -324,7 +339,9 @@ export const META_ADS_FLOW: FlowConfig = {
           label: 'Planned Monthly Ad Spend (INR)',
           type: 'select',
           options: [
-            { value: 'under-30k', label: '₹20,000 – ₹35,000 / month' },
+            { value: '5k-10k', label: '₹5,000 – ₹10,000 / month' },
+            { value: '10k-20k', label: '₹10,000 – ₹20,000 / month' },
+            { value: '20k-35k', label: '₹20,000 – ₹35,000 / month' },
             { value: '35k-75k', label: '₹35,000 – ₹75,000 / month' },
             { value: '75k-150k', label: '₹75,000 – ₹1,50,000 / month' },
             { value: '150k-plus', label: '₹1,50,000+ / month' },
@@ -400,10 +417,9 @@ export const META_ADS_FLOW: FlowConfig = {
       ],
     },
     getSharedCompetitorsStep('meta-ads'),
-    getSharedClientRequirementsStep('meta-ads'),
     {
       id: 'meta-access',
-      eyebrow: 'STEP 07 · ASSETS & PARTNER ACCESS',
+      eyebrow: 'STEP 06 · ASSETS & PARTNER ACCESS',
       title: 'Account Sync & Pixel Setup',
       subtitle: 'Invite Juntoz via Meta Business Manager Partner Access without sharing passwords.',
       fields: [
@@ -413,7 +429,7 @@ export const META_ADS_FLOW: FlowConfig = {
           type: 'access-guide',
           guide: {
             platformName: 'Meta Business Manager Partner Invite',
-            partnerIdentifier: 'Contact: Sujal.Mehta@juntoz.in',
+            partnerIdentifier: 'Contact: official.juntoz@gmail.com',
             instructions: [
               'Log into business.facebook.com and go to Business Settings.',
               'Click on Users > Partners > Add "Give a partner access to your assets".',
@@ -434,7 +450,7 @@ export const META_ADS_FLOW: FlowConfig = {
         },
       ],
     },
-    getSharedCallingSlotStep('meta-ads', 8),
+    getSharedCallingSlotStep('meta-ads', 7),
   ],
 };
 
@@ -565,10 +581,10 @@ export const MERCHANT_CENTER_FLOW: FlowConfig = {
           type: 'access-guide',
           guide: {
             platformName: 'Google Merchant Center Access',
-            partnerIdentifier: 'Sujal.Mehta@juntoz.in',
+            partnerIdentifier: 'official.juntoz@gmail.com',
             instructions: [
               'Log into merchants.google.com and click the Gear icon > People and access.',
-              'Click Add User and enter Sujal.Mehta@juntoz.in.',
+              'Click Add User and enter official.juntoz@gmail.com.',
               'Select "Standard" or "Admin" access and save.',
               'Verify that your domain is claimed under Business information > Website in GMC.',
             ],
@@ -586,8 +602,7 @@ export const MERCHANT_CENTER_FLOW: FlowConfig = {
       ],
     },
     getSharedCompetitorsStep('merchant-center'),
-    getSharedClientRequirementsStep('merchant-center'),
-    getSharedCallingSlotStep('merchant-center', 8),
+    getSharedCallingSlotStep('merchant-center', 7),
   ],
 };
 export const INSTAGRAM_HANDLING_FLOW: FlowConfig = {
@@ -634,13 +649,28 @@ export const INSTAGRAM_HANDLING_FLOW: FlowConfig = {
         },
         {
           name: 'targetMonthlyInquiries',
-          label: 'Desired Monthly DM Consultations & Inquiries',
+          label: 'Desired Monthly Qualified Inquiries',
           type: 'select',
           options: [
-            { value: '20-40', label: '20 – 40 High-Value Inquiries / month' },
-            { value: '40-80', label: '40 – 80 Inquiries / month' },
-            { value: '80-150', label: '80 – 150 Inquiries / month' },
-            { value: '150-plus', label: '150+ Inquiries / month (Scale Tier)' },
+            { value: '10-20', label: '10 – 20 Qualified Inquiries / month' },
+            { value: '20-50', label: '20 – 50 Qualified Inquiries / month' },
+            { value: '50-100', label: '50 – 100 Qualified Inquiries / month' },
+            { value: '100-250', label: '100 – 250 Qualified Inquiries / month' },
+            { value: '250-plus', label: '250+ Inquiries / month (Multi-branch / Academy)' },
+          ],
+          required: true,
+        },
+        {
+          name: 'monthlyAdSpend',
+          label: 'Planned Monthly Ad Spend (INR)',
+          type: 'select',
+          options: [
+            { value: '5k-10k', label: '₹5,000 – ₹10,000 / month' },
+            { value: '10k-20k', label: '₹10,000 – ₹20,000 / month' },
+            { value: '20k-35k', label: '₹20,000 – ₹35,000 / month' },
+            { value: '35k-75k', label: '₹35,000 – ₹75,000 / month' },
+            { value: '75k-150k', label: '₹75,000 – ₹1,50,000 / month' },
+            { value: '150k-plus', label: '₹1,50,000+ / month' },
           ],
           required: true,
         },
@@ -739,10 +769,9 @@ export const INSTAGRAM_HANDLING_FLOW: FlowConfig = {
       ],
     },
     getSharedCompetitorsStep('instagram-handling'),
-    getSharedClientRequirementsStep('instagram-handling'),
     {
       id: 'insta-access',
-      eyebrow: 'STEP 07 · ACCOUNT ACCESS',
+      eyebrow: 'STEP 06 · ACCOUNT ACCESS',
       title: 'Instagram & Meta Suite Access',
       subtitle: 'Connect Juntoz to your Instagram professional account via Meta Business Suite without passwords.',
       fields: [
@@ -752,12 +781,12 @@ export const INSTAGRAM_HANDLING_FLOW: FlowConfig = {
           type: 'access-guide',
           guide: {
             platformName: 'Meta Business Suite / Instagram Partner Access',
-            partnerIdentifier: 'Contact: Sujal.Mehta@juntoz.in',
+            partnerIdentifier: 'Contact: official.juntoz@gmail.com',
             instructions: [
               'Ensure your Instagram account is switched to a Professional / Creator account.',
               'Ensure your Instagram is connected to your brand’s Facebook Business Page.',
               'Log into business.facebook.com > Business Settings > Users > Partners.',
-              'Add Juntoz Partner ID or invite Sujal.Mehta@juntoz.in with Content & Community permissions.',
+              'Add Juntoz Partner ID or invite official.juntoz@gmail.com with Content & Community permissions.',
               'You retain 100% ownership at all times. Never share your private login password.',
             ],
             docLink: 'https://www.facebook.com/business/help/1717412048534642',
@@ -773,7 +802,7 @@ export const INSTAGRAM_HANDLING_FLOW: FlowConfig = {
         },
       ],
     },
-    getSharedCallingSlotStep('instagram-handling', 8),
+    getSharedCallingSlotStep('instagram-handling', 7),
   ],
 };
 
@@ -867,6 +896,33 @@ export const GMB_FLOW: FlowConfig = {
           required: true,
         },
         {
+          name: 'targetMonthlyInquiries',
+          label: 'Desired Monthly Qualified Inquiries',
+          type: 'select',
+          options: [
+            { value: '10-20', label: '10 – 20 Qualified Inquiries / month' },
+            { value: '20-50', label: '20 – 50 Qualified Inquiries / month' },
+            { value: '50-100', label: '50 – 100 Qualified Inquiries / month' },
+            { value: '100-250', label: '100 – 250 Qualified Inquiries / month' },
+            { value: '250-plus', label: '250+ Inquiries / month (Multi-branch / Academy)' },
+          ],
+          required: true,
+        },
+        {
+          name: 'monthlyAdSpend',
+          label: 'Planned Monthly Ad Spend (INR)',
+          type: 'select',
+          options: [
+            { value: '5k-10k', label: '₹5,000 – ₹10,000 / month' },
+            { value: '10k-20k', label: '₹10,000 – ₹20,000 / month' },
+            { value: '20k-35k', label: '₹20,000 – ₹35,000 / month' },
+            { value: '35k-75k', label: '₹35,000 – ₹75,000 / month' },
+            { value: '75k-150k', label: '₹75,000 – ₹1,50,000 / month' },
+            { value: '150k-plus', label: '₹1,50,000+ / month' },
+          ],
+          required: true,
+        },
+        {
           name: 'businessHours',
           label: 'Weekly Operating Hours',
           type: 'text',
@@ -917,12 +973,11 @@ export const GMB_FLOW: FlowConfig = {
       ],
     },
     getSharedCompetitorsStep('gmb'),
-    getSharedClientRequirementsStep('gmb'),
     {
       id: 'gmb-access',
-      eyebrow: 'STEP 07 · GMB MANAGER ACCESS',
+      eyebrow: 'STEP 06 · GMB MANAGER ACCESS',
       title: 'Google Business Profile Manager Access',
-      subtitle: 'Grant Sujal.Mehta@juntoz.in manager rights directly inside Google Search without passwords.',
+      subtitle: 'Grant official.juntoz@gmail.com manager rights directly inside Google Search without passwords.',
       fields: [
         {
           name: 'gmbAccessGuide',
@@ -930,12 +985,12 @@ export const GMB_FLOW: FlowConfig = {
           type: 'access-guide',
           guide: {
             platformName: 'Google Business Profile Manager Invitation',
-            partnerIdentifier: 'Manager: Sujal.Mehta@juntoz.in',
+            partnerIdentifier: 'Manager: official.juntoz@gmail.com',
             instructions: [
               'On Google Search or Maps, search for your exact business name while logged into your owner Google account.',
               'Click the 3 dots menu (top right of your business profile management panel) > Business Profile settings.',
               'Click People and access > Add.',
-              'Enter Sujal.Mehta@juntoz.in and select the role "Manager".',
+              'Enter official.juntoz@gmail.com and select the role "Manager".',
               'Click Invite. You retain 100% Primary Owner rights at all times.',
             ],
             docLink: 'https://support.google.com/business/answer/3403107',
@@ -951,7 +1006,7 @@ export const GMB_FLOW: FlowConfig = {
         },
       ],
     },
-    getSharedCallingSlotStep('gmb', 8),
+    getSharedCallingSlotStep('gmb', 7),
   ],
 };
 

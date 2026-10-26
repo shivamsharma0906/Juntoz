@@ -63,7 +63,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 w-full lg:max-w-2xl">
             {/* Email card */}
             <a
-              href="mailto:Sujal.Mehta@juntoz.in"
+              href="mailto:official.juntoz@gmail.com"
               className="group flex flex-row sm:flex-col items-center sm:items-start justify-between p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-white/12 bg-[#1A1A1A] hover:border-[#5D2E85]/40 transition-all duration-300 relative overflow-hidden"
             >
               <div className="w-10 h-10 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mb-0 sm:mb-6 transition-colors duration-300 group-hover:bg-[#5D2E85]/15 group-hover:border-[#5D2E85]/30">
@@ -73,7 +73,7 @@ export default function Footer() {
               </div>
               <div className="flex-1 min-w-0 ml-3.5 sm:ml-0 sm:w-full">
                 <span className="block text-[10px] text-white/50 uppercase tracking-wider font-sans font-bold mb-0.5 sm:mb-1">Email Us</span>
-                <span className="block text-xs font-sans font-semibold text-white/90 group-hover:text-white truncate">Sujal.Mehta@juntoz.in</span>
+                <span className="block text-xs font-sans font-semibold text-white/90 group-hover:text-white truncate">official.juntoz@gmail.com</span>
               </div>
               <svg className="w-4 h-4 block sm:hidden shrink-0 ml-2 text-white/30 group-hover:text-[#5D2E85] group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
