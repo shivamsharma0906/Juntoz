@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import Hero3D from './hero3d/Hero3D';
 
 /* ─── Animation Variants ─── */
 const containerVariants = {
@@ -43,13 +44,9 @@ const visualVariants = {
    Layered SVG + HTML composition representing Awareness → Consideration → Conversion → Advocacy
    with floating glassmorphic metrics HUD card overlay.
 ─── */
-function FullFunnelVisual() {
+function FunnelSvgIllustration() {
   return (
-    <div className="relative w-full max-w-[480px] xs:max-w-[500px] lg:max-w-[540px] xl:max-w-[580px] mx-auto flex items-center justify-center select-none py-2">
-      
-      {/* Background radial glow */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-[#5D2E85]/12 via-[#06B6D4]/12 to-transparent rounded-full blur-3xl -z-10" />
-
+    <div className="relative w-full h-auto">
       {/* Main SVG Composition */}
       <svg
         viewBox="0 0 520 480"
@@ -253,6 +250,18 @@ function FullFunnelVisual() {
         <span className="text-xs sm:text-sm">❤️</span>
         <span className="font-heading font-bold text-[9px] sm:text-[10.5px] uppercase tracking-wider text-[#E11D48]">ADVOCACY</span>
       </div>
+    </div>
+  );
+}
+
+function FullFunnelVisual() {
+  return (
+    <div className="relative w-full max-w-[480px] xs:max-w-[500px] lg:max-w-[540px] xl:max-w-[580px] mx-auto flex items-center justify-center select-none py-2">
+      {/* Background radial glow */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-[#5D2E85]/12 via-[#06B6D4]/12 to-transparent rounded-full blur-3xl -z-10" />
+
+      {/* ── 3D Interactive WebGL Funnel with Instant SVG Fallback ── */}
+      <Hero3D fallback={<FunnelSvgIllustration />} />
 
       {/* ── FLOATING METRICS HUD CARD & ATTACHED REVENUE BADGE (Overlay Right) ── */}
       <div className="absolute bottom-2 sm:bottom-6 right-0 sm:-right-4 z-20 pointer-events-auto">
