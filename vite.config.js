@@ -88,6 +88,9 @@ export default defineConfig({
             if (id.includes('three') || id.includes('@react-three')) {
               return 'vendor-three';
             }
+            if (id.includes('lenis')) {
+              return 'vendor-lenis';
+            }
             if (id.includes('framer-motion')) {
               return 'vendor-framer-motion';
             }

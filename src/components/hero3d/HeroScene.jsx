@@ -5,6 +5,7 @@ import * as THREE from 'three';
 // Custom GLSL Shaders for the "Awareness to Advocacy" Particle System
 const vertexShader = /* glsl */ `
   uniform float uTime;
+  uniform float uScrollProgress;
   uniform vec2 uPointer;
   uniform float uPointerRadius;
   uniform float uPointerStrength;
@@ -60,6 +61,43 @@ const vertexShader = /* glsl */ `
       // Brighter purple #5D2E85 with subtle lavender #F1E7F9 highlights
       vOpacity = mix(0.85, 0.3, t) * smoothstep(0.0, 0.06, t) * smoothstep(1.0, 0.85, t);
       vColor = mix(vec3(0.365, 0.180, 0.522), vec3(0.945, 0.906, 0.976), sin(t * 6.28) * 0.2 + 0.2);
+    }
+
+    // ── SCROLL-STORY MULTI-MOMENT MORPH ──
+    if (uScrollProgress > 0.001) {
+      // Stage 1 (0.0 -> 0.35, Services): Inward funnel broadens into 4 horizontal flow ribbons
+      float laneIdx = floor(mod(laneAngle * 0.6366, 4.0));
+      float laneY = (laneIdx - 1.5) * 0.52;
+      vec3 servicePos = vec3(
+        sin(t * 6.28 + laneAngle) * 2.1,
+        laneY + sin(uTime * 0.5 + t * 3.14) * 0.1,
+        cos(t * 6.28) * 0.35
+      );
+
+      // Stage 2 (0.35 -> 0.70, Proof): Streamlines gather into a circular orbital vortex framing proof
+      float vortexRadius = 0.95 + 0.45 * sin(laneAngle + uTime * 0.3);
+      vec3 proofPos = vec3(
+        cos(laneAngle + uTime * 0.4 + t * 1.5) * vortexRadius,
+        sin(laneAngle + uTime * 0.4 + t * 1.5) * (vortexRadius * 0.75),
+        sin(t * 3.14) * 0.25
+      );
+
+      // Stage 3 (0.70 -> 1.0, Final CTA): Vortex ascends into an advocacy halo ring
+      float haloRadius = 1.15 + 0.35 * sin(laneAngle * 2.0 + uTime * 0.6);
+      vec3 ctaPos = vec3(
+        cos(laneAngle + uTime * 0.5) * haloRadius,
+        sin(laneAngle + uTime * 0.5) * (haloRadius * 0.3) - 0.1,
+        sin(laneAngle * 3.0) * 0.2
+      );
+
+      float p1 = smoothstep(0.02, 0.32, uScrollProgress);
+      float p2 = smoothstep(0.32, 0.68, uScrollProgress);
+      float p3 = smoothstep(0.68, 0.96, uScrollProgress);
+
+      vec3 blended = mix(pos, servicePos, p1);
+      blended = mix(blended, proofPos, p2);
+      blended = mix(blended, ctaPos, p3);
+      pos = blended;
     }
 
     // ── GENTLE CURSOR INFLUENCE ──
@@ -132,7 +170,7 @@ function generateParticleData(count) {
   return { positions: pos, seeds: sd, sizes: sz };
 }
 
-function ParticleSystem({ count, pointerRef, onFirstFrame, onPerformanceDrop }) {
+function ParticleSystem({ count, pointerRef, scrollProgressRef, onFirstFrame, onPerformanceDrop }) {
   const pointsRef = useRef();
   const materialRef = useRef();
   const reportedFirstFrame = useRef(false);
@@ -152,6 +190,7 @@ function ParticleSystem({ count, pointerRef, onFirstFrame, onPerformanceDrop }) 
 
   const uniforms = useMemo(() => ({
     uTime: { value: 0 },
+    uScrollProgress: { value: 0 },
     uPointer: { value: new THREE.Vector2(-999, -999) },
     uPointerRadius: { value: 0.9 },
     uPointerStrength: { value: 0.22 },
@@ -193,6 +232,12 @@ function ParticleSystem({ count, pointerRef, onFirstFrame, onPerformanceDrop }) 
     if (materialRef.current) {
       materialRef.current.uniforms.uTime.value = (now - startTime.current) / 1000;
       
+      if (scrollProgressRef && typeof scrollProgressRef.current === 'number') {
+        const targetProgress = scrollProgressRef.current;
+        const currentProgress = materialRef.current.uniforms.uScrollProgress.value;
+        materialRef.current.uniforms.uScrollProgress.value += (targetProgress - currentProgress) * 0.1;
+      }
+
       if (pointerRef && pointerRef.current) {
         const target = pointerRef.current;
         const current = materialRef.current.uniforms.uPointer.value;
@@ -244,7 +289,7 @@ function ParticleSystem({ count, pointerRef, onFirstFrame, onPerformanceDrop }) 
   );
 }
 
-export default function HeroScene({ tier = 'high', isVisible = true, pointerRef, onFirstFrame, onPerformanceDrop }) {
+export default function HeroScene({ tier = 'high', isVisible = true, pointerRef, scrollProgressRef, onFirstFrame, onPerformanceDrop }) {
   const particleCount = tier === 'mid' ? 6000 : 12000;
 
   return (
@@ -263,6 +308,7 @@ export default function HeroScene({ tier = 'high', isVisible = true, pointerRef,
       <ParticleSystem
         count={particleCount}
         pointerRef={pointerRef}
+        scrollProgressRef={scrollProgressRef}
         onFirstFrame={onFirstFrame}
         onPerformanceDrop={onPerformanceDrop}
       />

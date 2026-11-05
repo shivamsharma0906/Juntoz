@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Hero3D from './hero3d/Hero3D';
+import { motionConfig } from '../config/motion';
 
 /* ─── Animation Variants ─── */
 const containerVariants = {
@@ -255,13 +256,18 @@ function FunnelSvgIllustration() {
 }
 
 function FullFunnelVisual() {
+  const isScrollStory = motionConfig.scrollStory;
   return (
     <div className="relative w-full max-w-[480px] xs:max-w-[500px] lg:max-w-[540px] xl:max-w-[580px] mx-auto flex items-center justify-center select-none py-2">
       {/* Background radial glow */}
       <div className="absolute inset-0 bg-gradient-to-tr from-[#5D2E85]/12 via-[#06B6D4]/12 to-transparent rounded-full blur-3xl -z-10" />
 
       {/* ── 3D Interactive WebGL Funnel with Instant SVG Fallback ── */}
-      <Hero3D fallback={<FunnelSvgIllustration />} />
+      {isScrollStory ? (
+        <FunnelSvgIllustration />
+      ) : (
+        <Hero3D fallback={<FunnelSvgIllustration />} />
+      )}
 
       {/* ── FLOATING METRICS HUD CARD & ATTACHED REVENUE BADGE (Overlay Right) ── */}
       <div className="absolute bottom-2 sm:bottom-6 right-0 sm:-right-4 z-20 pointer-events-auto">

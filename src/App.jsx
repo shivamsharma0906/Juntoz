@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import Home from './pages/Home';
 import ErrorBoundary from './components/ErrorBoundary';
+import { initLenis, destroyLenis, getLenis } from './lib/lenis';
 
 // Lazy load non-critical pages to reduce initial JavaScript bundle size (Fixes high FCP/LCP)
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
@@ -31,7 +32,12 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
 
     // Small delay so React finishes rendering the new page's components
     const t = setTimeout(() => {
@@ -48,6 +54,12 @@ function ScrollToTop() {
 }
 
 function App() {
+  useEffect(() => {
+    initLenis();
+    return () => {
+      destroyLenis();
+    };
+  }, []);
   useEffect(() => {
     const handlePreloadError = () => {
       window.location.reload();

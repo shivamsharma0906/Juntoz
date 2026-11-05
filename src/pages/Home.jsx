@@ -1,6 +1,8 @@
 import { lazy, Suspense } from 'react';
 import Hero from '../components/Hero';
 import PageMeta from '../components/PageMeta';
+import Hero3D from '../components/hero3d/Hero3D';
+import { motionConfig } from '../config/motion';
 
 // Lazy load below-the-fold curiosity-driven trailer sections
 const HomeServicesTeaser    = lazy(() => import('../components/HomeServicesTeaser'));
@@ -21,6 +23,7 @@ export default function Home() {
         description="Juntoz is a full-service digital growth agency. We help ambitious businesses build their brand, capture high-intent demand, and scale revenue through performance ads, SEO, GMB management, and web conversion engines."
         path="/"
       />
+      {motionConfig.scrollStory && <Hero3D isScrollStory={true} />}
       <Hero />
       <Suspense fallback={null}>
         <HomeServicesTeaser />

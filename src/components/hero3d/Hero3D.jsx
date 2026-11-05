@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import ErrorBoundary from '../ErrorBoundary';
 import { motionConfig } from '../../config/motion';
+import { getLenis } from '../../lib/lenis';
 
 // Only loaded dynamically when all capability gates pass
 const LazyHeroScene = lazy(() => import('./HeroScene'));
@@ -17,7 +18,7 @@ function checkWebGLSupport() {
   }
 }
 
-export default function Hero3D({ fallback }) {
+export default function Hero3D({ fallback = null, isScrollStory = false }) {
   const [canMount3D, setCanMount3D] = useState(false);
   // Initial tier is strictly 'high'. Mid tier comes exclusively from runtime step-down.
   const [tier, setTier] = useState('high');
@@ -27,10 +28,12 @@ export default function Hero3D({ fallback }) {
 
   const containerRef = useRef(null);
   const pointerRef = useRef({ x: -999, y: -999 });
+  const scrollProgressRef = useRef(0);
 
   useEffect(() => {
-    // 1. Feature Flag Check
-    if (!motionConfig.hero3d) return;
+    // 1. Feature Flag Check (Must be enabled by hero3d or scrollStory)
+    const isFeatureEnabled = isScrollStory ? motionConfig.scrollStory : (motionConfig.hero3d || motionConfig.scrollStory);
+    if (!isFeatureEnabled) return;
 
     // 2. Hardware and Environment Gates
     if (typeof window === 'undefined') return;
@@ -77,16 +80,47 @@ export default function Hero3D({ fallback }) {
       window.removeEventListener('load', scheduleMount);
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [isScrollStory]);
 
-  // 4. Track pointer on window with passive listener (Canvas wrapper is pointer-events-none)
+  // 4. Scroll progress tracking across the customer journey
+  useEffect(() => {
+    if (!canMount3D) return;
+
+    let cleanupScroll = null;
+    const lenis = getLenis();
+    if (lenis) {
+      const handleLenisScroll = (e) => {
+        if (typeof e.progress === 'number') {
+          scrollProgressRef.current = e.progress;
+        }
+      };
+      lenis.on('scroll', handleLenisScroll);
+      cleanupScroll = () => {
+        lenis.off('scroll', handleLenisScroll);
+      };
+    } else {
+      const handleNativeScroll = () => {
+        const docH = document.documentElement.scrollHeight - window.innerHeight;
+        scrollProgressRef.current = docH > 0 ? Math.min(1, Math.max(0, window.scrollY / docH)) : 0;
+      };
+      window.addEventListener('scroll', handleNativeScroll, { passive: true });
+      cleanupScroll = () => {
+        window.removeEventListener('scroll', handleNativeScroll);
+      };
+    }
+
+    return () => {
+      if (cleanupScroll) cleanupScroll();
+    };
+  }, [canMount3D]);
+
+  // 5. Track pointer on window with passive listener (Canvas wrapper is pointer-events-none)
   useEffect(() => {
     if (!canMount3D) return;
 
     const handlePointerMove = (e) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      // Normalized coordinates relative to container center [-1.5, 1.5]
       const nx = ((e.clientX - (rect.left + rect.width / 2)) / rect.width) * 3.0;
       const ny = -((e.clientY - (rect.top + rect.height / 2)) / rect.height) * 3.0;
       pointerRef.current = { x: nx, y: ny };
@@ -105,18 +139,20 @@ export default function Hero3D({ fallback }) {
     };
   }, [canMount3D]);
 
-  // 5. Visibility and Offscreen intersection management
+  // 6. Visibility and Offscreen intersection management
   useEffect(() => {
     if (!canMount3D || !containerRef.current) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting && !document.hidden);
-      },
-      { threshold: 0.05 }
-    );
-
-    observer.observe(containerRef.current);
+    let observer = null;
+    if (!isScrollStory) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsVisible(entry.isIntersecting && !document.hidden);
+        },
+        { threshold: 0.05 }
+      );
+      observer.observe(containerRef.current);
+    }
 
     const handleVisibilityChange = () => {
       setIsVisible(!document.hidden);
@@ -125,12 +161,12 @@ export default function Hero3D({ fallback }) {
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
-      observer.disconnect();
+      if (observer) observer.disconnect();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [canMount3D]);
+  }, [canMount3D, isScrollStory]);
 
-  // 6. WebGL context lost handler
+  // 7. WebGL context lost handler
   useEffect(() => {
     const handleContextLost = (e) => {
       e.preventDefault();
@@ -159,11 +195,42 @@ export default function Hero3D({ fallback }) {
 
   const showWebGL = canMount3D && !hasContextLost;
 
+  // ── SCROLL-STORY FULL-PAGE VIEWPORT MODE ──
+  if (isScrollStory) {
+    if (!showWebGL) return null;
+
+    return (
+      <div
+        ref={containerRef}
+        className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <div
+          className={`w-full h-full transition-opacity duration-1000 ease-out ${
+            isSceneReady ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <ErrorBoundary fallback={null}>
+            <Suspense fallback={null}>
+              <LazyHeroScene
+                tier={tier}
+                isVisible={isVisible}
+                pointerRef={pointerRef}
+                scrollProgressRef={scrollProgressRef}
+                onFirstFrame={() => setIsSceneReady(true)}
+                onPerformanceDrop={handlePerformanceDrop}
+              />
+            </Suspense>
+          </ErrorBoundary>
+        </div>
+      </div>
+    );
+  }
+
+  // ── LOCAL HERO MODE ──
   return (
     <div ref={containerRef} className="relative w-full h-full flex items-center justify-center">
-      {/* ── BASE LAYER: SVG Fallback ──
-          Always rendered initially to guarantee instant zero-delay presentation.
-          Fades out only after the 3D scene confirms its first rendered frame. */}
+      {/* ── BASE LAYER: SVG Fallback ── */}
       <div
         className={`w-full transition-opacity duration-700 ease-out ${
           isSceneReady && showWebGL ? 'opacity-0 pointer-events-none' : 'opacity-100'
@@ -172,8 +239,7 @@ export default function Hero3D({ fallback }) {
         {fallback}
       </div>
 
-      {/* ── ENHANCEMENT LAYER: Interactive WebGL Canvas ──
-          Strictly pointer-events-none so CTA buttons and HUD cards are never intercepted */}
+      {/* ── ENHANCEMENT LAYER: Interactive WebGL Canvas ── */}
       {showWebGL && (
         <div
           className={`absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-700 ease-out ${
@@ -187,6 +253,7 @@ export default function Hero3D({ fallback }) {
                 tier={tier}
                 isVisible={isVisible}
                 pointerRef={pointerRef}
+                scrollProgressRef={scrollProgressRef}
                 onFirstFrame={() => setIsSceneReady(true)}
                 onPerformanceDrop={handlePerformanceDrop}
               />
