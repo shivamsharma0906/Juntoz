@@ -31,6 +31,7 @@ export default function CaseStudiesShowcase() {
 
   return (
     <section 
+      id="case-studies"
       className="relative py-10 sm:py-16 md:py-20 lg:py-28 bg-[#F7F6F2] overflow-hidden border-b border-[#DEDED7]/70"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
