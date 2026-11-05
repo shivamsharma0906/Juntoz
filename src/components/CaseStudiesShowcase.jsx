@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal.jsx';
+import CardImageShader from './effects/CardImageShader.jsx';
 import { showcaseCaseStudies, showcaseAggregateStats } from '../data/caseStudies.js';
 
 const STAGES = ['STRATEGY', 'EXECUTION', 'RESULTS', 'GROWTH'];
@@ -112,19 +113,18 @@ export default function CaseStudiesShowcase() {
                   
                   {/* Left Visual Image Frame (7 Cols) */}
                   <div className="md:col-span-7 relative rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[320px]">
-                    <img
+                    <CardImageShader
                       src={current.coverImage}
                       alt={current.client}
                       loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover block"
+                      className="w-full h-full min-h-[260px] sm:min-h-[320px]"
                     />
                     
                     {/* Gradient Overlay Scrim */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
 
                     {/* Bottom Info Scrim Overlay */}
-                    <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
                       <span className="text-[10px] font-sans font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white mb-1.5 inline-block">
                         {current.category}
                       </span>
@@ -134,7 +134,7 @@ export default function CaseStudiesShowcase() {
                     </div>
 
                     {/* Decorative Script Overlay Phrase */}
-                    <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                    <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 pointer-events-none">
                       <span className="font-script text-white text-base tracking-wide">
                         {current.overlayQuote}
                       </span>
@@ -241,9 +241,14 @@ export default function CaseStudiesShowcase() {
                   }`}
                 >
                   <div className="relative rounded-xl overflow-hidden aspect-[16/9] mb-2.5">
-                    <img src={study.coverImage} alt={study.client} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                    <CardImageShader
+                      src={study.coverImage}
+                      alt={study.client}
+                      loading="lazy"
+                      className="w-full h-full"
+                    />
                     {isActive && (
-                      <span className="absolute bottom-1.5 left-1.5 w-3 h-3 rounded-full bg-[#5D2E85] border-2 border-white shadow-xs" />
+                      <span className="absolute bottom-1.5 left-1.5 w-3 h-3 rounded-full bg-[#5D2E85] border-2 border-white shadow-xs pointer-events-none" />
                     )}
                   </div>
                   <h4 className="font-heading font-bold text-xs text-[#111111] truncate">

@@ -13,4 +13,9 @@ export const motionConfig = {
   scrollStory: (typeof window !== 'undefined' && typeof window.__ENABLE_SCROLL_STORY__ === 'boolean')
     ? window.__ENABLE_SCROLL_STORY__
     : ((typeof import.meta !== 'undefined' && import.meta.env?.VITE_SCROLL_STORY === 'true') || false),
+
+  // Phase 2: Case-study card shader hover distortion (default: false)
+  caseHover: (typeof window !== 'undefined' && typeof window.__ENABLE_CASE_HOVER__ === 'boolean')
+    ? window.__ENABLE_CASE_HOVER__
+    : ((typeof import.meta !== 'undefined' && import.meta.env?.VITE_CASE_HOVER === 'true') || false),
 };
