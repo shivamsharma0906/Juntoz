@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import { motionConfig } from '../config/motion';
 
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20to%20request%20a%20growth%20audit%20for%20my%20business.';
@@ -20,47 +21,38 @@ const PROOF = [
 ];
 
 export default function CTASection() {
-  const ref = useRef(null);
-  const btnRef = useRef(null);
-  const [visible, setVisible] = useState(false);
-  const [btnOffset, setBtnOffset] = useState({ x: 0, y: 0 });
-  const [spotlight, setSpotlight] = useState({ x: -100, y: -100, active: false });
-
-  // Intersection observer for headline entrance
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) setVisible(true);
-      },
-      { threshold: 0.15 }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-
-  // Subtle magnetic hover pull & spotlight sheen on primary button (desktop only)
-  const handleBtnMouseMove = useCallback((e) => {
-    if (!motionConfig.ctaMotion) return;
-    const btn = btnRef.current;
-    if (!btn) return;
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const pullX = (x - rect.width / 2) * 0.12;
-    const pullY = (y - rect.height / 2) * 0.18;
-    setBtnOffset({ x: pullX, y: pullY });
-    setSpotlight({ x, y, active: true });
-  }, []);
-
-  const handleBtnMouseLeave = useCallback(() => {
-    setBtnOffset({ x: 0, y: 0 });
-    setSpotlight((prev) => ({ ...prev, active: false }));
-  }, []);
-
   const isMotionActive = motionConfig.ctaMotion;
 
+  // Magnetic button & spotlight sheen state
+  const [btnPos, setBtnPos] = useState({ x: 0, y: 0 });
+  const [sheen, setSheen] = useState({ x: 50, y: 50, opacity: 0 });
+
+  const handleMouseMove = useCallback((e) => {
+    if (!isMotionActive) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Smooth magnetic pull (max 8px in cursor direction)
+    const pullX = ((x - rect.width / 2) / (rect.width / 2)) * 8;
+    const pullY = ((y - rect.height / 2) / (rect.height / 2)) * 8;
+    setBtnPos({ x: pullX, y: pullY });
+
+    // Reactive spotlight position percentage
+    setSheen({
+      x: Math.round((x / rect.width) * 100),
+      y: Math.round((y / rect.height) * 100),
+      opacity: 1,
+    });
+  }, [isMotionActive]);
+
+  const handleMouseLeave = useCallback(() => {
+    setBtnPos({ x: 0, y: 0 });
+    setSheen((prev) => ({ ...prev, opacity: 0 }));
+  }, []);
+
   return (
-    <section ref={ref} id="cta" className="relative flex flex-col overflow-hidden bg-[#111111] py-24 md:py-32">
+    <section id="cta" className="relative flex flex-col overflow-hidden bg-[#111111] py-24 md:py-32">
       {/* Ticker Bar */}
       <div className="relative z-10 py-3 overflow-hidden border-y border-white/10 bg-[#161616] mb-16">
         <div className="cta-ticker-fwd flex whitespace-nowrap w-max">
@@ -72,51 +64,65 @@ export default function CTASection() {
         </div>
       </div>
 
-      <div className="flex-1 flex items-center justify-center relative z-10">
-        {/* Subtle Advocacy Halo Ring & Ambient Aura behind conversion content */}
+      <div className="flex-1 flex items-center justify-center relative">
+        {/* Luminous Purple Advocacy Halo & Orbiting Rings */}
         {isMotionActive && (
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] sm:w-[680px] sm:h-[680px] pointer-events-none -z-0"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] sm:w-[720px] sm:h-[720px] pointer-events-none z-0"
             aria-hidden="true"
           >
-            {/* Ambient soft pulse glow */}
-            <div className="absolute inset-0 rounded-full bg-[#5D2E85]/20 blur-3xl animate-pulse duration-[7000ms]" />
-            {/* Orbital fine ring with advocacy particle nodes */}
-            <svg className="w-full h-full text-[#5D2E85]/25 cta-advocacy-spin" viewBox="0 0 400 400" fill="none">
-              <circle cx="200" cy="200" r="185" stroke="currentColor" strokeWidth="1" strokeDasharray="4 10" opacity="0.6" />
-              <circle cx="200" cy="200" r="145" stroke="currentColor" strokeWidth="0.75" strokeDasharray="3 14" opacity="0.4" />
-              <circle cx="200" cy="15" r="3.5" fill="#5D2E85" opacity="0.9" />
-              <circle cx="385" cy="200" r="2.5" fill="#F1E7F9" opacity="0.8" />
-              <circle cx="70" cy="325" r="3" fill="#5D2E85" opacity="0.7" />
+            {/* Ambient soft glow core */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#5D2E85]/40 via-[#8B44BB]/25 to-transparent blur-3xl animate-pulse duration-[5000ms]" />
+            
+            {/* Secondary radial bloom */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[450px] sm:h-[450px] rounded-full bg-[#5D2E85]/30 blur-2xl" />
+
+            {/* Orbital fine rings with advocacy particle nodes */}
+            <svg className="w-full h-full text-[#8B44BB] cta-advocacy-spin" viewBox="0 0 400 400" fill="none">
+              {/* Outer dashed ring */}
+              <circle cx="200" cy="200" r="185" stroke="currentColor" strokeWidth="1.5" strokeDasharray="6 10" opacity="0.5" />
+              {/* Inner dashed ring */}
+              <circle cx="200" cy="200" r="145" stroke="#C488F0" strokeWidth="1" strokeDasharray="3 14" opacity="0.4" />
+              
+              {/* Glowing Advocacy Nodes */}
+              <circle cx="200" cy="15" r="5" fill="#F1E7F9" filter="drop-shadow(0 0 6px #F1E7F9)" />
+              <circle cx="385" cy="200" r="4" fill="#C488F0" filter="drop-shadow(0 0 6px #8B44BB)" />
+              <circle cx="200" cy="385" r="4.5" fill="#5D2E85" filter="drop-shadow(0 0 4px #5D2E85)" />
+              <circle cx="15" cy="200" r="3.5" fill="#F1E7F9" filter="drop-shadow(0 0 4px #F1E7F9)" />
+              <circle cx="70" cy="325" r="4" fill="#A84EE6" filter="drop-shadow(0 0 5px #A84EE6)" />
             </svg>
           </div>
         )}
 
         <div className="w-full max-w-4xl mx-auto px-5 sm:px-6 text-center relative z-10">
 
-          {/* Masked Typographic Entrance */}
+          {/* Masked Typographic Entrance Reveal */}
           <div className="mb-6">
             <h2
               className="font-heading font-black uppercase leading-tight tracking-tight select-none"
               aria-label="Ready to scale your business?"
             >
               <span className="block overflow-hidden mb-2">
-                <span
-                  className={`block text-white text-3xl sm:text-5xl md:text-6xl transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    isMotionActive ? (visible ? 'translate-y-0' : 'translate-y-full') : 'translate-y-0'
-                  }`}
+                <motion.span
+                  className="block text-white text-3xl sm:text-5xl md:text-6xl"
+                  initial={isMotionActive ? { y: '120%', opacity: 0 } : false}
+                  whileInView={isMotionActive ? { y: 0, opacity: 1 } : {}}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
                 >
                   READY TO SCALE
-                </span>
+                </motion.span>
               </span>
               <span className="block overflow-hidden">
-                <span
-                  className={`block text-[#5D2E85] text-4xl sm:text-6xl md:text-7xl transition-transform duration-700 delay-100 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    isMotionActive ? (visible ? 'translate-y-0' : 'translate-y-full') : 'translate-y-0'
-                  }`}
+                <motion.span
+                  className="block text-[#5D2E85] text-4xl sm:text-6xl md:text-7xl"
+                  initial={isMotionActive ? { y: '120%', opacity: 0 } : false}
+                  whileInView={isMotionActive ? { y: 0, opacity: 1 } : {}}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.75, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
                 >
                   YOUR BUSINESS?
-                </span>
+                </motion.span>
               </span>
             </h2>
           </div>
@@ -128,28 +134,30 @@ export default function CTASection() {
           <div className="mb-16">
             <div className="inline-block relative">
               <a
-                ref={btnRef}
                 href={WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                onMouseMove={handleBtnMouseMove}
-                onMouseLeave={handleBtnMouseLeave}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
                 style={{
                   transform: isMotionActive
-                    ? `translate3d(${btnOffset.x}px, ${btnOffset.y}px, 0)`
+                    ? `translate3d(${btnPos.x}px, ${btnPos.y}px, 0)`
                     : 'none',
-                  transition: isMotionActive && btnOffset.x === 0
+                  transition: btnPos.x === 0
                     ? 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s'
-                    : 'background-color 0.2s',
+                    : 'transform 0.08s ease-out, background-color 0.2s',
                 }}
-                className="relative overflow-hidden inline-flex items-center justify-center gap-3 px-8 py-4 sm:px-12 sm:py-5 rounded-full font-sans font-bold text-sm sm:text-base uppercase tracking-wider text-white bg-[#5D2E85] hover:bg-[#4C266D] shadow-md active:scale-95 cursor-pointer"
+                className="relative overflow-hidden inline-flex items-center justify-center gap-3 px-8 py-4 sm:px-12 sm:py-5 rounded-full font-sans font-bold text-sm sm:text-base uppercase tracking-wider text-white bg-[#5D2E85] hover:bg-[#4C266D] shadow-xl active:scale-95 cursor-pointer group"
               >
-                {/* Reactive spotlight sheen */}
-                {isMotionActive && spotlight.active && (
+                {/* Reactive liquid spotlight sheen */}
+                {isMotionActive && (
                   <span
                     aria-hidden="true"
-                    className="absolute pointer-events-none rounded-full -translate-x-1/2 -translate-y-1/2 w-36 h-36 bg-white/20 blur-md transition-opacity duration-200"
-                    style={{ left: `${spotlight.x}px`, top: `${spotlight.y}px` }}
+                    className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+                    style={{
+                      opacity: sheen.opacity,
+                      background: `radial-gradient(circle 90px at ${sheen.x}% ${sheen.y}%, rgba(255,255,255,0.4) 0%, rgba(241,231,249,0.18) 50%, transparent 100%)`,
+                    }}
                   />
                 )}
 
@@ -187,7 +195,7 @@ export default function CTASection() {
           100% { transform: rotate(360deg); }
         }
         .cta-ticker-fwd { animation: cta-ticker-fwd 26s linear infinite; }
-        .cta-advocacy-spin { animation: cta-advocacy-spin 90s linear infinite; }
+        .cta-advocacy-spin { animation: cta-advocacy-spin 22s linear infinite; }
       `}</style>
     </section>
   );
