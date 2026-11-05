@@ -18,4 +18,9 @@ export const motionConfig = {
   caseHover: (typeof window !== 'undefined' && typeof window.__ENABLE_CASE_HOVER__ === 'boolean')
     ? window.__ENABLE_CASE_HOVER__
     : ((typeof import.meta !== 'undefined' && import.meta.env?.VITE_CASE_HOVER === 'true') || false),
+
+  // Phase 3: Final conversion CTA typography motion & advocacy halo (default: false)
+  ctaMotion: (typeof window !== 'undefined' && typeof window.__ENABLE_CTA_MOTION__ === 'boolean')
+    ? window.__ENABLE_CTA_MOTION__
+    : ((typeof import.meta !== 'undefined' && import.meta.env?.VITE_CTA_MOTION === 'true') || false),
 };
