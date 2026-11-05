@@ -4,7 +4,7 @@ import { motionConfig } from '../../config/motion';
 /**
  * High-performance, luxury liquid silk shader hover effect for case study card imagery.
  * Progressive enhancement:
- * - Mounted only on desktop (pointer: fine) with hardwareConcurrency >= 4 and no reduced motion.
+ * - Mounted only on desktop (innerWidth >= 1024, pointer: fine) with hardwareConcurrency >= 4 and no reduced motion.
  * - Always keeps the underlying <img> in the DOM for SEO, lazy-loading, and accessibility.
  * - RAF loop runs ONLY while hovering or transitioning, stopping completely when idle (0% CPU/GPU).
  * - Graceful fallback to CSS hover scale if WebGL is unavailable, tainted, or flag is OFF.
@@ -121,14 +121,15 @@ export default function CardImageShader({
   const startTimeRef = useRef(0);
   const isRunningRef = useRef(false);
 
-  // Pure lazy state initialization to prevent setState within effect
+  // Pure lazy state initialization: desktop only (>= 1024), hardware >= 4, pointer: fine, no reduced motion
   const [canMountShader] = useState(() => {
     if (typeof window === 'undefined') return false;
     const flagEnabled = motionConfig.caseHover;
+    const isDesktopWidth = window.innerWidth >= 1024;
     const hasHardware = (navigator.hardwareConcurrency || 4) >= 4;
     const isDesktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    return Boolean(flagEnabled && hasHardware && isDesktopPointer && !prefersReducedMotion);
+    return Boolean(flagEnabled && isDesktopWidth && hasHardware && isDesktopPointer && !prefersReducedMotion);
   });
 
   const [isReady, setIsReady] = useState(false);
@@ -209,14 +210,15 @@ export default function CardImageShader({
     gl.enableVertexAttribArray(posLocation);
     gl.vertexAttribPointer(posLocation, 2, gl.FLOAT, false, 0, 0);
 
-    // Load texture
+    // Load texture with unmount protection
+    let isCancelled = false;
     const texture = gl.createTexture();
     textureRef.current = texture;
     const img = new Image();
     img.crossOrigin = 'anonymous';
 
     img.onload = () => {
-      if (!glRef.current) return;
+      if (isCancelled || !glRef.current || !textureRef.current || !programRef.current) return;
       gl.bindTexture(gl.TEXTURE_2D, texture);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -237,14 +239,14 @@ export default function CardImageShader({
 
     img.onerror = () => {
       // Fallback cleanly to standard CSS img
-      setIsReady(false);
+      if (!isCancelled) setIsReady(false);
     };
 
     img.src = src;
 
     // Handle container resizing
     const updateSize = () => {
-      if (!container || !canvas || !gl) return;
+      if (isCancelled || !container || !canvas || !gl) return;
       const rect = container.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const width = Math.max(1, Math.round(rect.width * dpr));
@@ -254,8 +256,10 @@ export default function CardImageShader({
         canvas.width = width;
         canvas.height = height;
         gl.viewport(0, 0, width, height);
-        gl.useProgram(program);
-        gl.uniform2f(gl.getUniformLocation(program, 'u_resolution'), width, height);
+        if (programRef.current) {
+          gl.useProgram(programRef.current);
+          gl.uniform2f(gl.getUniformLocation(programRef.current, 'u_resolution'), width, height);
+        }
       }
     };
 
@@ -264,6 +268,9 @@ export default function CardImageShader({
     resizeObserver.observe(container);
 
     return () => {
+      isCancelled = true;
+      img.onload = null;
+      img.onerror = null;
       resizeObserver.disconnect();
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       if (gl) {
@@ -304,11 +311,15 @@ export default function CardImageShader({
   return (
     <div
       ref={containerRef}
-      className={`relative overflow-hidden group/shader ${className}`}
+      tabIndex={0}
+      aria-label={`${alt || 'Case study visual'} (hover or focus to inspect details)`}
+      className={`relative overflow-hidden group/shader focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2 ${className}`}
       style={{ aspectRatio }}
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onFocus={handleMouseEnter}
+      onBlur={handleMouseLeave}
     >
       {/* Primary Accessible & SEO image */}
       <img
@@ -316,7 +327,7 @@ export default function CardImageShader({
         alt={alt}
         loading={loading}
         decoding="async"
-        className={`w-full h-full object-cover block transition-transform duration-500 ease-out group-hover/shader:scale-[1.03] ${imgClassName}`}
+        className={`w-full h-full object-cover block transition-transform duration-500 ease-out group-hover/shader:scale-[1.03] group-focus-visible:scale-[1.03] ${imgClassName}`}
       />
 
       {/* WebGL Canvas overlay */}
