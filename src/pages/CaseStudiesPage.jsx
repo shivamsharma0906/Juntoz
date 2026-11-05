@@ -205,6 +205,8 @@ export default function CaseStudiesPage() {
                         <img
                           src={study.image}
                           alt={study.clientName}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                         <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-[#111111]/80 text-white font-mono text-[10px] uppercase font-bold tracking-wider backdrop-blur-sm">

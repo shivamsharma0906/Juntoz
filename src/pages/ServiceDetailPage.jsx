@@ -5,8 +5,8 @@ import ScrollReveal from '../components/ScrollReveal';
 import { SERVICE_DETAILS } from '../data/serviceDetails';
 
 import logo from '../components/logo.webp';
-import reel1Thumb from '../assets/reels/image.png';
-import reel2Thumb from '../assets/reels/image copy.png';
+import reel1Thumb from '../assets/reels/reel-bridal-masterclass-thumb.webp';
+import reel2Thumb from '../assets/reels/reel-salon-aesthetic-thumb.webp';
 import reel3Thumb from '../assets/reels/reel-bts-setup.jpg';
 
 const ALL_SERVICES_LIST = [
@@ -172,6 +172,10 @@ function ServiceSimulator({ serviceId, serviceTitle }) {
                           <img
                             src={reel.thumbnail}
                             alt={reel.title}
+                            loading="lazy"
+                            decoding="async"
+                            width={640}
+                            height={1137}
                             className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300 ease-out motion-reduce:group-hover:scale-100"
                           />
                         ) : (

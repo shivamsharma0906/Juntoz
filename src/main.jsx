@@ -14,6 +14,11 @@ if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
 
+// Remove static fallback head tags on client hydration so react-helmet-async (React 19) metadata takes over exclusively without duplicates
+if (typeof document !== 'undefined') {
+  document.querySelectorAll('[data-rh="true"]').forEach((el) => el.remove());
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <HelmetProvider>

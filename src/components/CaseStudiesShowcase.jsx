@@ -115,6 +115,8 @@ export default function CaseStudiesShowcase() {
                     <img
                       src={current.coverImage}
                       alt={current.client}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover block"
                     />
                     
@@ -239,7 +241,7 @@ export default function CaseStudiesShowcase() {
                   }`}
                 >
                   <div className="relative rounded-xl overflow-hidden aspect-[16/9] mb-2.5">
-                    <img src={study.coverImage} alt={study.client} className="w-full h-full object-cover" />
+                    <img src={study.coverImage} alt={study.client} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                     {isActive && (
                       <span className="absolute bottom-1.5 left-1.5 w-3 h-3 rounded-full bg-[#5D2E85] border-2 border-white shadow-xs" />
                     )}

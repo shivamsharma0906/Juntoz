@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import teamImage from './image.png';
+import teamImage from './juntoz-team-culture.webp';
 import ScrollReveal from './ScrollReveal.jsx';
 
 export default function SimpleAbout() {
@@ -18,6 +18,10 @@ export default function SimpleAbout() {
                   <motion.img 
                     src={teamImage} 
                     alt="Juntoz Team" 
+                    loading="lazy"
+                    decoding="async"
+                    width={1441}
+                    height={803}
                     className="w-full h-auto object-contain block"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
 import TeamMemberProfile from '../components/TeamMemberProfile';
-import coFounderImg from '../components/CoFounder.webp';
+import coFounderImg from '../components/co-founder-saloni-mehta.webp';
 import { COMPANY_STATS } from '../data/clients';
 
 export default function CoFounderPage() {

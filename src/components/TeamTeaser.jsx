@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
 import founderImg from './Founder.webp';
-import coFounderImg from './CoFounder.webp';
+import coFounderImg from './co-founder-saloni-mehta.webp';
 
 export default function TeamTeaser() {
   const leaders = [
@@ -11,6 +11,8 @@ export default function TeamTeaser() {
       badge: 'Growth Strategist',
       description: 'EXTC Engineer (SPIT) with 9+ years corporate leadership experience at TCS & Nokia. Built Juntoz to scale brands with predictable growth.',
       image: founderImg,
+      width: 800,
+      height: 800,
       link: '/founder',
       accentColor: '#5D2E85',
     },
@@ -20,6 +22,8 @@ export default function TeamTeaser() {
       badge: 'Head of Operations & Client Success',
       description: 'B.Com with 7+ years business operations experience. Drives client success, operational systems, and business execution.',
       image: coFounderImg,
+      width: 1254,
+      height: 1254,
       link: '/co-founder',
       accentColor: '#111111',
     },
@@ -49,6 +53,10 @@ export default function TeamTeaser() {
                       <img
                         src={leader.image}
                         alt={leader.name}
+                        loading="lazy"
+                        decoding="async"
+                        width={leader.width}
+                        height={leader.height}
                         className="w-full h-full object-cover object-top"
                       />
                     ) : (
