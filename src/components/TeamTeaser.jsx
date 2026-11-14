@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 import founderImg from './Founder.webp';
 import coFounderImg from './co-founder-saloni-mehta.webp';
 
@@ -33,11 +34,16 @@ export default function TeamTeaser() {
     <section className="py-10 sm:py-16 lg:py-24 bg-[#F7F6F2] relative overflow-hidden border-b border-[#DEDED7]/70">
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
         <ScrollReveal data-reveal="up" className="text-center mb-8 sm:mb-14">
-         
-          <h2 className="font-heading font-black text-3xl sm:text-5xl text-[#111111] uppercase tracking-tight">
-            Meet the <span className="text-[#5D2E85]">Leadership</span>
+          <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+            EXECUTIVE TEAM · PROVEN OPERATORS
+          </span>
+          <h2
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            className="font-heading font-normal text-3xl sm:text-5xl lg:text-[3.25rem] text-[#111111] leading-[1.12] tracking-tight mb-4"
+          >
+            Meet The <HeadlineHighlight>Leadership</HeadlineHighlight>.
           </h2>
-          <p className="font-body text-[#5F5F5A] text-sm sm:text-base max-w-xl mx-auto mt-3 leading-relaxed">
+          <p className="font-body text-[#5F5F5A] text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
             Combining strategic growth marketing with operational excellence to scale ambitious modern brands.
           </p>
         </ScrollReveal>

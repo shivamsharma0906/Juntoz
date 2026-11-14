@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import ScrollReveal from './ScrollReveal.jsx';
 import CardImageShader from './effects/CardImageShader.jsx';
 import { showcaseCaseStudies, showcaseAggregateStats } from '../data/caseStudies.js';
+import { motionConfig } from '../config/motion';
 
 const STAGES = ['STRATEGY', 'EXECUTION', 'RESULTS', 'GROWTH'];
 
@@ -28,11 +30,16 @@ export default function CaseStudiesShowcase() {
 
   // Active process stage maps dynamically to case study index
   const activeStageIdx = activeIdx % STAGES.length;
+  const isRecomposeActive = motionConfig.recomposeTypography;
 
   return (
     <section 
       id="case-studies"
-      className="relative py-10 sm:py-16 md:py-20 lg:py-28 bg-[#F7F6F2] overflow-hidden border-b border-[#DEDED7]/70"
+      className={`relative bg-[#F7F6F2] overflow-hidden border-b border-[#DEDED7]/70 ${
+        isRecomposeActive
+          ? 'py-16 sm:py-24 md:py-32'
+          : 'py-10 sm:py-16 md:py-20 lg:py-28'
+      }`}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -45,10 +52,9 @@ export default function CaseStudiesShowcase() {
           <div className="lg:col-span-4 flex flex-col justify-between space-y-6">
             <ScrollReveal data-reveal="up">
               {/* Eyebrow */}
-              <div className="inline-flex items-center gap-2 font-sans font-bold text-xs uppercase tracking-widest text-[#5D2E85] mb-3">
-                <span className="w-2 h-2 rounded-full bg-[#5D2E85] animate-pulse" />
-                <span>CLIENT SUCCESS</span>
-              </div>
+              <p className="font-mono text-xs uppercase tracking-widest text-[#5D2E85] mb-3">
+                Client Success
+              </p>
 
               {/* Headline */}
               <h2 className="font-heading font-black text-3xl sm:text-5xl lg:text-[3.2rem] leading-[1.06] uppercase tracking-tight text-[#111111] mb-4">
@@ -82,14 +88,14 @@ export default function CaseStudiesShowcase() {
                   className="w-11 h-11 rounded-full border border-[#DEDED7] bg-white flex items-center justify-center text-[#111111] hover:border-[#5D2E85] hover:bg-[#F1E7F9] hover:text-[#5D2E85] transition-all duration-200 active:scale-95 shadow-subtle cursor-pointer"
                   aria-label="Previous Case Study"
                 >
-                  ←
+                  <ArrowLeft className="w-4 h-4" />
                 </button>
                 <button
                   onClick={handleNext}
                   className="w-11 h-11 rounded-full border border-[#DEDED7] bg-white flex items-center justify-center text-[#111111] hover:border-[#5D2E85] hover:bg-[#F1E7F9] hover:text-[#5D2E85] transition-all duration-200 active:scale-95 shadow-subtle cursor-pointer"
                   aria-label="Next Case Study"
                 >
-                  →
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             </ScrollReveal>
@@ -113,48 +119,44 @@ export default function CaseStudiesShowcase() {
                 <div className="relative grid grid-cols-1 md:grid-cols-12 gap-4 rounded-3xl bg-white border border-[#DEDED7] p-4 sm:p-5 shadow-card overflow-hidden">
                   
                   {/* Left Visual Image Frame (7 Cols) */}
-                  <div className="md:col-span-7 relative rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[320px]">
+                  <div className="md:col-span-7 relative rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[340px] bg-[#111111] group">
                     <CardImageShader
                       src={current.coverImage}
                       alt={current.client}
                       loading="lazy"
-                      className="w-full h-full min-h-[260px] sm:min-h-[320px]"
+                      className="w-full h-full min-h-[260px] sm:min-h-[340px]"
                     />
                     
                     {/* Gradient Overlay Scrim */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none" />
 
                     {/* Bottom Info Scrim Overlay */}
-                    <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
-                      <span className="text-[10px] font-sans font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white mb-1.5 inline-block">
+                    <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none z-10">
+                      <p className="text-[11px] font-mono font-medium uppercase tracking-wider text-white/90 mb-1">
                         {current.category}
-                      </span>
+                      </p>
                       <h3 className="font-heading font-bold text-lg sm:text-xl text-white leading-tight">
                         {current.client}
                       </h3>
                     </div>
 
-                    {/* Decorative Script Overlay Phrase */}
-                    <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 pointer-events-none">
-                      <span className="font-script text-white text-base tracking-wide">
+                    {/* Editorial Overlay Caption */}
+                    <div className="absolute top-4 left-4 pointer-events-none z-10">
+                      <span className="font-heading italic text-white/90 text-sm tracking-wide drop-shadow-md">
                         {current.overlayQuote}
                       </span>
-                      <span className="text-white text-xs">✨</span>
                     </div>
                   </div>
 
                   {/* Right Live Result Panel (5 Cols) */}
                   <div className="md:col-span-5 bg-[#FAFAF8] border border-[#DEDED7] rounded-2xl p-4 sm:p-5 flex flex-col justify-between space-y-4">
                     <div>
-                      {/* Panel Badge */}
+                      {/* Panel Header */}
                       <div className="flex items-center justify-between pb-3 border-b border-[#DEDED7] mb-4">
-                        <div className="flex items-center gap-1.5">
-                          <span className="w-2 h-2 rounded-full bg-[#287A55] animate-pulse" />
-                          <span className="font-sans font-bold text-[10px] uppercase tracking-wider text-[#111111]">
-                            LIVE RESULT
-                          </span>
-                        </div>
-                        <span className="text-[9.5px] font-sans text-[#5F5F5A] font-semibold">
+                        <span className="font-mono font-bold text-[11px] uppercase tracking-wider text-[#111111]">
+                          Live Result
+                        </span>
+                        <span className="text-[10px] font-mono text-[#5F5F5A]">
                           {current.liveResultDateRange}
                         </span>
                       </div>
@@ -167,8 +169,8 @@ export default function CaseStudiesShowcase() {
                               <span className="font-heading font-black text-xl sm:text-2xl text-[#111111]">
                                 {m.value}
                               </span>
-                              <span className="text-[10px] font-sans font-bold text-[#287A55] bg-[#287A55]/10 px-1.5 py-0.5 rounded">
-                                ↗
+                              <span className="p-1 rounded bg-[#287A55]/10">
+                                <ArrowUpRight className="w-3.5 h-3.5 text-[#287A55]" />
                               </span>
                             </div>
                             <span className="font-body text-[11px] text-[#5F5F5A] block mt-0.5 font-medium leading-tight">
@@ -181,12 +183,12 @@ export default function CaseStudiesShowcase() {
 
                     {/* CTA Button */}
                     <Link
-                      to="/case-studies"
+                      to={`/case-study/${current.slug}`}
                       onClick={() => window.scrollTo(0, 0)}
-                      className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#5D2E85] hover:bg-[#4C266D] text-white font-sans font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
+                      className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#5D2E85] hover:bg-[#4C266D] text-white font-sans font-bold text-xs uppercase tracking-wider transition-colors shadow-sm cursor-pointer"
                     >
                       <span>View Full Case Study</span>
-                      <span>→</span>
+                      <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
 
@@ -197,75 +199,85 @@ export default function CaseStudiesShowcase() {
 
           {/* ════ ZONE 3: RIGHT-SIDE VERTICAL PROCESS TABS (2 Cols - XL Screens Only) ════ */}
           <div className="hidden xl:flex xl:col-span-2 flex-col justify-center items-start pl-4 space-y-6">
-            {/* Script Doodle Header */}
-            <div className="space-y-1">
-              <span className="font-script text-[#5D2E85] text-xl font-bold block">
-                Ideas to Impact
-              </span>
-              <svg className="w-8 h-6 text-[#5D2E85]" viewBox="0 0 32 24" fill="none">
-                <path d="M4 4 C 12 18, 24 16, 28 20 M20 22 L 28 20 L 26 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <div className="flex items-center gap-1.5 text-xs font-script text-[#5D2E85]">
+              <span>Ideas to Impact</span>
+              <svg className="w-4 h-4 text-[#5D2E85]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </div>
 
-            {/* Stage List */}
             <div className="space-y-3">
               {STAGES.map((stage, idx) => (
-                <div key={stage} className="flex items-center gap-2.5">
+                <button
+                  key={stage}
+                  onClick={() => setActiveIdx(idx % total)}
+                  className="flex items-center gap-2.5 text-left group cursor-pointer focus:outline-none"
+                  aria-label={`Jump to process stage ${stage}`}
+                >
                   <span className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                    idx === activeStageIdx ? 'bg-[#5D2E85] scale-125' : 'border border-[#DEDED7] bg-white'
+                    idx === activeStageIdx ? 'bg-[#5D2E85] scale-125 ring-4 ring-[#5D2E85]/15' : 'border border-[#DEDED7] bg-white group-hover:border-[#5D2E85]'
                   }`} />
                   <span className={`font-sans font-bold text-xs uppercase tracking-wider transition-colors duration-300 ${
-                    idx === activeStageIdx ? 'text-[#5D2E85]' : 'text-[#5F5F5A]/60'
+                    idx === activeStageIdx ? 'text-[#5D2E85]' : 'text-[#5F5F5A]/60 group-hover:text-[#111111]'
                   }`}>
                     {stage}
                   </span>
-                </div>
+                </button>
               ))}
             </div>
           </div>
 
         </div>
 
-        {/* ════ ZONE 4: THUMBNAIL STRIP ════ */}
+        {/* ════ ZONE 4: THUMBNAILS (Responsive 5-Col Grid on Desktop, Snap Carousel on Mobile) ════ */}
         <ScrollReveal data-reveal="up" delay={150} className="mb-14 sm:mb-18">
-          <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar">
+          <div className="flex lg:grid lg:grid-cols-5 gap-3.5 sm:gap-4 overflow-x-auto lg:overflow-visible pb-3 lg:pb-0 snap-x snap-mandatory hide-scrollbar">
             {showcaseCaseStudies.map((study, idx) => {
               const isActive = activeIdx === idx;
+              const primaryMetric = study.metrics[0];
               return (
                 <button
                   key={study.id}
                   onClick={() => setActiveIdx(idx)}
-                  className={`w-[190px] sm:w-[220px] shrink-0 snap-start text-left rounded-2xl p-2.5 border transition-all duration-300 relative cursor-pointer ${
+                  className={`w-[200px] sm:w-[230px] lg:w-auto shrink-0 snap-start text-left rounded-2xl p-3 border transition-all duration-300 relative cursor-pointer group ${
                     isActive
-                      ? 'bg-white border-2 border-[#5D2E85] shadow-card scale-[1.02]'
-                      : 'bg-white/80 border-[#DEDED7] hover:border-[#111111]/30 opacity-75 hover:opacity-100'
+                      ? 'bg-white border-2 border-[#5D2E85] shadow-card scale-[1.02] ring-2 ring-[#5D2E85]/20'
+                      : 'bg-white/85 border-[#DEDED7] hover:border-[#5D2E85]/40 hover:bg-white hover:scale-[1.01] opacity-80 hover:opacity-100'
                   }`}
+                  aria-label={`Select ${study.client} case study`}
                 >
-                  <div className="relative rounded-xl overflow-hidden aspect-[16/9] mb-2.5">
+                  <div className="relative rounded-xl overflow-hidden aspect-[16/10] mb-2.5 bg-[#111111]">
                     <img
                       src={study.coverImage}
                       alt={study.client}
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
+                    {/* Primary Metric Tag */}
+                    <div className="absolute top-2 left-2 px-1.5 py-0.5 bg-black/75 rounded text-white font-mono font-bold text-[10px] tracking-wide pointer-events-none">
+                      {primaryMetric.value}
+                    </div>
+
+                    {/* Active State Indicator Dot */}
                     {isActive && (
-                      <span className="absolute bottom-1.5 left-1.5 w-3 h-3 rounded-full bg-[#5D2E85] border-2 border-white shadow-xs pointer-events-none" />
+                      <span className="absolute bottom-2 right-2 w-3 h-3 rounded-full bg-[#5D2E85] border-2 border-white shadow-sm pointer-events-none" />
                     )}
                   </div>
-                  <h4 className="font-heading font-bold text-xs text-[#111111] truncate">
-                    {study.client}
-                  </h4>
-                  <p className="font-body text-[10px] text-[#5F5F5A] uppercase tracking-wider font-semibold">
+                  
+                  <p className="font-sans text-[9.5px] uppercase tracking-wider font-bold text-[#5D2E85] mb-1">
                     {study.category}
                   </p>
+                  <h4 className="font-heading font-bold text-xs text-[#111111] line-clamp-2 leading-snug min-h-[2.1rem]">
+                    {study.client}
+                  </h4>
                 </button>
               );
             })}
           </div>
         </ScrollReveal>
 
-        {/* ════ ZONE 5: BOTTOM STATS ROW ════ */}
+        {/* ════ ZONE 5: BOTTOM STATS ROW (Aggregate Verified Metrics) ════ */}
         <ScrollReveal data-reveal="up" delay={200}>
           <div className="pt-8 border-t border-[#DEDED7] flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
             
@@ -304,7 +316,7 @@ export default function CaseStudiesShowcase() {
                 className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#F1E7F9] hover:bg-[#5D2E85] text-[#5D2E85] hover:text-white font-sans font-bold text-xs uppercase tracking-wider transition-colors border border-[#5D2E85]/20 shadow-xs"
               >
                 <span>See All Case Studies</span>
-                <span>→</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 

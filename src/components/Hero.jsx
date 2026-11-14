@@ -1,7 +1,8 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import Hero3D from './hero3d/Hero3D';
-import { motionConfig } from '../config/motion';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
+import MagneticPull from './ui/MagneticPull';
+import { trackCtaClick } from '../lib/telemetry';
 
 /* ─── Animation Variants ─── */
 const containerVariants = {
@@ -256,18 +257,13 @@ function FunnelSvgIllustration() {
 }
 
 function FullFunnelVisual() {
-  const isScrollStory = motionConfig.scrollStory;
   return (
     <div className="relative w-full max-w-[480px] xs:max-w-[500px] lg:max-w-[540px] xl:max-w-[580px] mx-auto flex items-center justify-center select-none py-2">
       {/* Background radial glow */}
       <div className="absolute inset-0 bg-gradient-to-tr from-[#5D2E85]/12 via-[#06B6D4]/12 to-transparent rounded-full blur-3xl -z-10" />
 
-      {/* ── 3D Interactive WebGL Funnel with Instant SVG Fallback ── */}
-      {isScrollStory ? (
-        <FunnelSvgIllustration />
-      ) : (
-        <Hero3D fallback={<FunnelSvgIllustration />} />
-      )}
+      {/* ── SVG Fallback Illustration ── */}
+      <FunnelSvgIllustration />
 
       {/* ── FLOATING METRICS HUD CARD & ATTACHED REVENUE BADGE (Overlay Right) ── */}
       <div className="absolute bottom-2 sm:bottom-6 right-0 sm:-right-4 z-20 pointer-events-auto">
@@ -390,35 +386,25 @@ export default function Hero() {
             animate="visible"
             className="lg:col-span-6 xl:col-span-6 flex flex-col items-start text-left w-full"
           >
+            <motion.span
+              variants={itemVariants}
+              className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3"
+            >
+              FULL-SERVICE DIGITAL PARTNER · ATTRIBUTABLE ROI
+            </motion.span>
+
             <motion.h1
               variants={itemVariants}
               style={{
                 fontFamily: "'Playfair Display', Georgia, serif",
               }}
-              className="font-heading font-normal text-[#111111] leading-[1.12] mb-4 sm:mb-5 text-[2.1rem] xs:text-[2.4rem] sm:text-[3.2rem] md:text-[3.6rem] lg:text-[3.1rem] xl:text-[3.6rem]"
+              className="font-heading font-normal text-[#111111] leading-[1.12] mb-4 sm:mb-5 text-[2.1rem] xs:text-[2.4rem] sm:text-[3.2rem] md:text-[3.6rem] lg:text-[3.1rem] xl:text-[3.6rem] tracking-tight"
             >
               <span className="block mb-1">From Awareness To</span>
-              <span className="block mb-1">
-                Advocacy:{' '}
-                <span className="relative inline-block whitespace-nowrap">
-                  <span className="relative z-10">Our</span>
-                  <svg
-                    className="absolute -bottom-1.5 left-0 w-full overflow-visible pointer-events-none text-[#5D2E85]"
-                    height="12"
-                    viewBox="0 0 100 12"
-                    fill="none"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M2 9 C 25 3, 50 11, 98 4"
-                      stroke="currentColor"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
+              <span className="block">
+                Advocacy: Our{' '}
+                <HeadlineHighlight>Full-Funnel System</HeadlineHighlight>.
               </span>
-              <span className="block">Full-Funnel System.</span>
             </motion.h1>
 
             {/* Subhead: 2 Short Sentences */}
@@ -429,26 +415,29 @@ export default function Hero() {
               We build the engine, you own the growth. Full-funnel marketing, scientifically proven.
             </motion.p>
 
-            {/* Single Layered Pill CTA Button */}
+            {/* Single Layered Pill CTA Button with Magnetic Pull & Telemetry */}
             <motion.div variants={itemVariants}>
-              <Link
-                to="/case-studies"
-                className="group relative inline-flex items-center gap-3 p-1 rounded-full bg-[#5D2E85]/10 border border-[#5D2E85]/35 hover:border-[#5D2E85] transition-all duration-300 shadow-[0_8px_24px_rgba(93,46,133,0.18)] hover:shadow-[0_12px_32px_rgba(93,46,133,0.30)] hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <div className="flex items-center gap-3 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white border border-[#5D2E85]/30 group-hover:border-[#5D2E85]/60 transition-colors">
-                  {/* Circular Icon Inset on Left */}
-                  <div className="w-5 h-5 rounded-full border-[2px] border-[#5D2E85] flex items-center justify-center shrink-0">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
+              <MagneticPull>
+                <Link
+                  to="/case-studies"
+                  onClick={() => trackCtaClick('hero_view_case_study', { destination: '/case-studies' })}
+                  className="group relative inline-flex items-center gap-3 p-1 rounded-full bg-[#5D2E85]/10 border border-[#5D2E85]/35 hover:border-[#5D2E85] transition-all duration-300 shadow-[0_8px_24px_rgba(93,46,133,0.18)] hover:shadow-[0_12px_32px_rgba(93,46,133,0.30)] hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  <div className="flex items-center gap-3 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white border border-[#5D2E85]/30 group-hover:border-[#5D2E85]/60 transition-colors">
+                    {/* Circular Icon Inset on Left */}
+                    <div className="w-5 h-5 rounded-full border-[2px] border-[#5D2E85] flex items-center justify-center shrink-0">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
+                    </div>
+                    <span className="font-heading font-bold text-xs sm:text-sm uppercase tracking-wider text-[#5D2E85]">
+                      VIEW CASE STUDY
+                    </span>
                   </div>
-                  <span className="font-heading font-bold text-xs sm:text-sm uppercase tracking-wider text-[#5D2E85]">
-                    VIEW CASE STUDY
-                  </span>
-                </div>
-              </Link>
+                </Link>
+              </MagneticPull>
             </motion.div>
           </motion.div>
 
-          {/* ── RIGHT COLUMN: Funnel Visual with Metrics Overlay (6 Cols) ── */}
+          {/* ── RIGHT COLUMN: Interactive 3D Crystal Sculpture when flagged, else default FullFunnelVisual ── */}
           <motion.div
             variants={visualVariants}
             initial="hidden"

@@ -88,14 +88,11 @@
   button, input, select, textarea {
     font-family: inherit;
   }
-  h1, h2, h3, h4, .font-heading {
-    font-family: 'Playfair Display', Georgia, serif;
+  h1, h2, h3, h4, h5, h6, .font-heading, .font-serif {
+    font-family: 'Playfair Display', Georgia, serif !important;
   }
   .font-body, .font-sans {
     font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  }
-  .font-heading, .font-serif {
-    font-family: 'Playfair Display', Georgia, serif !important;
   }
   *:focus {
     outline: none;
@@ -353,73 +350,31 @@
 
 /* ════════════════════════════════════════════════
    GLOBAL SCROLL REVEAL
-   JS in main.jsx scans [data-reveal] and adds .revealed
-   when elements enter viewport.
+   ScrollReveal.jsx now uses Framer Motion whileInView for all 3D
+   scroll animations. The CSS rules below are kept ONLY as a silent
+   fallback for any raw [data-reveal] elements that are NOT wrapped
+   in the ScrollReveal component (e.g. inline data-reveal attributes).
+   They must NOT fight Framer Motion, so the initial hidden state is
+   removed here — Framer Motion owns visibility.
 ════════════════════════════════════════════════ */
 
+/* Framer Motion-managed elements: let FM handle opacity/transform */
 [data-reveal] {
-  opacity: 0;
-  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  /* intentionally no opacity:0 here — FM sets initial state */
   will-change: opacity, transform;
 }
-[data-reveal="up"]    { transform: translateY(36px); }
-[data-reveal="left"]  { transform: translateX(-36px); }
-[data-reveal="right"] { transform: translateX(36px); }
-[data-reveal="fade"]  { transform: scale(0.97); }
-[data-reveal="zoom"]  { transform: scale(0.88); }
 
-/* ── 3D Perspective Reveal ── */
-[data-reveal="flip-3d"] {
-  opacity: 0;
-  transform: perspective(1200px) rotateX(12deg) translateY(45px);
-  transform-origin: 50% 0%;
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-[data-reveal="flip-3d"].revealed {
-  opacity: 1 !important;
-  transform: perspective(1200px) rotateX(0deg) translateY(0px) !important;
-}
-
-/* ── Cinematic Zoom Reveal ── */
-[data-reveal="zoom-cinematic"] {
-  opacity: 0;
-  transform: scale(0.86) translateY(20px);
-  filter: blur(8px);
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform, filter;
-}
-[data-reveal="zoom-cinematic"].revealed {
-  opacity: 1 !important;
-  transform: scale(1) translateY(0px) !important;
-  filter: blur(0px) !important;
-}
-
-/* ── Staggered Slide Spin ── */
-[data-reveal="slide-spin"] {
-  opacity: 0;
-  transform: translateX(-40px) rotate(-1.5deg);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-[data-reveal="slide-spin"].revealed {
-  opacity: 1 !important;
-  transform: translateX(0) rotate(0) !important;
-}
+/* Legacy CSS fallback ONLY for elements NOT wrapped in ScrollReveal */
+[data-reveal="up"].legacy-reveal    { opacity: 0; transform: translateY(36px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-reveal="left"].legacy-reveal  { opacity: 0; transform: translateX(-36px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-reveal="right"].legacy-reveal { opacity: 0; transform: translateX(36px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-reveal="fade"].legacy-reveal  { opacity: 0; transform: scale(0.97); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-reveal="zoom"].legacy-reveal  { opacity: 0; transform: scale(0.88); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
 
 [data-reveal].revealed {
   opacity: 1 !important;
-  transform: translate(0,0) scale(1) !important;
-}
-
-/* ── Mobile-Optimized Smooth Reveals ── */
-@media (max-width: 640px) {
-  [data-reveal] {
-    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  [data-reveal="up"] {
-    transform: translateY(16px);
-  }
+  transform: translate(0,0) scale(1) rotateX(0deg) rotateY(0deg) !important;
+  filter: blur(0px) !important;
 }
 
 /* ── LCP fix: hero h1 must be visible immediately for Lighthouse ─

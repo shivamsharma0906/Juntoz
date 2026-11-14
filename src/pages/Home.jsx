@@ -1,18 +1,16 @@
 import { lazy, Suspense } from 'react';
 import Hero from '../components/Hero';
 import PageMeta from '../components/PageMeta';
-import Hero3D from '../components/hero3d/Hero3D';
-import { motionConfig } from '../config/motion';
 
-// Lazy load below-the-fold curiosity-driven trailer sections
-const HomeServicesTeaser    = lazy(() => import('../components/HomeServicesTeaser'));
-const AboutIntro            = lazy(() => import('../components/AboutIntro'));
-const WhatWeDo              = lazy(() => import('../components/WhatWeDo'));
-const TrustExecution        = lazy(() => import('../components/TrustExecution'));
+// Core Capabilities & Services Spine Accordion
+const ServicesGrid          = lazy(() => import('../components/ServicesGrid'));
+
+// Business and conversion growth systems
+const HowWeGrowBusinesses   = lazy(() => import('../components/HowWeGrowBusinesses'));
 const ComparisonMatrix      = lazy(() => import('../components/ComparisonMatrix'));
+const LeadRoutingSection    = lazy(() => import('../components/sections/LeadRoutingSection'));
 const HomeGMBTeaser         = lazy(() => import('../components/HomeGMBTeaser'));
 const TrustExecutionSection = lazy(() => import('../components/TrustExecutionSection'));
-const CaseStudiesShowcase   = lazy(() => import('../components/CaseStudiesShowcase'));
 const CTASection            = lazy(() => import('../components/CTASection'));
 
 export default function Home() {
@@ -23,17 +21,17 @@ export default function Home() {
         description="Juntoz is a full-service digital growth agency. We help ambitious businesses build their brand, capture high-intent demand, and scale revenue through performance ads, SEO, GMB management, and web conversion engines."
         path="/"
       />
-      {motionConfig.scrollStory && <Hero3D isScrollStory={true} />}
       <Hero />
       <Suspense fallback={null}>
-        <HomeServicesTeaser />
-        <AboutIntro />
-        <WhatWeDo />
-        <TrustExecution />
+        {/* Core Capabilities: Interactive Spine Accordion */}
+        <ServicesGrid />
+
+        {/* Growth & Conversion Systems */}
+        <HowWeGrowBusinesses />
         <ComparisonMatrix />
+        <LeadRoutingSection />
         <HomeGMBTeaser />
         <TrustExecutionSection />
-        <CaseStudiesShowcase />
         <CTASection />
       </Suspense>
     </>

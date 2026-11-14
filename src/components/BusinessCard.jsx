@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
 import logo from './logo.webp';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 
 const GOOGLE_URL = 'https://www.google.com/maps/place/Juntoz+Digital+Marketing+Agency/@19.3016668,72.849608,17z/data=!4m8!3m7!1s0x3be7b10eda3a9a65:0x3c3c948829e3150e!8m2!3d19.3016668!4d72.8521829!9m1!1b1!16s%2Fg%2F11l228zbp7?entry=ttu&g_ep=EgoyMDI2MDQyNy4wIKXMDSoASAFQAw%3D%3D';
 
@@ -48,6 +49,9 @@ export default function BusinessCard() {
         {/* ── Section Header ── */}
         <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-18">
           <ScrollReveal data-reveal="up">
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+              CLIENT TRUST &amp; REPUTATION · VERIFIED REVIEWS
+            </span>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#287A55]/10 border border-[#287A55]/20 text-[#287A55] font-sans font-bold text-xs uppercase tracking-wider mb-4">
               <span className="w-2 h-2 rounded-full bg-[#287A55] animate-pulse" />
               <span>Verified Google 5.0 Rating</span>
@@ -55,26 +59,10 @@ export default function BusinessCard() {
             
             <h2 
               style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-              className="font-heading font-normal text-3xl sm:text-5xl lg:text-[3.25rem] text-[#111111] leading-[1.12] mb-4"
+              className="font-heading font-normal text-3xl sm:text-5xl lg:text-[3.25rem] text-[#111111] leading-[1.12] mb-4 tracking-tight"
             >
               Verified By Google.{' '}
-              <span className="relative inline-block whitespace-nowrap">
-                <span>Trusted By 200+ Brands.</span>
-                <svg
-                  className="absolute -bottom-2 left-0 w-full overflow-visible pointer-events-none text-[#5D2E85]"
-                  height="12"
-                  viewBox="0 0 260 14"
-                  fill="none"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M2 9 C 60 3, 170 12, 258 4"
-                    stroke="currentColor"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </span>
+              <HeadlineHighlight>Trusted By 200+ Brands</HeadlineHighlight>.
             </h2>
 
             <p className="font-body text-[#5F5F5A] text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">

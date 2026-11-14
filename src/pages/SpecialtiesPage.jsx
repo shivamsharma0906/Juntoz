@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
 import ScrollReveal from '../components/ScrollReveal';
 import IndustryFinder from '../components/IndustryFinder';
+import { HeadlineHighlight } from '../components/ui/CurvedUnderline';
 
 /* 
   Target segments customized for Juntoz beauty/MUA focus.
@@ -119,9 +120,15 @@ export default function SpecialtiesPage() {
         <section className="relative px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center mb-10 sm:mb-14">
 
           <ScrollReveal data-reveal="up" delay={80}>
-            <h1 className="font-heading font-normal text-[#111111] text-3xl sm:text-5xl md:text-6xl leading-[1.12] mb-6">
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+              SECTOR EXPERTISE · 36 INDUSTRY PLAYBOOKS
+            </span>
+            <h1
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              className="font-heading font-normal text-[#111111] text-3xl sm:text-5xl md:text-6xl leading-[1.12] mb-6 tracking-tight"
+            >
               Specialized Growth For <br />
-              <span className="text-[#5D2E85]">Your Exact Industry.</span>
+              <HeadlineHighlight>Your Exact Industry</HeadlineHighlight>.
             </h1>
           </ScrollReveal>
 

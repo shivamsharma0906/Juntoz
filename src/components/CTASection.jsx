@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import { Star } from 'lucide-react';
 import { motionConfig } from '../config/motion';
 
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20to%20request%20a%20growth%20audit%20for%20my%20business.';
@@ -16,12 +17,13 @@ const TICKER = [
 const PROOF = [
   { num: '5+ Yrs', label: 'Agency Experience' },
   { num: '30+', label: 'Active Retainers' },
-  { num: '5.0 ★', label: 'Google Rating' },
+  { num: '5.0', hasStar: true, label: 'Google Rating' },
   { num: '3.1×', label: 'Avg. Inquiries Growth' },
 ];
 
 export default function CTASection() {
   const isMotionActive = motionConfig.ctaMotion;
+  const isRecomposeActive = motionConfig.recomposeTypography;
 
   // Magnetic button & spotlight sheen state
   const [btnPos, setBtnPos] = useState({ x: 0, y: 0 });
@@ -52,7 +54,12 @@ export default function CTASection() {
   }, []);
 
   return (
-    <section id="cta" className="relative flex flex-col overflow-hidden bg-[#111111] py-24 md:py-32">
+    <section
+      id="cta"
+      className={`relative flex flex-col overflow-hidden bg-[#111111] ${
+        isRecomposeActive ? 'py-28 sm:py-36 md:py-44' : 'py-24 md:py-32'
+      }`}
+    >
       {/* Ticker Bar */}
       <div className="relative z-10 py-3 overflow-hidden border-y border-white/10 bg-[#161616] mb-16">
         <div className="cta-ticker-fwd flex whitespace-nowrap w-max">
@@ -104,7 +111,11 @@ export default function CTASection() {
             >
               <span className="block overflow-hidden mb-2">
                 <motion.span
-                  className="block text-white text-3xl sm:text-5xl md:text-6xl"
+                  className={`block text-white ${
+                    isRecomposeActive
+                      ? 'text-3xl sm:text-5xl md:text-6xl lg:text-7xl'
+                      : 'text-3xl sm:text-5xl md:text-6xl'
+                  }`}
                   initial={isMotionActive ? { y: '120%', opacity: 0 } : false}
                   whileInView={isMotionActive ? { y: 0, opacity: 1 } : {}}
                   viewport={{ once: true, amount: 0.3 }}
@@ -115,7 +126,11 @@ export default function CTASection() {
               </span>
               <span className="block overflow-hidden">
                 <motion.span
-                  className="block text-[#5D2E85] text-4xl sm:text-6xl md:text-7xl"
+                  className={`block text-[#5D2E85] ${
+                    isRecomposeActive
+                      ? 'text-4xl sm:text-6xl md:text-7xl lg:text-8xl'
+                      : 'text-4xl sm:text-6xl md:text-7xl'
+                  }`}
                   initial={isMotionActive ? { y: '120%', opacity: 0 } : false}
                   whileInView={isMotionActive ? { y: 0, opacity: 1 } : {}}
                   viewport={{ once: true, amount: 0.3 }}
@@ -176,7 +191,10 @@ export default function CTASection() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
             {PROOF.map((p, i) => (
               <div key={i} className="bg-[#1A1A1A] border border-white/10 rounded-2xl px-4 py-5 text-center transition-all duration-300 hover:border-white/20">
-                <div className="font-heading font-black text-2xl text-white">{p.num}</div>
+                <div className="font-heading font-black text-2xl text-white inline-flex items-center justify-center gap-1">
+                  <span>{p.num}</span>
+                  {p.hasStar && <Star className="w-5 h-5 fill-amber-400 text-amber-400 inline" />}
+                </div>
                 <div className="font-sans text-white/50 text-[11px] uppercase tracking-wider mt-1">{p.label}</div>
               </div>
             ))}

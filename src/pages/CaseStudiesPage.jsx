@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { caseStudies } from '../data/caseStudies';
 import ScrollReveal from '../components/ScrollReveal';
 import PageMeta from '../components/PageMeta';
+import { HeadlineHighlight } from '../components/ui/CurvedUnderline';
 
 const CATEGORIES = [
   'All Case Studies',
@@ -96,18 +97,23 @@ export default function CaseStudiesPage() {
         {/* ════ SECTION 1: EDITORIAL HEADER ════ */}
         <section className="mb-14 md:mb-18 text-center max-w-4xl mx-auto">
           <ScrollReveal data-reveal="up">
-            
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+              DOCUMENTED CLIENT TRANSFORMATIONS · ATTRIBUTABLE ROI
+            </span>
           </ScrollReveal>
 
           <ScrollReveal data-reveal="up" delay={60}>
-            <h1 className="font-heading font-normal text-[#111111] text-4xl sm:text-6xl md:text-7xl leading-[1.12] mb-6">
+            <h1
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              className="font-heading font-normal text-[#111111] text-4xl sm:text-6xl md:text-7xl leading-[1.12] mb-6 tracking-tight"
+            >
               Real Businesses. <br />
-              <span className="text-[#5D2E85]">Documented Growth.</span>
+              <HeadlineHighlight>Documented Growth</HeadlineHighlight>.
             </h1>
           </ScrollReveal>
 
           <ScrollReveal data-reveal="up" delay={120}>
-            <p className="font-sans text-[#5F5F5A] text-base md:text-lg max-w-xl leading-relaxed mx-auto mb-8">
+            <p className="font-body text-[#5F5F5A] text-base md:text-lg max-w-xl leading-relaxed mx-auto mb-8">
               The exact campaigns, funnels, and results. No fluff.
             </p>
           </ScrollReveal>
@@ -269,13 +275,16 @@ export default function CaseStudiesPage() {
         <section className="mb-20 md:mb-28">
           <div className="bg-white rounded-3xl p-8 sm:p-12 md:p-16 border border-[#DEDED7] shadow-card">
             <div className="max-w-3xl mb-12">
-              <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#5D2E85] mb-2 block">
-                The Juntoz Growth System
+              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] mb-3 block">
+                THE JUNTOZ GROWTH SYSTEM · 4-PHASE BLUEPRINT
               </span>
-              <h2 className="font-heading font-black text-3xl sm:text-5xl uppercase tracking-tight text-[#111111] mb-4">
-                How We Drive Results
+              <h2
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                className="font-heading font-normal text-3xl sm:text-5xl text-[#111111] mb-4 tracking-tight leading-[1.12]"
+              >
+                How We Drive <HeadlineHighlight>Measurable Results</HeadlineHighlight>.
               </h2>
-              <p className="font-sans text-[#5F5F5A] text-sm sm:text-base leading-relaxed">
+              <p className="font-body text-[#5F5F5A] text-sm sm:text-base leading-relaxed">
                 4 phases. Proven order. Repeatable results.
               </p>
             </div>
@@ -308,11 +317,14 @@ export default function CaseStudiesPage() {
         {/* ════ SECTION 5: CLIENT TESTIMONIALS ════ */}
         <section className="mb-20 md:mb-28">
           <div className="max-w-3xl mx-auto text-center mb-12">
-            <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#5D2E85] mb-2 block">
-              Verified Client Feedback
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] mb-3 block">
+              VERIFIED CLIENT FEEDBACK · MARKET ADVOCACY
             </span>
-            <h2 className="font-heading font-black text-2xl sm:text-4xl uppercase tracking-tight text-[#111111]">
-              What Our Partners Say.
+            <h2
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              className="font-heading font-normal text-2xl sm:text-4xl text-[#111111] leading-[1.12] tracking-tight"
+            >
+              What Our <HeadlineHighlight>Partners Say</HeadlineHighlight>.
             </h2>
           </div>
 
@@ -356,9 +368,12 @@ export default function CaseStudiesPage() {
                 Next Campaign Cohort Open
               </span>
               
-              <h2 className="font-heading font-black text-3xl sm:text-5xl uppercase tracking-tight mb-4 relative z-10">
+              <h2
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                className="font-heading font-normal text-3xl sm:text-5xl text-white mb-4 relative z-10 tracking-tight leading-[1.12]"
+              >
                 Ready to Become Our <br />
-                <span className="text-[#5D2E85]">Next Case Study?</span>
+                <HeadlineHighlight>Next Case Study</HeadlineHighlight>?
               </h2>
               
               <p className="font-sans text-white/70 text-sm sm:text-base max-w-lg mx-auto mb-8 relative z-10 leading-relaxed">

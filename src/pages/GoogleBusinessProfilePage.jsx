@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
 import ScrollReveal from '../components/ScrollReveal';
+import { HeadlineHighlight } from '../components/ui/CurvedUnderline';
 
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20to%20request%20a%20Google%20Business%20Profile%20audit%20for%20my%20business.';
 
@@ -70,9 +71,15 @@ export default function GoogleBusinessProfilePage() {
         <div className="max-w-3xl mx-auto text-center">
 
           <ScrollReveal data-reveal="up" delay={100}>
-            <h1 className="font-heading font-normal text-3xl sm:text-5xl md:text-6xl text-[#111111] leading-[1.12] mb-6">
-              Your Customers Are Already Searching. <br />
-              <span className="text-[#5D2E85]">The Question Is Whether They Find You.</span>
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+              LOCAL SEARCH &amp; MAPS DOMINANCE · GOOGLE 3-PACK
+            </span>
+            <h1
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              className="font-heading font-normal text-3xl sm:text-5xl md:text-6xl text-[#111111] leading-[1.12] mb-6 tracking-tight"
+            >
+              Your Customers Are Searching Nearby. <br />
+              <HeadlineHighlight>Whether They Find You</HeadlineHighlight> Decides Revenue.
             </h1>
           </ScrollReveal>
 

@@ -653,7 +653,10 @@ export default function ServiceDetailPage({ serviceSlug: propSlug }) {
           </ScrollReveal>
 
           <ScrollReveal data-reveal="up" delay={80}>
-            <h1 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-[#111111] leading-[1.05] mb-5">
+            <h1
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              className="font-heading font-black text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight text-[#111111] leading-[1.04] mb-5"
+            >
               {service.title}
             </h1>
           </ScrollReveal>

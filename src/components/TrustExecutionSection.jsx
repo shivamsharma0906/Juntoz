@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 
 export default function TrustExecutionSection() {
   return (
@@ -13,31 +14,20 @@ export default function TrustExecutionSection() {
 
           {/* ════ LEFT COLUMN: Editorial Headline & Strategic Narrative ════ */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
-            
+            <ScrollReveal data-reveal="up" delay={50}>
+              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+                HIGH-TICKET BEAUTY &amp; SALON ECOSYSTEM
+              </span>
+            </ScrollReveal>
 
             {/* Editorial Serif Contrast Headline */}
             <ScrollReveal data-reveal="up" delay={80}>
               <h2
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-[#111111] leading-[1.12] mb-6"
+                className="font-heading font-normal text-3xl sm:text-4xl lg:text-[3.25rem] tracking-tight text-[#111111] leading-[1.12] mb-6"
               >
                 From Endless DMs to{' '}
-                <span className="relative inline-block not-italic font-bold text-[#111111]">
-                  Fully Booked.
-                  <svg
-                    className="absolute -bottom-1.5 left-0 w-full h-3 text-[#5D2E85]"
-                    viewBox="0 0 100 12"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M2 9 C 25 3, 50 11, 98 4"
-                      stroke="currentColor"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
-                      fill="none"
-                    />
-                  </svg>
-                </span>
+                <HeadlineHighlight>Fully Booked</HeadlineHighlight>.
               </h2>
             </ScrollReveal>
 

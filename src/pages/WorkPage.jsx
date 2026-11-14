@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { caseStudies } from '../data/caseStudies';
 import ScrollReveal from '../components/ScrollReveal';
 import PageMeta from '../components/PageMeta';
+import { HeadlineHighlight } from '../components/ui/CurvedUnderline';
 
 const CATEGORIES = [
   'All Projects',
@@ -97,8 +98,14 @@ export default function WorkPage() {
         <section className="mb-12 md:mb-16 text-center max-w-4xl mx-auto">
 
           <ScrollReveal data-reveal="up" delay={60}>
-            <h1 className="font-heading font-normal text-[#111111] text-4xl sm:text-6xl md:text-7xl leading-[1.12] mb-5">
-              Proven <span className="text-[#5D2E85]">Results.</span>
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+              CLIENT CASE STUDIES · ATTRIBUTABLE ROI
+            </span>
+            <h1
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              className="font-heading font-normal text-[#111111] text-4xl sm:text-6xl md:text-7xl leading-[1.12] mb-5 tracking-tight"
+            >
+              Proven <HeadlineHighlight>Results</HeadlineHighlight>.
             </h1>
           </ScrollReveal>
 
@@ -266,13 +273,16 @@ export default function WorkPage() {
         <section className="mb-20 md:mb-28">
           <div className="p-8 sm:p-14 rounded-3xl bg-white border border-[#DEDED7] shadow-card">
             <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-              <span className="inline-block px-3 py-1 rounded-full bg-[#F1E7F9] text-[#5D2E85] font-heading font-black text-xs uppercase tracking-wider mb-3">
-                Methodology Behind The Numbers
+              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+                METHODOLOGY BEHIND THE NUMBERS · 4-PHASE ENGINE
               </span>
-              <h2 className="font-heading font-black text-2xl sm:text-4xl uppercase tracking-tight text-[#111111]">
-                How We Drive <span className="text-[#5D2E85]">Consistent Growth.</span>
+              <h2
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                className="font-heading font-normal text-2xl sm:text-4xl md:text-5xl text-[#111111] leading-[1.12] mb-4 tracking-tight"
+              >
+                How We Drive <HeadlineHighlight>Consistent Growth</HeadlineHighlight>.
               </h2>
-              <p className="font-sans text-sm sm:text-base text-[#5F5F5A] mt-3 max-w-xl mx-auto leading-relaxed">
+              <p className="font-body text-sm sm:text-base text-[#5F5F5A] max-w-xl mx-auto leading-relaxed">
                 4-phase system. Zero vanity metrics. Only compounding revenue.
               </p>
             </div>
@@ -307,11 +317,14 @@ export default function WorkPage() {
         {/* ════ SECTION 6: CLIENT FEEDBACK CARDS ════ */}
         <section className="mb-20 md:mb-28">
           <div className="max-w-3xl mx-auto text-center mb-12">
-            <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#5D2E85] mb-2 block">
-              Direct Client Feedback
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] mb-3 block">
+              DIRECT CLIENT FEEDBACK · MARKET ADVOCACY
             </span>
-            <h2 className="font-heading font-black text-2xl sm:text-4xl uppercase tracking-tight text-[#111111]">
-              What Our Partners Say.
+            <h2
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              className="font-heading font-normal text-2xl sm:text-4xl md:text-5xl text-[#111111] leading-[1.12] mb-4 tracking-tight"
+            >
+              What Our <HeadlineHighlight>Partners Say</HeadlineHighlight>.
             </h2>
           </div>
 

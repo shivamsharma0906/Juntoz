@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import logo from './logo.webp';
 import { SERVICES_MEGA_MENU } from '../data/services';
+import RollingText from './ui/RollingText';
 
 const WA_HARD =
   'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20want%20to%20book%20a%20strategy%20call.';
@@ -388,11 +389,12 @@ export default function Navbar() {
                         aria-expanded={megaMenuOpen}
                         aria-controls="services-mega-menu"
                         aria-current={isServiceActive ? 'page' : undefined}
-                        className={`relative inline-flex items-center gap-1 font-sans font-semibold text-[13px] xl:text-[14.5px] 2xl:text-[16px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2 rounded-md ${
+                        className={`group relative inline-flex items-center gap-1 font-sans font-semibold text-[13px] xl:text-[14.5px] 2xl:text-[16px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2 rounded-md ${
                           isServiceActive || megaMenuOpen ? 'text-[#5D2E85]' : 'text-[#1F1F1D] hover:text-[#5D2E85]'
                         }`}
+                        data-cursor="pointer"
                       >
-                        <span>{link.name}</span>
+                        <RollingText text={link.name} />
                         <svg
                           className={`w-3.5 h-3.5 text-[#777772] transition-transform duration-200 ${
                             megaMenuOpen ? 'rotate-180 text-[#5D2E85]' : ''
@@ -430,11 +432,12 @@ export default function Navbar() {
                         aria-expanded={specialtiesMenuOpen}
                         aria-controls="specialties-dropdown-menu"
                         aria-current={isSpecialtiesActive ? 'page' : undefined}
-                        className={`relative inline-flex items-center gap-1 font-sans font-semibold text-[13px] xl:text-[14.5px] 2xl:text-[16px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2 rounded-md ${
+                        className={`group relative inline-flex items-center gap-1 font-sans font-semibold text-[13px] xl:text-[14.5px] 2xl:text-[16px] tracking-tight transition-colors duration-200 cursor-pointer py-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2 rounded-md ${
                           isSpecialtiesActive || specialtiesMenuOpen ? 'text-[#5D2E85]' : 'text-[#1F1F1D] hover:text-[#5D2E85]'
                         }`}
+                        data-cursor="pointer"
                       >
-                        <span>{link.name}</span>
+                        <RollingText text={link.name} />
                         <svg
                           className={`w-3.5 h-3.5 text-[#777772] transition-transform duration-200 ${
                             specialtiesMenuOpen ? 'rotate-180 text-[#5D2E85]' : ''
@@ -560,11 +563,12 @@ export default function Navbar() {
                     key={link.name}
                     to={link.href}
                     aria-current={isActive ? 'page' : undefined}
-                    className={`relative shrink-0 font-sans font-semibold text-[13px] xl:text-[14.5px] 2xl:text-[16px] tracking-tight transition-colors duration-200 z-10 whitespace-nowrap py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2 rounded-md ${
+                    className={`group relative shrink-0 font-sans font-semibold text-[13px] xl:text-[14.5px] 2xl:text-[16px] tracking-tight transition-colors duration-200 z-10 whitespace-nowrap py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2 rounded-md ${
                       isActive ? 'text-[#5D2E85]' : 'text-[#1F1F1D] hover:text-[#5D2E85]'
                     }`}
+                    data-cursor="pointer"
                   >
-                    {link.name}
+                    <RollingText text={link.name} />
                     {isActive && (
                       <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
                     )}
@@ -581,9 +585,10 @@ export default function Navbar() {
                 title="Book a Strategy Call"
                 onMouseMove={onCtaMouseMove}
                 onMouseLeave={onCtaMouseLeave}
-                className="group/call inline-flex items-center justify-center gap-1.5 px-4 xl:px-5 py-2 xl:py-2.5 rounded-full font-sans font-semibold text-[13px] xl:text-[14px] text-white bg-[#5D2E85] hover:bg-[#4C266D] shadow-[0_4px_14px_rgba(93,46,133,0.3)] hover:shadow-[0_6px_20px_rgba(93,46,133,0.45)] active:scale-95 transition-all duration-200 cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2"
+                data-cursor="pointer"
+                className="group/call group inline-flex items-center justify-center gap-1.5 px-4 xl:px-5 py-2 xl:py-2.5 rounded-full font-sans font-semibold text-[13px] xl:text-[14px] text-white bg-[#5D2E85] hover:bg-[#4C266D] shadow-[0_4px_14px_rgba(93,46,133,0.3)] hover:shadow-[0_6px_20px_rgba(93,46,133,0.45)] active:scale-95 transition-all duration-200 cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5D2E85] focus-visible:ring-offset-2"
               >
-                <span>Book a Call</span>
+                <RollingText text="Book a Call" className="font-semibold" />
                 <span className="text-[12px] xl:text-[13px] transition-transform duration-200 group-hover/call:translate-x-0.5">→</span>
               </Link>
             </div>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 
 export default function HomeGMBTeaser() {
   return (
@@ -10,46 +11,24 @@ export default function HomeGMBTeaser() {
         <div className="text-center max-w-4xl mx-auto mb-8 sm:mb-16">
           <ScrollReveal data-reveal="up">
             {/* Eyebrow */}
-            <span className="font-sans font-bold text-xs sm:text-sm uppercase tracking-widest text-[#5D2E85] block mb-3">
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
               LOCAL SEARCH &amp; GOOGLE MAPS DOMINANCE
             </span>
 
             {/* Headline */}
             <h2
               style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.18] sm:leading-[1.12] text-[#111111] font-normal mb-5"
+              className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] text-[#111111] mb-5 tracking-tight"
             >
-              <span className="block">Your Customers Are Searching Nearby.</span>
-              <span className="block mt-1 sm:mt-2">
+              <span className="block mb-1 sm:mb-2">Your Customers Are Searching Nearby.</span>
+              <span className="block">
                 We Ensure You Win The{' '}
-                <span className="relative inline-block whitespace-nowrap">
-                  <span>#1 Local Position.</span>
-                  <svg
-                    className="absolute -bottom-2 sm:-bottom-2.5 left-0 w-full overflow-visible pointer-events-none text-[#5D2E85]"
-                    height="12"
-                    viewBox="0 0 260 14"
-                    fill="none"
-                    preserveAspectRatio="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M3 9C60 3.5 150 2.5 257 8.5C185 5 85 6.5 15 11.5"
-                      stroke="currentColor"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
+                <HeadlineHighlight>#1 Local Position</HeadlineHighlight>.
               </span>
             </h2>
 
-            {/* Mobile Summary */}
-            <p className="sm:hidden font-sans text-[#333333] font-medium text-xs leading-relaxed max-w-3xl mx-auto mb-4">
-              Over 68% of local clicks go directly to the Google Maps 3-Pack. We turn search proximity into verified customer bookings.
-            </p>
-
-            {/* Desktop Full Subtitle */}
-            <p className="hidden sm:block font-sans text-[#333333] font-medium text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+            {/* Subtitle */}
+            <p className="font-body text-[#5F5F5A] text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
               Over 68% of all high-intent local customer clicks go directly to the Google Maps 3-Pack. When nearby clients search for premium services, we turn geographic proximity into predictable, verified customer bookings.
             </p>
           </ScrollReveal>
@@ -73,10 +52,7 @@ export default function HomeGMBTeaser() {
                         best [service] near me
                       </span>
                     </div>
-                    <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-300/80 text-xs font-sans font-extrabold shrink-0 flex items-center gap-1.5 shadow-xs">
-                      <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
-                      Live 3-Pack
-                    </span>
+                    
                   </div>
 
                   {/* Winner Card: Rank #1 */}
@@ -142,10 +118,7 @@ export default function HomeGMBTeaser() {
                     <span className="font-heading font-bold text-sm text-[#111111]">
                       Geo-Radius Coverage Radar
                     </span>
-                    <span className="text-xs font-sans font-extrabold text-white bg-[#5D2E85] px-3 py-1 rounded-full shadow-xs flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                      100% Signal
-                    </span>
+                    
                   </div>
 
                   {/* Stylized Vector Radar Map with Animated Scanner */}
@@ -222,7 +195,7 @@ export default function HomeGMBTeaser() {
                     <span className="font-heading font-bold text-sm text-[#111111]">
                       Systematic Local Architecture
                     </span>
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                    
                   </div>
 
                   <div className="space-y-3">

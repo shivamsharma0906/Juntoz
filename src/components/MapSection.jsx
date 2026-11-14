@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 
 export default function MapSection({
   address = "Office No. 5, 1st Floor, Dev Shristi Tower, 60 Feet Rd, Bhayandar West, Mira Bhayandar, Maharashtra 401101"
@@ -51,9 +52,14 @@ export default function MapSection({
 
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-16">
-          
-          <h2 className="font-heading font-black uppercase text-[#111111] leading-tight tracking-tight text-3xl sm:text-5xl md:text-6xl mb-4">
-            Visit Our <span className="text-[#5D2E85]">Workspace</span>
+          <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+            PHYSICAL HEADQUARTERS · CLIENT VISITS
+          </span>
+          <h2
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            className="font-heading font-normal text-3xl sm:text-5xl md:text-6xl text-[#111111] leading-[1.12] mb-4 tracking-tight"
+          >
+            Visit Our <HeadlineHighlight>Workspace</HeadlineHighlight>.
           </h2>
           <p className="font-body text-[#5F5F5A] text-sm sm:text-base max-w-lg leading-relaxed">
             Let's discuss how we can grow your beauty brand. Drop in during business hours or locate us online.

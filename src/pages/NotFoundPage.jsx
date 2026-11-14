@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
+import { HeadlineHighlight } from '../components/ui/CurvedUnderline';
 
 export default function NotFoundPage() {
   return (
@@ -11,8 +12,14 @@ export default function NotFoundPage() {
       />
       <div className="min-h-[75vh] flex flex-col items-center justify-center px-6 pt-32 md:pt-40 pb-20 text-center bg-[#F7F6F2]">
 
-        <h1 className="font-heading font-black uppercase text-[#111111] text-4xl sm:text-6xl md:text-7xl mb-4 tracking-tight">
-          Page Not <span className="text-[#5D2E85]">Found</span>
+        <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+          ERROR 404 · PAGE NOT FOUND
+        </span>
+        <h1
+          style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+          className="font-heading font-normal text-[#111111] text-4xl sm:text-6xl md:text-7xl mb-4 tracking-tight leading-[1.12]"
+        >
+          Page Not <HeadlineHighlight>Found</HeadlineHighlight>.
         </h1>
         
         <p className="font-body text-[#5F5F5A] text-base md:text-lg max-w-md mb-10 leading-relaxed">

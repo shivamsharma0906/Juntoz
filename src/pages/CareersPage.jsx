@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageMeta from '../components/PageMeta';
 import ScrollReveal from '../components/ScrollReveal';
+import { HeadlineHighlight } from '../components/ui/CurvedUnderline';
 import {
   OPEN_POSITIONS,
   VIBE_PRINCIPLES,
@@ -418,37 +419,20 @@ export default function CareersPage() {
           <div className="max-w-4xl mx-auto text-center">
 
             <ScrollReveal data-reveal="up">
-              {/* Refined Eyebrow matching Image 2 */}
-              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5F5F5A] block mb-3">
-                CAREERS AT JUNTOZ
+              {/* Refined Eyebrow */}
+              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+                CAREERS AT JUNTOZ · JOIN THE TEAM
               </span>
 
-              {/* Editorial Heading matching Image 2 */}
+              {/* Editorial Heading */}
               <h1
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] text-[#111111] leading-[1.15] mb-4 sm:mb-5"
+                className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] text-[#111111] leading-[1.15] mb-4 sm:mb-5 tracking-tight"
               >
                 <span className="block mb-1 sm:mb-2">Great Work Needs Great People.</span>
                 <span className="block">
                   We&apos;re Building The{' '}
-                  <span className="relative inline-block whitespace-nowrap">
-                    <span>Dream Team</span>
-                    <svg
-                      className="absolute -bottom-2 left-0 w-full overflow-visible pointer-events-none text-[#5D2E85]"
-                      height="12"
-                      viewBox="0 0 260 14"
-                      fill="none"
-                      preserveAspectRatio="none"
-                    >
-                      <path
-                        d="M2 9 C 60 3, 170 12, 258 4"
-                        stroke="currentColor"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>
-                  .
+                  <HeadlineHighlight>Dream Team</HeadlineHighlight>.
                 </span>
               </h1>
 
@@ -511,34 +495,16 @@ export default function CareersPage() {
           
           <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-18">
             <ScrollReveal data-reveal="up">
-              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5F5F5A] block mb-3">
+              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
                 OUR CULTURE &amp; PRINCIPLES
               </span>
               <h2
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.15] text-[#111111] mb-4"
+                className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] text-[#111111] mb-4 tracking-tight"
               >
                 <span className="block mb-1">High Standards. High Trust.</span>
                 <span className="block">
-                  Zero{' '}
-                  <span className="relative inline-block whitespace-nowrap">
-                    <span>Bureaucracy</span>
-                    <svg
-                      className="absolute -bottom-2 left-0 w-full overflow-visible pointer-events-none text-[#5D2E85]"
-                      height="12"
-                      viewBox="0 0 260 14"
-                      fill="none"
-                      preserveAspectRatio="none"
-                    >
-                      <path
-                        d="M2 9 C 60 3, 170 12, 258 4"
-                        stroke="currentColor"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>
-                  .
+                  Zero <HeadlineHighlight>Bureaucracy</HeadlineHighlight>.
                 </span>
               </h2>
               <p className="font-body text-[#5F5F5A] text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
@@ -605,34 +571,16 @@ export default function CareersPage() {
           
           <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
             <ScrollReveal data-reveal="up">
-              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5F5F5A] block mb-3">
+              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
                 OPEN POSITIONS IN MUMBAI
               </span>
               <h2
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.15] text-[#111111] mb-4"
+                className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] text-[#111111] mb-4 tracking-tight"
               >
                 <span className="block mb-1">Find Your Next Chapter</span>
                 <span className="block">
-                  At{' '}
-                  <span className="relative inline-block whitespace-nowrap">
-                    <span>Juntoz</span>
-                    <svg
-                      className="absolute -bottom-2 left-0 w-full overflow-visible pointer-events-none text-[#5D2E85]"
-                      height="12"
-                      viewBox="0 0 260 14"
-                      fill="none"
-                      preserveAspectRatio="none"
-                    >
-                      <path
-                        d="M2 9 C 60 3, 170 12, 258 4"
-                        stroke="currentColor"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>
-                  .
+                  At <HeadlineHighlight>Juntoz</HeadlineHighlight>.
                 </span>
               </h2>
               <p className="font-body text-[#5F5F5A] text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
@@ -755,34 +703,16 @@ export default function CareersPage() {
           
           <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-18">
             <ScrollReveal data-reveal="up">
-              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5F5F5A] block mb-3">
+              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
                 STUDIO LIFE &amp; ADVANTAGES
               </span>
               <h2
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.15] text-[#111111] mb-4"
+                className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] text-[#111111] mb-4 tracking-tight"
               >
                 <span className="block mb-1">Why Top Talent Chooses</span>
                 <span className="block">
-                  To Build{' '}
-                  <span className="relative inline-block whitespace-nowrap">
-                    <span>At Juntoz</span>
-                    <svg
-                      className="absolute -bottom-2 left-0 w-full overflow-visible pointer-events-none text-[#5D2E85]"
-                      height="12"
-                      viewBox="0 0 260 14"
-                      fill="none"
-                      preserveAspectRatio="none"
-                    >
-                      <path
-                        d="M2 9 C 60 3, 170 12, 258 4"
-                        stroke="currentColor"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>
-                  .
+                  To Build <HeadlineHighlight>At Juntoz</HeadlineHighlight>.
                 </span>
               </h2>
               <p className="font-body text-[#5F5F5A] text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
@@ -888,34 +818,16 @@ export default function CareersPage() {
           
           <div className="max-w-3xl mx-auto text-center mb-16">
             <ScrollReveal data-reveal="up">
-              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5F5F5A] block mb-3">
+              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
                 HIRING QUALITIES &amp; MINDSET
               </span>
               <h2
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.15] text-[#111111] mb-4"
+                className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] text-[#111111] mb-4 tracking-tight"
               >
                 <span className="block mb-1">Skills Can Be Taught.</span>
                 <span className="block">
-                  Mindset Is{' '}
-                  <span className="relative inline-block whitespace-nowrap">
-                    <span>Everything</span>
-                    <svg
-                      className="absolute -bottom-2 left-0 w-full overflow-visible pointer-events-none text-[#5D2E85]"
-                      height="12"
-                      viewBox="0 0 260 14"
-                      fill="none"
-                      preserveAspectRatio="none"
-                    >
-                      <path
-                        d="M2 9 C 60 3, 170 12, 258 4"
-                        stroke="currentColor"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>
-                  .
+                  Mindset Is <HeadlineHighlight>Everything</HeadlineHighlight>.
                 </span>
               </h2>
               <p className="font-body text-[#5F5F5A] text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
@@ -962,34 +874,16 @@ export default function CareersPage() {
           
           <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-18">
             <ScrollReveal data-reveal="up">
-              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5F5F5A] block mb-3">
-                HIRING TRANSPARENCY
+              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+                HIRING TRANSPARENCY · 4 SIMPLE STEPS
               </span>
               <h2
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.15] text-[#111111] mb-4"
+                className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] text-[#111111] mb-4 tracking-tight"
               >
                 <span className="block mb-1">Simple Steps.</span>
                 <span className="block">
-                  Fast{' '}
-                  <span className="relative inline-block whitespace-nowrap">
-                    <span>Turnarounds</span>
-                    <svg
-                      className="absolute -bottom-2 left-0 w-full overflow-visible pointer-events-none text-[#5D2E85]"
-                      height="12"
-                      viewBox="0 0 260 14"
-                      fill="none"
-                      preserveAspectRatio="none"
-                    >
-                      <path
-                        d="M2 9 C 60 3, 170 12, 258 4"
-                        stroke="currentColor"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>
-                  .
+                  Fast <HeadlineHighlight>Turnarounds</HeadlineHighlight>.
                 </span>
               </h2>
               <p className="font-body text-[#5F5F5A] text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
@@ -1038,34 +932,16 @@ export default function CareersPage() {
 
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-14">
-            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5F5F5A] block mb-3">
-              JOIN OUR TEAM
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+              JOIN OUR TEAM · DIRECT APPLICATION
             </span>
             <h2
               style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-              className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.15] text-[#111111] mb-4"
+              className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] text-[#111111] mb-4 tracking-tight"
             >
               <span className="block mb-1">Submit Your Application</span>
               <span className="block">
-                To{' '}
-                <span className="relative inline-block whitespace-nowrap">
-                  <span>Juntoz</span>
-                  <svg
-                    className="absolute -bottom-2 left-0 w-full overflow-visible pointer-events-none text-[#5D2E85]"
-                    height="12"
-                    viewBox="0 0 260 14"
-                    fill="none"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M2 9 C 60 3, 170 12, 258 4"
-                      stroke="currentColor"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
-                .
+                To <HeadlineHighlight>Juntoz</HeadlineHighlight>.
               </span>
             </h2>
             <p className="font-body text-[#5F5F5A] text-sm sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed">

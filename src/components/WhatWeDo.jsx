@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 
 const CHECKLIST_ITEMS = [
   'Direct & Transparent Stakeholder Communication',
@@ -172,36 +173,19 @@ export default function WhatWeDo() {
           <div className="lg:col-span-6 xl:col-span-6 space-y-6 sm:space-y-7">
             <ScrollReveal data-reveal="up">
               {/* Eyebrow Label - Brand Purple #5D2E85 */}
-              <span className="font-heading font-black text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
-                WHAT DO WE DO?
+              <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+                WHAT DO WE DO? · ACQUISITION ENGINE
               </span>
 
-              {/* Serif Display Headline (2 Lines with Hand-Drawn Underline in Brand Purple #5D2E85) */}
+              {/* Serif Display Headline */}
               <h2
                 style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                className="text-3xl sm:text-4xl md:text-5xl leading-[1.18] sm:leading-[1.14] text-[#111111] font-normal mb-5"
+                className="font-heading font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] text-[#111111] mb-5 tracking-tight"
               >
-                <span className="block">High-Ticket Growth Begins</span>
-                <span className="block mt-1">
+                <span className="block mb-1">High-Ticket Growth Begins</span>
+                <span className="block">
                   With A Strategic{' '}
-                  <span className="relative inline-block whitespace-nowrap">
-                    <span>Execution Blueprint.</span>
-                    <svg
-                      className="absolute -bottom-2 sm:-bottom-2.5 left-0 w-full overflow-visible pointer-events-none text-[#5D2E85]"
-                      height="12"
-                      viewBox="0 0 260 14"
-                      fill="none"
-                      preserveAspectRatio="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M3 9C60 3.5 150 2.5 257 8.5C185 5 85 6.5 15 11.5"
-                        stroke="currentColor"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>
+                  <HeadlineHighlight>Execution Blueprint</HeadlineHighlight>.
                 </span>
               </h2>
 

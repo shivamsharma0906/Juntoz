@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 
 const proofStats = [
   { value: 5, suffix: '+ Yrs', label: 'Agency Experience', icon: '⏳' },
@@ -124,11 +125,14 @@ export default function About() {
         {/* Values Block */}
         <div className="space-y-12">
           <ScrollReveal className="text-center max-w-xl mx-auto space-y-3">
-            <span className="font-sans font-semibold tracking-wider text-[#5D2E85] uppercase text-xs block">
-              Core Principles
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+              CORE PRINCIPLES · MEASURABLE LEVERAGE
             </span>
-            <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl uppercase tracking-tight">
-              How We Create Impact
+            <h2
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              className="font-heading font-normal text-3xl sm:text-5xl text-[#111111] tracking-tight leading-[1.12] mb-3"
+            >
+              How We Create <HeadlineHighlight>Impact</HeadlineHighlight>.
             </h2>
             <p className="font-body text-[#5F5F5A] text-sm leading-relaxed">
               We align our design, code, and ad strategies with a simple focus: generating measurable business leverage.
@@ -171,11 +175,14 @@ export default function About() {
         {/* ── Why a Specialist Beats a Generalist for MUAs ── */}
         <div className="pt-14 border-t border-[#DEDED7] space-y-12">
           <ScrollReveal className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="font-sans font-semibold tracking-wider text-[#5D2E85] uppercase text-xs block">
-              The Strategic Advantage
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+              THE STRATEGIC ADVANTAGE · SPECIALIZATION
             </span>
-            <h2 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl uppercase tracking-tight">
-              Why a Specialist Beats a Generalist for MUAs
+            <h2
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              className="font-heading font-normal text-3xl sm:text-5xl text-[#111111] tracking-tight leading-[1.12] mb-3"
+            >
+              Why A Specialist Beats A <HeadlineHighlight>Generalist</HeadlineHighlight>.
             </h2>
             <p className="font-body text-[#5F5F5A] text-sm leading-relaxed">
               Most digital agencies manage real estate, restaurants, and clinics on the same desk. Here is why beauty professionals scale dramatically faster with an exclusive MUA growth partner.

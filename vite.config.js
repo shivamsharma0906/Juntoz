@@ -1,6 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function devApiMiddleware() {
   return {
@@ -75,6 +79,11 @@ function devApiMiddleware() {
 
 // https://vite.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
   plugins: [
     react(),
     tailwindcss(),
@@ -91,8 +100,11 @@ export default defineConfig({
             if (id.includes('lenis')) {
               return 'vendor-lenis';
             }
-            if (id.includes('framer-motion')) {
+            if (id.includes('framer-motion') || id.includes('node_modules/motion/') || id.includes('node_modules/motion-')) {
               return 'vendor-framer-motion';
+            }
+            if (id.includes('gsap') || id.includes('@gsap')) {
+              return 'vendor-gsap';
             }
             if (id.includes('react-router-dom') || id.includes('react-router') || id.includes('@remix-run')) {
               return 'vendor-router';

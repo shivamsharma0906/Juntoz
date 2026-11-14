@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 
 const COMPARISON_ROWS = [
   {
@@ -171,34 +172,18 @@ export default function ComparisonMatrix() {
         {/* ════ SECTION HEADER ════ */}
         <div className="text-center max-w-4xl mx-auto mb-8 sm:mb-14">
           <ScrollReveal data-reveal="up">
-            <span className="font-heading font-extrabold text-[11px] sm:text-xs uppercase tracking-widest text-[#5F5F5A] block mb-2.5 sm:mb-3">
-              HONEST AGENCY BENCHMARK
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-2.5 sm:mb-3">
+              HONEST AGENCY BENCHMARK · THE DIFFERENCE
             </span>
 
             <h2
               style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-              className="font-heading font-normal text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.2] sm:leading-[1.15] text-[#111111] mb-3 sm:mb-4 px-2"
+              className="font-heading font-normal text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] text-[#111111] mb-3 sm:mb-4 px-2 tracking-tight"
             >
               <span className="block mb-1">Why High-Performing Brands Choose</span>
               <span>
                 Juntoz Over{' '}
-                <span className="relative inline-block">
-                  <span className="relative z-10">The Alternatives.</span>
-                  <svg
-                    className="absolute -bottom-1.5 sm:-bottom-2 left-0 w-full overflow-visible pointer-events-none text-[#5D2E85]"
-                    height="10"
-                    viewBox="0 0 260 14"
-                    fill="none"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M2 9 C 60 3, 170 12, 258 4"
-                      stroke="currentColor"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
+                <HeadlineHighlight>The Alternatives</HeadlineHighlight>.
               </span>
             </h2>
 

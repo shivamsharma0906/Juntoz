@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
 import useCountUp from '../hooks/useCountUp.js';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 
 const stats = [
   { value: 200, suffix: '+',  label: 'MUAs & Salons Scaled',  icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6' },
@@ -59,8 +60,14 @@ export default function Results() {
 
         {/* Header */}
         <ScrollReveal data-reveal="up" className="text-center mb-16">
-          <h2 className="font-heading font-black text-white text-3xl sm:text-5xl md:text-6xl uppercase leading-tight tracking-tight mb-4">
-            Proof That Our <span className="text-[#5D2E85]">System Works</span>
+          <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#8A44C8] block mb-3">
+            VERIFIED CLIENT TRANSFORMATIONS · ATTRIBUTABLE ROI
+          </span>
+          <h2
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            className="font-heading font-normal text-white text-3xl sm:text-5xl md:text-6xl leading-[1.12] tracking-tight mb-4"
+          >
+            Proof That Our <HeadlineHighlight underlineClass="text-[#8A44C8]">System Works</HeadlineHighlight>.
           </h2>
           
           <p className="font-body text-white/65 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">

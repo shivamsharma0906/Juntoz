@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import logo from './logo.webp';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 
 const footerServices = [
   { label: 'Growth Strategy & Roadmaps', to: '/services' },
@@ -46,15 +47,17 @@ export default function Footer() {
         {/* ════ SECTION 1: HEADER & INTERACTIVE CONTACT CARDS ════ */}
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-8 sm:gap-12 border-b border-white/12 pb-12 sm:pb-16">
           <div className="text-center lg:text-left space-y-4 max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/15 bg-white/5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#5D2E85]" />
-              <span className="font-sans font-semibold text-xs uppercase tracking-wider text-white/90">Direct Communication</span>
-            </div>
-            <h2 className="font-heading font-black text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight leading-none text-white">
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#8A44C8] block mb-2">
+              DIRECT FOUNDER COMMUNICATION · ATTRIBUTABLE ROI
+            </span>
+            <h2
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              className="font-heading font-normal text-3xl sm:text-5xl lg:text-[3.5rem] leading-[1.12] text-white tracking-tight"
+            >
               Let's Talk About <br />
-              <span className="text-[#5D2E85]">Your Growth.</span>
+              <HeadlineHighlight>Your Growth</HeadlineHighlight>.
             </h2>
-            <p className="font-body text-white/65 text-sm max-w-md">
+            <p className="font-body text-white/65 text-sm sm:text-base leading-relaxed max-w-md">
               Whether you have a specific bridal campaign, need localized growth funnels, or want to audit your marketing performance—we're easy to reach.
             </p>
           </div>

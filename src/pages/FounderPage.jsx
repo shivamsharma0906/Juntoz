@@ -3,6 +3,7 @@ import PageMeta from '../components/PageMeta';
 import TeamMemberProfile from '../components/TeamMemberProfile';
 import founderImg from '../components/Founder.webp';
 import { COMPANY_STATS } from '../data/clients';
+import { HeadlineHighlight } from '../components/ui/CurvedUnderline';
 
 export default function FounderPage() {
   const bioParagraphs = [
@@ -73,10 +74,13 @@ export default function FounderPage() {
         whatsappUrl="https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27d%20like%20a%20custom%20growth%20plan%20for%20my%20business."
         sectionId="founder"
         sectionLabel="The Visionary Behind Juntoz"
-        subheading="Meet the Founder"
+        subheading="MEET THE FOUNDER · STRATEGIC LEADERSHIP"
         heading={
-          <h2 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl text-[#111111] uppercase tracking-tight leading-[1.05]">
-            An Agency That Actually <span className="text-[#5D2E85]">Gets</span> Growth.
+          <h2
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            className="font-heading font-normal text-3xl sm:text-5xl md:text-6xl text-[#111111] tracking-tight leading-[1.12]"
+          >
+            An Agency That Actually <HeadlineHighlight>Gets</HeadlineHighlight> Growth.
           </h2>
         }
         bioHeading="About Sujal Mehta"

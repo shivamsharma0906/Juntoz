@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
 import ScrollReveal from '../components/ScrollReveal';
 import HowWeGrowBusinesses from '../components/HowWeGrowBusinesses';
+import { HeadlineHighlight } from '../components/ui/CurvedUnderline';
 
 const AGENCY_SERVICES = [
   {
@@ -136,14 +137,21 @@ export default function ServicesPage() {
 
       {/* ── HERO HEADER ── */}
       <section className="relative px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center mb-10 sm:mb-24">
-        <h1 className="font-heading font-normal text-[#111111] text-3xl sm:text-5xl md:text-6xl leading-[1.12] mb-4 sm:mb-6">
-          Strategic Capabilities To{' '}
-          <span className="text-[#5D2E85]">Scale Your Business.</span>
-        </h1>
-        {/* subtitle only on desktop — avoids verbose clutter on mobile */}
-        <p className="font-body text-[#5F5F5A] text-sm sm:text-lg max-w-xl mx-auto leading-relaxed hidden sm:block">
-          Every service connects — strategy, ads, local search, content, and web — into one compounded growth engine.
-        </p>
+        <ScrollReveal data-reveal="up">
+          <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+            OUR CORE SERVICES · 7 GROWTH PILLARS
+          </span>
+          <h1
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            className="font-heading font-normal text-[#111111] text-3xl sm:text-5xl md:text-6xl lg:text-[3.6rem] leading-[1.12] mb-4 sm:mb-6 tracking-tight"
+          >
+            Strategic Capabilities To{' '}
+            <HeadlineHighlight>Scale Your Business</HeadlineHighlight>.
+          </h1>
+          <p className="font-body text-[#5F5F5A] text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+            Every service connects — strategy, ads, local search, content, and web — into one compounded growth engine.
+          </p>
+        </ScrollReveal>
       </section>
 
       {/* ── SERVICE CARDS ── */}

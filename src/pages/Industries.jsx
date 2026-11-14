@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import PageMeta from '../components/PageMeta';
 import ScrollReveal from '../components/ScrollReveal';
 import IndustryFinder from '../components/IndustryFinder';
+import { HeadlineHighlight } from '../components/ui/CurvedUnderline';
 
 export default function Industries() {
   return (
@@ -18,8 +19,14 @@ export default function Industries() {
         <section className="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
 
           <ScrollReveal data-reveal="up" delay={60}>
-            <h1 className="font-heading font-black text-[#111111] text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight leading-[1.06] mb-3 sm:mb-4">
-              Find Your <span className="text-[#5D2E85]">Industry.</span>
+            <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+              36 SECTOR PLAYBOOKS · TAILORED ARCHITECTURES
+            </span>
+            <h1
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              className="font-heading font-normal text-[#111111] text-3xl sm:text-5xl md:text-6xl leading-[1.12] mb-3 sm:mb-4 tracking-tight"
+            >
+              Find Your <HeadlineHighlight>Industry</HeadlineHighlight>.
             </h1>
           </ScrollReveal>
 

@@ -7,6 +7,7 @@ import WhatsAppButton from './components/WhatsAppButton';
 import Home from './pages/Home';
 import ErrorBoundary from './components/ErrorBoundary';
 import { initLenis, destroyLenis, getLenis } from './lib/lenis';
+import { initDelegatedTracking } from './lib/tracking';
 
 // Lazy load non-critical pages to reduce initial JavaScript bundle size (Fixes high FCP/LCP)
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
@@ -56,8 +57,10 @@ function ScrollToTop() {
 function App() {
   useEffect(() => {
     initLenis();
+    const cleanupTracking = initDelegatedTracking();
     return () => {
       destroyLenis();
+      cleanupTracking();
     };
   }, []);
   useEffect(() => {

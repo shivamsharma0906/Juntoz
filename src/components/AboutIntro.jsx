@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 
 export default function AboutIntro() {
   return (
@@ -45,37 +46,28 @@ export default function AboutIntro() {
           </div>
         </ScrollReveal>
 
-        {/* ── 2. Expansive Serif Headline (Changed Copy & Broad Width) ── */}
-        <ScrollReveal data-reveal="up" delay={80}>
+        {/* ── 2. Expansive Serif Headline & Eyebrow ── */}
+        <ScrollReveal data-reveal="up" delay={80} className="text-center">
+          <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+            WHO WE ARE · STRATEGIC GROWTH PARTNER
+          </span>
+
           <h2
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-            className="text-2xl sm:text-5xl lg:text-6xl leading-[1.18] sm:leading-[1.15] text-[#111111] font-normal text-center max-w-5xl mx-auto mb-8 sm:mb-18"
+            className="font-heading font-normal text-2xl sm:text-5xl lg:text-[3.25rem] leading-[1.14] text-[#111111] text-center max-w-5xl mx-auto mb-4 tracking-tight"
           >
             <span className="block mb-1 sm:mb-2">
               A Full-Service{' '}
-              <span className="relative inline-block whitespace-nowrap">
-                <span>Growth Partner</span>
-                <svg
-                  className="absolute -bottom-2 sm:-bottom-2.5 left-0 w-full overflow-visible pointer-events-none text-[#5D2E85]"
-                  height="12"
-                  viewBox="0 0 260 14"
-                  fill="none"
-                  preserveAspectRatio="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3 9C60 3.5 150 2.5 257 8.5C185 5 85 6.5 15 11.5"
-                    stroke="currentColor"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </span>
+              <HeadlineHighlight>Growth Partner</HeadlineHighlight>
             </span>
             <span className="block text-[#111111]">
               Built to Scale Your Authority, Reach, and Revenue.
             </span>
           </h2>
+
+          <p className="font-body text-[#5F5F5A] text-sm sm:text-base md:text-lg max-w-2xl mx-auto text-center leading-relaxed mb-8 sm:mb-14">
+            We architect integrated acquisition ecosystems that turn digital presence into predictable commercial revenue.
+          </p>
         </ScrollReveal>
 
         {/* ── 3. Full-Width 2-Column (Mobile) / 3-Column (Desktop) Editorial Grid ── */}

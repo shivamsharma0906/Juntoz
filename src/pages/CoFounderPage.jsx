@@ -3,6 +3,7 @@ import PageMeta from '../components/PageMeta';
 import TeamMemberProfile from '../components/TeamMemberProfile';
 import coFounderImg from '../components/co-founder-saloni-mehta.webp';
 import { COMPANY_STATS } from '../data/clients';
+import { HeadlineHighlight } from '../components/ui/CurvedUnderline';
 
 export default function CoFounderPage() {
   const bioParagraphs = [
@@ -72,10 +73,13 @@ export default function CoFounderPage() {
         whatsappUrl="https://wa.me/918767957561?text=Hi%20Saloni!%20I%27d%20like%20to%20connect%20about%20working%20with%20Juntoz."
         sectionId="co-founder"
         sectionLabel="Leadership & Operations"
-        subheading="Meet the Co-Founder"
+        subheading="MEET THE CO-FOUNDER · CLIENT OPERATIONS"
         heading={
-          <h2 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl text-[#111111] uppercase tracking-tight leading-[1.05]">
-            Operational Excellence <span className="text-[#5D2E85]">Drives</span> Growth.
+          <h2
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            className="font-heading font-normal text-3xl sm:text-5xl md:text-6xl text-[#111111] tracking-tight leading-[1.12]"
+          >
+            Operational Excellence <HeadlineHighlight>Drives</HeadlineHighlight> Growth.
           </h2>
         }
         bioHeading="About Saloni Mehta"

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
 import MapSection from '../components/MapSection';
 import PageMeta from '../components/PageMeta';
+import { HeadlineHighlight } from '../components/ui/CurvedUnderline';
 
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%27m%20a%20makeup%20artist%20and%20I%27d%20like%20to%20book%20a%20growth%20strategy%20consultation.';
 
@@ -302,10 +303,15 @@ export default function ContactPage() {
         path="/contact"
       />
         <ScrollReveal data-reveal="up" className="mb-12 sm:mb-16 text-center">
-          
-          <h1 className="font-heading font-normal text-[#111111] text-3xl sm:text-6xl md:text-7xl leading-tight mb-6">
+          <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+            SCHEDULE A GROWTH AUDIT · STRATEGIC CONSULTATION
+          </span>
+          <h1
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            className="font-heading font-normal text-[#111111] text-3xl sm:text-6xl md:text-7xl leading-[1.12] mb-6 tracking-tight"
+          >
             Turn Digital Presence Into <br className="hidden sm:block" />
-            <span className="text-[#5D2E85]">Business Growth</span>
+            <HeadlineHighlight>Business Growth</HeadlineHighlight>.
           </h1>
           <p className="font-body text-[#5F5F5A] text-base md:text-lg max-w-xl mx-auto leading-relaxed">
             Share your goal — we'll audit your presence and map a clear growth plan.

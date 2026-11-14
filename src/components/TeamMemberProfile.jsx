@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import ScrollReveal from './ScrollReveal.jsx';
 import useCountUp from '../hooks/useCountUp.js';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 
 const Zap = ({ size = 14, ...props }) => (
   <svg
@@ -157,21 +158,27 @@ export default function TeamMemberProfile({
           <div className="md:col-span-7 space-y-6 md:space-y-8">
             <ScrollReveal data-reveal="up" className="text-left">
               {subheading && (
-                <span className="font-heading font-bold text-xs uppercase tracking-wider text-[#5D2E85] mb-2 block">
+                <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] mb-3 block">
                   {subheading}
                 </span>
               )}
               {heading ? (
                 typeof heading === 'string' ? (
-                  <h2 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl text-[#111111] uppercase tracking-tight leading-[1.05]">
+                  <h2
+                    style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                    className="font-heading font-normal text-3xl sm:text-5xl md:text-6xl text-[#111111] tracking-tight leading-[1.12]"
+                  >
                     {heading}
                   </h2>
                 ) : (
                   heading
                 )
               ) : (
-                <h2 className="font-heading font-black text-3xl sm:text-5xl md:text-6xl text-[#111111] uppercase tracking-tight leading-[1.05]">
-                  An Agency That Actually <span className="text-[#5D2E85]">Gets</span> Growth.
+                <h2
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                  className="font-heading font-normal text-3xl sm:text-5xl md:text-6xl text-[#111111] tracking-tight leading-[1.12]"
+                >
+                  An Agency That Actually <HeadlineHighlight>Gets</HeadlineHighlight> Growth.
                 </h2>
               )}
             </ScrollReveal>

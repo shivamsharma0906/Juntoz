@@ -4,6 +4,7 @@ import { caseStudies } from '../data/caseStudies.js';
 import ScrollReveal from '../components/ScrollReveal.jsx';
 import PageMeta from '../components/PageMeta.jsx';
 import CTASection from '../components/CTASection.jsx';
+import { HeadlineHighlight } from '../components/ui/CurvedUnderline';
 
 const WA = 'https://wa.me/919004001800?text=Hi%20Juntoz!%20I%20run%20a%20salon%20and%20I%27d%20like%20to%20book%20a%20salon%20growth%20audit.';
 
@@ -87,9 +88,15 @@ export default function ForSalonsPage() {
             <div className="lg:col-span-7 text-left space-y-6">
 
               <ScrollReveal data-reveal="up" delay={100}>
-                <h1 className="font-heading font-normal text-4xl sm:text-6xl lg:text-7xl text-[#111111] leading-[1.08] mb-3">
+                <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+                  SALONS &amp; AESTHETIC CLINICS · LOCAL SCALE
+                </span>
+                <h1
+                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                  className="font-heading font-normal text-4xl sm:text-6xl lg:text-7xl text-[#111111] leading-[1.08] mb-3 tracking-tight"
+                >
                   Salon &amp; Clinic <br />
-                  <span className="text-[#5D2E85]">Growth Engine.</span>
+                  <HeadlineHighlight>Growth Engine</HeadlineHighlight>.
                 </h1>
                 <p className="font-heading font-extrabold text-xl sm:text-2xl text-[#111111] leading-snug tracking-tight mb-2">
                   Pack Your Styling Chairs Every Single Day.

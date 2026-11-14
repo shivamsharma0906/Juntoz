@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { industries } from '../data/industries';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 
 const CATEGORIES = [
   { id: 'all',       label: 'All' },
@@ -49,11 +50,17 @@ export default function IndustryFinder({
       {/* ── OPTIONAL HEADER ── */}
       {showHeader && (
         <div className="max-w-3xl mx-auto text-center mb-6 sm:mb-12">
-          <h2 className="font-heading font-black text-[#111111] text-2xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-[1.06] mb-3">
+          <span className="font-heading font-bold text-xs uppercase tracking-widest text-[#5D2E85] block mb-3">
+            SECTOR INTELLIGENCE · 36 PLAYBOOKS
+          </span>
+          <h2
+            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            className="font-heading font-normal text-[#111111] text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] mb-3 tracking-tight"
+          >
             {title.includes('Industry') ? (
               <>
                 {title.split('Industry')[0]}
-                <span className="text-[#5D2E85]">Industry{title.split('Industry')[1]}</span>
+                <HeadlineHighlight>Industry{title.split('Industry')[1]}</HeadlineHighlight>
               </>
             ) : title}
           </h2>

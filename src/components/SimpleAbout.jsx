@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import teamImage from './juntoz-team-culture.webp';
 import ScrollReveal from './ScrollReveal.jsx';
+import { HeadlineHighlight } from './ui/CurvedUnderline';
 
 export default function SimpleAbout() {
   return (
@@ -34,15 +35,18 @@ export default function SimpleAbout() {
           {/* Right Column: Premium Copy */}
           <div className="lg:col-span-6 space-y-6 text-left lg:pl-4">
             <ScrollReveal data-reveal="up">
-              <span className="font-sans font-bold tracking-[0.16em] text-[#5D2E85] uppercase text-xs block">
-                Who We Are
+              <span className="font-heading font-bold tracking-[0.2em] text-[#5D2E85] uppercase text-xs block mb-3">
+                WHO WE ARE · INTEGRATED GROWTH ENGINE
               </span>
             </ScrollReveal>
 
             <ScrollReveal data-reveal="up" delay={100}>
-              <h2 className="font-heading font-black text-3xl sm:text-5xl uppercase tracking-tight leading-tight text-[#111111]">
+              <h2
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+                className="font-heading font-normal text-3xl sm:text-5xl lg:text-[3.25rem] tracking-tight leading-[1.12] text-[#111111] mb-4"
+              >
                 We Build Predictable <br />
-                <span className="text-[#5D2E85]">Growth Systems.</span>
+                <HeadlineHighlight>Growth Systems</HeadlineHighlight>.
               </h2>
             </ScrollReveal>
 
